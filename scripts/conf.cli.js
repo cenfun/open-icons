@@ -98,7 +98,7 @@ const beforeBuildWebIcons = (item, Util) => {
 
     const total = iconsDirs.length;
     iconsDirs.forEach((dir, i) => {
-        iconsHandler(item, Util, dir, i, total);
+        iconsHandler(item, Util, dir, i + 1, total);
 
         const outputName = `${item.namespace}-${dir}`;
         const size = fs.statSync(path.resolve(item.buildPath, `${outputName}.js`)).size;

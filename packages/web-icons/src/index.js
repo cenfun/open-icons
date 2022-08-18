@@ -1,8 +1,9 @@
 
 import decompress from 'lz-utils/lib/decompress.js';
 import icons from './icons.json';
+import getIconElement from './get-icon-element.js';
 
-const load = (path = './', callback = (item, info) => {}) => {
+const loadIcons = (path = './', callback = (item, info) => {}) => {
     return new Promise((resolve, reject) => {
 
         const list = Object.keys(icons);
@@ -56,6 +57,15 @@ const load = (path = './', callback = (item, info) => {}) => {
     });
 };
 
-export { icons, load };
+const version = window.VERSION;
+const timestamp = window.TIMESTAMP;
+
+export {
+    version,
+    timestamp,
+    icons,
+    loadIcons,
+    getIconElement
+};
 
 export default icons;

@@ -1,5 +1,9 @@
 import './app.scss';
 
+import {
+    loadIcons, getIconElement, version, timestamp
+} from 'web-icons';
+
 const $ = function(selector) {
     return document.querySelector(selector);
 };
@@ -133,7 +137,9 @@ const initGrid = function() {
     grid.showLoading();
 };
 
-const renderFinder = function(option, list, rows) {
+const renderFinder = function(option, icons, rows) {
+
+    const keys = Object.keys(icons);
 
     initGrid();
 
@@ -141,7 +147,7 @@ const renderFinder = function(option, list, rows) {
 
     $('.wci-info').innerHTML = `
         <div class="wci-title">Web Components Icons</div>
-        <div class="wci-stats">Total <b>${list.length}</b> packages and <b>${total.toLocaleString()}</b> icons</div>
+        <div class="wci-stats">Total <b>${keys.length}</b> packages and <b>${total.toLocaleString()}</b> icons</div>
     `;
 
     const cellSize = parseInt(option.size) + 10;
@@ -361,7 +367,7 @@ const renderPackage = function(option, item) {
 
 };
 
-const renderView = function(list, gridRows) {
+const renderView = function(icons, gridRows) {
 
     const hash = location.hash.substr(1);
     //console.log(hash);
@@ -376,7 +382,7 @@ const renderView = function(list, gridRows) {
 
 
     if (hash) {
-        const item = list.find((it) => it.name === hash);
+        const item = icons[hash];
         if (item) {
             $package.style.display = 'block';
             renderPackage(option, item);
@@ -385,7 +391,7 @@ const renderView = function(list, gridRows) {
     }
 
     $finder.style.display = 'flex';
-    renderFinder(option, list, gridRows);
+    renderFinder(option, icons, gridRows);
 
 };
 
@@ -435,11 +441,7 @@ const getPopular = function(popularList) {
 };
 
 let menuGrid;
-const renderMenu = function(metadata) {
-    const turbogrid = window.turbogrid;
-    if (!turbogrid) {
-        return;
-    }
+const renderMenu = function(icons) {
 
     if (menuGrid) {
         return;
@@ -447,10 +449,13 @@ const renderMenu = function(metadata) {
 
     const Grid = window.turbogrid.Grid;
 
-    const rows = metadata.list.map((it) => {
+    const keys = Object.keys(icons);
+
+    const rows = keys.map((k) => {
+        const item = icons[k];
         return {
-            name: it.name,
-            total: it.total.toLocaleString()
+            name: item.name,
+            total: item.icons.length.toLocaleString()
         };
     });
 
@@ -513,16 +518,20 @@ const renderMenu = function(metadata) {
     menuGrid.setData(menuData);
     menuGrid.render();
 
-    const date = new Date(metadata.timestamp).toLocaleDateString();
-    const footer = `<a href="https://github.com/cenfun/wci" target="_blank">Latest: v${metadata.version} - ${date}</a>`;
+    const date = new Date(timestamp).toLocaleDateString();
+    const footer = `<a href="https://github.com/cenfun/wci" target="_blank">Latest: v${version} - ${date}</a>`;
     $('.wci-menu-footer').innerHTML = footer;
 
 };
 
-const renderStart = function(metadata) {
-    const list = metadata.list;
+const renderStart = function(icons) {
+
+    const keys = Object.keys(icons);
+
     const gridRows = [];
-    list.forEach(function(item) {
+    keys.forEach(function(key) {
+        const item = icons[key];
+
         item.icons.forEach((ic) => {
 
             const iconName = ic.name;
@@ -575,7 +584,7 @@ const renderStart = function(metadata) {
     $popular.innerHTML = getPopular(popularList);
 
     window.addEventListener('popstate', (e) => {
-        renderView(list, gridRows);
+        renderView(icons, gridRows);
     });
 
     $('.wci-package').addEventListener('click', function(e) {
@@ -589,125 +598,22 @@ const renderStart = function(metadata) {
     toolbars.forEach(function(item) {
         const $item = $(item);
         $item.addEventListener('change', function(e) {
-            renderView(list, gridRows);
+            renderView(icons, gridRows);
         });
     });
 
-    renderView(list, gridRows);
+    renderView(icons, gridRows);
 };
 
-const initMetadata = function(metadata) {
-    metadata.list.forEach(function(item) {
-        const lib = window[`wci-${item.name}`];
-        if (!lib) {
-            return;
-        }
-        item.tagName = lib.tagName;
-        item.icons = lib.icons;
-    });
-};
+const initIcons = function(icons) {
 
-const getIconElement = function(icons) {
-    class IconElement extends HTMLElement {
+    const keys = Object.keys(icons);
 
-        static get observedAttributes() {
-            return ['name', 'size', 'color', 'radius', 'background'];
-        }
-
-        constructor() {
-            super();
-            const shadow = this.attachShadow({
-                mode: 'open'
-            });
-            this.$style = document.createElement('style');
-            shadow.appendChild(this.$style);
-
-            this.$container = document.createElement('div');
-            shadow.appendChild(this.$container);
-        }
-
-        connectedCallback() {
-            this.render();
-        }
-
-        attributeChangedCallback(name, oldValue, newValue) {
-            this.render();
-        }
-
-        getIcon(name, key) {
-            if (!name) {
-                return '';
-            }
-            let item;
-            for (let i = 0, l = icons.length; i < l; i++) {
-                const it = icons[i];
-                if (name === it.name || name === `${it.namespace}-${it.name}`) {
-                    item = it;
-                    break;
-                }
-            }
-            if (!item) {
-                return '';
-            }
-            if (key) {
-                return item[key];
-            }
-            return item;
-        }
-
-        render() {
-
-            const name = this.getAttribute('name') || 'blank';
-            const size = this.getAttribute('size') || '100%';
-
-            const color = this.getAttribute('color');
-            let $color = '';
-            if (color) {
-                $color = `color: ${color};`;
-            }
-
-            const background = this.getAttribute('background');
-            let $background = '';
-            if (background) {
-                $background = `background: ${background};`;
-            }
-
-            let $overflow = '';
-            const radius = this.getAttribute('radius');
-            let $radius = '';
-            if (radius) {
-                $radius = `border-radius: ${radius};`;
-                $overflow = 'overflow: hidden;';
-            }
-
-            this.svg = this.getIcon(name, 'svg');
-
-            this.$style.textContent = `
-            :host, svg {
-                display: block;
-            }
-            div {
-                width: ${size};
-                height: ${size};
-                ${$color}
-                ${$background}
-                ${$radius}
-                ${$overflow}
-            }
-        `;
-
-            this.$container.innerHTML = this.svg;
-
-        }
-    }
-
-    return IconElement;
-};
-
-const initIconElement = function(metadata) {
-    metadata.list.forEach(function(item) {
+    keys.forEach(function(key) {
+        const item = icons[key];
         const IconElement = getIconElement(item.icons);
-        const tagName = item.tagName;
+        //console.log(item);
+        const tagName = `wci-${item.name}`;
         //override tagName
         IconElement.tagName = tagName;
         //define custom element
@@ -718,12 +624,13 @@ const initIconElement = function(metadata) {
             customElements.define(tagName, IconElement);
         }
     });
+
+    renderMenu(icons);
+
+    renderStart(icons);
 };
 
 const loadLibs = async () => {
-
-    const metadata = window.wciMetadata;
-    console.log(metadata);
 
     const $loading = $('.wci-loading');
     const $loadingLabel = $loading.querySelector('.wci-loading-label');
@@ -733,40 +640,27 @@ const loadLibs = async () => {
     //console.log(db);
     const cache = await ost.get('metadata');
     //console.log(cache);
-    if (cache && cache.version === metadata.version) {
-        console.log('Found local cache', cache);
+    if (cache && cache.version === version) {
+        console.log('Found cache icons', cache);
         $loading.style.display = 'none';
-        initIconElement(cache);
-        renderMenu(cache);
-        renderStart(cache);
+        initIcons(cache.icons);
         return;
     }
 
-    const libs = metadata.libs;
-    const total = libs.length;
+    const icons = await loadIcons('../node_modules/web-icons/dist/', (item, info) => {
+        //console.log(info);
+        const per = Math.round(info.loadedSize / info.totalSize * 100);
+        $loadingLabel.innerHTML = `loaded ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
+    });
 
-    let loaded = 0;
-    const loadHandler = function(item) {
-        loaded += 1;
-        const per = Math.round(loaded / total * 100);
-        $loadingLabel.innerHTML = `${item} ... ${per}% loaded`;
-        renderMenu(metadata);
-        if (loaded >= total) {
-            $loading.style.display = 'none';
-            initMetadata(metadata);
-            ost.set('metadata', metadata);
-            renderStart(metadata);
-        }
+    const metadata = {
+        version,
+        icons
     };
 
-    libs.forEach(function(item, i) {
-        const $script = document.createElement('script');
-        $script.src = `js/${item}`;
-        $script.addEventListener('load', function() {
-            loadHandler(item);
-        });
-        document.body.appendChild($script);
-    });
+    ost.set('metadata', metadata);
+    console.log('Loaded icons', metadata);
+    initIcons(metadata.icons);
 
 };
 
