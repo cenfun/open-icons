@@ -93,12 +93,12 @@ const beforeBuildWebIcons = (item, Util) => {
         iconsHandler(item, Util, dir, i, total);
 
         const fullName = `${namespace}-${dir}`;
-        const size = fs.statSync(path.resolve(outputRoot, `${fullName}.json`)).size;
-        const sizeLZ = fs.statSync(path.resolve(outputRoot, `${fullName}.lz.js`)).size;
+        const sizeJson = fs.statSync(path.resolve(outputRoot, `${fullName}.json`)).size;
+        const size = fs.statSync(path.resolve(outputRoot, `${fullName}.lz.js`)).size;
 
         iconsStats[dir] = {
-            size,
-            sizeLZ
+            sizeJson,
+            size
         };
     });
 
