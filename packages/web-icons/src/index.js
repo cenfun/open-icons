@@ -7,15 +7,15 @@ const load = (path = './', callback = (item, info) => {}) => {
 
         const list = Object.keys(icons);
 
-        const totalNum = list.length;
+        const total = list.length;
         const totalSize = list.reduce((v, k) => v + icons[k].size, 0);
 
         const loadedIcons = {};
 
-        let loadedNum = 0;
+        let loaded = 0;
         let loadedSize = 0;
         const loadHandler = function(k, itemName) {
-            loadedNum += 1;
+            loaded += 1;
 
             const item = JSON.parse(decompress(window[itemName]));
 
@@ -29,13 +29,13 @@ const load = (path = './', callback = (item, info) => {}) => {
             const info = {
                 loadedSize,
                 totalSize,
-                loadedNum,
-                totalNum
+                loaded,
+                total
             };
 
             callback(item, info);
 
-            if (loadedNum >= totalNum) {
+            if (loaded >= total) {
                 resolve(loadedIcons);
             }
         };
