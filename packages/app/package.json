@@ -9,8 +9,7 @@
     "dependencies": {
         "file-saver": "^2.0.5",
         "open-store": "^1.0.0",
-        "turbogrid": "^3.0.1",
-        "web-icons": ""
+        "turbogrid": "^3.0.1"
     },
     "devDependencies": {}
 }

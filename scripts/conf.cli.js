@@ -16,7 +16,7 @@ const iconsHandler = (item, Util, dir, i, total) => {
 
     const outputName = `${item.namespace}-${dir}`;
 
-    if (fs.existsSync(path.resolve(item.outputRoot, `${outputName}.json`))) {
+    if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
         Util.logYellow(`exists cache and ignore: ${dir}`);
         return;
     }
@@ -34,6 +34,7 @@ const iconsHandler = (item, Util, dir, i, total) => {
         namespace: outputName,
         dirs,
         outputDir: item.outputRoot,
+        outputRuntime: false,
         metadata: {
             name: dir,
             package: options.package,
@@ -60,13 +61,13 @@ const iconsHandler = (item, Util, dir, i, total) => {
     const compressedStr = compress(JSON.stringify(metadata));
 
     //save lz.js
-    const lzPath = path.resolve(item.outputRoot, `${outputName}.lz.js`);
+    const lzPath = path.resolve(item.buildPath, `${outputName}.js`);
 
-    const content = `export default '${compressedStr}';${os.EOL}`;
+    const content = `window['${outputName}'] = '${compressedStr}';`;
 
     Util.writeFileContentSync(lzPath, content);
 
-    Util.logCyan(`[${i}/${total}] minified: ${dir}`);
+    Util.logCyan(`minified: ${dir} (${i}/${total})`);
 
 };
 
@@ -86,44 +87,25 @@ const beforeBuildWebIcons = (item, Util) => {
     }
     item.outputRoot = outputRoot;
 
-    const iconsStats = {};
+    const icons = {};
+
     const total = iconsDirs.length;
     iconsDirs.forEach((dir, i) => {
-
         iconsHandler(item, Util, dir, i, total);
 
-        const fullName = `${namespace}-${dir}`;
-        const sizeJson = fs.statSync(path.resolve(outputRoot, `${fullName}.json`)).size;
-        const size = fs.statSync(path.resolve(outputRoot, `${fullName}.lz.js`)).size;
+        const outputName = `${item.namespace}-${dir}`;
+        const size = fs.statSync(path.resolve(item.buildPath, `${outputName}.js`)).size;
+        const sizeJson = fs.statSync(path.resolve(item.outputRoot, `${outputName}.json`)).size;
 
-        iconsStats[dir] = {
-            sizeJson,
-            size
+        icons[dir] = {
+            size,
+            sizeJson
         };
     });
 
-    //generating icons.js
-    const iconsPath = path.resolve(item.componentPath, 'src/icons.js');
-
-    const lsImport = iconsDirs.map((dir) => {
-        return `import ${dir} from '../output/${namespace}-${dir}.lz.js';`;
-    }).join(`${os.EOL}`);
-
-    const lsObject = iconsDirs.join(`,${os.EOL}`);
-
-    const iconsCodes = `
-        ${lsImport}
-        const icons = {
-            ${lsObject}
-        };
-        export default icons;
-    `;
-    Util.writeFileContentSync(iconsPath, iconsCodes);
-
-    const statsPath = path.resolve(item.componentPath, 'src/stats.json');
-    Util.writeJSONSync(statsPath, iconsStats);
-
-    Util.format(iconsPath);
+    //generating icons.json
+    const iconsPath = path.resolve(item.componentPath, 'src/icons.json');
+    Util.writeJSONSync(iconsPath, icons);
 
 };
 

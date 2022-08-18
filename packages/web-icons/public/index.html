@@ -13,18 +13,18 @@
     <script src="../dist/web-icons.js"></script>
     <!--inject:end-->
     <script>
-        const webIcons = window['web-icons'].default;
+        const { icons, load } = window['web-icons'];
 
-        console.log(webIcons);
+        console.log(icons);
 
         const ts = Date.now();
 
-        const icons = webIcons.decompress((name, index, total) => {
-            console.log(name, index, total);
+        load('../dist/', (item, loaded, total) => {
+            console.log(item.name, loaded, total);
+        }).then((loadedIcons) => {
+            console.log(loadedIcons);
+            console.log('duration', Date.now() - ts);
         });
-        console.log(icons);
-
-        console.log('duration', Date.now() - ts);
         
     </script>
 </body>

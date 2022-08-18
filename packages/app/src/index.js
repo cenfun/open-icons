@@ -1,3 +1,3 @@
-import icons from 'web-icons';
+import App from './app.js';
 
-export default icons;
+App.createComponent();
