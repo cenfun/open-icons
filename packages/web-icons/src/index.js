@@ -323,7 +323,7 @@ webIcons.decompress = (callback) => {
     return iconList.map((k, i) => {
         const item = JSON.parse(decompress(iconContents[k]));
         if (typeof callback === 'function') {
-            callback(k, i, iconTotal);
+            callback(k, i, iconTotal, item);
         }
         return Object.assign(item, iconStats[k]);
     });
