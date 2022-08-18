@@ -2,30 +2,40 @@
 import decompress from 'lz-utils/lib/decompress.js';
 import icons from './icons.json';
 
-const load = (path = './', callback = (item, loaded, total) => {}) => {
+const load = (path = './', callback = (item, info) => {}) => {
     return new Promise((resolve, reject) => {
 
         const list = Object.keys(icons);
 
-        const total = list.length;
+        const totalNum = list.length;
+        const totalSize = list.reduce((v, k) => v + icons[k].size, 0);
 
         const loadedIcons = {};
 
-        let loaded = 0;
+        let loadedNum = 0;
+        let loadedSize = 0;
         const loadHandler = function(k, itemName) {
-            loaded += 1;
+            loadedNum += 1;
 
             const item = JSON.parse(decompress(window[itemName]));
 
-            Object.assign(item, icons[k]);
+            const sizeInfo = icons[k];
+            loadedSize += sizeInfo.size;
+
+            Object.assign(item, sizeInfo);
 
             loadedIcons[k] = item;
 
-            callback(item, loaded, total);
+            const info = {
+                loadedSize,
+                totalSize,
+                loadedNum,
+                totalNum
+            };
 
-            // $loadingLabel.innerHTML = `${item} ... ${per}% loaded`;
-            // renderMenu(metadata);
-            if (loaded >= total) {
+            callback(item, info);
+
+            if (loadedNum >= totalNum) {
                 resolve(loadedIcons);
             }
         };

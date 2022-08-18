@@ -19,8 +19,8 @@
 
         const ts = Date.now();
 
-        load('../dist/', (item, loaded, total) => {
-            console.log(item.name, loaded, total);
+        load('../dist/', (item, info) => {
+            console.log(item.name, info);
         }).then((loadedIcons) => {
             console.log(loadedIcons);
             console.log('duration', Date.now() - ts);
