@@ -4,7 +4,6 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const child_process = require('child_process');
 
 const iconsHandler = (item, Util, dir, i, total) => {
 
@@ -87,7 +86,7 @@ const beforeBuildWebIcons = (item, Util) => {
     }
     item.outputRoot = outputRoot;
 
-    const fileStats = {};
+    const iconsStats = {};
     const total = iconsDirs.length;
     iconsDirs.forEach((dir, i) => {
 
@@ -97,14 +96,14 @@ const beforeBuildWebIcons = (item, Util) => {
         const size = fs.statSync(path.resolve(outputRoot, `${fullName}.json`)).size;
         const sizeLZ = fs.statSync(path.resolve(outputRoot, `${fullName}.lz.js`)).size;
 
-        fileStats[dir] = {
+        iconsStats[dir] = {
             size,
             sizeLZ
         };
     });
 
-    //generating index.js
-    const indexPath = path.resolve(item.componentPath, 'src/index.js');
+    //generating icons.js
+    const iconsPath = path.resolve(item.componentPath, 'src/icons.js');
 
     const lsImport = iconsDirs.map((dir) => {
         return `import ${dir} from '../output/${namespace}-${dir}.lz.js';`;
@@ -112,41 +111,19 @@ const beforeBuildWebIcons = (item, Util) => {
 
     const lsObject = iconsDirs.join(`,${os.EOL}`);
 
-    const codes = `
-        import decompress from 'lz-utils/lib/decompress.js';
+    const iconsCodes = `
         ${lsImport}
-        const iconContents = {
+        const icons = {
             ${lsObject}
         };
-        const iconStats = ${JSON.stringify(fileStats, null, 4)};
-        const iconList = Object.keys(iconStats);
-        const iconTotal = iconList.length;
-
-        const webIcons = iconList.map((k) => {
-            return Object.assign({
-                name: k
-            }, iconStats[k]);
-        });
-
-        webIcons.decompress = (callback) => {
-            return iconList.map((k, i) => {
-                const item = JSON.parse(decompress(iconContents[k]));
-                if (typeof callback === 'function') {
-                    callback(k, i, iconTotal, item);
-                }
-                return Object.assign(item, iconStats[k]);
-            });
-        };
-
-        export default webIcons;
+        export default icons;
     `;
+    Util.writeFileContentSync(iconsPath, iconsCodes);
 
-    Util.writeFileContentSync(indexPath, codes);
+    const statsPath = path.resolve(item.componentPath, 'src/stats.json');
+    Util.writeJSONSync(statsPath, iconsStats);
 
-    //eslint file
-    const cmd = `npx eslint -c .eslintrc.js ${indexPath} --env browser --fix --color`;
-    console.log(cmd);
-    child_process.execSync(cmd);
+    Util.format(iconsPath);
 
 };
 

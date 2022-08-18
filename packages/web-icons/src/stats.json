@@ -1,0 +1,206 @@
+{
+    "akar": {
+        "size": 198549,
+        "sizeLZ": 76978
+    },
+    "ant": {
+        "size": 467628,
+        "sizeLZ": 199610
+    },
+    "awesome": {
+        "size": 1087596,
+        "sizeLZ": 476334
+    },
+    "blueprint": {
+        "size": 327529,
+        "sizeLZ": 128418
+    },
+    "bootstrap": {
+        "size": 1120862,
+        "sizeLZ": 400010
+    },
+    "box": {
+        "size": 821591,
+        "sizeLZ": 316962
+    },
+    "carbon": {
+        "size": 962939,
+        "sizeLZ": 336938
+    },
+    "charm": {
+        "size": 89316,
+        "sizeLZ": 21510
+    },
+    "coreui": {
+        "size": 339809,
+        "sizeLZ": 140382
+    },
+    "crypto": {
+        "size": 676914,
+        "sizeLZ": 338030
+    },
+    "cssgg": {
+        "size": 298861,
+        "sizeLZ": 85858
+    },
+    "dev": {
+        "size": 406096,
+        "sizeLZ": 220242
+    },
+    "element": {
+        "size": 165952,
+        "sizeLZ": 67598
+    },
+    "entypo": {
+        "size": 256804,
+        "sizeLZ": 116830
+    },
+    "eva": {
+        "size": 224222,
+        "sizeLZ": 72350
+    },
+    "feather": {
+        "size": 100117,
+        "sizeLZ": 25122
+    },
+    "flag": {
+        "size": 235267,
+        "sizeLZ": 98626
+    },
+    "flat": {
+        "size": 212896,
+        "sizeLZ": 86014
+    },
+    "fluent": {
+        "size": 2471690,
+        "sizeLZ": 763378
+    },
+    "foundation": {
+        "size": 293756,
+        "sizeLZ": 146422
+    },
+    "grommet": {
+        "size": 276959,
+        "sizeLZ": 114614
+    },
+    "hero": {
+        "size": 191615,
+        "sizeLZ": 56014
+    },
+    "icomoon": {
+        "size": 254687,
+        "sizeLZ": 113014
+    },
+    "iconoir": {
+        "size": 574867,
+        "sizeLZ": 144214
+    },
+    "ikonate": {
+        "size": 97419,
+        "sizeLZ": 26218
+    },
+    "ionic": {
+        "size": 635190,
+        "sizeLZ": 247946
+    },
+    "jam": {
+        "size": 534156,
+        "sizeLZ": 191426
+    },
+    "line": {
+        "size": 1119330,
+        "sizeLZ": 518798
+    },
+    "lucide": {
+        "size": 308331,
+        "sizeLZ": 71186
+    },
+    "majest": {
+        "size": 375452,
+        "sizeLZ": 109822
+    },
+    "maki": {
+        "size": 112721,
+        "sizeLZ": 51814
+    },
+    "material": {
+        "size": 1616927,
+        "sizeLZ": 525002
+    },
+    "mdi": {
+        "size": 3238412,
+        "sizeLZ": 1101434
+    },
+    "mono": {
+        "size": 83635,
+        "sizeLZ": 30562
+    },
+    "oct": {
+        "size": 342456,
+        "sizeLZ": 128702
+    },
+    "park": {
+        "size": 1467362,
+        "sizeLZ": 350030
+    },
+    "phosphor": {
+        "size": 2902455,
+        "sizeLZ": 912982
+    },
+    "pixelart": {
+        "size": 137777,
+        "sizeLZ": 34242
+    },
+    "prime": {
+        "size": 130778,
+        "sizeLZ": 46634
+    },
+    "radix": {
+        "size": 209408,
+        "sizeLZ": 76470
+    },
+    "remix": {
+        "size": 1026667,
+        "sizeLZ": 319194
+    },
+    "simple": {
+        "size": 3940987,
+        "sizeLZ": 1959670
+    },
+    "tabler": {
+        "size": 966046,
+        "sizeLZ": 198250
+    },
+    "teeny": {
+        "size": 582021,
+        "sizeLZ": 196078
+    },
+    "tiny": {
+        "size": 169012,
+        "sizeLZ": 79018
+    },
+    "typ": {
+        "size": 226048,
+        "sizeLZ": 104722
+    },
+    "uiw": {
+        "size": 166777,
+        "sizeLZ": 82062
+    },
+    "unicons": {
+        "size": 804377,
+        "sizeLZ": 265982
+    },
+    "vscode": {
+        "size": 252096,
+        "sizeLZ": 113098
+    },
+    "weather": {
+        "size": 311695,
+        "sizeLZ": 139190
+    },
+    "zond": {
+        "size": 86056,
+        "sizeLZ": 27378
+    }
+}
