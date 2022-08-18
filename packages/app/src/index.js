@@ -1,3 +1,3 @@
-const component = {};
+import icons from 'web-icons';
 
-export default component;
+export default icons;

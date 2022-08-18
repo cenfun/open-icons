@@ -63,7 +63,7 @@ const iconsHandler = (item, Util, dir, i, total) => {
     //save lz.js
     const lzPath = path.resolve(item.outputRoot, `${outputName}.lz.js`);
 
-    const content = `module.exports = '${compressedStr}';${os.EOL}`;
+    const content = `export default '${compressedStr}';${os.EOL}`;
 
     Util.writeFileContentSync(lzPath, content);
 
@@ -106,22 +106,39 @@ const beforeBuildWebIcons = (item, Util) => {
     //generating index.js
     const indexPath = path.resolve(item.componentPath, 'src/index.js');
 
-    const ls = iconsDirs.map((dir) => {
-        return `require('../output/${namespace}-${dir}.lz.js')`;
-    }).join(`,${os.EOL}`);
+    const lsImport = iconsDirs.map((dir) => {
+        return `import ${dir} from '../output/${namespace}-${dir}.lz.js';`;
+    }).join(`${os.EOL}`);
+
+    const lsObject = iconsDirs.join(`,${os.EOL}`);
 
     const codes = `
-        const decompress = require('lz-utils/lib/decompress.js');
-        const fileStats = ${JSON.stringify(fileStats, null, 4)};
-        module.exports = [
-            ${ls}
-        ].map((item) => {
-            item = decompress(item);
-            return {
-                ... item,
-                ... fileStats[item.name]
-            }
+        import decompress from 'lz-utils/lib/decompress.js';
+        ${lsImport}
+        const iconContents = {
+            ${lsObject}
+        };
+        const iconStats = ${JSON.stringify(fileStats, null, 4)};
+        const iconList = Object.keys(iconStats);
+        const iconTotal = iconList.length;
+
+        const webIcons = iconList.map((k) => {
+            return Object.assign({
+                name: k
+            }, iconStats[k]);
         });
+
+        webIcons.decompress = (callback) => {
+            return iconList.map((k, i) => {
+                const item = JSON.parse(decompress(iconContents[k]));
+                if (typeof callback === 'function') {
+                    callback(k, i, iconTotal, item);
+                }
+                return Object.assign(item, iconStats[k]);
+            });
+        };
+
+        export default webIcons;
     `;
 
     Util.writeFileContentSync(indexPath, codes);
