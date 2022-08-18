@@ -12,8 +12,6 @@ const iconsHandler = (item, Util, dir, i, total) => {
 
     const optionsPath = path.resolve(item.iconsRoot, dir, 'options.js');
 
-    //Util.format(optionsPath);
-
     const options = require(optionsPath);
 
     const outputName = `${item.namespace}-${dir}`;
@@ -25,17 +23,14 @@ const iconsHandler = (item, Util, dir, i, total) => {
 
     console.log(`start svg minify: ${dir}`);
 
+    Util.format(optionsPath);
+
     let dirs = options.dirs;
     if (typeof dirs === 'function') {
         dirs = dirs.call(options, dir, Util);
     }
 
-    let version = '';
-    const packagePath = path.resolve(__dirname, `../node_modules/${options.name}/package.json`);
-    const json = Util.readJSONSync(packagePath);
-    if (json) {
-        version = json.version;
-    }
+    const version = require(`../node_modules/${options.name}/package.json`).version;
 
     //compress svg
     const svgMinifier = require('svg-minifier');
