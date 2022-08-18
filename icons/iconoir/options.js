@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'iconoir',
+    name: 'iconoir',
     url: 'https://github.com/lucaburgio/iconoir',
     dirs: [
         'node_modules/iconoir/icons'

@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@carbon/icons',
+    name: '@carbon/icons',
     url: 'https://github.com/carbon-design-system/carbon',
     dirs: 'node_modules/@carbon/icons/svg/32',
     readme: '',

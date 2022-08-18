@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'weather-icons-npm',
+    name: 'weather-icons-npm',
     url: 'https://github.com/erikflowers/weather-icons',
     dirs: 'node_modules/weather-icons-npm/svg',
     readme: '',

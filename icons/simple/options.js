@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'simple-icons',
+    name: 'simple-icons',
     url: 'https://github.com/simple-icons/simple-icons',
     dirs: 'node_modules/simple-icons/icons',
     readme: '',

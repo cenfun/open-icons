@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@iconscout/unicons',
+    name: '@iconscout/unicons',
     url: 'https://github.com/Iconscout/unicons',
     dirs: [
         'node_modules/@iconscout/unicons/svg/line',

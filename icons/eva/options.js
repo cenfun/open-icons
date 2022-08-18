@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'eva-icons',
+    name: 'eva-icons',
     url: 'https://github.com/akveo/eva-icons',
     dirs: [
         'node_modules/eva-icons/fill/svg',

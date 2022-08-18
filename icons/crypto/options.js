@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'cryptocurrency-icons',
+    name: 'cryptocurrency-icons',
     url: 'https://github.com/spothq/cryptocurrency-icons',
     dirs: 'node_modules/cryptocurrency-icons/svg/color',
     readme: '',

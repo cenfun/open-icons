@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-    package: '@fortawesome/free-solid-svg-icons',
+    name: '@fortawesome/free-solid-svg-icons',
     url: 'https://github.com/FortAwesome/Font-Awesome',
     dirs: function(item, Util) {
 

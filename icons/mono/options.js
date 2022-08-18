@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'mono-icons',
+    name: 'mono-icons',
     url: 'https://github.com/mono-company/mono-icons',
     dirs: 'node_modules/mono-icons/svg',
     readme: '',

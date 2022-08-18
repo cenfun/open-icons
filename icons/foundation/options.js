@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'foundation-icons',
+    name: 'foundation-icons',
     url: 'https://github.com/zurb/foundation-icon-fonts',
     dirs: 'node_modules/foundation-icons/svgs',
     readme: '',
@@ -10,7 +10,7 @@ module.exports = {
     },
     onSVGDocument: function($svg) {
         let found = false;
-        ['path', 'polygon', 'rect', 'circle'].forEach(k => {
+        ['path', 'polygon', 'rect', 'circle'].forEach((k) => {
             const $elem = $svg.find(k);
             const fill = $elem.attr('fill');
             if (fill && fill !== 'none') {
@@ -22,6 +22,6 @@ module.exports = {
             return;
         }
         $svg.attr('fill', 'currentColor');
-        
+
     }
 };

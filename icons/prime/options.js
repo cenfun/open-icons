@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'primeicons',
+    name: 'primeicons',
     url: 'https://github.com/primefaces/primeicons',
     dirs: 'node_modules/primeicons/raw-svg',
     readme: '',

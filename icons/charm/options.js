@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'charm-icons',
+    name: 'charm-icons',
     url: 'https://github.com/jaynewey/charm-icons',
     dirs: 'node_modules/charm-icons/icons',
     readme: '',

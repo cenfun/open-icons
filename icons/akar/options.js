@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-
 const pascalToKebabCase = (text) => {
     return (`${text}`).trim()
         .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -50,7 +49,7 @@ const createTag = function(option) {
 };
 
 module.exports = {
-    package: 'akar-icons',
+    name: 'akar-icons',
     url: 'https://github.com/artcoholic/akar-icons',
     dirs: function(item, Util) {
 

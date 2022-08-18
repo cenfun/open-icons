@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'country-flag-icons',
+    name: 'country-flag-icons',
     url: 'https://gitlab.com/catamphetamine/country-flag-icons',
     dirs: {
         '1x1': 'node_modules/country-flag-icons/1x1',

@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'typicons.font',
+    name: 'typicons.font',
     url: 'https://github.com/stephenhutchings/typicons.font',
     dirs: 'node_modules/typicons.font/src/svg',
     readme: '',

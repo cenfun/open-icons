@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@mapbox/maki',
+    name: '@mapbox/maki',
     url: 'https://github.com/mapbox/maki',
     dirs: 'node_modules/@mapbox/maki/icons',
     readme: '',

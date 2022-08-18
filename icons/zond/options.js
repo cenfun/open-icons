@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'zondicons',
+    name: 'zondicons',
     url: 'https://www.zondicons.com/',
     dirs: 'node_modules/zondicons',
     readme: '',

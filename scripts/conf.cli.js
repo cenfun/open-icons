@@ -3,7 +3,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 
 const iconsHandler = (item, Util, dir, i, total) => {
 
@@ -12,6 +11,9 @@ const iconsHandler = (item, Util, dir, i, total) => {
     // Util.rmSync(path.resolve(item.iconsRoot, dir, 'public'));
 
     const optionsPath = path.resolve(item.iconsRoot, dir, 'options.js');
+
+    //Util.format(optionsPath);
+
     const options = require(optionsPath);
 
     const outputName = `${item.namespace}-${dir}`;
@@ -28,6 +30,13 @@ const iconsHandler = (item, Util, dir, i, total) => {
         dirs = dirs.call(options, dir, Util);
     }
 
+    let version = '';
+    const packagePath = path.resolve(__dirname, `../node_modules/${options.name}/package.json`);
+    const json = Util.readJSONSync(packagePath);
+    if (json) {
+        version = json.version;
+    }
+
     //compress svg
     const svgMinifier = require('svg-minifier');
     const config = {
@@ -37,10 +46,13 @@ const iconsHandler = (item, Util, dir, i, total) => {
         outputRuntime: false,
         metadata: {
             name: dir,
-            package: options.package,
-            url: options.url,
-            readme: options.readme,
-            license: options.license
+            source: {
+                name: options.name,
+                version: version,
+                url: options.url,
+                readme: options.readme,
+                license: options.license
+            }
         }
     };
     if (options.exclude) {
@@ -131,131 +143,7 @@ module.exports = {
 
         afterAll: (option, Util) => {
 
-            //if (!Util.option.production) {
             return 0;
-            //}
-
-            //console.log(option);
-
-            // const env = option.jobList[0].env;
-            // const componentsRoot = option.workerOption.componentsRoot;
-
-            // //console.log(buildENV, componentsRoot);
-
-            // const buildPath = Util.getConfig('build.path');
-
-            // const dirs = fs.readdirSync(componentsRoot);
-
-            // const list = dirs.map((dir) => {
-            //     const metadata = Util.readJSONSync(path.resolve(componentsRoot, dir, buildPath, 'metadata.json'));
-            //     return {
-            //         name: dir,
-            //         ... metadata
-            //     };
-            // });
-
-            // //console.log(list);
-
-            // //================================================================================
-            // console.log('generating README.md ....');
-            // //README.md
-            // let total = 0;
-            // const readmeList = list.map((item, i) => {
-            //     total += item.total;
-            //     return [
-            //         i + 1,
-            //         `[${item.name}](packages/${item.name})`,
-            //         item.total.toLocaleString(),
-            //         item.size,
-            //         item.gzip,
-            //         item.license,
-            //         `[${item.package}@${item.version}](${item.url})`
-            //     ];
-            // });
-            // readmeList.push(['', 'Total', total.toLocaleString(), '', '', '', '']);
-
-            // const readmeTable = getMarkDownTable({
-            //     columns: [{
-            //         name: '',
-            //         width: 2,
-            //         align: 'right'
-            //     }, {
-            //         name: 'Name',
-            //         width: 32
-            //     }, {
-            //         name: 'Icons',
-            //         width: 5,
-            //         align: 'right'
-            //     }, {
-            //         name: 'Size',
-            //         width: 8,
-            //         align: 'right'
-            //     }, {
-            //         name: 'Gzip',
-            //         width: 8,
-            //         align: 'right'
-            //     }, {
-            //         name: 'License',
-            //         width: 7
-            //     }, {
-            //         name: 'Built from',
-            //         width: 10
-            //     }],
-            //     rows: readmeList
-            // });
-            // let readmeContent = Util.readFileContentSync(path.resolve(__dirname, 'template/README.md'));
-            // readmeContent = readmeContent.replace('{replace_holder_list}', readmeTable);
-            // const readmePath = path.resolve(__dirname, '../README.md');
-            // Util.writeFileContentSync(readmePath, readmeContent);
-            // console.log('generated README.md');
-
-            // //================================================================================
-            // console.log('generating docs ....');
-
-            // const jsPath = path.resolve(__dirname, '../docs/js');
-            // //clean previous
-            // Util.rmSync(jsPath);
-            // fs.mkdirSync(jsPath, {
-            //     recursive: true
-            // });
-
-            // //copy vendors
-            // const vendors = {
-            //     'turbogrid.js': '../node_modules/turbogrid/dist/turbogrid.js',
-            //     'filesaver.js': '../node_modules/file-saver/dist/FileSaver.min.js',
-            //     'open-store.js': '../node_modules/open-store/dist/open-store.js'
-            // };
-
-            // Object.keys(vendors).forEach((key) => {
-            //     fs.copyFileSync(path.resolve(__dirname, vendors[key]), path.resolve(jsPath, key));
-            //     console.log(`copied ${key}`);
-            // });
-
-
-            // const libs = [];
-            // //copy packages
-            // list.forEach((p) => {
-            //     const fn = `wci-${p.name}.js`;
-            //     fs.copyFileSync(path.resolve(__dirname, `../packages/${p.name}/dist/${fn}`), path.resolve(jsPath, fn));
-            //     libs.push(fn);
-            //     console.log(`copied ${fn}`);
-            // });
-
-            // //metadata.js
-            // console.log('generating metadata ....');
-            // const metadataPath = path.resolve(jsPath, 'metadata.js');
-            // const metadata = {
-            //     ... env,
-            //     libs,
-            //     list
-            // };
-
-            // const metadataContent = `window.wciMetadata = ${JSON.stringify(metadata, null, 4)};`;
-            // Util.writeFileContentSync(metadataPath, metadataContent);
-
-            // console.log('generated docs');
-
-            // return 0;
         }
 
     }

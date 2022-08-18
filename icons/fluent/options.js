@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@fluentui/svg-icons',
+    name: '@fluentui/svg-icons',
     url: 'https://github.com/microsoft/fluentui-system-icons',
     dirs: 'node_modules/@fluentui/svg-icons/icons',
     excludeSubDir: true,

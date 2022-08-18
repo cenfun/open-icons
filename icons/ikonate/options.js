@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'ikonate',
+    name: 'ikonate',
     url: 'https://github.com/mikolajdobrucki/ikonate',
     dirs: 'node_modules/ikonate/icons',
     readme: '',

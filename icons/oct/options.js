@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@primer/octicons',
+    name: '@primer/octicons',
     url: 'https://github.com/primer/octicons',
     dirs: 'node_modules/@primer/octicons/build/svg',
     readme: '',

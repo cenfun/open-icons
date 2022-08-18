@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'boxicons',
+    name: 'boxicons',
     url: 'https://github.com/atisawd/boxicons',
     dirs: 'node_modules/boxicons/svg',
     readme: '',

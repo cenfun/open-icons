@@ -12,7 +12,7 @@ const pascalToKebabCase = (text) => {
 };
 
 module.exports = {
-    package: '@icon-park/svg',
+    name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
     dirs: function(item, Util) {
 

@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'devicons',
+    name: 'devicons',
     url: 'https://github.com/vorillaz/devicons',
     dirs: 'node_modules/devicons/!SVG',
     readme: '',
@@ -11,7 +11,7 @@ module.exports = {
     },
     onSVGDocument: function($svg) {
         let found = false;
-        ['path'].forEach(k => {
+        ['path'].forEach((k) => {
             const $elem = $svg.find(k);
             const fill = $elem.attr('fill');
             if (fill && fill !== 'none') {
@@ -23,6 +23,6 @@ module.exports = {
             return;
         }
         $svg.attr('fill', 'currentColor');
-        
+
     }
 };

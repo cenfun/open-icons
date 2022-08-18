@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'majesticons',
+    name: 'majesticons',
     url: 'https://github.com/halfmage/majesticons',
     dirs: ['node_modules/majesticons/line', {
         solid: 'node_modules/majesticons/solid'

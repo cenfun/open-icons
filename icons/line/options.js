@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'line-awesome',
+    name: 'line-awesome',
     url: 'https://github.com/icons8/line-awesome',
     dirs: 'node_modules/line-awesome/svg',
     readme: '',
@@ -7,5 +7,5 @@ module.exports = {
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     }
-    
+
 };

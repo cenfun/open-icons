@@ -31,7 +31,7 @@ const createTag = function(tag, attrs, children) {
 };
 
 module.exports = {
-    package: 'lucide',
+    name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
     dirs: function(item, Util) {
 

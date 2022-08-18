@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'entypo',
+    name: 'entypo',
     url: 'https://github.com/hypermodules/entypo',
     dirs: 'node_modules/entypo/src',
     readme: '',

@@ -1,12 +1,12 @@
 module.exports = {
-    package: '@uiw/icons',
+    name: '@uiw/icons',
     url: 'https://github.com/uiwjs/icons',
     dirs: 'node_modules/@uiw/icons/icon',
     readme: '',
     license: 'MIT',
     onSVGDocument: function($svg) {
         let found = false;
-        ['path', 'use'].forEach(k => {
+        ['path', 'use'].forEach((k) => {
             const $elem = $svg.find(k);
             const fill = $elem.attr('fill');
             if (fill && fill !== 'none') {
@@ -18,6 +18,6 @@ module.exports = {
             return;
         }
         $svg.attr('fill', 'currentColor');
-        
+
     }
 };

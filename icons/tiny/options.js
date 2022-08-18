@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'super-tiny-icons',
+    name: 'super-tiny-icons',
     url: 'https://github.com/edent/SuperTinyIcons',
     dirs: 'node_modules/super-tiny-icons/images/svg',
     readme: '',

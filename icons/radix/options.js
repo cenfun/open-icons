@@ -50,7 +50,7 @@ const createTag = function(option) {
 };
 
 module.exports = {
-    package: '@radix-ui/react-icons',
+    name: '@radix-ui/react-icons',
     url: 'https://github.com/radix-ui/icons',
     dirs: function(item, Util) {
 

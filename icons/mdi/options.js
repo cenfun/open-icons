@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@mdi/svg',
+    name: '@mdi/svg',
     url: 'https://github.com/Templarian/MaterialDesign-SVG',
     dirs: 'node_modules/@mdi/svg/svg',
     readme: '',

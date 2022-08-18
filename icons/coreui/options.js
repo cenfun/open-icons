@@ -1,5 +1,5 @@
 module.exports = {
-    package: '@coreui/icons',
+    name: '@coreui/icons',
     url: 'https://github.com/coreui/coreui-icons',
     dirs: [
         'node_modules/@coreui/icons/svg/free'

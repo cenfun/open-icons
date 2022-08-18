@@ -1,206 +1,206 @@
 {
     "akar": {
-        "size": 76986,
-        "sizeJson": 198549
+        "size": 76930,
+        "sizeJson": 198613
     },
     "ant": {
-        "size": 199617,
-        "sizeJson": 467628
+        "size": 199621,
+        "sizeJson": 467696
     },
     "awesome": {
-        "size": 476345,
-        "sizeJson": 1087596
+        "size": 476445,
+        "sizeJson": 1087659
     },
     "blueprint": {
-        "size": 128431,
-        "sizeJson": 327529
+        "size": 128419,
+        "sizeJson": 327592
     },
     "bootstrap": {
-        "size": 400023,
-        "sizeJson": 1120862
+        "size": 400395,
+        "sizeJson": 1120925
     },
     "box": {
-        "size": 316969,
-        "sizeJson": 821591
+        "size": 317025,
+        "sizeJson": 821654
     },
     "carbon": {
-        "size": 336948,
-        "sizeJson": 962939
+        "size": 337192,
+        "sizeJson": 963003
     },
     "charm": {
-        "size": 21519,
-        "sizeJson": 89316
+        "size": 21503,
+        "sizeJson": 89380
     },
     "coreui": {
-        "size": 140392,
-        "sizeJson": 339809
+        "size": 140316,
+        "sizeJson": 339872
     },
     "crypto": {
-        "size": 338040,
-        "sizeJson": 676914
+        "size": 338036,
+        "sizeJson": 676978
     },
     "cssgg": {
-        "size": 85867,
-        "sizeJson": 298861
+        "size": 85935,
+        "sizeJson": 298924
     },
     "dev": {
-        "size": 220249,
-        "sizeJson": 406096
+        "size": 220477,
+        "sizeJson": 406159
     },
     "element": {
-        "size": 67609,
-        "sizeJson": 165952
+        "size": 67601,
+        "sizeJson": 166015
     },
     "entypo": {
-        "size": 116840,
-        "sizeJson": 256804
+        "size": 116516,
+        "sizeJson": 256867
     },
     "eva": {
-        "size": 72357,
-        "sizeJson": 224222
+        "size": 72365,
+        "sizeJson": 224285
     },
     "feather": {
-        "size": 25133,
-        "sizeJson": 100117
+        "size": 25197,
+        "sizeJson": 100181
     },
     "flag": {
-        "size": 98634,
-        "sizeJson": 235267
+        "size": 98722,
+        "sizeJson": 235330
     },
     "flat": {
-        "size": 86022,
-        "sizeJson": 212896
+        "size": 86074,
+        "sizeJson": 212959
     },
     "fluent": {
-        "size": 763388,
-        "sizeJson": 2471690
+        "size": 763128,
+        "sizeJson": 2471755
     },
     "foundation": {
-        "size": 146436,
-        "sizeJson": 293756
+        "size": 146420,
+        "sizeJson": 293819
     },
     "grommet": {
-        "size": 114625,
-        "sizeJson": 276959
+        "size": 114517,
+        "sizeJson": 277022
     },
     "hero": {
-        "size": 56022,
-        "sizeJson": 191615
+        "size": 56202,
+        "sizeJson": 191678
     },
     "icomoon": {
-        "size": 113025,
-        "sizeJson": 254687
+        "size": 113089,
+        "sizeJson": 254750
     },
     "iconoir": {
-        "size": 144225,
-        "sizeJson": 574867
+        "size": 144129,
+        "sizeJson": 574930
     },
     "ikonate": {
-        "size": 26229,
-        "sizeJson": 97419
+        "size": 26161,
+        "sizeJson": 97482
     },
     "ionic": {
-        "size": 247955,
-        "sizeJson": 635190
+        "size": 247963,
+        "sizeJson": 635258
     },
     "jam": {
-        "size": 191433,
-        "sizeJson": 534156
+        "size": 191573,
+        "sizeJson": 534219
     },
     "line": {
         "size": 518806,
-        "sizeJson": 1119330
+        "sizeJson": 1119393
     },
     "lucide": {
-        "size": 71196,
-        "sizeJson": 308331
+        "size": 71380,
+        "sizeJson": 308395
     },
     "majest": {
-        "size": 109832,
-        "sizeJson": 375452
+        "size": 109816,
+        "sizeJson": 375515
     },
     "maki": {
-        "size": 51822,
-        "sizeJson": 112721
+        "size": 51834,
+        "sizeJson": 112784
     },
     "material": {
-        "size": 525014,
-        "sizeJson": 1616927
+        "size": 524978,
+        "sizeJson": 1616996
     },
     "mdi": {
-        "size": 1101441,
-        "sizeJson": 3238412
+        "size": 1101477,
+        "sizeJson": 3238476
     },
     "mono": {
-        "size": 30570,
-        "sizeJson": 83635
+        "size": 30698,
+        "sizeJson": 83698
     },
     "oct": {
-        "size": 128709,
-        "sizeJson": 342456
+        "size": 128849,
+        "sizeJson": 342520
     },
     "park": {
-        "size": 350038,
-        "sizeJson": 1467362
+        "size": 349502,
+        "sizeJson": 1467425
     },
     "phosphor": {
-        "size": 912994,
-        "sizeJson": 2902455
+        "size": 913206,
+        "sizeJson": 2902518
     },
     "pixelart": {
-        "size": 34254,
-        "sizeJson": 137777
+        "size": 34350,
+        "sizeJson": 137840
     },
     "prime": {
-        "size": 46643,
-        "sizeJson": 130778
+        "size": 46543,
+        "sizeJson": 130841
     },
     "radix": {
-        "size": 76479,
-        "sizeJson": 209408
+        "size": 76399,
+        "sizeJson": 209471
     },
     "remix": {
-        "size": 319203,
-        "sizeJson": 1026667
+        "size": 319091,
+        "sizeJson": 1026730
     },
     "simple": {
-        "size": 1959680,
-        "sizeJson": 3940987
+        "size": 1959896,
+        "sizeJson": 3941050
     },
     "tabler": {
-        "size": 198260,
-        "sizeJson": 966046
+        "size": 198216,
+        "sizeJson": 966110
     },
     "teeny": {
-        "size": 196087,
-        "sizeJson": 582021
+        "size": 195987,
+        "sizeJson": 582084
     },
     "tiny": {
-        "size": 79026,
-        "sizeJson": 169012
+        "size": 79002,
+        "sizeJson": 169075
     },
     "typ": {
-        "size": 104729,
-        "sizeJson": 226048
+        "size": 104629,
+        "sizeJson": 226111
     },
     "uiw": {
-        "size": 82069,
-        "sizeJson": 166777
+        "size": 82121,
+        "sizeJson": 166840
     },
     "unicons": {
-        "size": 265993,
-        "sizeJson": 804377
+        "size": 266033,
+        "sizeJson": 804440
     },
     "vscode": {
-        "size": 113108,
-        "sizeJson": 252096
+        "size": 113084,
+        "sizeJson": 252160
     },
     "weather": {
-        "size": 139201,
-        "sizeJson": 311695
+        "size": 139189,
+        "sizeJson": 311759
     },
     "zond": {
-        "size": 27386,
-        "sizeJson": 86056
+        "size": 27462,
+        "sizeJson": 86119
     }
 }

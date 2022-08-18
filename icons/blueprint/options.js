@@ -1,18 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-
-const pascalToKebabCase = (text) => {
-    return (`${text}`).trim()
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .replace(/\W/g, (m) => ((/[À-ž]/).test(m) ? m : '-'))
-        .replace(/^-+|-+$/g, '')
-        .replace(/-{2,}/g, '-')
-        .toLowerCase();
-};
-
 module.exports = {
-    package: '@blueprintjs/icons',
+    name: '@blueprintjs/icons',
     url: 'https://github.com/palantir/blueprint',
     dirs: function(item, Util) {
 

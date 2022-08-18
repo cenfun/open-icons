@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'heroicons',
+    name: 'heroicons',
     url: 'https://github.com/tailwindlabs/heroicons',
     dirs: {
         outline: 'node_modules/heroicons/outline',

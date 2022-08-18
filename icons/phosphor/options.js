@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-    package: 'phosphor-icons',
+    name: 'phosphor-icons',
     url: 'https://github.com/phosphor-icons/phosphor-icons',
     dirs: function(item, Util) {
 

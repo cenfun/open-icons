@@ -1,8 +1,8 @@
 module.exports = {
-    package: 'flat-color-icons',
+    name: 'flat-color-icons',
     url: 'https://github.com/icons8/flat-color-icons',
     dirs: 'node_modules/flat-color-icons/svg',
-    readme: 'Fixed Color',
+    readme: 'Fixed color',
     license: 'MIT',
     onSVGName: function(name, item) {
         name = name.toLowerCase();

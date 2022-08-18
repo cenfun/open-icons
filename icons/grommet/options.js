@@ -1,12 +1,12 @@
 module.exports = {
-    package: 'grommet-icons',
+    name: 'grommet-icons',
     url: 'https://github.com/FortAwesome/Font-Awesome',
     dirs: 'node_modules/grommet-icons/img',
     readme: '',
     license: 'Apache 2.0',
     onSVGDocument: function($svg) {
         let found = false;
-        ['path', 'rect', 'circle', 'polygon', 'polyline', 'g'].forEach(k => {
+        ['path', 'rect', 'circle', 'polygon', 'polyline', 'g'].forEach((k) => {
             const $elem = $svg.find(k);
             const stroke = $elem.attr('stroke');
             if (stroke && stroke !== 'none') {
@@ -29,6 +29,6 @@ module.exports = {
             return;
         }
         $svg.attr('fill', 'currentColor');
-        
+
     }
 };

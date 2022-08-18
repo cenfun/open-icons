@@ -1,5 +1,5 @@
 module.exports = {
-    package: 'remixicon',
+    name: 'remixicon',
     url: 'https://github.com/Remix-Design/RemixIcon',
     dirs: 'node_modules/remixicon/icons',
     readme: '',
