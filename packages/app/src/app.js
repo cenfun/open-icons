@@ -655,6 +655,7 @@ const loadLibs = async () => {
 
     const metadata = {
         version,
+        timestamp,
         icons
     };
 
