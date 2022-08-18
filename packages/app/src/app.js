@@ -641,9 +641,11 @@ const loadLibs = async () => {
     const cache = await ost.get('metadata');
     //console.log(cache);
     if (cache && cache.version === version) {
+
         console.log('Found cache icons', cache);
         $loading.style.display = 'none';
         initIcons(cache.icons);
+
         return;
     }
 
@@ -653,6 +655,7 @@ const loadLibs = async () => {
         $loadingLabel.innerHTML = `loaded ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
     });
 
+
     const metadata = {
         version,
         timestamp,
@@ -660,7 +663,9 @@ const loadLibs = async () => {
     };
 
     ost.set('metadata', metadata);
+
     console.log('Loaded icons', metadata);
+    $loading.style.display = 'none';
     initIcons(metadata.icons);
 
 };
