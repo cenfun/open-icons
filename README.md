@@ -1,2 +1,2 @@
-# wc-icons
-Web Components Icons
+# web-icons
+> Web Components Icons

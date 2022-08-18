@@ -1,0 +1,10 @@
+{
+    "name": "web-icons",
+    "version": "1.0.0",
+    "main": "dist/web-icons.js",
+    "files": [
+        "dist"
+    ],
+    "dependencies": {},
+    "devDependencies": {}
+}

@@ -1,0 +1,15 @@
+{
+    "name": "wci-{name}",
+    "version": "{version}",
+    "description": "Web components icons built from {packageName}",
+    "main": "dist/wci-{name}.js",
+    "files": [
+        "dist",
+        "public"
+    ],
+    "repository": {
+        "url": "https://github.com/cenfun/wci.git"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

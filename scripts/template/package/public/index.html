@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="icon" href="data:,">
+    <title>wci-{name}</title>
+    <!--inject:start-->
+    <script src="../dist/wci-{name}.js"></script>
+    <!--inject:end-->
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: arial, sans-serif;
+        }
+
+        a:visited,
+        a:link {
+            color: #000;
+        }
+
+        a:hover {
+            color: deepskyblue;
+        }
+
+        .dev-head {
+            height: 35px;
+            line-height: 35px;
+            padding: 0 5px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+        }
+
+        .dev-title {
+            flex: auto;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .dev-title span {
+            font-weight: normal;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .dev-toolbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .dev-toolbar select {
+            margin: 0 5px;
+        }
+
+        .dev-container {
+            padding: 4px;
+        }
+
+        .dev-container::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .icon-item {
+            margin: 3px;
+            float: left;
+            border: 1px solid transparent;
+        }
+
+        .icon-item:hover {
+            border: 1px solid #ccc;
+        }
+
+        .icon-item > * {
+            cursor: pointer;
+        }
+
+        .icon-item div {
+            font-size: 11px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dev-head">
+        <div class="dev-title"><a href="https://github.com/cenfun/wci" target="_blank">wci-{name}</a> <span>({stats})</span></div>
+        <div class="dev-toolbar">
+            size:
+            <select class="icon-size">
+                <option>16px</option>
+                <option>20px</option>
+                <option selected>32px</option>
+                <option>50px</option>
+                <option>64px</option>
+                <option>100px</option>
+                <option>128px</option>
+            </select>
+            color:
+            <select class="icon-color">
+                <option></option>
+                <option selected>rainbow</option>
+                <option>orangered</option>
+                <option>orange</option>
+                <option>green</option>
+                <option>deepskyblue</option>
+                <option>royalblue</option>
+                <option>darkorchid</option>
+            </select>
+            background:
+            <select class="icon-background">
+                <option></option>
+                <option>#eee</option>
+                <option>#fff</option>
+                <option>#ccc</option>
+                <option>#000</option>
+            </select>
+            radius:
+            <select class="icon-radius">
+                <option></option>
+                <option>5px</option>
+                <option>10px</option>
+                <option>20%</option>
+                <option>50%</option>
+            </select>
+        </div>
+    </div>
+    <div class="dev-body">
+        <div class="dev-container"></div>
+    </div>
+    <script>
+        const Icon = window['wci-{name}'];
+        console.log(Icon);
+        const icons = Icon.icons;
+        const tagName = Icon.tagName;
+
+        const $container = document.querySelector('.dev-container');
+
+        const copyContent = function(content) {
+            navigator.clipboard.writeText(content);
+        };
+
+        $container.addEventListener('click', function(e) {
+            const $item = e.target;
+            if ($item.tagName.toLowerCase() === tagName) {
+                copyContent($item.outerHTML);
+            }
+        });
+
+        const getColor = function(c, colorIndex) {
+            const colors = [
+                'orangered',
+                'orange',
+                'green',
+                'deepskyblue',
+                'royalblue',
+                'darkorchid'
+            ];
+
+            if (c === 'rainbow') {
+                const index = colorIndex % colors.length;
+                c = colors[index];
+                colorIndex += 1;
+            }
+
+            return c;
+        };
+
+        const renderList = function(list, length, index, size, color, background, radius) {
+
+            const next = [];
+
+            list.forEach(function(item, i) {
+
+                if (i > length) {
+                    next.push(item);
+                    return;
+                }
+
+                const $div = document.createElement('div');
+                $div.className = 'icon-item';
+                $div.title = item.name;
+
+                const $icon = document.createElement(tagName);
+                $icon.setAttribute('name', item.name);
+                $icon.setAttribute('size', size);
+                if (color) {
+                    const c = getColor(color, index);
+                    index += 1;
+                    $icon.setAttribute('color', c);
+                }
+                if (background) {
+                    $icon.setAttribute('background', background);
+                }
+                if (radius) {
+                    $icon.setAttribute('radius', radius);
+                }
+                $div.appendChild($icon);
+
+                if (parseInt(size) >= 64) {
+                    const $name = document.createElement('div');
+                    $name.style.width = size;
+                    $name.innerText = item.name;
+                    $div.appendChild($name);
+                }
+
+                $container.appendChild($div);
+            });
+
+            if (next.length) {
+                setTimeout(function() {
+                    renderList(next, length, index, size, color, background, radius);
+                });
+            }
+        };
+
+        const render = function() {
+
+            $container.innerHTML = '';
+
+            const size = document.querySelector('.icon-size').value;
+            const color = document.querySelector('.icon-color').value;
+            const background = document.querySelector('.icon-background').value;
+            const radius = document.querySelector('.icon-radius').value;
+
+            icons.sort(function(a, b) {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                return 0;
+            });
+
+            renderList(icons, 600, 0, size, color, background, radius);
+
+        };
+
+        const toolbars = ['.icon-size', '.icon-color', '.icon-background', '.icon-radius'];
+        toolbars.forEach(function(item) {
+            const $item = document.querySelector(item);
+            $item.addEventListener('change', function(e) {
+                render();
+            });
+        });
+
+        render();
+        
+    </script>
+</body>
+
+</html>

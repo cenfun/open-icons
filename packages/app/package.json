@@ -1,0 +1,15 @@
+{
+    "name": "web-icons-app",
+    "version": "1.0.0",
+    "main": "dist/web-icons-app.js",
+    "private": true,
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "file-saver": "^2.0.5",
+        "open-store": "^1.0.0",
+        "turbogrid": "^3.0.1"
+    },
+    "devDependencies": {}
+}
