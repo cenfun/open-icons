@@ -2,7 +2,7 @@
 import decompress from 'lz-utils/lib/decompress.js';
 import icons from './icons.json';
 
-const initSvg = (item) => {
+const initSvg = (item, contents) => {
     const list = ['<svg pointer-events="none" width="100%" height="100%"'];
     if (item.viewBox) {
         list.push(` viewBox="${item.viewBox}"`);
@@ -10,7 +10,8 @@ const initSvg = (item) => {
     if (item.preserveAspectRatio) {
         list.push(` preserveAspectRatio="${item.preserveAspectRatio}"`);
     }
-    list.push(`>${item.content}</svg>`);
+    const content = contents[item.content];
+    list.push(`>${content}</svg>`);
     const svg = list.join('');
 
     item.svg = svg;
@@ -39,7 +40,7 @@ const loadIcons = (path = './', callback = (item, info) => {}) => {
             Object.assign(item, sizeInfo);
 
             item.icons.forEach((it) => {
-                initSvg(it);
+                initSvg(it, item.contents);
             });
 
             loadedIcons[k] = item;
