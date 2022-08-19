@@ -325,6 +325,28 @@ const renderList = function($container, list, option) {
     }
 };
 
+const BF = function(v, places = 1, base = 1024) {
+    if (v === 0) {
+        return '0B';
+    }
+    let prefix = '';
+    if (v < 0) {
+        v = Math.abs(v);
+        prefix = '-';
+    }
+    const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    for (let i = 0, l = units.length; i < l; i++) {
+        const min = Math.pow(base, i);
+        const max = Math.pow(base, i + 1);
+        if (v > min && v < max) {
+            const unit = units[i];
+            v = prefix + (v / min).toFixed(places) + unit;
+            break;
+        }
+    }
+    return v;
+};
+
 
 const renderPackage = function(option, pkg) {
     console.log(pkg);
@@ -337,7 +359,7 @@ const renderPackage = function(option, pkg) {
     $('.wi-info').innerHTML = `
         <div class="wi-title">${pkg.name}</div>
         <div class="wi-link"><a href="${source.url}" target="_blank">${source.name}@${source.version} - ${source.license}</a></div>
-        <div class="wi-stats">bundle: ${bundle} / <b>${total}</b> icons / size: ${pkg.size} / gzip: ${pkg.sizeGzip}</div>
+        <div class="wi-stats">bundle: ${bundle} / <b>${total}</b> icons / size: ${BF(pkg.size)} / gzip: ${BF(pkg.sizeGzip)}</div>
     `;
 
     const $container = $('.wi-package');
