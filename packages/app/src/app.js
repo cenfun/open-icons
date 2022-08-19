@@ -35,10 +35,7 @@ const setOption = function() {
 setOption();
 
 const savePNG = function(content, name) {
-    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
     const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
-    let minifier;
-    console.log(minifier);
 
     const option = getOption();
     const size = parseInt(option.size);
@@ -67,8 +64,6 @@ const savePNG = function(content, name) {
 };
 
 const saveSVG = function(content, name) {
-    //add xmlns
-    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
     const blob = new Blob([content], {
         type: 'text/plain;charset=utf-8'
     });
@@ -189,8 +184,7 @@ const renderFinder = function(option, packages, rows) {
                 return `<textarea spellcheck="false">${v}</textarea>`;
             }
             if (c.id === 'dataUrl') {
-                const content = r.svg.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
-                const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
+                const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(r.svg)}`;
                 return `<textarea spellcheck="false">${dataUrl}</textarea>`;
             }
             return `<textarea spellcheck="false">${this.getFormatter('icon')(v, r)}</textarea>`;
@@ -332,21 +326,24 @@ const renderList = function($container, list, option) {
 };
 
 
-const renderPackage = function(option, item) {
-    console.log(item);
+const renderPackage = function(option, pkg) {
+    console.log(pkg);
 
-    const bundle = `<a href="js/${item.tagName}.js" target="_blank">${item.tagName}.js</a>`;
+    const bundle = `<a href="dist/${pkg.namespace}.js" target="_blank">${pkg.namespace}.js</a>`;
+
+    const source = pkg.source;
+    const total = pkg.icons.length.toLocaleString();
 
     $('.wi-info').innerHTML = `
-        <div class="wi-title">${item.name}</div>
-        <div class="wi-link"><a href="${item.url}" target="_blank">${item.package}@${item.version} - ${item.license}</a></div>
-        <div class="wi-stats">bundle: ${bundle} / <b>${item.total}</b> icons / size: ${item.size} / gzip: ${item.gzip}</div>
+        <div class="wi-title">${pkg.name}</div>
+        <div class="wi-link"><a href="${source.url}" target="_blank">${source.name}@${source.version} - ${source.license}</a></div>
+        <div class="wi-stats">bundle: ${bundle} / <b>${total}</b> icons / size: ${pkg.size} / gzip: ${pkg.sizeGzip}</div>
     `;
 
     const $container = $('.wi-package');
     $container.innerHTML = '';
 
-    const list = item.icons;
+    const list = pkg.icons;
     list.sort(function(a, b) {
         if (a.name > b.name) {
             return 1;
@@ -357,7 +354,7 @@ const renderPackage = function(option, item) {
         return 0;
     });
 
-    option.tagName = item.tagName;
+    option.tagName = pkg.tagName;
     option.pageSize = 500;
     option.index = 0;
 

@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 
 const packageHandler = (item, Util, name, index, total) => {
 
@@ -106,16 +107,28 @@ const beforeBuildWebIcons = (item, Util) => {
         packageHandler(item, Util, name, i + 1, total);
 
         const outputName = `${item.namespace}-${name}`;
-        const size = fs.statSync(path.resolve(item.buildPath, `${outputName}.js`)).size;
+
+        const p = path.resolve(item.buildPath, `${outputName}.js`);
+        const size = fs.statSync(p).size;
+
+        const gzip = zlib.gzipSync(fs.readFileSync(p), {
+            level: 9
+        });
+        const sizeGzip = gzip.length;
+        //console.log('sizeGzip', sizeGzip);
+
         const sizeJson = fs.statSync(path.resolve(item.outputRoot, `${outputName}.json`)).size;
 
         packages.push({
             name,
             namespace: outputName,
             size,
+            sizeGzip,
             sizeJson
         });
     });
+
+    //console.log(packages);
 
     //generating packages.json
     const packagesPath = path.resolve(item.componentPath, 'src/packages.json');
