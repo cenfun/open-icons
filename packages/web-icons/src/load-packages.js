@@ -17,7 +17,9 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
         const loadHandler = function(it) {
             loaded += 1;
 
-            const pkg = JSON.parse(decompress(window[it.namespace]));
+            const str = window[it.namespace].default;
+
+            const pkg = JSON.parse(decompress(str));
 
             loadedSize += it.size;
 

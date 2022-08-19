@@ -2,307 +2,307 @@
     {
         "name": "akar",
         "namespace": "web-icons-akar",
-        "size": 76930,
+        "size": 77545,
         "sizeJson": 198613
     },
     {
         "name": "ant",
         "namespace": "web-icons-ant",
-        "size": 199621,
+        "size": 200234,
         "sizeJson": 467696
     },
     {
         "name": "awesome",
         "namespace": "web-icons-awesome",
-        "size": 476445,
+        "size": 477066,
         "sizeJson": 1087659
     },
     {
         "name": "blueprint",
         "namespace": "web-icons-blueprint",
-        "size": 128419,
+        "size": 129044,
         "sizeJson": 327592
     },
     {
         "name": "bootstrap",
         "namespace": "web-icons-bootstrap",
-        "size": 400395,
+        "size": 401020,
         "sizeJson": 1120925
     },
     {
         "name": "box",
         "namespace": "web-icons-box",
-        "size": 317025,
+        "size": 317638,
         "sizeJson": 821654
     },
     {
         "name": "carbon",
         "namespace": "web-icons-carbon",
-        "size": 337192,
+        "size": 337811,
         "sizeJson": 963003
     },
     {
         "name": "charm",
         "namespace": "web-icons-charm",
-        "size": 21503,
+        "size": 22120,
         "sizeJson": 89380
     },
     {
         "name": "coreui",
         "namespace": "web-icons-coreui",
-        "size": 140316,
+        "size": 140935,
         "sizeJson": 339872
     },
     {
         "name": "crypto",
         "namespace": "web-icons-crypto",
-        "size": 338036,
+        "size": 338655,
         "sizeJson": 676978
     },
     {
         "name": "cssgg",
         "namespace": "web-icons-cssgg",
-        "size": 85935,
+        "size": 86552,
         "sizeJson": 298924
     },
     {
         "name": "dev",
         "namespace": "web-icons-dev",
-        "size": 220477,
+        "size": 221090,
         "sizeJson": 406159
     },
     {
         "name": "element",
         "namespace": "web-icons-element",
-        "size": 67601,
+        "size": 68222,
         "sizeJson": 166015
     },
     {
         "name": "entypo",
         "namespace": "web-icons-entypo",
-        "size": 116516,
+        "size": 117135,
         "sizeJson": 256867
     },
     {
         "name": "eva",
         "namespace": "web-icons-eva",
-        "size": 72365,
+        "size": 72978,
         "sizeJson": 224285
     },
     {
         "name": "feather",
         "namespace": "web-icons-feather",
-        "size": 25197,
+        "size": 25818,
         "sizeJson": 100181
     },
     {
         "name": "flag",
         "namespace": "web-icons-flag",
-        "size": 98722,
+        "size": 99337,
         "sizeJson": 235330
     },
     {
         "name": "flat",
         "namespace": "web-icons-flat",
-        "size": 86074,
+        "size": 86689,
         "sizeJson": 212959
     },
     {
         "name": "fluent",
         "namespace": "web-icons-fluent",
-        "size": 763128,
+        "size": 763747,
         "sizeJson": 2471755
     },
     {
         "name": "foundation",
         "namespace": "web-icons-foundation",
-        "size": 146420,
+        "size": 147047,
         "sizeJson": 293819
     },
     {
         "name": "grommet",
         "namespace": "web-icons-grommet",
-        "size": 114517,
+        "size": 115138,
         "sizeJson": 277022
     },
     {
         "name": "hero",
         "namespace": "web-icons-hero",
-        "size": 56202,
+        "size": 56817,
         "sizeJson": 191678
     },
     {
         "name": "icomoon",
         "namespace": "web-icons-icomoon",
-        "size": 113089,
+        "size": 113710,
         "sizeJson": 254750
     },
     {
         "name": "iconoir",
         "namespace": "web-icons-iconoir",
-        "size": 144129,
+        "size": 144750,
         "sizeJson": 574930
     },
     {
         "name": "ikonate",
         "namespace": "web-icons-ikonate",
-        "size": 26161,
+        "size": 26782,
         "sizeJson": 97482
     },
     {
         "name": "ionic",
         "namespace": "web-icons-ionic",
-        "size": 247963,
+        "size": 248580,
         "sizeJson": 635258
     },
     {
         "name": "jam",
         "namespace": "web-icons-jam",
-        "size": 191573,
+        "size": 192186,
         "sizeJson": 534219
     },
     {
         "name": "line",
         "namespace": "web-icons-line",
-        "size": 518806,
+        "size": 519421,
         "sizeJson": 1119393
     },
     {
         "name": "lucide",
         "namespace": "web-icons-lucide",
-        "size": 71380,
+        "size": 71999,
         "sizeJson": 308395
     },
     {
         "name": "majest",
         "namespace": "web-icons-majest",
-        "size": 109816,
+        "size": 110435,
         "sizeJson": 375515
     },
     {
         "name": "maki",
         "namespace": "web-icons-maki",
-        "size": 51834,
+        "size": 52449,
         "sizeJson": 112784
     },
     {
         "name": "material",
         "namespace": "web-icons-material",
-        "size": 524978,
+        "size": 525601,
         "sizeJson": 1616996
     },
     {
         "name": "mdi",
         "namespace": "web-icons-mdi",
-        "size": 1101477,
+        "size": 1102090,
         "sizeJson": 3238476
     },
     {
         "name": "mono",
         "namespace": "web-icons-mono",
-        "size": 30698,
+        "size": 31313,
         "sizeJson": 83698
     },
     {
         "name": "oct",
         "namespace": "web-icons-oct",
-        "size": 128849,
+        "size": 129462,
         "sizeJson": 342520
     },
     {
         "name": "park",
         "namespace": "web-icons-park",
-        "size": 349502,
+        "size": 350117,
         "sizeJson": 1467425
     },
     {
         "name": "phosphor",
         "namespace": "web-icons-phosphor",
-        "size": 913206,
+        "size": 913829,
         "sizeJson": 2902518
     },
     {
         "name": "pixelart",
         "namespace": "web-icons-pixelart",
-        "size": 34350,
+        "size": 34973,
         "sizeJson": 137840
     },
     {
         "name": "prime",
         "namespace": "web-icons-prime",
-        "size": 46543,
+        "size": 47160,
         "sizeJson": 130841
     },
     {
         "name": "radix",
         "namespace": "web-icons-radix",
-        "size": 76399,
+        "size": 77016,
         "sizeJson": 209471
     },
     {
         "name": "remix",
         "namespace": "web-icons-remix",
-        "size": 319091,
+        "size": 319708,
         "sizeJson": 1026730
     },
     {
         "name": "simple",
         "namespace": "web-icons-simple",
-        "size": 1959896,
+        "size": 1960515,
         "sizeJson": 3941050
     },
     {
         "name": "tabler",
         "namespace": "web-icons-tabler",
-        "size": 198216,
+        "size": 198835,
         "sizeJson": 966110
     },
     {
         "name": "teeny",
         "namespace": "web-icons-teeny",
-        "size": 195987,
+        "size": 196604,
         "sizeJson": 582084
     },
     {
         "name": "tiny",
         "namespace": "web-icons-tiny",
-        "size": 79002,
+        "size": 79617,
         "sizeJson": 169075
     },
     {
         "name": "typ",
         "namespace": "web-icons-typ",
-        "size": 104629,
+        "size": 105242,
         "sizeJson": 226111
     },
     {
         "name": "uiw",
         "namespace": "web-icons-uiw",
-        "size": 82121,
+        "size": 82734,
         "sizeJson": 166840
     },
     {
         "name": "unicons",
         "namespace": "web-icons-unicons",
-        "size": 266033,
+        "size": 266654,
         "sizeJson": 804440
     },
     {
         "name": "vscode",
         "namespace": "web-icons-vscode",
-        "size": 113084,
+        "size": 113703,
         "sizeJson": 252160
     },
     {
         "name": "weather",
         "namespace": "web-icons-weather",
-        "size": 139189,
+        "size": 139810,
         "sizeJson": 311759
     },
     {
         "name": "zond",
         "namespace": "web-icons-zond",
-        "size": 27462,
+        "size": 28077,
         "sizeJson": 86119
     }
 ]

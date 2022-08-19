@@ -23,7 +23,7 @@ const packageHandler = (item, Util, name, index, total) => {
 
     console.log(`start svg minify: ${name}`);
 
-    Util.format(optionsPath);
+    //Util.format(optionsPath);
 
     let dirs = options.dirs;
     if (typeof dirs === 'function') {
@@ -70,9 +70,13 @@ const packageHandler = (item, Util, name, index, total) => {
     //save lz.js
     const lzPath = path.resolve(item.buildPath, `${outputName}.js`);
 
-    const content = `window['${outputName}'] = '${compressedStr}';`;
-
-    Util.writeFileContentSync(lzPath, content);
+    const URT = require('umd-runtime-templates');
+    URT({
+        template: 'export-default-string',
+        name: outputName,
+        content: compressedStr,
+        output: lzPath
+    });
 
     Util.logCyan(`minified package: ${name} (${index}/${total})`);
 
@@ -96,7 +100,7 @@ const beforeBuildWebIcons = (item, Util) => {
 
     const packages = [];
 
-    const total = packages.length;
+    const total = list.length;
     list.forEach((name, i) => {
 
         packageHandler(item, Util, name, i + 1, total);

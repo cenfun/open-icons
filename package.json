@@ -78,6 +78,7 @@
         "stylelint": "^14.10.0",
         "stylelint-config-recommended": "^9.0.0",
         "stylelint-config-standard": "^27.0.0",
-        "svg-minifier": "^1.0.2"
+        "svg-minifier": "^1.0.2",
+        "umd-runtime-templates": "^1.0.0"
     }
 }
