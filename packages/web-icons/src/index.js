@@ -1,19 +1,24 @@
 
-import icons from './icons.json';
+import packages from './packages.json';
 import decompress from 'lz-utils/lib/decompress.js';
-import loadIcons from './load-icons.js';
+
+import loadPackages from './load-packages.js';
+import initIcons from './init-icons.js';
 import getIconElement from './get-icon-element.js';
 
 const version = window.VERSION;
 const timestamp = window.TIMESTAMP;
 
 export {
-    icons,
+    packages,
     decompress,
-    loadIcons,
+
+    loadPackages,
+    initIcons,
     getIconElement,
+
     version,
     timestamp
 };
 
-export default icons;
+export default packages;

@@ -1,7 +1,7 @@
 import './app.scss';
 
 import {
-    loadIcons, getIconElement, version, timestamp
+    loadPackages, getIconElement, version, timestamp
 } from 'web-icons';
 
 const $ = function(selector) {
@@ -649,7 +649,7 @@ const loadLibs = async () => {
         return;
     }
 
-    const icons = await loadIcons('../node_modules/web-icons/dist/', (item, info) => {
+    const packages = await loadPackages('../node_modules/web-icons/dist/', (item, info) => {
         //console.log(info);
         const per = Math.round(info.loadedSize / info.totalSize * 100);
         $loadingLabel.innerHTML = `loaded ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
@@ -659,7 +659,7 @@ const loadLibs = async () => {
     const metadata = {
         version,
         timestamp,
-        icons
+        packages
     };
 
     ost.set('metadata', metadata);

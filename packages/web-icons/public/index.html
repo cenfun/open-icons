@@ -13,16 +13,16 @@
     <script src="../dist/web-icons.js"></script>
     <!--inject:end-->
     <script>
-        const { icons, loadIcons } = window['web-icons'];
+        const { packages, loadPackages } = window['web-icons'];
 
-        console.log(icons);
+        console.log(packages);
 
         const ts = Date.now();
 
-        loadIcons('../dist/', (item, info) => {
+        loadPackages('../dist/', (item, info) => {
             console.log(item.name, info);
-        }).then((loadedIcons) => {
-            console.log(loadedIcons);
+        }).then((loadedPackages) => {
+            console.log(loadedPackages);
             console.log('duration', Date.now() - ts);
         });
         

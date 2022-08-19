@@ -4,30 +4,30 @@
 const fs = require('fs');
 const path = require('path');
 
-const iconsHandler = (item, Util, dir, i, total) => {
+const packageHandler = (item, Util, name, index, total) => {
 
-    // Util.rmSync(path.resolve(item.iconsRoot, dir, 'src'));
-    // Util.rmSync(path.resolve(item.iconsRoot, dir, 'dist'));
-    // Util.rmSync(path.resolve(item.iconsRoot, dir, 'public'));
+    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'src'));
+    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
+    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
 
-    const optionsPath = path.resolve(item.iconsRoot, dir, 'options.js');
+    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
 
     const options = require(optionsPath);
 
-    const outputName = `${item.namespace}-${dir}`;
+    const outputName = `${item.namespace}-${name}`;
 
     if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
-        Util.logYellow(`exists cache and ignore: ${dir}`);
+        Util.logYellow(`exists cache and ignore: ${name}`);
         return;
     }
 
-    console.log(`start svg minify: ${dir}`);
+    console.log(`start svg minify: ${name}`);
 
     Util.format(optionsPath);
 
     let dirs = options.dirs;
     if (typeof dirs === 'function') {
-        dirs = dirs.call(options, dir, Util);
+        dirs = dirs.call(options, name, Util);
     }
 
     const version = require(`../node_modules/${options.name}/package.json`).version;
@@ -40,7 +40,7 @@ const iconsHandler = (item, Util, dir, i, total) => {
         outputDir: item.outputRoot,
         outputRuntime: false,
         metadata: {
-            name: dir,
+            name: name,
             source: {
                 name: options.name,
                 version: version,
@@ -74,7 +74,7 @@ const iconsHandler = (item, Util, dir, i, total) => {
 
     Util.writeFileContentSync(lzPath, content);
 
-    Util.logCyan(`minified: ${dir} (${i}/${total})`);
+    Util.logCyan(`minified package: ${name} (${index}/${total})`);
 
 };
 
@@ -83,10 +83,10 @@ const beforeBuildWebIcons = (item, Util) => {
     const namespace = require('../package.json').name;
     item.namespace = namespace;
 
-    const iconsRoot = path.resolve(__dirname, '../icons');
-    item.iconsRoot = iconsRoot;
+    const sourcesRoot = path.resolve(__dirname, '../sources');
+    item.sourcesRoot = sourcesRoot;
 
-    const iconsDirs = fs.readdirSync(iconsRoot);
+    const list = fs.readdirSync(sourcesRoot);
 
     const outputRoot = path.resolve(item.componentPath, './output');
     if (!fs.existsSync(outputRoot)) {
@@ -94,25 +94,28 @@ const beforeBuildWebIcons = (item, Util) => {
     }
     item.outputRoot = outputRoot;
 
-    const icons = {};
+    const packages = [];
 
-    const total = iconsDirs.length;
-    iconsDirs.forEach((dir, i) => {
-        iconsHandler(item, Util, dir, i + 1, total);
+    const total = packages.length;
+    list.forEach((name, i) => {
 
-        const outputName = `${item.namespace}-${dir}`;
+        packageHandler(item, Util, name, i + 1, total);
+
+        const outputName = `${item.namespace}-${name}`;
         const size = fs.statSync(path.resolve(item.buildPath, `${outputName}.js`)).size;
         const sizeJson = fs.statSync(path.resolve(item.outputRoot, `${outputName}.json`)).size;
 
-        icons[dir] = {
+        packages.push({
+            name,
+            namespace: outputName,
             size,
             sizeJson
-        };
+        });
     });
 
-    //generating icons.json
-    const iconsPath = path.resolve(item.componentPath, 'src/icons.json');
-    Util.writeJSONSync(iconsPath, icons);
+    //generating packages.json
+    const packagesPath = path.resolve(item.componentPath, 'src/packages.json');
+    Util.writeJSONSync(packagesPath, packages);
 
 };
 
