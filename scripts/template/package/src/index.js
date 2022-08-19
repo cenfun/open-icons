@@ -1,4 +1,4 @@
-import metadata from './dist/wci-{name}.js';
+import metadata from './dist/wi-{name}.js';
 const icons = metadata.icons;
 
 const getIcon = function(name, key) {
@@ -97,7 +97,7 @@ class IconElement extends HTMLElement {
     }
 }
 
-const tagName = 'wci-{name}';
+const tagName = 'wi-{name}';
 //override tagName
 IconElement.tagName = tagName;
 

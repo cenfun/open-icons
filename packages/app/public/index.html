@@ -9,35 +9,29 @@
 </head>
 
 <body>
-    <div class="wci-loading">
-        <div class="wci-loading-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" pointer-events="none" width="100%" height="100%">
-                <path
-                    d="M1,8 A7 7 0 1 1 8 15"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    fill="none"
-                />
+    <div class="wi-loading">
+        <div class="wi-loading-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" pointer-events="none">
+                <path d="M1,8 A7 7 0 1 1 8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
             </svg>
         </div>
-        <div class="wci-loading-label">Loading ...</div>
+        <div class="wi-loading-label">Loading ...</div>
     </div>
-    <div class="wci-menu">
-        <div class="wci-menu-header">
-            <a href="https://cenfun.github.io/wci" class="wci" title="Web Components Icons">WCI</a>
-            <a href="https://github.com/cenfun/wci" target="_blank" class="github" title="Fork WCI">
-                <svg pointer-events="none" width="100%" height="100%" viewBox="0 0 16 16"><g fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></g></svg>
+    <div class="wi-menu">
+        <div class="wi-menu-header">
+            <a href="https://cenfun.github.io/wi" class="wi" title="Web Components Icons">Web Icons</a>
+            <a href="https://github.com/cenfun/wi" target="_blank" class="github" title="Fork wi">
+                <svg xmlns="http://www.w3.org/2000/svg" pointer-events="none" viewBox="0 0 16 16"><g fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></g></svg>
             </a>
         </div>
-        <div class="wci-menu-grid flex-auto"></div>
-        <div class="wci-menu-footer"></div>
+        <div class="wi-menu-grid flex-auto"></div>
+        <div class="wi-menu-footer"></div>
     </div>
-    <div class="wci-main flex-auto flex-column">
-        <div class="wci-header">
-            <div class="wci-toolbar">
+    <div class="wi-main flex-auto flex-column">
+        <div class="wi-header">
+            <div class="wi-toolbar">
                 size:
-                <select class="wci-icon-size">
+                <select class="wi-icon-size">
                     <option>16px</option>
                     <option>20px</option>
                     <option selected>32px</option>
@@ -47,7 +41,7 @@
                     <option>128px</option>
                 </select>
                 color:
-                <select class="wci-icon-color">
+                <select class="wi-icon-color">
                     <option></option>
                     <option selected>rainbow</option>
                     <option>orangered</option>
@@ -58,7 +52,7 @@
                     <option>darkorchid</option>
                 </select>
                 background:
-                <select class="wci-icon-background">
+                <select class="wi-icon-background">
                     <option></option>
                     <option>#eee</option>
                     <option>#fff</option>
@@ -66,7 +60,7 @@
                     <option>#000</option>
                 </select>
                 radius:
-                <select class="wci-icon-radius">
+                <select class="wi-icon-radius">
                     <option></option>
                     <option>5px</option>
                     <option>10px</option>
@@ -74,19 +68,19 @@
                     <option>50%</option>
                 </select>
             </div>
-            <div class="wci-info"></div>
+            <div class="wi-info"></div>
         </div>
-        <div class="wci-view flex-auto">
-            <div class="wci-package"></div>
-            <div class="wci-finder flex-column">
-                <div class="wci-filter flex-row">
-                    <div class="wci-searcher">
-                        <input type="text" class="wci-keywords flex-auto" onfocus="this.select()" /> 
-                        <wci-tabler class="wci-searcher-icon" name="search" size="32px"></wci-tabler>
+        <div class="wi-view flex-auto">
+            <div class="wi-package"></div>
+            <div class="wi-finder flex-column">
+                <div class="wi-filter flex-row">
+                    <div class="wi-searcher">
+                        <input type="text" class="wi-keywords flex-auto" onfocus="this.select()" /> 
+                        <wi-tabler class="wi-searcher-icon" name="search" size="32px"></wi-tabler>
                     </div>
                 </div>
-                <div class="wci-popular"></div>
-                <div class="wci-grid flex-auto"></div>
+                <div class="wi-popular"></div>
+                <div class="wi-grid flex-auto"></div>
             </div>
         </div>
     </div>

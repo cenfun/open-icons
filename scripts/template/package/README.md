@@ -1,4 +1,4 @@
-# wci-{name}
+# wi-{name}
 Built from [{packageNameVersion}]({packageUrl})  
 
 {stats}  
@@ -8,7 +8,7 @@ Built from [{packageNameVersion}]({packageUrl})
 # Screenshot
 ![screenshot](public/screenshot.png)
 
-Online Page: [https://cenfun.github.io/wci/#{name}](https://cenfun.github.io/wci/#{name})
+Online Page: [https://cenfun.github.io/wi/#{name}](https://cenfun.github.io/wi/#{name})
 
 # Features
 * Web Components
@@ -17,13 +17,13 @@ Online Page: [https://cenfun.github.io/wci/#{name}](https://cenfun.github.io/wci
 * High Compressed Bundle
 # Installation
 ```sh
-npm install wci-{name}
+npm install wi-{name}
 ```
 # API Usage
 ```js
-import { icons, getIcon } from "wci-{name}";
+import { icons, getIcon } from "wi-{name}";
 
-const $icon = document.createElement("wci-{name}");
+const $icon = document.createElement("wi-{name}");
 $icon.setAttribute("name", "[icon-name]");
 $icon.setAttribute("size", "64px");
 $icon.setAttribute("color", "#000");
@@ -37,10 +37,10 @@ icons.forEach(item => {
 # Browser Usage
 ```html
 
-<script src="path-to/wci-{name}/dist/wci-{name}.js"></script>
+<script src="path-to/wi-{name}/dist/wi-{name}.js"></script>
 
-<wci-{name} name="[icon-name]"></wci-{name}>
-<wci-{name} name="[icon-name]" size="64px" color="#000" style="background:#f5f5f5;"></wci-{name}>
+<wi-{name} name="[icon-name]"></wi-{name}>
+<wi-{name} name="[icon-name]" size="64px" color="#000" style="background:#f5f5f5;"></wi-{name}>
 ```
 see [public/index.html](public/index.html)
 

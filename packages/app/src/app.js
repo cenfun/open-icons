@@ -16,8 +16,8 @@ const iconAttrs = ['size', 'color', 'background', 'radius'];
 const getOption = function() {
     const option = {};
     iconAttrs.forEach(function(key) {
-        const value = $(`.wci-icon-${key}`).value;
-        sessionStorage.setItem(`wci-icon-${key}`, value);
+        const value = $(`.wi-icon-${key}`).value;
+        sessionStorage.setItem(`wi-icon-${key}`, value);
         option[key] = value;
     });
     return option;
@@ -25,9 +25,9 @@ const getOption = function() {
 
 const setOption = function() {
     iconAttrs.forEach(function(key) {
-        const value = sessionStorage.getItem(`wci-icon-${key}`);
+        const value = sessionStorage.getItem(`wi-icon-${key}`);
         if (value) {
-            $(`.wci-icon-${key}`).value = value;
+            $(`.wi-icon-${key}`).value = value;
         }
     });
 };
@@ -110,7 +110,7 @@ const initGrid = function() {
     }
 
     const Grid = window.turbogrid.Grid;
-    grid = new Grid($('.wci-grid'));
+    grid = new Grid($('.wi-grid'));
     grid.bind('onClick', function(e, d) {
         const rowItem = d.rowItem;
         const $target = d.e.target;
@@ -118,14 +118,14 @@ const initGrid = function() {
             $target.select();
             return;
         }
-        if ($target.classList.contains('wci-icon-copy')) {
-            const url = `https://cenfun.github.io/wci/js/${rowItem.tag}.js`;
+        if ($target.classList.contains('wi-icon-copy')) {
+            const url = `https://cenfun.github.io/wi/js/${rowItem.tag}.js`;
             const textarea = document.createElement('textarea');
             textarea.innerHTML = `&lt;script src=&quot;${url}&quot;&gt;&lt;/script&gt;\n${$target.innerHTML}`;
             copyContent(textarea.value);
             return;
         }
-        if ($target.classList.contains('wci-icon-download')) {
+        if ($target.classList.contains('wi-icon-download')) {
             const type = $target.getAttribute('name');
             if (type === 'png') {
                 savePNG(rowItem.svg, rowItem.name);
@@ -137,17 +137,15 @@ const initGrid = function() {
     grid.showLoading();
 };
 
-const renderFinder = function(option, icons, rows) {
-
-    const keys = Object.keys(icons);
+const renderFinder = function(option, packages, rows) {
 
     initGrid();
 
     const total = rows.length;
 
-    $('.wci-info').innerHTML = `
-        <div class="wci-title">Web Components Icons</div>
-        <div class="wci-stats">Total <b>${keys.length}</b> packages and <b>${total.toLocaleString()}</b> icons</div>
+    $('.wi-info').innerHTML = `
+        <div class="wi-title">Web Components Icons</div>
+        <div class="wi-stats">Total <b>${packages.length}</b> packages and <b>${total.toLocaleString()}</b> icons</div>
     `;
 
     const cellSize = parseInt(option.size) + 10;
@@ -157,7 +155,7 @@ const renderFinder = function(option, icons, rows) {
         frozenColumn: 2,
         bindWindowResize: true,
         bindContainerResize: true,
-        rowNotFound: '<div class="wci-not-found">Not found results</div>',
+        rowNotFound: '<div class="wi-not-found">Not found results</div>',
         rowFilter: function(rowData) {
             if (!keywords.length) {
                 return true;
@@ -184,7 +182,7 @@ const renderFinder = function(option, icons, rows) {
             return `<a href="#${v}">${v}</a>`;
         },
         copy: function(v, r) {
-            return `<wci-ant class="wci-icon-action wci-icon-copy" name="copy-outlined" size="16px" title="copy script/wci">${this.getFormatter('icon')(v, r)}</wci-ant>`;
+            return `<wi-ant class="wi-icon-action wi-icon-copy" name="copy-outlined" size="16px" title="copy script/wi">${this.getFormatter('icon')(v, r)}</wi-ant>`;
         },
         textarea: function(v, r, c) {
             if (c.id === 'svg') {
@@ -198,10 +196,10 @@ const renderFinder = function(option, icons, rows) {
             return `<textarea spellcheck="false">${this.getFormatter('icon')(v, r)}</textarea>`;
         },
         downloadSvg: function(v) {
-            return '<wci-carbon class="wci-icon-action wci-icon-download" name="svg" size="16px" title="download svg file"></wci-carbon>';
+            return '<wi-carbon class="wi-icon-action wi-icon-download" name="svg" size="16px" title="download svg file"></wi-carbon>';
         },
         downloadPng: function(v) {
-            return '<wci-carbon class="wci-icon-action wci-icon-download" name="png" size="16px" title="download png file"></wci-carbon>';
+            return '<wi-carbon class="wi-icon-action wi-icon-download" name="png" size="16px" title="download png file"></wi-carbon>';
         }
     });
     grid.setData({
@@ -218,7 +216,7 @@ const renderFinder = function(option, icons, rows) {
             width: cellSize,
             minWidth: cellSize,
             align: 'center',
-            classMap: 'wci-icon',
+            classMap: 'wi-icon',
             formatter: 'icon',
             sortable: false
         }, {
@@ -242,7 +240,7 @@ const renderFinder = function(option, icons, rows) {
         }, {
             id: 'svg',
             name: 'Pure SVG',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -250,7 +248,7 @@ const renderFinder = function(option, icons, rows) {
         }, {
             id: 'dataUrl',
             name: 'Data URL',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -258,7 +256,7 @@ const renderFinder = function(option, icons, rows) {
         }, {
             id: 'wc',
             name: 'Web component',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -294,7 +292,7 @@ const renderList = function($container, list, option) {
         }
 
         const $div = document.createElement('div');
-        $div.className = 'wci-icon-item';
+        $div.className = 'wi-icon-item';
         $div.title = item.name;
 
         const $icon = document.createElement(option.tagName);
@@ -314,7 +312,7 @@ const renderList = function($container, list, option) {
 
         if (parseInt(option.size) >= 64) {
             const $name = document.createElement('div');
-            $name.className = 'wci-icon-item-label';
+            $name.className = 'wi-icon-item-label';
             $name.style.width = option.size;
             $name.innerText = item.name;
             $div.appendChild($name);
@@ -339,13 +337,13 @@ const renderPackage = function(option, item) {
 
     const bundle = `<a href="js/${item.tagName}.js" target="_blank">${item.tagName}.js</a>`;
 
-    $('.wci-info').innerHTML = `
-        <div class="wci-title">${item.name}</div>
-        <div class="wci-link"><a href="${item.url}" target="_blank">${item.package}@${item.version} - ${item.license}</a></div>
-        <div class="wci-stats">bundle: ${bundle} / <b>${item.total}</b> icons / size: ${item.size} / gzip: ${item.gzip}</div>
+    $('.wi-info').innerHTML = `
+        <div class="wi-title">${item.name}</div>
+        <div class="wi-link"><a href="${item.url}" target="_blank">${item.package}@${item.version} - ${item.license}</a></div>
+        <div class="wi-stats">bundle: ${bundle} / <b>${item.total}</b> icons / size: ${item.size} / gzip: ${item.gzip}</div>
     `;
 
-    const $container = $('.wci-package');
+    const $container = $('.wi-package');
     $container.innerHTML = '';
 
     const list = item.icons;
@@ -367,12 +365,12 @@ const renderPackage = function(option, item) {
 
 };
 
-const renderView = function(icons, gridRows) {
+const renderView = function(packages, gridRows) {
 
     const hash = location.hash.substr(1);
     //console.log(hash);
-    const $package = $('.wci-package');
-    const $finder = $('.wci-finder');
+    const $package = $('.wi-package');
+    const $finder = $('.wi-finder');
 
     $package.style.display = 'none';
     $finder.style.display = 'none';
@@ -382,7 +380,7 @@ const renderView = function(icons, gridRows) {
 
 
     if (hash) {
-        const item = icons[hash];
+        const item = packages.find((pkg) => pkg.name === hash);
         if (item) {
             $package.style.display = 'block';
             renderPackage(option, item);
@@ -391,7 +389,7 @@ const renderView = function(icons, gridRows) {
     }
 
     $finder.style.display = 'flex';
-    renderFinder(option, icons, gridRows);
+    renderFinder(option, packages, gridRows);
 
 };
 
@@ -440,22 +438,14 @@ const getPopular = function(popularList) {
     return `Popular: ${ks} <i></i>`;
 };
 
-let menuGrid;
-const renderMenu = function(icons) {
-
-    if (menuGrid) {
-        return;
-    }
+const renderMenu = function(packages) {
 
     const Grid = window.turbogrid.Grid;
 
-    const keys = Object.keys(icons);
-
-    const rows = keys.map((k) => {
-        const item = icons[k];
+    const rows = packages.map((pkg) => {
         return {
-            name: item.name,
-            total: item.icons.length.toLocaleString()
+            name: pkg.name,
+            total: pkg.icons.length.toLocaleString()
         };
     });
 
@@ -476,13 +466,13 @@ const renderMenu = function(icons) {
             id: 'total',
             name: 'Total',
             width: 60,
-            dataType: 'number'
+            type: 'number'
         }],
         rows
     };
 
 
-    menuGrid = new Grid($('.wci-menu-grid'));
+    const menuGrid = new Grid($('.wi-menu-grid'));
 
     menuGrid.bind('onClick', function(e, d) {
         if (!d.rowNode) {
@@ -519,28 +509,25 @@ const renderMenu = function(icons) {
     menuGrid.render();
 
     const date = new Date(timestamp).toLocaleDateString();
-    const footer = `<a href="https://github.com/cenfun/wci" target="_blank">Latest: v${version} - ${date}</a>`;
-    $('.wci-menu-footer').innerHTML = footer;
+    const footer = `<a href="https://github.com/cenfun/wi" target="_blank">Latest: v${version} - ${date}</a>`;
+    $('.wi-menu-footer').innerHTML = footer;
 
 };
 
-const renderStart = function(icons) {
-
-    const keys = Object.keys(icons);
+const renderStart = function(packages) {
 
     const gridRows = [];
-    keys.forEach(function(key) {
-        const item = icons[key];
+    packages.forEach(function(pkg) {
 
-        item.icons.forEach((ic) => {
+        pkg.icons.forEach((ic) => {
 
             const iconName = ic.name;
             addPopular(iconName);
 
             gridRows.push({
-                tag: item.tagName,
+                tag: pkg.tagName,
                 name: iconName,
-                package: item.name,
+                package: pkg.name,
                 svg: ic.svg
             });
         });
@@ -550,7 +537,7 @@ const renderStart = function(icons) {
     const picked = popularList[Math.floor(popularList.length * Math.random())];
     keywords = [picked];
 
-    const $keywords = $('.wci-keywords');
+    const $keywords = $('.wi-keywords');
     $keywords.value = picked;
     $keywords.focus();
 
@@ -568,7 +555,7 @@ const renderStart = function(icons) {
         keywordsHandler();
     });
 
-    const $popular = $('.wci-popular');
+    const $popular = $('.wi-popular');
     $popular.addEventListener('click', function(e) {
         const tagName = e.target.tagName.toLowerCase();
         if (tagName === 'span') {
@@ -584,59 +571,54 @@ const renderStart = function(icons) {
     $popular.innerHTML = getPopular(popularList);
 
     window.addEventListener('popstate', (e) => {
-        renderView(icons, gridRows);
+        renderView(packages, gridRows);
     });
 
-    $('.wci-package').addEventListener('click', function(e) {
+    $('.wi-package').addEventListener('click', function(e) {
         const $elem = e.target;
         if ($elem.tagName.includes('-')) {
             saveSVG($elem.svg, $elem.parentNode.title);
         }
     });
 
-    const toolbars = ['.wci-icon-size', '.wci-icon-color', '.wci-icon-background', '.wci-icon-radius'];
+    const toolbars = ['.wi-icon-size', '.wi-icon-color', '.wi-icon-background', '.wi-icon-radius'];
     toolbars.forEach(function(item) {
         const $item = $(item);
         $item.addEventListener('change', function(e) {
-            renderView(icons, gridRows);
+            renderView(packages, gridRows);
         });
     });
 
-    renderView(icons, gridRows);
+    renderView(packages, gridRows);
 };
 
-const initIcons = function(icons) {
+const initPackages = function(packages) {
 
-    const keys = Object.keys(icons);
-
-    keys.forEach(function(key) {
-        const item = icons[key];
-        const IconElement = getIconElement(item.icons);
-        //console.log(item);
-        const tagName = `wci-${item.name}`;
+    packages.forEach(function(pkg) {
+        const IconElement = getIconElement(pkg.icons);
         //override tagName
-        IconElement.tagName = tagName;
+        IconElement.tagName = pkg.tagName;
         //define custom element
-        if (customElements.get(tagName)) {
-            console.error(`${tagName} already defined`);
+        if (customElements.get(pkg.tagName)) {
+            console.error(`${pkg.tagName} already defined`);
         } else {
             //console.log(tagName);
-            customElements.define(tagName, IconElement);
+            customElements.define(pkg.tagName, IconElement);
         }
     });
 
-    renderMenu(icons);
+    renderMenu(packages);
 
-    renderStart(icons);
+    renderStart(packages);
 };
 
 const loadLibs = async () => {
 
-    const $loading = $('.wci-loading');
-    const $loadingLabel = $loading.querySelector('.wci-loading-label');
+    const $loading = $('.wi-loading');
+    const $loadingLabel = $loading.querySelector('.wi-loading-label');
 
     const { openStore } = window['open-store'];
-    const ost = await openStore('wci');
+    const ost = await openStore('wi');
     //console.log(db);
     const cache = await ost.get('metadata');
     //console.log(cache);
@@ -644,7 +626,7 @@ const loadLibs = async () => {
 
         console.log('Found cache icons', cache);
         $loading.style.display = 'none';
-        initIcons(cache.icons);
+        initPackages(cache.packages);
 
         return;
     }
@@ -666,7 +648,7 @@ const loadLibs = async () => {
 
     console.log('Loaded icons', metadata);
     $loading.style.display = 'none';
-    initIcons(metadata.icons);
+    initPackages(metadata.packages);
 
 };
 

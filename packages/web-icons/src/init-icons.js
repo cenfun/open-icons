@@ -3,7 +3,7 @@ const getSvg = (item) => {
     if (item.viewBox) {
         list.push(` viewBox="${item.viewBox}"`);
     }
-    //list.push(' width="100%" height="100%"');
+    list.push(' width="100%" height="100%"');
     if (item.preserveAspectRatio) {
         list.push(` preserveAspectRatio="${item.preserveAspectRatio}"`);
     }
