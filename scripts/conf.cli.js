@@ -140,7 +140,7 @@ module.exports = {
 
     build: {
 
-        vendors: ['web-icons'],
+        vendors: ['app', 'web-icons'],
 
         webpackConfig: (conf, Util) => {
             conf.devtool = false;

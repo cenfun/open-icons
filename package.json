@@ -71,6 +71,7 @@
         "eslint": "^8.22.0",
         "eslint-config-plus": "^1.0.3",
         "eslint-plugin-html": "^7.1.0",
+        "eslint-plugin-vue": "^9.3.0",
         "lz-utils": "^1.0.5",
         "postcss": "^8.4.16",
         "postcss-html": "^1.5.0",
@@ -79,6 +80,7 @@
         "stylelint-config-recommended": "^9.0.0",
         "stylelint-config-standard": "^27.0.0",
         "svg-minifier": "^1.0.2",
-        "umd-runtime-templates": "^1.0.0"
+        "umd-runtime-templates": "^1.0.0",
+        "vine-ui": "^3.0.9"
     }
 }

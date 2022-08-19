@@ -17,10 +17,12 @@ module.exports = {
     },
 
     'plugins': [
+        'vue',
         'html'
     ],
 
     'extends': [
+        'plugin:vue/recommended',
         'plus'
     ],
 
@@ -30,6 +32,7 @@ module.exports = {
     },
 
     'rules': {
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn'
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+        'vue/multi-word-component-names': 'off'
     }
 };
