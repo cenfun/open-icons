@@ -81,8 +81,7 @@ const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
         pkg.iconsNum = pkg.icons.length.toLocaleString();
-        pkg.sourceName = pkg.source.name;
-        pkg.sourceVersion = pkg.source.version;
+        pkg.sourceFrom = `${pkg.source.name}@${pkg.source.version}`;
         pkg.sourceLicense = pkg.source.license;
         return pkg;
     });
@@ -119,19 +118,18 @@ const renderPackages = function(packages) {
             formatter: 'BF',
             align: 'right'
         }, {
-            id: 'sourceName',
-            name: 'Source Name',
-            formatter: 'source',
-            width: 150
+            id: 'dist',
+            name: 'Dist',
+            formatter: 'dist',
+            width: 160
         }, {
-            id: 'sourceVersion',
-            name: 'Version',
-            formatter: 'source',
-            width: 65
+            id: 'sourceFrom',
+            name: 'Source From',
+            formatter: 'sourceFrom',
+            width: 200
         }, {
             id: 'sourceLicense',
             name: 'License',
-            formatter: 'source',
             width: 100
         }],
         rows
@@ -150,30 +148,27 @@ const renderPackages = function(packages) {
     });
 
     gridPackages.setFormatter({
-        // rowNumber: function(value, rowItem, columnItem, cellNode) {
-        //     const defaultFormatter = this.getDefaultFormatter('rowNumber');
-        //     if (rowItem.type === 'finder') {
-        //         return '<svg pointer-events="none" width="100%" height="100%" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor"><path d="M0 0h24v24H0z" stroke="none"/><circle cx="10" cy="10" r="7"/><path d="m21 21-6-6"/></g></svg>';
-        //     }
-        //     return defaultFormatter(value, rowItem, columnItem, cellNode);
-        // }
-        source: function(value, rowItem, columnItem, cellNode) {
-            if (!value) {
-                return '';
+
+        sourceFrom: function(value, rowItem, columnItem, cellNode) {
+            const source = rowItem.source;
+            if (!source) {
+                return '—';
             }
-
-            return value;
-
-            // const bundle = `<a href="dist/${rowItem.namespace}.js" target="_blank">${rowItem.namespace}.js</a>`;
-
-            // return `
-            //   <div class="wi-link"><a href="${source.url}" target="_blank">${source.name}@${source.version} - ${source.license}</a></div>
-            //   <div class="wi-stats">bundle: ${bundle}</div>
-            // `;
+            return `<a href="${source.url}" target="_blank">${value}</a>`;
         },
+
+        dist: function(value, rowItem, columnItem, cellNode) {
+            if (!rowItem.namespace) {
+                return '—';
+            }
+            const bundleName = `${rowItem.namespace}.js`;
+            return `<a href="/dist/${bundleName}" target="_blank">${bundleName}</a>`;
+        },
+
         BF: function(value, rowItem, columnItem, cellNode) {
             return BF(value);
         }
+
     });
 
     gridPackages.setOption({
