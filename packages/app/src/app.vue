@@ -1,50 +1,66 @@
 <template>
   <div class="wi-app">
-    <VuiTab
-      v-model="tabActive"
-      position="left"
+    <VuiLayout
+      v-model="layout"
+      width="100%"
+      height="100%"
+      gutter-size="2px"
     >
-      <template #toolbar>
-        <div class="wi-state vui-flex-auto">
-          {{ state.state }}
-        </div>
-        <VuiFlex spacing="10px">
-          <a
-            class="wi-title"
-            href="https://cenfun.github.io/web-icons"
-          >Web Icons</a>
-          <a
-            class="wi-icon wi-icon-github"
-            href="https://github.com/cenfun/web-icons"
-            target="_blank"
-          />
-        </VuiFlex>
-      </template>
+      <div class="wi-layout-left">
+        <div class="wi-grid wi-grid-packages" />
+      </div>
 
-      <template #tabs>
-        <div class="vui-flex-row">
-          <div class="wi-icon wi-icon-packages" />
-          <b>Packages</b>
-        </div>
-        <div class="vui-flex-row">
-          <div class="wi-icon wi-icon-my-icons" />
-          <b>My Icons</b>
-        </div>
-      </template>
-      <template #panes>
-        <VuiFlex
-          direction="column"
-          class="wi-pane"
+      <div class="wi-layout-right">
+        <VuiTab
+          v-model="tabActive"
+          align="center"
         >
-          <div class="vui-filter" />
-          <div class="wi-grid wi-grid-packages vui-flex-auto" />
-        </VuiFlex>
-        <VuiFlex direction="column">
-          <div class="vui-filter" />
-          <div class="wi-grid wi-grid-my-icons vui-flex-auto" />
-        </VuiFlex>
-      </template>
-    </VuiTab>
+          <template #left>
+            <div class="wi-header-left">
+              <div class="wi-title">
+                Web Icons <span>v{{ version }}</span>
+              </div>
+            </div>
+          </template>
+
+          <template #right>
+            <div class="vui-flex-auto" />
+            <div class="wi-header-right">
+              <a
+                class="wi-icon wi-icon-github"
+                href="https://github.com/cenfun/web-icons"
+                target="_blank"
+              />
+            </div>
+          </template>
+
+          <template #tabs>
+            <div class="vui-flex-row">
+              <div class="wi-icon wi-icon-packages" />
+              <b>Packages</b>
+            </div>
+            <div class="vui-flex-row">
+              <div class="wi-icon wi-icon-my-icons" />
+              <b>My Icons</b>
+            </div>
+          </template>
+
+          <template #panes>
+            <VuiFlex
+              direction="column"
+              class="wi-pane"
+            >
+              <div class="vui-filter" />
+            </VuiFlex>
+
+            <VuiFlex direction="column">
+              <div class="vui-filter" />
+            </VuiFlex>
+          </template>
+        </VuiTab>
+      </div>
+    </VuiLayout>
+
     <WiLoading
       :visible="loadingVisible"
       :text="loadingText"
@@ -54,7 +70,7 @@
 <script setup>
 import VineUI from 'vine-ui';
 import {
-    onMounted, onUnmounted, reactive, ref
+    onMounted, onUnmounted, reactive, ref, watch
 } from 'vue';
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
@@ -65,10 +81,14 @@ import {
 import WiLoading from './components/loading.vue';
 import { BF } from './util/util.js';
 
-const { VuiFlex, VuiTab } = VineUI;
+const {
+    VuiLayout, VuiFlex, VuiTab
+} = VineUI;
+
+const layout = ref('30%,auto');
 
 const state = reactive({
-    state: ''
+    ost: null
 });
 
 const tabActive = ref(0);
@@ -174,6 +194,7 @@ const renderPackages = function(packages) {
     gridPackages.setOption({
         theme: 'lightblue',
         frozenRow: 0,
+        frozenColumn: 0,
         frozenRowHoverable: true,
         selectMultiple: false,
         rowNumberVisible: true,
@@ -214,6 +235,14 @@ const initPackages = function(packages) {
 const loadStart = async () => {
 
     const ost = await openStore('wi');
+    state.ost = ost;
+
+    const prevLayout = await ost.get('layout');
+    if (prevLayout) {
+        //console.log('layout', prevLayout);
+        layout.value = prevLayout;
+    }
+
     //console.log(db);
     const cache = await ost.get('metadata');
     //console.log(cache);
@@ -249,6 +278,12 @@ const loadStart = async () => {
     initPackages(metadata.packages);
 
 };
+
+watch(layout, (v) => {
+    if (state.ost) {
+        state.ost.set('layout', v);
+    }
+});
 
 onMounted(() => {
     loadStart();

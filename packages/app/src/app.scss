@@ -26,6 +26,16 @@ a:hover {
     overflow: hidden;
 }
 
+.wi-layout-left {
+    min-width: 160px;
+    max-width: 50%;
+    border-right: thin solid #eee;
+}
+
+.wi-layout-right {
+    border-left: thin solid #eee;
+}
+
 .wi-icon {
     display: block;
     overflow: hidden;
@@ -45,13 +55,20 @@ a:hover {
     background-image: url("./images/github.svg");
 }
 
-.wi-state {
-    text-align: center;
+.wi-header-left,
+.wi-header-right {
+    padding: 5px 10px;
 }
 
 .wi-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
+
+    span {
+        margin-left: 5px;
+        font-size: 14px;
+        color: gray;
+    }
 }
 
 .wi-menu {
@@ -285,7 +302,8 @@ a:hover {
 }
 
 .wi-grid {
-    margin-top: 10px;
+    width: 100%;
+    height: 100%;
 }
 
 .wi-grid .tg-turbogrid .tg-cell.wi-icon {
@@ -323,26 +341,4 @@ a:hover {
 
 .wi-grid .wi-not-found {
     font-size: 20px;
-}
-
-.vui-tab {
-    display: flex;
-    flex-direction: column;
-
-    .vui-tab-header {
-        border-top: none;
-    }
-
-    .vui-tab-panes {
-        flex: 1 1 0%;
-        overflow: hidden;
-
-        .vui-tab-pane {
-            padding: 0;
-        }
-    }
-}
-
-.wi-pane {
-    height: 100%;
 }

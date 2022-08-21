@@ -10,7 +10,7 @@
         "file-saver": "^2.0.5",
         "open-store": "^1.0.0",
         "turbogrid": "^3.0.1",
-        "vine-ui": "^3.0.9",
+        "vine-ui": "^3.0.11",
         "web-icons": ""
     },
     "devDependencies": {}

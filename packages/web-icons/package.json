@@ -1,6 +1,7 @@
 {
     "name": "web-icons",
     "version": "1.0.0",
+    "description": "Web Components Icons",
     "main": "dist/web-icons.js",
     "files": [
         "dist"
