@@ -3,6 +3,7 @@ import VineUI from 'vine-ui';
 import {
     inject, ref, watch
 } from 'vue';
+import { BF } from '../util/util.js';
 
 const { VuiFlex } = VineUI;
 
@@ -49,10 +50,24 @@ watch(() => props.packageName, (v) => {
     direction="column"
     height="100%"
   >
-    <div class="wi-package">
-      {{ item.name }}
+    <div class="wi-pkg-info">
+      <div class="wi-pkg-title">
+        {{ item.name }}
+      </div>
+      <div class="wi-pkg-link">
+        From <a
+          :href="item.source.url"
+          target="_blank"
+        >{{ item.source.name }}@{{ item.source.version }} - {{ item.source.license }}</a>
+      </div>
+      <div class="wi-pkg-stats">
+        <b>{{ item.iconsNum.toLocaleString() }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
+          :href="'/dist/'+item.namespace+'.js'"
+          target="_blank"
+        >{{ item.namespace }}.js</a>
+      </div>
     </div>
-    <div class="wi-finder flex-column">
+    <div class="wi-finder">
       <div class="wi-filter flex-row">
         <div class="wi-searcher">
           <input
@@ -69,10 +84,49 @@ watch(() => props.packageName, (v) => {
   </VuiFlex>
 </template>
 <style lang="scss">
-.wi-package {
+
+.wi-pkg-info {
     position: relative;
-    padding: 5px;
+    padding-bottom: 10px;
 }
+
+.wi-pkg-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    padding: 15px;
+}
+
+.wi-pkg-link {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.wi-pkg-link a:link,
+.wi-pkg-link a:visited {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #666;
+}
+
+.wi-pkg-link a:hover {
+    color: #0077cf;
+}
+
+.wi-pkg-stats {
+    text-align: center;
+    font-size: 18px;
+}
+
+.wi-pkg-stats a:link,
+.wi-pkg-stats a:visited {
+    font-size: 16px;
+}
+
+.wi-pkg-stats a:hover {
+    color: #0077cf;
+}
+
 
 .wi-finder {
     height: 100%;

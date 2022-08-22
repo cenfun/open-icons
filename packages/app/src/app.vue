@@ -102,13 +102,21 @@ const renderPackages = function(packages) {
             return;
         }
         const rowItem = d.rowItem;
-        const packageName = rowItem.hash || rowItem.name;
+        const packageName = rowItem.type || rowItem.name;
         state.packageName = packageName;
         document.location.hash = packageName;
         gridPackages.setRowSelected(rowItem, d.e);
     });
 
     gridPackages.setFormatter({
+
+        rowNumber: function(value, rowItem, columnItem, cellNode) {
+            const defaultFormatter = this.getDefaultFormatter('rowNumber');
+            if (rowItem.type === 'total') {
+                return '<div class="wi-icon-total"></div>';
+            }
+            return defaultFormatter(value, rowItem, columnItem, cellNode);
+        },
 
         sourceFrom: function(value, rowItem, columnItem, cellNode) {
             const source = rowItem.source;
@@ -175,12 +183,15 @@ const initPackages = function(packages) {
     });
 
     state.total = {
-        name: 'Total',
-        hash: 'total',
+        name: 'Web Icons',
+        type: 'total',
         source: {
             name: 'web-icons',
-            url: 'https://github.com/cenfun/web-icons'
+            version: version,
+            url: 'https://github.com/cenfun/web-icons',
+            license: 'MIT'
         },
+        namespace: 'web-icons',
         iconsNum: totalIcons.toLocaleString(),
         size: totalSize,
         sizeGzip: totalGzip,
@@ -392,7 +403,30 @@ a:hover {
         color: #fff;
         text-decoration: underline;
     }
+
+    .tg-total {
+        font-weight: bold;
+    }
+
+    .wi-icon-total {
+        width: 100%;
+        height: 100%;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+    }
+
 }
+
 
 .wi-layout-main {
     position: relative;
@@ -448,5 +482,6 @@ a:hover {
 .wi-grid-packages .tg-pane .tg-scrollbar-thumb:hover {
     background-color: #999;
 }
+
 
 </style>
