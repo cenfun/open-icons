@@ -11,13 +11,16 @@ import {
 
 import WiLoading from './components/loading.vue';
 import WiFinder from './components/finder.vue';
+import WiSettings from './components/settings.vue';
 import { BF } from './util/util.js';
+
+import { initTooltip } from './util/tooltip.js';
 
 const {
     VuiLayout, VuiFlex, VuiTab
 } = VineUI;
 
-const layout = ref('30%,auto');
+const layout = ref('200px,auto');
 
 const state = shallowReactive({
     ost: null,
@@ -27,6 +30,15 @@ const state = shallowReactive({
 });
 
 provide('state', state);
+
+const settings = shallowReactive({
+    size: '32px',
+    color: 'rainbow',
+    bg: '',
+    radius: ''
+});
+
+provide('settings', settings);
 
 const tabActive = ref(0);
 
@@ -83,9 +95,9 @@ const renderPackages = function(packages) {
         rows
     };
 
-    const gridPackages = new Grid('.wi-grid-packages');
+    const grid = new Grid('.wi-grid-packages');
 
-    gridPackages.bind('onFirstUpdated', function(e) {
+    grid.bind('onFirstUpdated', function(e) {
         //console.log(e.type);
         if (!state.packageName) {
             return;
@@ -97,7 +109,7 @@ const renderPackages = function(packages) {
         }
     });
 
-    gridPackages.bind('onClick', function(e, d) {
+    grid.bind('onClick', function(e, d) {
         if (!d.rowNode) {
             return;
         }
@@ -105,10 +117,10 @@ const renderPackages = function(packages) {
         const packageName = rowItem.type || rowItem.name;
         state.packageName = packageName;
         document.location.hash = packageName;
-        gridPackages.setRowSelected(rowItem, d.e);
+        grid.setRowSelected(rowItem, d.e);
     });
 
-    gridPackages.setFormatter({
+    grid.setFormatter({
 
         rowNumber: function(value, rowItem, columnItem, cellNode) {
             const defaultFormatter = this.getDefaultFormatter('rowNumber');
@@ -140,7 +152,7 @@ const renderPackages = function(packages) {
 
     });
 
-    gridPackages.setOption({
+    grid.setOption({
         theme: 'dark',
         frozenRow: 0,
         frozenColumn: 0,
@@ -148,24 +160,26 @@ const renderPackages = function(packages) {
         selectMultiple: false,
         rowNumberVisible: true,
         rowNumberWidth: 30,
+        scrollbarRound: true,
         bindWindowResize: true,
         bindContainerResize: true
     });
 
-    gridPackages.setData(gridData);
-    gridPackages.render();
+    grid.setData(gridData);
+    grid.render();
 
 };
 
 
 const initPackages = function(packages) {
 
-    let totalIcons = 0;
+    let totalIcons = [];
     let totalSize = 0;
     let totalGzip = 0;
+
     packages.forEach(function(pkg) {
 
-        totalIcons += pkg.icons.length;
+        totalIcons = totalIcons.concat(pkg.icons);
         totalSize += pkg.size;
         totalGzip += pkg.sizeGzip;
 
@@ -192,7 +206,8 @@ const initPackages = function(packages) {
             license: 'MIT'
         },
         namespace: 'web-icons',
-        iconsNum: totalIcons.toLocaleString(),
+        icons: totalIcons,
+        iconsNum: totalIcons.length.toLocaleString(),
         size: totalSize,
         sizeGzip: totalGzip,
         selectable: true
@@ -235,7 +250,6 @@ const loadStart = async () => {
         loadingText.value = `Loading ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
     });
 
-
     const metadata = {
         version,
         timestamp,
@@ -260,13 +274,13 @@ watch(layout, (v) => {
 
 onMounted(() => {
     loadStart();
+    initTooltip();
 });
 
 </script>
 <template>
   <div class="wi-app">
     <VuiLayout
-      v-show="state.packages"
       v-model="layout"
       width="100%"
       height="100%"
@@ -291,6 +305,7 @@ onMounted(() => {
         <VuiTab v-model="tabActive">
           <template #right>
             <div class="vui-flex-auto" />
+            <WiSettings />
             <div class="wi-header-right">
               <a
                 class="wi-icon wi-icon-github"
@@ -313,10 +328,7 @@ onMounted(() => {
 
           <template #panes>
             <WiFinder :package-name="state.packageName" />
-
-            <VuiFlex direction="column">
-              <div class="vui-filter" />
-            </VuiFlex>
+            <div>TODO</div>
           </template>
         </VuiTab>
       </div>
@@ -396,6 +408,8 @@ a:hover {
     min-width: 200px;
     max-width: 50%;
     color: #eee;
+    border-right: thin solid #1E1E1E;
+    background-color: #1E1E1E;
 
     a:visited,
     a:link {
@@ -467,7 +481,7 @@ a:hover {
 }
 
 .wi-header-right {
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
 .wi-grid-packages {

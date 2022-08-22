@@ -39,7 +39,7 @@ const props = defineProps({
 
 .wi-loading-label {
     font-size: 14px;
-    width: 200px;
+    width: 100px;
     white-space: nowrap;
 }
 </style>

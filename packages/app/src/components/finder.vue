@@ -1,7 +1,8 @@
 <script setup>
 import VineUI from 'vine-ui';
+import { Grid } from 'turbogrid';
 import {
-    inject, ref, watch
+    inject, nextTick, ref, watch
 } from 'vue';
 import { BF } from '../util/util.js';
 
@@ -15,8 +16,145 @@ const props = defineProps({
 });
 
 const state = inject('state');
+const settings = inject('settings');
 
 const item = ref(null);
+const keywords = ref('');
+
+const createGrid = () => {
+    const grid = new Grid('.wi-grid-icons');
+    state.gridIcons = grid;
+    return grid;
+};
+
+
+const renderGrid = () => {
+    let grid = state.gridIcons;
+
+    if (!grid) {
+        grid = createGrid();
+    }
+
+    const cellSize = parseInt(settings.size) + 10;
+
+    grid.setOption({
+        rowHeight: cellSize,
+        frozenColumn: 1,
+        rowNotFound: '<div class="wi-not-found">Not found results</div>',
+        rowFilter: function(rowData) {
+            if (!keywords.value) {
+                return true;
+            }
+            const iconName = rowData.name;
+            const parts = iconName.split('-');
+            for (let i = 0; i < keywords.value; i++) {
+                const keyword = keywords[i];
+                if (parts.includes(keyword) || iconName.startsWith(keyword)) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        selectVisible: true,
+        selectAllVisible: false,
+        rowNumberVisible: true,
+        rowNumberWidth: 52,
+        scrollbarRound: true,
+        bindWindowResize: true,
+        bindContainerResize: true
+    });
+
+    const rows = [];
+
+    const pkg = item.value;
+
+    pkg.icons.forEach((ic) => {
+
+        const iconName = ic.name;
+        //addPopular(iconName);
+
+        rows.push({
+            tag: item.value.tagName,
+            name: iconName,
+            package: item.value.name,
+            svg: ic.svg
+        });
+    });
+
+
+    const gridData = {
+        columns: [{
+            id: 'icon',
+            name: '',
+            width: cellSize,
+            minWidth: cellSize,
+            align: 'center',
+            classMap: 'wci-icon',
+            formatter: 'icon',
+            sortable: false
+        }, {
+            id: 'name',
+            name: 'Name',
+            width: 150
+        }, {
+            id: 'downloadSvg',
+            name: '',
+            align: 'center',
+            formatter: 'downloadSvg',
+            resizable: false,
+            width: 30
+        }, {
+            id: 'downloadPng',
+            name: '',
+            align: 'center',
+            formatter: 'downloadPng',
+            resizable: false,
+            width: 30
+        }, {
+            id: 'svg',
+            name: 'Pure SVG',
+            classMap: 'wci-textarea',
+            formatter: 'textarea',
+            sortable: false,
+            width: 260,
+            maxWidth: 1000
+        }, {
+            id: 'dataUrl',
+            name: 'Data URL',
+            classMap: 'wci-textarea',
+            formatter: 'textarea',
+            sortable: false,
+            width: 260,
+            maxWidth: 1000
+        }, {
+            id: 'wc',
+            name: 'Web component',
+            classMap: 'wci-textarea',
+            formatter: 'textarea',
+            sortable: false,
+            width: 260,
+            maxWidth: 500
+        }, {
+            id: 'package',
+            name: 'Package',
+            align: 'center',
+            formatter: 'package'
+        }, {
+            id: 'copy',
+            name: '',
+            align: 'center',
+            formatter: 'copy',
+            sortable: false,
+            width: 50
+        }],
+        rows
+    };
+
+    grid.setData(gridData);
+
+    grid.render();
+
+};
 
 const render = () => {
     const packages = state.packages;
@@ -32,16 +170,23 @@ const render = () => {
         pkg = state.total;
     }
 
-    console.log(pkg);
+    //console.log(pkg);
 
     item.value = pkg;
 
+    nextTick(() => {
+        renderGrid();
+    });
 
 };
 
 
 watch(() => props.packageName, (v) => {
     render();
+});
+
+watch(settings, () => {
+    renderGrid();
 });
 
 </script>
@@ -62,7 +207,7 @@ watch(() => props.packageName, (v) => {
       >{{ item.source.name }}@{{ item.source.version }} - {{ item.source.license }}</a>
     </div>
     <div class="wi-pkg-stats">
-      <b>{{ item.iconsNum.toLocaleString() }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
+      <b>{{ item.iconsNum }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
         :href="'/dist/'+item.namespace+'.js'"
         target="_blank"
       >{{ item.namespace }}.js</a>
@@ -87,17 +232,17 @@ watch(() => props.packageName, (v) => {
 .wi-pkg-title {
     text-align: center;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 38px;
     padding: 15px 0 5px 0;
 }
 
 .wi-pkg-link {
     text-align: center;
+    padding-bottom: 5px;
 }
 
 .wi-pkg-link a:link,
 .wi-pkg-link a:visited {
-    margin-top: 8px;
     font-size: 16px;
     color: #666;
 }

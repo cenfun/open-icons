@@ -20,3 +20,33 @@ export const BF = function(v, places = 1, base = 1024) {
     return v;
 };
 
+
+export const unbindEvents = function(events) {
+    if (!events) {
+        return;
+    }
+    Object.keys(events).forEach((type) => {
+        const item = events[type];
+        if (item.target) {
+            item.target.removeEventListener(type, item.handler, item.options);
+        }
+    });
+};
+
+export const bindEvents = function(events, target) {
+    if (!events) {
+        return;
+    }
+    unbindEvents(events);
+    Object.keys(events).forEach((type) => {
+        const item = events[type];
+        item.target = item.target || target;
+        item.target.addEventListener(type, item.handler, item.options);
+    });
+};
+
+export const preventDefault = function(e) {
+    if (e && typeof e.preventDefault === 'function' && e.cancelable) {
+        e.preventDefault();
+    }
+};
