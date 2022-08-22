@@ -380,6 +380,10 @@ a:hover {
     background-image: url("./images/star.svg");
 }
 
+.wi-icon-searcher {
+    background-image: url("./images/searcher.svg");
+}
+
 /* app */
 
 .wi-app {

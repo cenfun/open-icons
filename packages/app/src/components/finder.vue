@@ -36,6 +36,7 @@ const render = () => {
 
     item.value = pkg;
 
+
 };
 
 
@@ -48,57 +49,49 @@ watch(() => props.packageName, (v) => {
   <VuiFlex
     v-if="item"
     direction="column"
+    spacing="10px"
     height="100%"
   >
-    <div class="wi-pkg-info">
-      <div class="wi-pkg-title">
-        {{ item.name }}
-      </div>
-      <div class="wi-pkg-link">
-        From <a
-          :href="item.source.url"
-          target="_blank"
-        >{{ item.source.name }}@{{ item.source.version }} - {{ item.source.license }}</a>
-      </div>
-      <div class="wi-pkg-stats">
-        <b>{{ item.iconsNum.toLocaleString() }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
-          :href="'/dist/'+item.namespace+'.js'"
-          target="_blank"
-        >{{ item.namespace }}.js</a>
+    <div class="wi-pkg-title">
+      {{ item.name }}
+    </div>
+    <div class="wi-pkg-link">
+      <a
+        :href="item.source.url"
+        target="_blank"
+      >{{ item.source.name }}@{{ item.source.version }} - {{ item.source.license }}</a>
+    </div>
+    <div class="wi-pkg-stats">
+      <b>{{ item.iconsNum.toLocaleString() }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
+        :href="'/dist/'+item.namespace+'.js'"
+        target="_blank"
+      >{{ item.namespace }}.js</a>
+    </div>
+
+    <div class="wi-filter flex-row">
+      <div class="wi-searcher">
+        <input
+          type="text"
+          class="wi-keywords flex-auto"
+          onfocus="this.select()"
+        >
+        <div class="wi-icon wi-icon-searcher" />
       </div>
     </div>
-    <div class="wi-finder">
-      <div class="wi-filter flex-row">
-        <div class="wi-searcher">
-          <input
-            type="text"
-            class="wi-keywords flex-auto"
-            onfocus="this.select()"
-          >
-          <div class="wi-icon wi-icon-searcher" />
-        </div>
-      </div>
-      <div class="wi-popular" />
-      <div class="wi-grid flex-auto" />
-    </div>
+    <div class="wi-popular" />
+    <div class="wi-grid-icons vui-flex-auto" />
   </VuiFlex>
 </template>
 <style lang="scss">
-
-.wi-pkg-info {
-    position: relative;
-    padding-bottom: 10px;
-}
 
 .wi-pkg-title {
     text-align: center;
     font-weight: bold;
     font-size: 35px;
-    padding: 15px;
+    padding: 15px 0 5px 0;
 }
 
 .wi-pkg-link {
-    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -127,27 +120,33 @@ watch(() => props.packageName, (v) => {
     color: #0077cf;
 }
 
-
-.wi-finder {
-    height: 100%;
-}
-
 .wi-filter {
     text-align: center;
     margin: 0 auto;
     width: 60%;
-    max-width: 600px;
+    max-width: 500px;
+    margin-top: 10px;
 }
 
 .wi-searcher {
     width: 100%;
     position: relative;
+
+    .wi-icon-searcher {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-size: 30px 30px;
+        right: 15px;
+        top: 13px;
+        opacity: 0.3;
+    }
 }
 
 .wi-keywords {
-    border: 2px solid transparent;
-    border-radius: 10px;
-    padding: 10px 45px 10px 15px;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 10px 50px 10px 15px;
     background-color: #eee;
     height: 32px;
     line-height: 32px;
@@ -155,25 +154,15 @@ watch(() => props.packageName, (v) => {
     font-size: 18px;
     box-sizing: content-box;
     display: block;
-    width: calc(100% - 60px);
+    width: calc(100% - 70px);
 }
 
 .wi-keywords:focus {
-    border: 2px solid lightblue;
-}
-
-.wi-searcher-icon {
-    position: absolute;
-    right: 10px;
-    top: 13px;
-    opacity: 0.3;
+    border: 3px solid lightblue;
 }
 
 .wi-popular {
-    margin: 10px 0;
     text-align: center;
-    height: 35px;
-    line-height: 35px;
     font-size: 16px;
     display: flex;
     justify-content: center;
@@ -204,41 +193,47 @@ watch(() => props.packageName, (v) => {
     opacity: 1;
 }
 
+.wi-grid-icons {
+    border: thin solid #ccc;
+    border-radius: 5px;
+    margin: 10px 10px;
+}
 
-.wi-grid .tg-turbogrid .tg-cell.wi-icon {
+
+.wi-grid-icons .tg-turbogrid .tg-cell.wi-icon {
     padding: 4px;
     border-left: thin solid #e5e5e5;
     border-right: thin solid #e5e5e5;
 }
 
-.wi-grid .tg-turbogrid .tg-cell.wi-textarea {
+.wi-grid-icons .tg-turbogrid .tg-cell.wi-textarea {
     padding: 3px 5px;
 }
 
-.wi-grid .tg-turbogrid .tg-cell.wi-textarea textarea {
+.wi-grid-icons .tg-turbogrid .tg-cell.wi-textarea textarea {
     width: 100%;
     height: 100%;
     resize: none;
     font-family: monaco, sans-serif;
 }
 
-.wi-grid .wi-icon-action {
+.wi-grid-icons .wi-icon-action {
     cursor: pointer;
     opacity: 0.6;
 }
 
-.wi-grid .wi-icon-action:hover {
+.wi-grid-icons .wi-icon-action:hover {
     opacity: 1;
 }
 
-.wi-grid .tg-turbogrid .tg-cell .wi-icon-action {
+.wi-grid-icons .tg-turbogrid .tg-cell .wi-icon-action {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.wi-grid .wi-not-found {
+.wi-grid-icons .wi-not-found {
     font-size: 20px;
 }
 
