@@ -22,7 +22,7 @@ const props = defineProps({
     },
     text: {
         type: String,
-        default: 'Loading ...'
+        default: ''
     }
 });
 
@@ -39,7 +39,7 @@ const props = defineProps({
 
 .wi-loading-label {
     font-size: 14px;
-    width: 70px;
+    width: 200px;
     white-space: nowrap;
 }
 </style>

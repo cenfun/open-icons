@@ -1,76 +1,7 @@
-<template>
-  <div class="wi-app">
-    <VuiLayout
-      v-model="layout"
-      width="100%"
-      height="100%"
-      gutter-size="2px"
-    >
-      <div class="wi-layout-left">
-        <div class="wi-grid wi-grid-packages" />
-      </div>
-
-      <div class="wi-layout-right">
-        <VuiTab
-          v-model="tabActive"
-          align="center"
-        >
-          <template #left>
-            <div class="wi-header-left">
-              <div class="wi-title">
-                Web Icons <span>v{{ version }}</span>
-              </div>
-            </div>
-          </template>
-
-          <template #right>
-            <div class="vui-flex-auto" />
-            <div class="wi-header-right">
-              <a
-                class="wi-icon wi-icon-github"
-                href="https://github.com/cenfun/web-icons"
-                target="_blank"
-              />
-            </div>
-          </template>
-
-          <template #tabs>
-            <div class="vui-flex-row">
-              <div class="wi-icon wi-icon-packages" />
-              <b>Packages</b>
-            </div>
-            <div class="vui-flex-row">
-              <div class="wi-icon wi-icon-my-icons" />
-              <b>My Icons</b>
-            </div>
-          </template>
-
-          <template #panes>
-            <VuiFlex
-              direction="column"
-              class="wi-pane"
-            >
-              <div class="vui-filter" />
-            </VuiFlex>
-
-            <VuiFlex direction="column">
-              <div class="vui-filter" />
-            </VuiFlex>
-          </template>
-        </VuiTab>
-      </div>
-    </VuiLayout>
-
-    <WiLoading
-      :visible="loadingVisible"
-      :text="loadingText"
-    />
-  </div>
-</template>
 <script setup>
 import VineUI from 'vine-ui';
 import {
-    onMounted, onUnmounted, reactive, ref, watch
+    onMounted, provide, ref, shallowReactive, watch
 } from 'vue';
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
@@ -79,6 +10,7 @@ import {
 } from 'web-icons';
 
 import WiLoading from './components/loading.vue';
+import WiFinder from './components/finder.vue';
 import { BF } from './util/util.js';
 
 const {
@@ -87,13 +19,18 @@ const {
 
 const layout = ref('30%,auto');
 
-const state = reactive({
-    ost: null
+const state = shallowReactive({
+    ost: null,
+    packages: null,
+    packageName: null,
+    total: null
 });
+
+provide('state', state);
 
 const tabActive = ref(0);
 
-const loadingText = ref('Loading ...');
+const loadingText = ref('Loading Web Icons ...');
 const loadingVisible = ref(true);
 
 
@@ -106,27 +43,18 @@ const renderPackages = function(packages) {
         return pkg;
     });
 
-    const total = packages.reduce((v, pkg) => v + pkg.icons.length, 0);
-    const size = packages.reduce((v, pkg) => v + pkg.size, 0);
-    const sizeGzip = packages.reduce((v, pkg) => v + pkg.sizeGzip, 0);
-
-    rows.unshift({
-        name: 'Total',
-        iconsNum: total.toLocaleString(),
-        size,
-        sizeGzip,
-        selectable: true
-    });
+    rows.unshift(state.total);
 
     const gridData = {
         columns: [{
             id: 'name',
             name: 'Name',
-            width: 120
+            width: 80
         }, {
             id: 'iconsNum',
             name: 'Icons',
-            type: 'number'
+            type: 'number',
+            width: 60
         }, {
             id: 'size',
             name: 'Size',
@@ -155,15 +83,28 @@ const renderPackages = function(packages) {
         rows
     };
 
-
     const gridPackages = new Grid('.wi-grid-packages');
+
+    gridPackages.bind('onFirstUpdated', function(e) {
+        //console.log(e.type);
+        if (!state.packageName) {
+            return;
+        }
+        const rowItem = this.getRowItemBy('name', state.packageName);
+        if (rowItem) {
+            this.setRowSelected(rowItem);
+            this.scrollRowIntoView(rowItem);
+        }
+    });
 
     gridPackages.bind('onClick', function(e, d) {
         if (!d.rowNode) {
             return;
         }
         const rowItem = d.rowItem;
-        document.location.hash = rowItem.hash || rowItem.name;
+        const packageName = rowItem.hash || rowItem.name;
+        state.packageName = packageName;
+        document.location.hash = packageName;
         gridPackages.setRowSelected(rowItem, d.e);
     });
 
@@ -192,7 +133,7 @@ const renderPackages = function(packages) {
     });
 
     gridPackages.setOption({
-        theme: 'lightblue',
+        theme: 'dark',
         frozenRow: 0,
         frozenColumn: 0,
         frozenRowHoverable: true,
@@ -206,15 +147,21 @@ const renderPackages = function(packages) {
     gridPackages.setData(gridData);
     gridPackages.render();
 
-    // const date = new Date(timestamp).toLocaleDateString();
-    // const footer = `<a href="https://github.com/cenfun/wi" target="_blank">Latest: v${version} - ${date}</a>`;
-
 };
 
 
 const initPackages = function(packages) {
 
+    let totalIcons = 0;
+    let totalSize = 0;
+    let totalGzip = 0;
     packages.forEach(function(pkg) {
+
+        totalIcons += pkg.icons.length;
+        totalSize += pkg.size;
+        totalGzip += pkg.sizeGzip;
+
+        //init web components
         const IconElement = getIconElement(pkg.icons);
         //override tagName
         IconElement.tagName = pkg.tagName;
@@ -227,9 +174,24 @@ const initPackages = function(packages) {
         }
     });
 
+    state.total = {
+        name: 'Total',
+        hash: 'total',
+        source: {
+            name: 'web-icons',
+            url: 'https://github.com/cenfun/web-icons'
+        },
+        iconsNum: totalIcons.toLocaleString(),
+        size: totalSize,
+        sizeGzip: totalGzip,
+        selectable: true
+    };
+
+    state.packages = packages;
+    state.packageName = location.hash.substr(1);
+
     renderPackages(packages);
 
-    //renderStart(packages);
 };
 
 const loadStart = async () => {
@@ -259,7 +221,7 @@ const loadStart = async () => {
     const packages = await loadPackages('../node_modules/web-icons/dist/', (item, info) => {
         //console.log(info);
         const per = Math.round(info.loadedSize / info.totalSize * 100);
-        loadingText.value = `loaded ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
+        loadingText.value = `Loading ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
     });
 
 
@@ -289,9 +251,202 @@ onMounted(() => {
     loadStart();
 });
 
-onUnmounted(() => {
-
-});
-
 </script>
-<style lang="scss" src="./app.scss"></style>
+<template>
+  <div class="wi-app">
+    <VuiLayout
+      v-show="state.packages"
+      v-model="layout"
+      width="100%"
+      height="100%"
+      gutter-size="0"
+      gutter-hover-size="2px"
+    >
+      <div class="wi-layout-packages">
+        <VuiFlex
+          direction="column"
+          height="100%"
+        >
+          <div class="wi-packages-header">
+            <div class="wi-title">
+              Web Icons <span>v{{ version }}</span>
+            </div>
+          </div>
+          <div class="wi-grid-packages vui-flex-auto" />
+        </VuiFlex>
+      </div>
+
+      <div class="wi-layout-main">
+        <VuiTab v-model="tabActive">
+          <template #right>
+            <div class="vui-flex-auto" />
+            <div class="wi-header-right">
+              <a
+                class="wi-icon wi-icon-github"
+                href="https://github.com/cenfun/web-icons"
+                target="_blank"
+              />
+            </div>
+          </template>
+
+          <template #tabs>
+            <div class="vui-flex-row">
+              <div class="wi-icon wi-icon-finder" />
+              <b>Icon Finder</b>
+            </div>
+            <div class="vui-flex-row">
+              <div class="wi-icon wi-icon-my" />
+              <b>My Icons</b>
+            </div>
+          </template>
+
+          <template #panes>
+            <WiFinder :package-name="state.packageName" />
+
+            <VuiFlex direction="column">
+              <div class="vui-filter" />
+            </VuiFlex>
+          </template>
+        </VuiTab>
+      </div>
+    </VuiLayout>
+
+    <WiLoading
+      :visible="loadingVisible"
+      :text="loadingText"
+    />
+  </div>
+</template>
+<style lang="scss">
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+a:link,
+a:visited {
+    color: #002b36;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #3fa8f8;
+    text-decoration: underline;
+}
+
+/* icon */
+
+.wi-icon {
+    display: block;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+}
+
+.wi-icon:hover {
+    opacity: 1;
+}
+
+.wi-icon-github {
+    background-image: url("./images/github.svg");
+}
+
+.wi-icon-finder {
+    background-image: url("./images/search.svg");
+}
+
+.wi-icon-my {
+    background-image: url("./images/star.svg");
+}
+
+/* app */
+
+.wi-app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.wi-layout-packages {
+    min-width: 200px;
+    max-width: 50%;
+    color: #eee;
+
+    a:visited,
+    a:link {
+        color: #eee;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+}
+
+.wi-layout-main {
+    position: relative;
+}
+
+.vui-tab-item .wi-icon {
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+    margin-right: 5px;
+}
+
+.wi-packages-header {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 20px 0 15px;
+    height: 41px;
+    line-height: 41px;
+    display: flex;
+    flex-direction: row;
+    background-color: #000;
+}
+
+.wi-title {
+    font-weight: bold;
+    font-size: 18px;
+
+    span {
+        font-weight: normal;
+        margin-left: 5px;
+        font-size: 14px;
+        color: gray;
+    }
+}
+
+.wi-header-right {
+    margin-right: 10px;
+}
+
+.wi-grid-packages {
+    width: 100%;
+    height: 100%;
+}
+
+.wi-grid-packages .tg-row .tg-tree-name {
+    cursor: pointer;
+}
+
+.wi-grid-packages .tg-pane .tg-scrollbar-thumb {
+    background-color: #666;
+}
+
+.wi-grid-packages .tg-pane .tg-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+</style>
