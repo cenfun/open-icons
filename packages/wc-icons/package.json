@@ -1,8 +1,8 @@
 {
-    "name": "web-icons",
+    "name": "wc-icons",
     "version": "1.0.0",
     "description": "Web Components Icons",
-    "main": "dist/web-icons.js",
+    "main": "dist/wc-icons.js",
     "files": [
         "dist"
     ],

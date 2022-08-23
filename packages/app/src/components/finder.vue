@@ -52,7 +52,7 @@ const tagClickHandler = (tag) => {
 // };
 
 const savePNG = function(content, name) {
-    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
+
     const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
 
     const size = parseInt(settings.size);
@@ -88,7 +88,7 @@ const saveSVG = function(content, name) {
 };
 
 const createGrid = () => {
-    const grid = new Grid('.wi-grid-icons');
+    const grid = new Grid('.wci-grid-icons');
     grid.bind('onClick', function(e, d) {
         const rowItem = d.rowItem;
         const $target = d.e.target;
@@ -96,7 +96,7 @@ const createGrid = () => {
             $target.select();
             return;
         }
-        if ($target.classList.contains('wi-icon-download')) {
+        if ($target.classList.contains('wci-icon-download')) {
             const type = $target.getAttribute('name');
             if (type === 'png') {
                 savePNG(rowItem.svg, rowItem.name);
@@ -146,7 +146,7 @@ const renderGrid = () => {
     grid.setOption({
         rowHeight: cellSize,
         frozenColumn: 1,
-        rowNotFound: '<div class="wi-not-found">Not found icon</div>',
+        rowNotFound: '<div class="wci-not-found">Not found icon</div>',
         rowFilter: rowFilter,
         selectVisible: true,
         selectAllVisible: false,
@@ -173,10 +173,10 @@ const renderGrid = () => {
             return `<textarea spellcheck="false">${this.getFormatter('icon')(v, r)}</textarea>`;
         },
         downloadSvg: function(v) {
-            return '<wi-carbon class="wi-icon-action wi-icon-download" name="svg" size="16px" title="download svg file"></wi-carbon>';
+            return '<wci-carbon class="wci-icon-action wci-icon-download" name="svg" size="16px" title="download svg file"></wci-carbon>';
         },
         downloadPng: function(v) {
-            return '<wi-carbon class="wi-icon-action wi-icon-download" name="png" size="16px" title="download png file"></wi-carbon>';
+            return '<wci-carbon class="wci-icon-action wci-icon-download" name="png" size="16px" title="download png file"></wci-carbon>';
         }
     });
 
@@ -187,7 +187,7 @@ const renderGrid = () => {
             width: cellSize,
             minWidth: cellSize,
             align: 'center',
-            classMap: 'wi-grid-icon',
+            classMap: 'wci-grid-icon',
             formatter: 'icon',
             sortable: false
         }, {
@@ -211,7 +211,7 @@ const renderGrid = () => {
         }, {
             id: 'svg',
             name: 'Pure SVG',
-            classMap: 'wi-textarea',
+            classMap: 'wci-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -219,7 +219,7 @@ const renderGrid = () => {
         }, {
             id: 'dataUrl',
             name: 'Data URL',
-            classMap: 'wi-textarea',
+            classMap: 'wci-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -227,7 +227,7 @@ const renderGrid = () => {
         }, {
             id: 'wc',
             name: 'Web component',
-            classMap: 'wi-textarea',
+            classMap: 'wci-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -268,7 +268,7 @@ const renderTags = () => {
         }
     }
 
-    console.log(list);
+    //console.log(list);
 
     tagsList.value = list;
 
@@ -322,82 +322,82 @@ watch(keywords, () => {
     spacing="10px"
     height="100%"
   >
-    <div class="wi-pkg-title">
-      {{ packageInfo.name }}
+    <div class="wci-pkg-title">
+      {{ packageInfo.fullName || packageInfo.name }}
     </div>
-    <div class="wi-pkg-link">
+    <div class="wci-pkg-link">
       <a
         :href="packageInfo.source.url"
         target="_blank"
       >{{ packageInfo.source.name }}@{{ packageInfo.source.version }} - {{ packageInfo.source.license }}</a>
     </div>
-    <div class="wi-pkg-stats">
+    <div class="wci-pkg-stats">
       <b>{{ packageInfo.iconsNum }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
         :href="'/dist/'+packageInfo.namespace+'.js'"
         target="_blank"
       >{{ packageInfo.namespace }}.js</a>
     </div>
 
-    <div class="wi-filter flex-row">
-      <div class="wi-searcher">
+    <div class="wci-filter flex-row">
+      <div class="wci-searcher">
         <input
           v-model="keywords"
           type="text"
-          class="wi-keywords flex-auto"
+          class="wci-keywords flex-auto"
           onfocus="this.select()"
         >
-        <div class="wi-icon wi-icon-searcher" />
+        <div class="wci-icon wci-icon-searcher" />
       </div>
     </div>
-    <div class="wi-tags">
+    <div class="wci-tags">
       <span
         v-for="(tag, i) in tagsList"
         :key="i"
         @click="tagClickHandler(tag)"
       >{{ tag.name }}</span>
     </div>
-    <div class="wi-grid-icons vui-flex-auto" />
+    <div class="wci-grid-icons vui-flex-auto" />
   </VuiFlex>
 </template>
 <style lang="scss">
 
-.wi-pkg-title {
+.wci-pkg-title {
     text-align: center;
     font-weight: bold;
     font-size: 38px;
     padding: 15px 0 5px 0;
 }
 
-.wi-pkg-link {
+.wci-pkg-link {
     text-align: center;
     padding-bottom: 5px;
 }
 
-.wi-pkg-link a:link,
-.wi-pkg-link a:visited {
+.wci-pkg-link a:link,
+.wci-pkg-link a:visited {
     font-size: 16px;
     color: #666;
 }
 
-.wi-pkg-link a:hover {
+.wci-pkg-link a:hover {
     color: #0077cf;
 }
 
-.wi-pkg-stats {
+.wci-pkg-stats {
     text-align: center;
     font-size: 18px;
 }
 
-.wi-pkg-stats a:link,
-.wi-pkg-stats a:visited {
+.wci-pkg-stats a:link,
+.wci-pkg-stats a:visited {
     font-size: 16px;
 }
 
-.wi-pkg-stats a:hover {
+.wci-pkg-stats a:hover {
     color: #0077cf;
 }
 
-.wi-filter {
+.wci-filter {
     text-align: center;
     margin: 0 auto;
     width: 60%;
@@ -405,11 +405,11 @@ watch(keywords, () => {
     margin-top: 10px;
 }
 
-.wi-searcher {
+.wci-searcher {
     width: 100%;
     position: relative;
 
-    .wi-icon-searcher {
+    .wci-icon-searcher {
         position: absolute;
         width: 30px;
         height: 30px;
@@ -420,7 +420,7 @@ watch(keywords, () => {
     }
 }
 
-.wi-keywords {
+.wci-keywords {
     border: 3px solid transparent;
     border-radius: 15px;
     padding: 10px 50px 10px 15px;
@@ -434,11 +434,11 @@ watch(keywords, () => {
     width: calc(100% - 70px);
 }
 
-.wi-keywords:focus {
+.wci-keywords:focus {
     border: 3px solid lightblue;
 }
 
-.wi-tags {
+.wci-tags {
     text-align: center;
     font-size: 16px;
     display: flex;
@@ -446,17 +446,17 @@ watch(keywords, () => {
     align-items: center;
 }
 
-.wi-tags span {
+.wci-tags span {
     margin-left: 5px;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.wi-tags span:hover {
+.wci-tags span:hover {
     color: deepskyblue;
 }
 
-.wi-tags i {
+.wci-tags i {
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -466,51 +466,51 @@ watch(keywords, () => {
     opacity: 0.6;
 }
 
-.wi-tags i:hover {
+.wci-tags i:hover {
     opacity: 1;
 }
 
-.wi-grid-icons {
+.wci-grid-icons {
     border: thin solid #ccc;
     border-radius: 5px;
     margin: 10px 10px;
 }
 
 
-.wi-grid-icons .tg-turbogrid .tg-cell.wi-grid-icon {
+.wci-grid-icons .tg-turbogrid .tg-cell.wci-grid-icon {
     padding: 4px;
     border-left: thin solid #e5e5e5;
     border-right: thin solid #e5e5e5;
 }
 
-.wi-grid-icons .tg-turbogrid .tg-cell.wi-textarea {
+.wci-grid-icons .tg-turbogrid .tg-cell.wci-textarea {
     padding: 3px 5px;
 }
 
-.wi-grid-icons .tg-turbogrid .tg-cell.wi-textarea textarea {
+.wci-grid-icons .tg-turbogrid .tg-cell.wci-textarea textarea {
     width: 100%;
     height: 100%;
     resize: none;
     font-family: monaco, sans-serif;
 }
 
-.wi-grid-icons .wi-icon-action {
+.wci-grid-icons .wci-icon-action {
     cursor: pointer;
     opacity: 0.6;
 }
 
-.wi-grid-icons .wi-icon-action:hover {
+.wci-grid-icons .wci-icon-action:hover {
     opacity: 1;
 }
 
-.wi-grid-icons .tg-turbogrid .tg-cell .wi-icon-action {
+.wci-grid-icons .tg-turbogrid .tg-cell .wci-icon-action {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.wi-grid-icons .wi-not-found {
+.wci-grid-icons .wci-not-found {
     font-size: 20px;
 }
 

@@ -143,7 +143,7 @@ module.exports = {
 
     build: {
 
-        vendors: ['app', 'web-icons'],
+        vendors: ['app', 'wc-icons'],
 
         webpackConfig: (conf, Util) => {
             conf.devtool = false;
@@ -152,7 +152,7 @@ module.exports = {
 
         before: (item, Util) => {
 
-            if (item.name === 'web-icons') {
+            if (item.name === 'wc-icons') {
                 beforeBuildWebIcons(item, Util);
             }
 
@@ -160,7 +160,7 @@ module.exports = {
         },
 
         afterAll: (o, Util) => {
-            const item = o.jobList.find((it) => it.name === 'web-icons');
+            const item = o.jobList.find((it) => it.name === 'wc-icons');
             if (!item) {
                 return 0;
             }
@@ -250,7 +250,7 @@ module.exports = {
                 });
             }, dest);
 
-            fs.copyFileSync(dest, path.resolve(__dirname, '../packages/web-icons/README.md'));
+            fs.copyFileSync(dest, path.resolve(__dirname, '../packages/wc-icons/README.md'));
 
             return 0;
         }

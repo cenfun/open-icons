@@ -1,17 +1,17 @@
-# web-icons
+# wc-icons
 > Web Components Icons
 
-![](https://img.shields.io/npm/v/web-icons)
-![](https://img.shields.io/librariesio/github/cenfun/web-icons)
-![](https://img.shields.io/librariesio/dependents/npm/web-icons)
-[![](https://badgen.net/npm/dw/web-icons)](https://www.npmjs.com/package/web-icons)
+![](https://img.shields.io/npm/v/wc-icons)
+![](https://img.shields.io/librariesio/github/cenfun/wc-icons)
+![](https://img.shields.io/librariesio/dependents/npm/wc-icons)
+[![](https://badgen.net/npm/dw/wc-icons)](https://www.npmjs.com/package/wc-icons)
 
 ## Homepage
-[https://cenfun.github.io/web-icons/](https://cenfun.github.io/web-icons/)
+[https://cenfun.github.io/wc-icons/](https://cenfun.github.io/wc-icons/)
 
 # Installation
 ```sh
-npm install web-icons
+npm install wc-icons
 ```
 
 ## Packages

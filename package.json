@@ -1,5 +1,5 @@
 {
-    "name": "web-icons",
+    "name": "wc-icons",
     "version": "1.0.0",
     "description": "Web Components Icons",
     "main": "",
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/cenfun/web-icons.git"
+        "url": "git+https://github.com/cenfun/wc-icons.git"
     },
     "workspaces": [
         "packages/*"

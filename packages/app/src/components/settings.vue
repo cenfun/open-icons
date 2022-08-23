@@ -10,7 +10,7 @@ const settings = inject('settings');
 <template>
   <VuiFlex
     spacing="10px"
-    class="wi-settings"
+    class="wci-settings"
   >
     <VuiSelect
       v-model="settings.size"
@@ -61,7 +61,7 @@ const settings = inject('settings');
   </VuiFlex>
 </template>
 <style lang="scss">
-.wi-settings {
+.wci-settings {
   height: 35px;
   padding-right: 5px;
 }

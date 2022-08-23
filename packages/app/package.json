@@ -1,7 +1,7 @@
 {
-    "name": "web-icons-app",
+    "name": "wc-icons-app",
     "version": "1.0.0",
-    "main": "dist/web-icons-app.js",
+    "main": "dist/wc-icons-app.js",
     "private": true,
     "files": [
         "dist"
@@ -11,7 +11,7 @@
         "open-store": "^1.0.0",
         "turbogrid": "^3.0.1",
         "vine-ui": "^3.0.11",
-        "web-icons": ""
+        "wc-icons": ""
     },
     "devDependencies": {}
 }

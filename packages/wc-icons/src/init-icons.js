@@ -17,7 +17,7 @@ const initIcons = (pkg) => {
     const contents = pkg.contents;
     delete pkg.contents;
 
-    pkg.tagName = `wi-${pkg.name}`;
+    pkg.tagName = `wci-${pkg.name}`;
 
     pkg.icons.forEach((icon) => {
         icon.namespace = `${pkg.namespace}-${icon.name}`;
