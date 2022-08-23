@@ -394,7 +394,7 @@ onMounted(() => {
               center
               height="100%"
             >
-              To be continue
+              To do
             </VuiFlex>
           </template>
         </VuiTab>
