@@ -65,9 +65,9 @@
     {
         "name": "crypto",
         "namespace": "web-icons-crypto",
-        "size": 338655,
-        "sizeGzip": 256049,
-        "sizeJson": 676978
+        "size": 361411,
+        "sizeGzip": 273339,
+        "sizeJson": 719982
     },
     {
         "name": "cssgg",
@@ -128,9 +128,9 @@
     {
         "name": "fluent",
         "namespace": "web-icons-fluent",
-        "size": 763747,
-        "sizeGzip": 575820,
-        "sizeJson": 2471755
+        "size": 766131,
+        "sizeGzip": 577663,
+        "sizeJson": 2480509
     },
     {
         "name": "foundation",
@@ -198,9 +198,9 @@
     {
         "name": "lucide",
         "namespace": "web-icons-lucide",
-        "size": 71999,
-        "sizeGzip": 54441,
-        "sizeJson": 308395
+        "size": 71891,
+        "sizeGzip": 54312,
+        "sizeJson": 309020
     },
     {
         "name": "majest",
@@ -261,9 +261,9 @@
     {
         "name": "pixelart",
         "namespace": "web-icons-pixelart",
-        "size": 34973,
-        "sizeGzip": 26463,
-        "sizeJson": 137840
+        "size": 35565,
+        "sizeGzip": 26921,
+        "sizeJson": 140086
     },
     {
         "name": "prime",
@@ -289,16 +289,16 @@
     {
         "name": "simple",
         "namespace": "web-icons-simple",
-        "size": 1960515,
-        "sizeGzip": 1481882,
-        "sizeJson": 3941050
+        "size": 1960755,
+        "sizeGzip": 1482274,
+        "sizeJson": 3942308
     },
     {
         "name": "tabler",
         "namespace": "web-icons-tabler",
-        "size": 198835,
-        "sizeGzip": 150252,
-        "sizeJson": 966110
+        "size": 205263,
+        "sizeGzip": 155088,
+        "sizeJson": 997070
     },
     {
         "name": "teeny",
