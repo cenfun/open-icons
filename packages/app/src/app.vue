@@ -314,6 +314,10 @@ const loadStart = async () => {
 
     await initSettings(ost);
 
+    const path = window.WC_ICONS_PATH;
+
+    console.log('wc icons path:', path);
+
     //console.log(db);
     const cache = await ost.get('metadata');
     //console.log(cache);
@@ -326,8 +330,7 @@ const loadStart = async () => {
 
         return;
     }
-
-    const packages = await loadPackages('../../../node_modules/wc-icons/dist/', (item, info) => {
+    const packages = await loadPackages(path, (item, info) => {
         //console.log(info);
         const per = Math.round(info.loadedSize / info.totalSize * 100);
         loadingText.value = `Loading ${per}% (${info.loaded}/${info.total}) - ${item.name}`;

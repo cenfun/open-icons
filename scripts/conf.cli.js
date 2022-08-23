@@ -145,6 +145,20 @@ module.exports = {
 
         vendors: ['app', 'wc-icons'],
 
+        define: (env) => {
+
+            let dest = '../../../node_modules/wc-icons/dist/';
+            if (env.production) {
+                dest = 'dist/';
+            }
+
+            return {
+                'window.WC_ICONS_PATH': JSON.stringify(dest),
+                __VUE_OPTIONS_API__: false,
+                __VUE_PROD_DEVTOOLS__: false
+            };
+        },
+
         webpackConfig: (conf, Util) => {
             conf.devtool = false;
             return conf;
@@ -255,5 +269,25 @@ module.exports = {
             return 0;
         }
 
+    },
+
+    pack: {
+
+        after: (item, Util) => {
+            console.log('copy icons dist ...');
+
+            const from = path.resolve(__dirname, '../packages/wc-icons/dist');
+            const list = fs.readdirSync(from);
+
+            const dest = path.resolve(item.distPath);
+
+            list.forEach((name) => {
+                const to = path.resolve(dest, name);
+                fs.copyFileSync(path.resolve(from, name), to);
+                console.log(`copied: ${Util.relativePath(to)}`);
+            });
+
+            return 0;
+        }
     }
 };
