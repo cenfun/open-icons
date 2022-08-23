@@ -5,18 +5,23 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
+const getSource = (options) => {
+    return {
+        name: options.name,
+        version: require(`../node_modules/${options.name}/package.json`).version,
+        url: options.url,
+        readme: options.readme,
+        license: options.license
+    };
+};
+
 const packageHandler = (item, Util, name, index, total) => {
 
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'src'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
 
-    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
-
-    const options = require(optionsPath);
-
     const outputName = `${item.namespace}-${name}`;
-
     if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
         Util.logYellow(`exists cache and ignore: ${name}`);
         return;
@@ -26,12 +31,14 @@ const packageHandler = (item, Util, name, index, total) => {
 
     //Util.format(optionsPath);
 
+    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
+    const options = require(optionsPath);
+    const source = getSource(options);
+
     let dirs = options.dirs;
     if (typeof dirs === 'function') {
         dirs = dirs.call(options, name, Util);
     }
-
-    const version = require(`../node_modules/${options.name}/package.json`).version;
 
     //compress svg
     const svgMinifier = require('svg-minifier');
@@ -41,14 +48,8 @@ const packageHandler = (item, Util, name, index, total) => {
         outputDir: item.outputRoot,
         outputRuntime: false,
         metadata: {
-            name: name,
-            source: {
-                name: options.name,
-                version: version,
-                url: options.url,
-                readme: options.readme,
-                license: options.license
-            }
+            name,
+            source
         }
     };
     if (options.exclude) {
@@ -128,6 +129,8 @@ const beforeBuildWebIcons = (item, Util) => {
         });
     });
 
+    item.packages = packages;
+
     //console.log(packages);
 
     //generating packages.json
@@ -156,7 +159,98 @@ module.exports = {
             return 0;
         },
 
-        afterAll: (option, Util) => {
+        afterAll: (o, Util) => {
+            const item = o.jobList.find((it) => it.name === 'web-icons');
+            if (!item) {
+                return 0;
+            }
+
+            if (!item.production) {
+                return 0;
+            }
+
+            //screenshots handler
+
+            let totalIcons = 0;
+            let totalSize = 0;
+            let totalSizeGzip = 0;
+
+            const list = item.packages.map((pkg, i) => {
+                const outputPath = path.resolve(item.outputRoot, `${pkg.namespace}.json`);
+                //console.log(outputPath);
+                const json = require(outputPath);
+                const source = getSource(json.source);
+                const icons = json.icons.length;
+
+                totalIcons += icons;
+                totalSize += pkg.size;
+                totalSizeGzip += pkg.sizeGzip;
+
+                return {
+                    index: i + 1,
+                    name: pkg.name,
+                    icons: icons.toLocaleString(),
+                    size: Util.BF(pkg.size),
+                    sizeGzip: Util.BF(pkg.sizeGzip),
+                    source: `[${source.name}@${source.version}](${source.url})`,
+                    license: source.license
+                };
+            });
+
+            list.push({
+                index: '',
+                name: 'Total',
+                icons: totalIcons.toLocaleString(),
+                size: Util.BF(totalSize),
+                sizeGzip: Util.BF(totalSizeGzip),
+                source: '',
+                license: ''
+            });
+
+            //console.log(list);
+
+            const MG = require('markdown-grid');
+            const mg = MG({
+                columns: [{
+                    id: 'index',
+                    name: '',
+                    align: 'right'
+                }, {
+                    id: 'name',
+                    name: 'Name',
+                    align: 'left'
+                }, {
+                    id: 'icons',
+                    name: 'Icons',
+                    align: 'right'
+                }, {
+                    id: 'size',
+                    name: 'Size',
+                    align: 'right'
+                }, {
+                    id: 'sizeGzip',
+                    name: 'Gzip',
+                    align: 'right'
+                }, {
+                    id: 'source',
+                    name: 'Source'
+                }, {
+                    id: 'license',
+                    name: 'License'
+                }],
+                rows: list
+            });
+
+            const from = path.resolve(__dirname, 'template/README.md');
+            const dest = path.resolve(__dirname, '../README.md');
+
+            Util.editFile(from, (content) => {
+                return Util.replace(content, {
+                    placeholder_list: mg
+                });
+            }, dest);
+
+            fs.copyFileSync(dest, path.resolve(__dirname, '../packages/web-icons/README.md'));
 
             return 0;
         }
