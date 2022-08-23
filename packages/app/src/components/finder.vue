@@ -247,9 +247,10 @@ const updateGrid = () => {
     }
 };
 
-const renderTags = () => {
+const renderTags = (pkg) => {
 
-    const tags = packageInfo.value.tags;
+    const tags = pkg.tags;
+
     const len = tags.length;
 
     const list = [];
@@ -265,6 +266,10 @@ const renderTags = () => {
     //console.log(list);
 
     tagsList.value = list;
+
+    if (pkg.type === 'total' && !keywords.value) {
+        keywords.value = list[0].name;
+    }
 
 };
 
@@ -285,12 +290,12 @@ const render = () => {
     }
 
     console.log(pkg);
+    renderTags(pkg);
 
     packageInfo.value = pkg;
 
     nextTick(() => {
         renderGrid();
-        renderTags();
     });
 
 };
