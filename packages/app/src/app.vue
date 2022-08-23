@@ -303,7 +303,7 @@ const initSettings = async (ost) => {
 
 const loadStart = async () => {
 
-    const ost = await openStore('wi');
+    const ost = await openStore('wc-icons');
     state.ost = ost;
 
     const prevLayout = await ost.get('layout');
@@ -327,7 +327,7 @@ const loadStart = async () => {
         return;
     }
 
-    const packages = await loadPackages('../node_modules/wc-icons/dist/', (item, info) => {
+    const packages = await loadPackages('../../../node_modules/wc-icons/dist/', (item, info) => {
         //console.log(info);
         const per = Math.round(info.loadedSize / info.totalSize * 100);
         loadingText.value = `Loading ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
