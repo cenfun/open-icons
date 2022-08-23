@@ -115,7 +115,11 @@ const renderPackages = function(packages) {
             return;
         }
         const rowItem = d.rowItem;
-        const packageName = rowItem.type || rowItem.name;
+
+        let packageName = rowItem.name;
+        if (rowItem.type === 'total') {
+            packageName = '';
+        }
         state.packageName = packageName;
         document.location.hash = packageName;
         grid.setRowSelected(rowItem, d.e);
@@ -171,27 +175,71 @@ const renderPackages = function(packages) {
 
 };
 
+const addTag = function(tags, n) {
+    n.split('-').forEach((w) => {
+        if (w.length < 2) {
+            return;
+        }
+        if (tags[w]) {
+            tags[w] += 1;
+        } else {
+            tags[w] = 1;
+        }
+    });
+};
+
+const getTags = function(tags) {
+    const list = Object.keys(tags).map((k) => {
+        return {
+            name: k,
+            num: tags[k]
+        };
+    });
+
+    list.sort((a, b) => {
+        return b.num - a.num;
+    });
+
+    const max = list[0].num;
+    list.forEach((it) => {
+        it.prob = Math.round(it.num / max * 100);
+    });
+
+    const ls = list.filter((it) => it.prob > 0);
+
+    //console.log(ls.length);
+
+    return ls;
+};
 
 const initPackages = function(packages) {
 
     let totalSize = 0;
     let totalGzip = 0;
     const allIcons = [];
+    const allTags = {};
 
     packages.forEach(function(pkg) {
 
         totalSize += pkg.size;
         totalGzip += pkg.sizeGzip;
 
+        const tags = {};
+
         pkg.icons.forEach((icon) => {
+            const iconName = icon.name;
+            addTag(allTags, iconName);
+            addTag(tags, iconName);
             allIcons.push({
-                name: icon.name,
+                name: iconName,
                 namespace: icon.namespace,
                 svg: icon.svg,
                 packageName: pkg.name,
                 tagName: pkg.tagName
             });
         });
+
+        pkg.tags = getTags(tags);
 
         //init web components
         const IconElement = getIconElement(pkg.icons);
@@ -216,6 +264,7 @@ const initPackages = function(packages) {
             license: 'MIT'
         },
         namespace: 'web-icons',
+        tags: getTags(allTags),
         icons: allIcons,
         iconsNum: allIcons.length.toLocaleString(),
         size: totalSize,
@@ -227,6 +276,7 @@ const initPackages = function(packages) {
 
     state.packages = packages;
     state.packageName = location.hash.substr(1);
+    //console.log(state.packageName);
 
     renderPackages(packages);
 
@@ -340,7 +390,12 @@ onMounted(() => {
 
           <template #panes>
             <WiFinder :package-name="state.packageName" />
-            <div>TODO</div>
+            <VuiFlex
+              center
+              height="100%"
+            >
+              To be continue
+            </VuiFlex>
           </template>
         </VuiTab>
       </div>

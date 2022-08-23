@@ -17,10 +17,35 @@ const props = defineProps({
 
 const state = inject('state');
 const settings = inject('settings');
-
 const packageInfo = ref(null);
-const keywords = ref('');
+const tagsList = ref([]);
 
+const keywords = ref('');
+const rowFilter = function(icon) {
+
+    //filter package
+    const packageName = state.packageName;
+    if (packageName && icon.packageName !== packageName) {
+        return false;
+    }
+
+    const kw = keywords.value.trim();
+    if (!kw) {
+        return true;
+    }
+
+    const iconName = icon.name;
+    const parts = iconName.split('-');
+    if (parts.includes(kw) || iconName.startsWith(kw)) {
+        return true;
+    }
+
+    return false;
+};
+
+const tagClickHandler = (tag) => {
+    keywords.value = tag.name;
+};
 
 // const copyContent = function(content) {
 //     navigator.clipboard.writeText(content);
@@ -121,21 +146,8 @@ const renderGrid = () => {
     grid.setOption({
         rowHeight: cellSize,
         frozenColumn: 1,
-        rowNotFound: '<div class="wi-not-found">Not found results</div>',
-        rowFilter: function(rowData) {
-            if (!keywords.value) {
-                return true;
-            }
-            const iconName = rowData.name;
-            const parts = iconName.split('-');
-            for (let i = 0; i < keywords.value; i++) {
-                const keyword = keywords[i];
-                if (parts.includes(keyword) || iconName.startsWith(keyword)) {
-                    return true;
-                }
-            }
-            return false;
-        },
+        rowNotFound: '<div class="wi-not-found">Not found icon</div>',
+        rowFilter: rowFilter,
         selectVisible: true,
         selectAllVisible: false,
         rowNumberVisible: true,
@@ -146,9 +158,6 @@ const renderGrid = () => {
     });
 
     grid.setFormatter({
-        index: function(v, r) {
-            return r.tg_index + 1;
-        },
         icon: function(v, r) {
             return getIcon(r);
         },
@@ -237,17 +246,47 @@ const renderGrid = () => {
 
 };
 
+const updateGrid = () => {
+    const grid = state.iconsGrid;
+    if (grid) {
+        grid.update();
+    }
+};
+
+const renderTags = () => {
+
+    const tags = packageInfo.value.tags;
+    const len = tags.length;
+
+    const list = [];
+    let num = 10;
+    while (num > 0) {
+        const item = tags[Math.floor(len * Math.random())];
+        if (!list.includes(item)) {
+            list.push(item);
+            num -= 1;
+        }
+    }
+
+    console.log(list);
+
+    tagsList.value = list;
+
+};
+
 const render = () => {
     const packages = state.packages;
     const packageName = state.packageName;
 
     let pkg;
 
-    if (packageName && packageName !== 'total') {
+    if (packageName) {
         pkg = packages.find((it) => it.name === packageName);
     }
 
-    if (!pkg) {
+    if (pkg) {
+        keywords.value = '';
+    } else {
         pkg = state.total;
     }
 
@@ -257,6 +296,7 @@ const render = () => {
 
     nextTick(() => {
         renderGrid();
+        renderTags();
     });
 
 };
@@ -268,6 +308,10 @@ watch(() => props.packageName, (v) => {
 
 watch(settings, () => {
     renderGrid();
+});
+
+watch(keywords, () => {
+    updateGrid();
 });
 
 </script>
@@ -297,6 +341,7 @@ watch(settings, () => {
     <div class="wi-filter flex-row">
       <div class="wi-searcher">
         <input
+          v-model="keywords"
           type="text"
           class="wi-keywords flex-auto"
           onfocus="this.select()"
@@ -304,7 +349,13 @@ watch(settings, () => {
         <div class="wi-icon wi-icon-searcher" />
       </div>
     </div>
-    <div class="wi-popular" />
+    <div class="wi-tags">
+      <span
+        v-for="(tag, i) in tagsList"
+        :key="i"
+        @click="tagClickHandler(tag)"
+      >{{ tag.name }}</span>
+    </div>
     <div class="wi-grid-icons vui-flex-auto" />
   </VuiFlex>
 </template>
@@ -387,7 +438,7 @@ watch(settings, () => {
     border: 3px solid lightblue;
 }
 
-.wi-popular {
+.wi-tags {
     text-align: center;
     font-size: 16px;
     display: flex;
@@ -395,17 +446,17 @@ watch(settings, () => {
     align-items: center;
 }
 
-.wi-popular span {
+.wi-tags span {
     margin-left: 5px;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.wi-popular span:hover {
+.wi-tags span:hover {
     color: deepskyblue;
 }
 
-.wi-popular i {
+.wi-tags i {
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -415,7 +466,7 @@ watch(settings, () => {
     opacity: 0.6;
 }
 
-.wi-popular i:hover {
+.wi-tags i:hover {
     opacity: 1;
 }
 
