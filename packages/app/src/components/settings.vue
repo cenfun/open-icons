@@ -17,12 +17,13 @@ const settings = inject('settings');
       label="Size"
     >
       <option>16px</option>
-      <option>20px</option>
+      <option>24px</option>
       <option>32px</option>
-      <option>50px</option>
+      <option>48px</option>
       <option>64px</option>
-      <option>100px</option>
+      <option>96px</option>
       <option>128px</option>
+      <option>256px</option>
     </VuiSelect>
     <VuiSelect
       v-model="settings.color"

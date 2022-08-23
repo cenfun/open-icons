@@ -18,18 +18,99 @@ const props = defineProps({
 const state = inject('state');
 const settings = inject('settings');
 
-const item = ref(null);
+const packageInfo = ref(null);
 const keywords = ref('');
+
+
+// const copyContent = function(content) {
+//     navigator.clipboard.writeText(content);
+// };
+
+const savePNG = function(content, name) {
+    content = content.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
+    const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
+
+    const size = parseInt(settings.size);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    canvas.style.cssText = 'position:absolute;top:0;right:0;';
+    const ctx = canvas.getContext('2d');
+    document.body.appendChild(canvas);
+
+    const img = document.createElement('img');
+    img.width = size;
+    img.height = size;
+    img.src = dataUrl;
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        document.body.removeChild(img);
+        canvas.toBlob(function(blob) {
+            window.saveAs(blob, `${name}.png`);
+            document.body.removeChild(canvas);
+        });
+    };
+    document.body.appendChild(img);
+
+};
+
+const saveSVG = function(content, name) {
+    const blob = new Blob([content], {
+        type: 'text/plain;charset=utf-8'
+    });
+    window.saveAs(blob, `${name}.svg`);
+};
 
 const createGrid = () => {
     const grid = new Grid('.wi-grid-icons');
-    state.gridIcons = grid;
+    grid.bind('onClick', function(e, d) {
+        const rowItem = d.rowItem;
+        const $target = d.e.target;
+        if ($target.tagName === 'TEXTAREA') {
+            $target.select();
+            return;
+        }
+        if ($target.classList.contains('wi-icon-download')) {
+            const type = $target.getAttribute('name');
+            if (type === 'png') {
+                savePNG(rowItem.svg, rowItem.name);
+                return;
+            }
+            saveSVG(rowItem.svg, rowItem.name);
+        }
+    });
+    state.iconsGrid = grid;
     return grid;
 };
 
+const getColor = function(c, colorIndex) {
+    const colors = [
+        'orangered',
+        'orange',
+        'green',
+        'deepskyblue',
+        'royalblue',
+        'darkorchid'
+    ];
+
+    if (c === 'rainbow') {
+        const index = colorIndex % colors.length;
+        c = colors[index];
+        colorIndex += 1;
+    }
+
+    return c;
+};
+
+const getIcon = function(r) {
+    const c = getColor(settings.color, r.tg_index);
+    const tag = r.tagName;
+    return `<${tag} name="${r.name}" size="${settings.size}" color="${c}" background="${settings.bg}" radius="${settings.radius}"></${tag}>`;
+};
 
 const renderGrid = () => {
-    let grid = state.gridIcons;
+    let grid = state.iconsGrid;
 
     if (!grid) {
         grid = createGrid();
@@ -64,23 +145,31 @@ const renderGrid = () => {
         bindContainerResize: true
     });
 
-    const rows = [];
-
-    const pkg = item.value;
-
-    pkg.icons.forEach((ic) => {
-
-        const iconName = ic.name;
-        //addPopular(iconName);
-
-        rows.push({
-            tag: item.value.tagName,
-            name: iconName,
-            package: item.value.name,
-            svg: ic.svg
-        });
+    grid.setFormatter({
+        index: function(v, r) {
+            return r.tg_index + 1;
+        },
+        icon: function(v, r) {
+            return getIcon(r);
+        },
+        textarea: function(v, r, c) {
+            if (c.id === 'svg') {
+                return `<textarea spellcheck="false">${v}</textarea>`;
+            }
+            if (c.id === 'dataUrl') {
+                const content = r.svg;
+                const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
+                return `<textarea spellcheck="false">${dataUrl}</textarea>`;
+            }
+            return `<textarea spellcheck="false">${this.getFormatter('icon')(v, r)}</textarea>`;
+        },
+        downloadSvg: function(v) {
+            return '<wi-carbon class="wi-icon-action wi-icon-download" name="svg" size="16px" title="download svg file"></wi-carbon>';
+        },
+        downloadPng: function(v) {
+            return '<wi-carbon class="wi-icon-action wi-icon-download" name="png" size="16px" title="download png file"></wi-carbon>';
+        }
     });
-
 
     const gridData = {
         columns: [{
@@ -89,7 +178,7 @@ const renderGrid = () => {
             width: cellSize,
             minWidth: cellSize,
             align: 'center',
-            classMap: 'wci-icon',
+            classMap: 'wi-grid-icon',
             formatter: 'icon',
             sortable: false
         }, {
@@ -113,7 +202,7 @@ const renderGrid = () => {
         }, {
             id: 'svg',
             name: 'Pure SVG',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -121,7 +210,7 @@ const renderGrid = () => {
         }, {
             id: 'dataUrl',
             name: 'Data URL',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -129,25 +218,17 @@ const renderGrid = () => {
         }, {
             id: 'wc',
             name: 'Web component',
-            classMap: 'wci-textarea',
+            classMap: 'wi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
             maxWidth: 500
         }, {
-            id: 'package',
+            id: 'packageName',
             name: 'Package',
-            align: 'center',
-            formatter: 'package'
-        }, {
-            id: 'copy',
-            name: '',
-            align: 'center',
-            formatter: 'copy',
-            sortable: false,
-            width: 50
+            align: 'center'
         }],
-        rows
+        rows: state.icons
     };
 
     grid.setData(gridData);
@@ -170,9 +251,9 @@ const render = () => {
         pkg = state.total;
     }
 
-    //console.log(pkg);
+    console.log(pkg);
 
-    item.value = pkg;
+    packageInfo.value = pkg;
 
     nextTick(() => {
         renderGrid();
@@ -192,25 +273,25 @@ watch(settings, () => {
 </script>
 <template>
   <VuiFlex
-    v-if="item"
+    v-if="packageInfo"
     direction="column"
     spacing="10px"
     height="100%"
   >
     <div class="wi-pkg-title">
-      {{ item.name }}
+      {{ packageInfo.name }}
     </div>
     <div class="wi-pkg-link">
       <a
-        :href="item.source.url"
+        :href="packageInfo.source.url"
         target="_blank"
-      >{{ item.source.name }}@{{ item.source.version }} - {{ item.source.license }}</a>
+      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }} - {{ packageInfo.source.license }}</a>
     </div>
     <div class="wi-pkg-stats">
-      <b>{{ item.iconsNum }}</b> icons / size: {{ BF(item.size) }} / gzip: {{ BF(item.sizeGzip) }} / <a
-        :href="'/dist/'+item.namespace+'.js'"
+      <b>{{ packageInfo.iconsNum }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
+        :href="'/dist/'+packageInfo.namespace+'.js'"
         target="_blank"
-      >{{ item.namespace }}.js</a>
+      >{{ packageInfo.namespace }}.js</a>
     </div>
 
     <div class="wi-filter flex-row">
@@ -345,7 +426,7 @@ watch(settings, () => {
 }
 
 
-.wi-grid-icons .tg-turbogrid .tg-cell.wi-icon {
+.wi-grid-icons .tg-turbogrid .tg-cell.wi-grid-icon {
     padding: 4px;
     border-left: thin solid #e5e5e5;
     border-right: thin solid #e5e5e5;

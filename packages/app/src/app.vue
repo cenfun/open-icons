@@ -26,7 +26,8 @@ const state = shallowReactive({
     ost: null,
     packages: null,
     packageName: null,
-    total: null
+    total: null,
+    icons: null
 });
 
 provide('state', state);
@@ -173,15 +174,24 @@ const renderPackages = function(packages) {
 
 const initPackages = function(packages) {
 
-    let totalIcons = [];
     let totalSize = 0;
     let totalGzip = 0;
+    const allIcons = [];
 
     packages.forEach(function(pkg) {
 
-        totalIcons = totalIcons.concat(pkg.icons);
         totalSize += pkg.size;
         totalGzip += pkg.sizeGzip;
+
+        pkg.icons.forEach((icon) => {
+            allIcons.push({
+                name: icon.name,
+                namespace: icon.namespace,
+                svg: icon.svg,
+                packageName: pkg.name,
+                tagName: pkg.tagName
+            });
+        });
 
         //init web components
         const IconElement = getIconElement(pkg.icons);
@@ -206,12 +216,14 @@ const initPackages = function(packages) {
             license: 'MIT'
         },
         namespace: 'web-icons',
-        icons: totalIcons,
-        iconsNum: totalIcons.length.toLocaleString(),
+        icons: allIcons,
+        iconsNum: allIcons.length.toLocaleString(),
         size: totalSize,
         sizeGzip: totalGzip,
         selectable: true
     };
+
+    state.icons = allIcons;
 
     state.packages = packages;
     state.packageName = location.hash.substr(1);
