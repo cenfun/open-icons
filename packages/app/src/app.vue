@@ -33,8 +33,8 @@ const state = shallowReactive({
 provide('state', state);
 
 const settings = shallowReactive({
-    size: '32px',
-    color: 'rainbow',
+    size: '',
+    color: '',
     bg: '',
     radius: ''
 });
@@ -96,7 +96,7 @@ const renderPackages = function(packages) {
         rows
     };
 
-    const grid = new Grid('.wci-grid-packages');
+    const grid = new Grid('.wci-packages-grid');
 
     grid.bind('onFirstUpdated', function(e) {
         //console.log(e.type);
@@ -283,6 +283,24 @@ const initPackages = function(packages) {
 
 };
 
+const initSettings = async (ost) => {
+    const defaultSettings = {
+        size: '32px',
+        color: 'rainbow',
+        bg: '',
+        radius: ''
+    };
+
+    let prevSettings = await ost.get('settings');
+    if (!prevSettings) {
+        prevSettings = defaultSettings;
+    }
+
+    Object.keys(prevSettings).forEach((k) => {
+        settings[k] = prevSettings[k];
+    });
+};
+
 const loadStart = async () => {
 
     const ost = await openStore('wi');
@@ -293,6 +311,8 @@ const loadStart = async () => {
         //console.log('layout', prevLayout);
         layout.value = prevLayout;
     }
+
+    await initSettings(ost);
 
     //console.log(db);
     const cache = await ost.get('metadata');
@@ -335,6 +355,15 @@ watch(layout, (v) => {
     }
 });
 
+watch(settings, (v) => {
+
+    const obj = JSON.parse(JSON.stringify(v));
+
+    if (state.ost) {
+        state.ost.set('settings', obj);
+    }
+});
+
 onMounted(() => {
     loadStart();
     initTooltip();
@@ -360,7 +389,7 @@ onMounted(() => {
               Web Components Icons <span>v{{ version }}</span>
             </div>
           </div>
-          <div class="wci-grid-packages vui-flex-auto" />
+          <div class="wci-packages-grid vui-flex-auto" />
         </VuiFlex>
       </div>
 
@@ -476,8 +505,8 @@ a:hover {
     min-width: 200px;
     max-width: 50%;
     color: #eee;
-    border-right: thin solid #1E1E1E;
-    background-color: #1E1E1E;
+    border-right: thin solid #1e1e1e;
+    background-color: #1e1e1e;
 
     a:visited,
     a:link {
@@ -501,18 +530,19 @@ a:hover {
         &::after {
             content: "";
             position: absolute;
-            top:50%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background-color: #ddd;
-            border-radius: 50%;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-left-color: #ddd;
+            margin-left: 3px;
         }
     }
-
 }
-
 
 .wci-layout-main {
     position: relative;
@@ -552,22 +582,21 @@ a:hover {
     margin: 0 10px;
 }
 
-.wci-grid-packages {
+.wci-packages-grid {
     width: 100%;
     height: 100%;
 }
 
-.wci-grid-packages .tg-row .tg-tree-name {
+.wci-packages-grid .tg-row .tg-tree-name {
     cursor: pointer;
 }
 
-.wci-grid-packages .tg-pane .tg-scrollbar-thumb {
+.wci-packages-grid .tg-pane .tg-scrollbar-thumb {
     background-color: #666;
 }
 
-.wci-grid-packages .tg-pane .tg-scrollbar-thumb:hover {
+.wci-packages-grid .tg-pane .tg-scrollbar-thumb:hover {
     background-color: #999;
 }
-
 
 </style>

@@ -62,7 +62,7 @@ const settings = inject('settings');
 </template>
 <style lang="scss">
 .wci-settings {
-  height: 35px;
-  padding-right: 5px;
+    height: 35px;
+    padding-right: 5px;
 }
 </style>

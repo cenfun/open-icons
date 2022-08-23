@@ -88,7 +88,7 @@ const saveSVG = function(content, name) {
 };
 
 const createGrid = () => {
-    const grid = new Grid('.wci-grid-icons');
+    const grid = new Grid('.wci-finder-grid');
     grid.bind('onClick', function(e, d) {
         const rowItem = d.rowItem;
         const $target = d.e.target;
@@ -172,11 +172,13 @@ const renderGrid = () => {
             }
             return `<textarea spellcheck="false">${this.getFormatter('icon')(v, r)}</textarea>`;
         },
-        downloadSvg: function(v) {
-            return '<wci-carbon class="wci-icon-action wci-icon-download" name="svg" size="16px" title="download svg file"></wci-carbon>';
-        },
-        downloadPng: function(v) {
-            return '<wci-carbon class="wci-icon-action wci-icon-download" name="png" size="16px" title="download png file"></wci-carbon>';
+        download: function(v) {
+            return `
+                <div class="wci-download-icons vui-flex-row">
+                    <div class="wci-icon-action wci-icon-download" name="svg" title="download svg file">SVG</div>
+                    <div class="wci-icon-action wci-icon-download" name="png" title="download png file">PNG</div>
+                <div>
+            `;
         }
     });
 
@@ -195,19 +197,11 @@ const renderGrid = () => {
             name: 'Name',
             width: 150
         }, {
-            id: 'downloadSvg',
-            name: '',
-            align: 'center',
-            formatter: 'downloadSvg',
+            id: 'download',
+            name: 'Download',
+            formatter: 'download',
             resizable: false,
-            width: 30
-        }, {
-            id: 'downloadPng',
-            name: '',
-            align: 'center',
-            formatter: 'downloadPng',
-            resizable: false,
-            width: 30
+            width: 80
         }, {
             id: 'svg',
             name: 'Pure SVG',
@@ -307,7 +301,10 @@ watch(() => props.packageName, (v) => {
 });
 
 watch(settings, () => {
-    renderGrid();
+    const grid = state.iconsGrid;
+    if (grid) {
+        renderGrid();
+    }
 });
 
 watch(keywords, () => {
@@ -356,16 +353,15 @@ watch(keywords, () => {
         @click="tagClickHandler(tag)"
       >{{ tag.name }}</span>
     </div>
-    <div class="wci-grid-icons vui-flex-auto" />
+    <div class="wci-finder-grid vui-flex-auto" />
   </VuiFlex>
 </template>
 <style lang="scss">
-
 .wci-pkg-title {
     text-align: center;
     font-weight: bold;
     font-size: 38px;
-    padding: 15px 0 5px 0;
+    padding: 15px 0 5px;
 }
 
 .wci-pkg-link {
@@ -417,6 +413,7 @@ watch(keywords, () => {
         right: 15px;
         top: 13px;
         opacity: 0.3;
+        pointer-events: none;
     }
 }
 
@@ -456,63 +453,51 @@ watch(keywords, () => {
     color: deepskyblue;
 }
 
-.wci-tags i {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    margin-left: 10px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: 0.6;
-}
-
-.wci-tags i:hover {
-    opacity: 1;
-}
-
-.wci-grid-icons {
+.wci-finder-grid {
     border: thin solid #ccc;
     border-radius: 5px;
-    margin: 10px 10px;
+    margin: 10px;
 }
 
+.wci-finder-grid .wci-not-found {
+    font-size: 20px;
+}
 
-.wci-grid-icons .tg-turbogrid .tg-cell.wci-grid-icon {
+.wci-finder-grid .tg-turbogrid .tg-cell.wci-grid-icon {
     padding: 4px;
     border-left: thin solid #e5e5e5;
     border-right: thin solid #e5e5e5;
 }
 
-.wci-grid-icons .tg-turbogrid .tg-cell.wci-textarea {
+.wci-finder-grid .tg-turbogrid .tg-cell.wci-textarea {
     padding: 3px 5px;
 }
 
-.wci-grid-icons .tg-turbogrid .tg-cell.wci-textarea textarea {
+.wci-finder-grid .tg-turbogrid .tg-cell.wci-textarea textarea {
     width: 100%;
     height: 100%;
     resize: none;
-    font-family: monaco, sans-serif;
 }
 
-.wci-grid-icons .wci-icon-action {
+.wci-icon-action {
+    font-family: Menlo, Consolas, monospace;
+    font-weight: bold;
     cursor: pointer;
     opacity: 0.6;
+
+    &:first-child {
+        margin-right: 10px;
+    }
 }
 
-.wci-grid-icons .wci-icon-action:hover {
+.wci-icon-action:hover {
     opacity: 1;
+    text-decoration: underline;
 }
 
-.wci-grid-icons .tg-turbogrid .tg-cell .wci-icon-action {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.wci-download-icons {
+    align-items: center;
+    height: 100%;
 }
-
-.wci-grid-icons .wci-not-found {
-    font-size: 20px;
-}
-
 
 </style>
