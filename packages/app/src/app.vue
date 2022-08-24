@@ -1,7 +1,8 @@
 <script setup>
 import VineUI from 'vine-ui';
 import {
-    onMounted, provide, ref, shallowReactive, watch
+    isRef,
+    onMounted, provide, reactive, ref, shallowReactive, toRaw, watch
 } from 'vue';
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
@@ -40,6 +41,12 @@ const state = shallowReactive({
 });
 
 provide('state', state);
+
+const myIcons = reactive({
+    icons: []
+});
+
+provide('myIcons', myIcons);
 
 const defaultSettings = {
     size: '32px',
@@ -292,30 +299,14 @@ const initPackages = function(packages) {
 
 };
 
-const initSettings = async (ost) => {
-
-    const prevSettings = await ost.get('settings');
-
-    if (prevSettings) {
-        Object.keys(prevSettings).forEach((k) => {
-            settings[k] = prevSettings[k];
-        });
-    }
-
-};
-
 const loadStart = async () => {
 
     const ost = await openStore('open-icons');
     state.ost = ost;
 
-    const prevLayout = await ost.get('layout');
-    if (prevLayout) {
-        //console.log('layout', prevLayout);
-        layout.value = prevLayout;
-    }
-
-    await initSettings(ost);
+    await read('layout', layout);
+    await read('settings', settings);
+    await read('myIcons', myIcons);
 
     const path = window.WC_ICONS_PATH;
 
@@ -358,21 +349,46 @@ const loadStart = async () => {
 
 };
 
-watch(layout, (v) => {
-    if (state.ost) {
-        state.ost.set('layout', v);
+const read = async (k, target) => {
+    if (!state.ost) {
+        return;
     }
+
+    const v = await state.ost.get(k);
+    //console.log('ost get', k, v);
+
+    if (typeof v === 'undefined') {
+        return;
+    }
+
+    if (isRef(target)) {
+        target.value = v;
+        return;
+    }
+
+    for (const key in v) {
+        target[key] = v[key];
+    }
+
+};
+
+const save = function(k, v) {
+    if (!state.ost) {
+        return;
+    }
+    state.ost.set(k, toRaw(v));
+};
+
+watch(layout, (v) => {
+    save('layout', v);
+});
+
+watch(myIcons, (v) => {
+    save('myIcons', v);
 });
 
 watch(settings, (v) => {
-
-    const obj = JSON.parse(JSON.stringify(v));
-
-    //console.log(obj);
-
-    if (state.ost) {
-        state.ost.set('settings', obj);
-    }
+    save('settings', v);
 });
 
 onMounted(() => {
@@ -502,6 +518,14 @@ a:hover {
 
 .oi-icon-searcher {
     background-image: url("./images/searcher.svg");
+}
+
+.oi-icon-add {
+    background-image: url("./images/plus.svg");
+}
+
+.oi-icon-ok {
+    background-image: url("./images/ok.svg");
 }
 
 /* app */

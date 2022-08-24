@@ -3,6 +3,8 @@ import { bindEvents } from './util.js';
 
 const { VuiTooltip } = VineUI;
 
+let tooltipInstance;
+
 const showTooltip = function(elem) {
     if (elem === document) {
         return;
@@ -17,18 +19,18 @@ const showTooltip = function(elem) {
         return;
     }
     hideTooltip(elem);
-    elem.$tooltip = VuiTooltip.createComponent({
+    tooltipInstance = VuiTooltip.createComponent({
         target: elem,
         text: text
     });
 };
 
 const hideTooltip = function(elem) {
-    if (!elem.$tooltip) {
+    if (!tooltipInstance) {
         return;
     }
-    elem.$tooltip.unmount();
-    elem.$tooltip = null;
+    tooltipInstance.unmount();
+    tooltipInstance = null;
 };
 
 export const initTooltip = () => {

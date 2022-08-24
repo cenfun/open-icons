@@ -1,6 +1,7 @@
 <script setup>
 import VineUI from 'vine-ui';
 import { Grid } from 'turbogrid';
+import { saveAs } from 'file-saver';
 import {
     inject, nextTick, ref, watch
 } from 'vue';
@@ -17,6 +18,7 @@ const props = defineProps({
 
 const state = inject('state');
 const settings = inject('settings');
+const myIcons = inject('myIcons');
 const packageInfo = ref(null);
 const tagsList = ref([]);
 
@@ -72,7 +74,7 @@ const savePNG = function(content, name) {
         ctx.drawImage(img, 0, 0);
         document.body.removeChild(img);
         canvas.toBlob(function(blob) {
-            window.saveAs(blob, `${name}.png`);
+            saveAs(blob, `${name}.png`);
             document.body.removeChild(canvas);
         });
     };
@@ -84,29 +86,7 @@ const saveSVG = function(content, name) {
     const blob = new Blob([content], {
         type: 'text/plain;charset=utf-8'
     });
-    window.saveAs(blob, `${name}.svg`);
-};
-
-const createGrid = () => {
-    const grid = new Grid('.oi-finder-grid');
-    grid.bind('onClick', function(e, d) {
-        const rowItem = d.rowItem;
-        const $target = d.e.target;
-        if ($target.tagName === 'TEXTAREA') {
-            $target.select();
-            return;
-        }
-        if ($target.classList.contains('oi-icon-download')) {
-            const type = $target.getAttribute('name');
-            if (type === 'png') {
-                savePNG(rowItem.svg, rowItem.name);
-                return;
-            }
-            saveSVG(rowItem.svg, rowItem.name);
-        }
-    });
-    state.iconsGrid = grid;
-    return grid;
+    saveAs(blob, `${name}.svg`);
 };
 
 const getColor = function(colorIndex) {
@@ -148,6 +128,38 @@ const getIcon = function(r) {
     return `<${tag} name="${r.name}" size="${settings.size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
+const addIcon = function(icon, $target) {
+    myIcons.icons.push(icon.name);
+    $target.classList.remove('oi-icon-add');
+    $target.classList.add('oi-icon-ok');
+};
+
+const createGrid = () => {
+    const grid = new Grid('.oi-finder-grid');
+    grid.bind('onClick', function(e, d) {
+        const rowItem = d.rowItem;
+        const $target = d.e.target;
+        if ($target.tagName === 'TEXTAREA') {
+            $target.select();
+            return;
+        }
+        if ($target.classList.contains('oi-icon-add')) {
+            addIcon(rowItem, $target);
+            return;
+        }
+        if ($target.classList.contains('oi-icon-download')) {
+            const type = $target.getAttribute('name');
+            if (type === 'png') {
+                savePNG(rowItem.svg, rowItem.name);
+                return;
+            }
+            saveSVG(rowItem.svg, rowItem.name);
+        }
+    });
+    state.iconsGrid = grid;
+    return grid;
+};
+
 const renderGrid = () => {
     let grid = state.iconsGrid;
 
@@ -162,11 +174,12 @@ const renderGrid = () => {
         frozenColumn: 1,
         rowNotFound: '<div class="oi-not-found">Not found icon</div>',
         rowFilter: rowFilter,
-        selectVisible: true,
-        selectAllVisible: false,
         rowNumberVisible: true,
         rowNumberWidth: 52,
         scrollbarRound: true,
+        columnTypes: {
+            name: ''
+        },
         bindWindowResize: true,
         bindContainerResize: true
     });
@@ -174,6 +187,17 @@ const renderGrid = () => {
     grid.setFormatter({
         icon: function(v, r) {
             return getIcon(r);
+        },
+        my: function(value, rowItem, columnItem, cellNode) {
+            const v = rowItem.name;
+            let iconName = 'add';
+            let tooltip = `Add '${v}' to my icons`;
+            if (myIcons.icons.includes(v)) {
+                iconName = 'ok';
+                tooltip = `'${v}' already in my icons`;
+            }
+            const icon = `<div class="oi-action-my oi-icon oi-icon-${iconName}" tooltip="${tooltip}"></div>`;
+            return icon;
         },
         textarea: function(v, r, c) {
             if (c.id === 'svg') {
@@ -188,9 +212,9 @@ const renderGrid = () => {
         },
         download: function(v) {
             return `
-                <div class="oi-download-icons vui-flex-row">
-                    <div class="oi-icon-action oi-icon-download" name="svg" title="download svg file">SVG</div>
-                    <div class="oi-icon-action oi-icon-download" name="png" title="download png file">PNG</div>
+                <div class="oi-action-downloads vui-flex-row">
+                    <div class="oi-icon-download" name="svg" title="download svg file">SVG</div>
+                    <div class="oi-icon-download" name="png" title="download png file">PNG</div>
                 <div>
             `;
         }
@@ -211,9 +235,16 @@ const renderGrid = () => {
             name: 'Name',
             width: 150
         }, {
+            id: 'my',
+            name: '<div class="oi-icon oi-icon-my"></div>',
+            width: 30,
+            resizable: false,
+            formatter: 'my'
+        }, {
             id: 'download',
             name: 'Download',
             formatter: 'download',
+            align: 'center',
             resizable: false,
             width: 80
         }, {
@@ -477,47 +508,56 @@ watch(keywords, () => {
     border: thin solid #ccc;
     border-radius: 5px;
     margin: 10px;
-}
 
-.oi-finder-grid .oi-not-found {
-    font-size: 20px;
-}
+    .oi-action-my {
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-.oi-finder-grid .tg-turbogrid .tg-cell.oi-grid-icon {
-    padding: 4px;
-    border-left: thin solid #e5e5e5;
-    border-right: thin solid #e5e5e5;
-}
+    .oi-not-found {
+        font-size: 20px;
+    }
 
-.oi-finder-grid .tg-turbogrid .tg-cell.oi-textarea {
-    padding: 3px 5px;
-}
+    .tg-cell.oi-grid-icon {
+        padding: 4px;
+        border-left: thin solid #e5e5e5;
+        border-right: thin solid #e5e5e5;
+    }
 
-.oi-finder-grid .tg-turbogrid .tg-cell.oi-textarea textarea {
-    width: 100%;
-    height: 100%;
-    resize: none;
-}
+    .tg-cell.oi-textarea {
+        padding: 3px 5px;
 
-.oi-icon-action {
-    font-family: Menlo, Consolas, monospace;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0.6;
-
-    &:first-child {
-        margin-right: 10px;
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
     }
 }
 
-.oi-icon-action:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-.oi-download-icons {
+.oi-action-downloads {
+    justify-content: center;
     align-items: center;
     height: 100%;
+
+    .oi-icon-download {
+        font-family: Menlo, Consolas, monospace;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.6;
+
+        &:first-child {
+            margin-right: 10px;
+        }
+    }
+
+    .oi-icon-download:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
 }
 
 </style>
