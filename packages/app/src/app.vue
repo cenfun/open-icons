@@ -41,12 +41,16 @@ const state = shallowReactive({
 
 provide('state', state);
 
-const settings = shallowReactive({
-    size: '',
-    color: '',
+const defaultSettings = {
+    size: '32px',
+    color: 'rainbow',
+    colorCustom: '',
     bg: '',
+    bgCustom: '',
     radius: ''
-});
+};
+
+const settings = shallowReactive(defaultSettings);
 
 provide('settings', settings);
 
@@ -289,21 +293,15 @@ const initPackages = function(packages) {
 };
 
 const initSettings = async (ost) => {
-    const defaultSettings = {
-        size: '32px',
-        color: 'rainbow',
-        bg: '',
-        radius: ''
-    };
 
-    let prevSettings = await ost.get('settings');
-    if (!prevSettings) {
-        prevSettings = defaultSettings;
+    const prevSettings = await ost.get('settings');
+
+    if (prevSettings) {
+        Object.keys(prevSettings).forEach((k) => {
+            settings[k] = prevSettings[k];
+        });
     }
 
-    Object.keys(prevSettings).forEach((k) => {
-        settings[k] = prevSettings[k];
-    });
 };
 
 const loadStart = async () => {
@@ -369,6 +367,8 @@ watch(layout, (v) => {
 watch(settings, (v) => {
 
     const obj = JSON.parse(JSON.stringify(v));
+
+    //console.log(obj);
 
     if (state.ost) {
         state.ost.set('settings', obj);

@@ -4,7 +4,7 @@ import { Grid } from 'turbogrid';
 import {
     inject, nextTick, ref, watch
 } from 'vue';
-import { BF } from '../util/util.js';
+import { BF, throttle } from '../util/util.js';
 
 const { VuiFlex } = VineUI;
 
@@ -109,29 +109,43 @@ const createGrid = () => {
     return grid;
 };
 
-const getColor = function(c, colorIndex) {
-    const colors = [
-        'orangered',
-        'orange',
-        'green',
-        'deepskyblue',
-        'royalblue',
-        'darkorchid'
-    ];
+const getColor = function(colorIndex) {
 
-    if (c === 'rainbow') {
+    const color = settings.color;
+
+    if (color === 'rainbow') {
+        const colors = [
+            'orangered',
+            'orange',
+            'green',
+            'deepskyblue',
+            'royalblue',
+            'darkorchid'
+        ];
         const index = colorIndex % colors.length;
-        c = colors[index];
-        colorIndex += 1;
+        return colors[index];
     }
 
-    return c;
+    if (color === 'custom') {
+        return settings.colorCustom;
+    }
+
+    return color;
+};
+
+const getBG = () => {
+    const bg = settings.bg;
+    if (bg === 'custom') {
+        return settings.bgCustom;
+    }
+    return bg;
 };
 
 const getIcon = function(r) {
-    const c = getColor(settings.color, r.tg_index);
+    const color = getColor(r.tg_index);
+    const bg = getBG();
     const tag = r.tagName;
-    return `<${tag} name="${r.name}" size="${settings.size}" color="${c}" background="${settings.bg}" radius="${settings.radius}"></${tag}>`;
+    return `<${tag} name="${r.name}" size="${settings.size}" color="${color}" background="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
 const renderGrid = () => {
@@ -300,6 +314,7 @@ const render = () => {
 
 };
 
+const renderGridAsync = throttle(renderGrid);
 
 watch(() => props.packageName, (v) => {
     render();
@@ -308,7 +323,7 @@ watch(() => props.packageName, (v) => {
 watch(settings, () => {
     const grid = state.iconsGrid;
     if (grid) {
-        renderGrid();
+        renderGridAsync();
     }
 });
 

@@ -50,3 +50,30 @@ export const preventDefault = function(e) {
         e.preventDefault();
     }
 };
+
+
+export const throttle = function(callback, time = 100) {
+    let last = 0;
+    let timeout;
+    const handler = function() {
+        const now = Date.now();
+        if (now > last + time) {
+            clearTimeout(timeout);
+            last = now;
+            callback.apply(this, arguments);
+            return;
+        }
+
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            last = now;
+            callback.apply(this, arguments);
+        }, time);
+
+    };
+    handler.cancel = () => {
+        clearTimeout(timeout);
+        last = 0;
+    };
+    return handler;
+};

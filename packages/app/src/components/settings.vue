@@ -30,6 +30,7 @@ const settings = inject('settings');
       label="Color"
     >
       <option />
+      <option>custom</option>
       <option>rainbow</option>
       <option>orangered</option>
       <option>orange</option>
@@ -38,16 +39,27 @@ const settings = inject('settings');
       <option>royalblue</option>
       <option>darkorchid</option>
     </VuiSelect>
+    <input
+      v-if="settings.color === 'custom'"
+      v-model="settings.colorCustom"
+      type="color"
+    >
     <VuiSelect
       v-model="settings.bg"
       label="BG"
     >
       <option />
+      <option>custom</option>
       <option>#eee</option>
       <option>#fff</option>
       <option>#ccc</option>
       <option>#000</option>
     </VuiSelect>
+    <input
+      v-if="settings.bg === 'custom'"
+      v-model="settings.bgCustom"
+      type="color"
+    >
     <VuiSelect
       v-model="settings.radius"
       label="Radius"
