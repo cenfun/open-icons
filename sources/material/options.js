@@ -5,8 +5,8 @@ module.exports = {
         filled: 'node_modules/@material-design-icons/svg/filled',
         outlined: 'node_modules/@material-design-icons/svg/outlined'
     },
-    readme: 'Without sharp/round/two-tone icons',
-    license: 'Apache 2.0',
+
+
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     },
@@ -14,5 +14,7 @@ module.exports = {
         name = name.toLowerCase();
         name = name.split('_').join('-');
         return this.onSVGNameDefault(name, item);
-    }
+    },
+
+    readme: 'Without sharp/round/two-tone icons'
 };

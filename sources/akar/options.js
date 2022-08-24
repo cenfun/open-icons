@@ -79,7 +79,6 @@ module.exports = {
         });
 
         return dir;
-    },
-    readme: '',
-    license: 'MIT'
+    }
+
 };

@@ -1,7 +1,5 @@
 module.exports = {
     name: '@vscode/codicons',
     url: 'https://github.com/microsoft/vscode-codicons',
-    dirs: 'node_modules/@vscode/codicons/src/icons',
-    readme: '',
-    license: 'MIT'
+    dirs: 'node_modules/@vscode/codicons/src/icons'
 };

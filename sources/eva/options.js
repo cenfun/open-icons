@@ -5,8 +5,6 @@ module.exports = {
         'node_modules/eva-icons/fill/svg',
         'node_modules/eva-icons/outline/svg'
     ],
-    readme: '',
-    license: 'MIT',
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     }

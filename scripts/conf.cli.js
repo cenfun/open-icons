@@ -5,13 +5,34 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
+const getLicense = (json) => {
+
+    if (json.license) {
+        return json.license;
+    }
+
+    if (json.licenses) {
+        return json.licenses.type;
+    }
+
+    return 'MIT';
+};
+
 const getSource = (options) => {
+
+    const jsonPath = path.resolve(__dirname, '../node_modules', options.name, 'package.json');
+    const json = require(jsonPath);
+
+    let license = options.license;
+    if (!license) {
+        license = getLicense(json);
+    }
+
     return {
         name: options.name,
-        version: require(`../node_modules/${options.name}/package.json`).version,
         url: options.url,
-        readme: options.readme,
-        license: options.license
+        version: json.version,
+        license: license
     };
 };
 
@@ -33,7 +54,10 @@ const packageHandler = (item, Util, name, index, total) => {
 
     const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
     const options = require(optionsPath);
+
     const source = getSource(options);
+
+    //console.log(source.name, source.license);
 
     let dirs = options.dirs;
     if (typeof dirs === 'function') {
@@ -193,7 +217,7 @@ module.exports = {
                 const outputPath = path.resolve(item.outputRoot, `${pkg.namespace}.json`);
                 //console.log(outputPath);
                 const json = require(outputPath);
-                const source = getSource(json.source);
+                const source = json.source;
                 const icons = json.icons.length;
 
                 totalIcons += icons;

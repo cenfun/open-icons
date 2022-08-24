@@ -2,8 +2,7 @@ module.exports = {
     name: '@uiw/icons',
     url: 'https://github.com/uiwjs/icons',
     dirs: 'node_modules/@uiw/icons/icon',
-    readme: '',
-    license: 'MIT',
+
     onSVGDocument: function($svg) {
         let found = false;
         ['path', 'use'].forEach((k) => {

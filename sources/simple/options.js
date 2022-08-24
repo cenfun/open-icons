@@ -2,8 +2,7 @@ module.exports = {
     name: 'simple-icons',
     url: 'https://github.com/simple-icons/simple-icons',
     dirs: 'node_modules/simple-icons/icons',
-    readme: '',
-    license: 'CC0 1.0',
+
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     },

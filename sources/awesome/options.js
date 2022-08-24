@@ -41,7 +41,5 @@ module.exports = {
 
 
         return dir;
-    },
-    readme: '',
-    license: 'CC BY 4.0'
+    }
 };

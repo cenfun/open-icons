@@ -2,8 +2,7 @@ module.exports = {
     name: 'foundation-icons',
     url: 'https://github.com/zurb/foundation-icon-fonts',
     dirs: 'node_modules/foundation-icons/svgs',
-    readme: '',
-    license: 'MIT',
+
     onSVGName: function(name, item) {
         name = name.replace('fi-', '');
         return this.onSVGNameDefault(name, item);

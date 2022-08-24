@@ -57,7 +57,5 @@ module.exports = {
         });
 
         return dir;
-    },
-    readme: '',
-    license: 'ISC'
+    }
 };

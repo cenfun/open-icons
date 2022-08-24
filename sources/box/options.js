@@ -24,8 +24,5 @@ module.exports = {
     onSVGDocument: function($svg) {
         $svg.attr('viewBox', '0 0 24 24');
         $svg.attr('fill', 'currentColor');
-    },
-
-    readme: '',
-    license: 'MIT'
+    }
 };

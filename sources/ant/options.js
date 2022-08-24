@@ -5,13 +5,14 @@ module.exports = {
         filled: 'node_modules/@ant-design/icons-svg/inline-svg/filled',
         outlined: 'node_modules/@ant-design/icons-svg/inline-svg/outlined'
     },
-    readme: 'Without two-tone icons',
-    license: 'MIT',
+
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     },
     onSVGName: function(name, item) {
         name = name.toLowerCase();
         return this.onSVGNameDefault(name, item);
-    }
+    },
+
+    readme: 'Without two-tone icons'
 };

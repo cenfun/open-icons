@@ -2,8 +2,7 @@ module.exports = {
     name: 'weather-icons-npm',
     url: 'https://github.com/erikflowers/weather-icons',
     dirs: 'node_modules/weather-icons-npm/svg',
-    readme: '',
-    license: 'SIL OFL 1.1',
+
     onSVGName: function(name, item) {
         name = name.replace(/\s+/i, '');
         name = name.replace(/^wi-/i, '');

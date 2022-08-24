@@ -4,8 +4,7 @@ module.exports = {
     dirs: [
         'node_modules/iconoir/icons'
     ],
-    readme: '',
-    license: 'MIT',
+
     onSVGName: function(name, item) {
         name = name.toLowerCase();
         name = name.split(/\s+/).join('-');

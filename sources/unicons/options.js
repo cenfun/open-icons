@@ -7,8 +7,7 @@ module.exports = {
             solid: 'node_modules/@iconscout/unicons/svg/solid'
         }
     ],
-    readme: '',
-    license: 'MIT',
+
     onSVGDocument: function($svg) {
         $svg.find('path').attr('fill', 'currentColor');
     }

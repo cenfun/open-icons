@@ -43,7 +43,5 @@ module.exports = {
         });
 
         return dir;
-    },
-    readme: '',
-    license: 'Apache 2.0'
+    }
 };
