@@ -115,8 +115,8 @@
                 <option>royalblue</option>
                 <option>darkorchid</option>
             </select>
-            background:
-            <select class="icon-background">
+            bg:
+            <select class="icon-bg">
                 <option></option>
                 <option>#eee</option>
                 <option>#fff</option>
@@ -174,7 +174,7 @@
             return c;
         };
 
-        const renderList = function(list, length, index, size, color, background, radius) {
+        const renderList = function(list, length, index, size, color, bg, radius) {
 
             const next = [];
 
@@ -197,8 +197,8 @@
                     index += 1;
                     $icon.setAttribute('color', c);
                 }
-                if (background) {
-                    $icon.setAttribute('background', background);
+                if (bg) {
+                    $icon.setAttribute('bg', bg);
                 }
                 if (radius) {
                     $icon.setAttribute('radius', radius);
@@ -217,7 +217,7 @@
 
             if (next.length) {
                 setTimeout(function() {
-                    renderList(next, length, index, size, color, background, radius);
+                    renderList(next, length, index, size, color, bg, radius);
                 });
             }
         };
@@ -228,7 +228,7 @@
 
             const size = document.querySelector('.icon-size').value;
             const color = document.querySelector('.icon-color').value;
-            const background = document.querySelector('.icon-background').value;
+            const bg = document.querySelector('.icon-bg').value;
             const radius = document.querySelector('.icon-radius').value;
 
             icons.sort(function(a, b) {
@@ -241,11 +241,11 @@
                 return 0;
             });
 
-            renderList(icons, 600, 0, size, color, background, radius);
+            renderList(icons, 600, 0, size, color, bg, radius);
 
         };
 
-        const toolbars = ['.icon-size', '.icon-color', '.icon-background', '.icon-radius'];
+        const toolbars = ['.icon-size', '.icon-color', '.icon-bg', '.icon-radius'];
         toolbars.forEach(function(item) {
             const $item = document.querySelector(item);
             $item.addEventListener('change', function(e) {

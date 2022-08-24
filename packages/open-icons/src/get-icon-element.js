@@ -2,7 +2,7 @@ const getIconElement = function(icons) {
     class IconElement extends HTMLElement {
 
         static get observedAttributes() {
-            return ['name', 'size', 'color', 'radius', 'background'];
+            return ['name', 'size', 'color', 'bg', 'radius'];
         }
 
         constructor() {
@@ -57,10 +57,10 @@ const getIconElement = function(icons) {
                 $color = `color: ${color};`;
             }
 
-            const background = this.getAttribute('background');
-            let $background = '';
-            if (background) {
-                $background = `background: ${background};`;
+            const bg = this.getAttribute('bg');
+            let $bg = '';
+            if (bg) {
+                $bg = `background: ${bg};`;
             }
 
             let $overflow = '';
@@ -81,7 +81,7 @@ const getIconElement = function(icons) {
                 width: ${size};
                 height: ${size};
                 ${$color}
-                ${$background}
+                ${$bg}
                 ${$radius}
                 ${$overflow}
             }

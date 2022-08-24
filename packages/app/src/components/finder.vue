@@ -145,7 +145,7 @@ const getIcon = function(r) {
     const color = getColor(r.tg_index);
     const bg = getBG();
     const tag = r.tagName;
-    return `<${tag} name="${r.name}" size="${settings.size}" color="${color}" background="${bg}" radius="${settings.radius}"></${tag}>`;
+    return `<${tag} name="${r.name}" size="${settings.size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
 const renderGrid = () => {
