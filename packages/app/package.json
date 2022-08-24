@@ -1,15 +1,15 @@
 {
-    "name": "wc-icons-app",
+    "name": "open-icons-app",
     "version": "1.0.0",
-    "main": "dist/wc-icons-app.js",
+    "main": "dist/open-icons-app.js",
     "private": true,
     "files": [
         "dist"
     ],
     "dependencies": {
+        "open-icons": "",
         "turbogrid": "^3.0.1",
-        "vine-ui": "^3.0.11",
-        "wc-icons": ""
+        "vine-ui": "^3.0.11"
     },
     "devDependencies": {}
 }

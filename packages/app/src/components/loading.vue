@@ -1,11 +1,11 @@
 <template>
   <div
     v-if="props.visible"
-    class="wci-loading"
+    class="oi-loading"
   >
     <VuiFlex spacing="10px">
       <VuiLoading fast />
-      <div class="wci-loading-label">
+      <div class="oi-loading-label">
         {{ props.text }}
       </div>
     </VuiFlex>
@@ -28,7 +28,7 @@ const props = defineProps({
 
 </script>
 <style>
-.wci-loading {
+.oi-loading {
     pointer-events: none;
     position: absolute;
     z-index: 100;
@@ -37,7 +37,7 @@ const props = defineProps({
     transform: translate(-50%, -50%);
 }
 
-.wci-loading-label {
+.oi-loading-label {
     font-size: 14px;
     width: 100px;
     white-space: nowrap;

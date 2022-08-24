@@ -1,17 +1,17 @@
-# wc-icons
-> Web Components Icons
+# open-icons
+> Open source icons collection
 
-![](https://img.shields.io/npm/v/wc-icons)
-![](https://img.shields.io/librariesio/github/cenfun/wc-icons)
-![](https://img.shields.io/librariesio/dependents/npm/wc-icons)
-[![](https://badgen.net/npm/dw/wc-icons)](https://www.npmjs.com/package/wc-icons)
+![](https://img.shields.io/npm/v/open-icons)
+![](https://img.shields.io/librariesio/github/cenfun/open-icons)
+![](https://img.shields.io/librariesio/dependents/npm/open-icons)
+[![](https://badgen.net/npm/dw/open-icons)](https://www.npmjs.com/package/open-icons)
 
 ## Homepage
-[https://cenfun.github.io/wc-icons/](https://cenfun.github.io/wc-icons/)
+[https://cenfun.github.io/open-icons/](https://cenfun.github.io/open-icons/)
 
 # Installation
 ```sh
-npm install wc-icons
+npm install open-icons
 ```
 
 ## Packages

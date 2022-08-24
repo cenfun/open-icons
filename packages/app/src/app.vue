@@ -7,7 +7,7 @@ import openStore from 'open-store';
 import { Grid } from 'turbogrid';
 import {
     loadPackages, getIconElement, version, timestamp
-} from 'wc-icons';
+} from 'open-icons';
 
 import WiLoading from './components/loading.vue';
 import WiFinder from './components/finder.vue';
@@ -20,7 +20,7 @@ const {
     VuiLayout, VuiFlex, VuiTab
 } = VineUI;
 
-const layout = ref('270px,auto');
+const layout = ref('200px,auto');
 
 const state = shallowReactive({
     ost: null,
@@ -96,7 +96,7 @@ const renderPackages = function(packages) {
         rows
     };
 
-    const grid = new Grid('.wci-packages-grid');
+    const grid = new Grid('.oi-packages-grid');
 
     grid.bind('onFirstUpdated', function(e) {
         //console.log(e.type);
@@ -130,7 +130,7 @@ const renderPackages = function(packages) {
         rowNumber: function(value, rowItem, columnItem, cellNode) {
             const defaultFormatter = this.getDefaultFormatter('rowNumber');
             if (rowItem.type === 'total') {
-                return '<div class="wci-icon-total"></div>';
+                return '<div class="oi-icon-total"></div>';
             }
             return defaultFormatter(value, rowItem, columnItem, cellNode);
         },
@@ -256,15 +256,15 @@ const initPackages = function(packages) {
 
     state.total = {
         name: 'Total',
-        fullName: 'Web Components Icons',
+        fullName: 'Open Icons',
         type: 'total',
         source: {
-            name: 'wc-icons',
+            name: 'open-icons',
             version: version,
-            url: 'https://github.com/cenfun/wc-icons',
+            url: 'https://github.com/cenfun/open-icons',
             license: 'MIT'
         },
-        namespace: 'wc-icons',
+        namespace: 'open-icons',
         tags: getTags(allTags),
         icons: allIcons,
         iconsNum: allIcons.length.toLocaleString(),
@@ -303,7 +303,7 @@ const initSettings = async (ost) => {
 
 const loadStart = async () => {
 
-    const ost = await openStore('wc-icons');
+    const ost = await openStore('open-icons');
     state.ost = ost;
 
     const prevLayout = await ost.get('layout');
@@ -374,7 +374,7 @@ onMounted(() => {
 
 </script>
 <template>
-  <div class="wci-app">
+  <div class="oi-app">
     <VuiLayout
       v-model="layout"
       width="100%"
@@ -382,29 +382,32 @@ onMounted(() => {
       gutter-size="0"
       gutter-hover-size="2px"
     >
-      <div class="wci-layout-packages">
+      <div class="oi-layout-packages">
         <VuiFlex
           direction="column"
           height="100%"
         >
-          <div class="wci-packages-header">
-            <div class="wci-title">
-              Web Components Icons <span>v{{ version }}</span>
+          <div class="oi-packages-header">
+            <div class="oi-title">
+              Open Icons <span><a
+                href="https://github.com/cenfun/open-icons"
+                target="_blank"
+              >v{{ version }}</a></span>
             </div>
           </div>
-          <div class="wci-packages-grid vui-flex-auto" />
+          <div class="oi-packages-grid vui-flex-auto" />
         </VuiFlex>
       </div>
 
-      <div class="wci-layout-main">
+      <div class="oi-layout-main">
         <VuiTab v-model="tabActive">
           <template #right>
             <div class="vui-flex-auto" />
             <WiSettings />
-            <div class="wci-header-right">
+            <div class="oi-header-right">
               <a
-                class="wci-icon wci-icon-github"
-                href="https://github.com/cenfun/wc-icons"
+                class="oi-icon oi-icon-github"
+                href="https://github.com/cenfun/open-icons"
                 target="_blank"
               />
             </div>
@@ -412,11 +415,11 @@ onMounted(() => {
 
           <template #tabs>
             <div class="vui-flex-row">
-              <div class="wci-icon wci-icon-finder" />
+              <div class="oi-icon oi-icon-finder" />
               <b>Icon Finder</b>
             </div>
             <div class="vui-flex-row">
-              <div class="wci-icon wci-icon-my" />
+              <div class="oi-icon oi-icon-my" />
               <b>My Icons</b>
             </div>
           </template>
@@ -465,7 +468,7 @@ a:hover {
 
 /* icon */
 
-.wci-icon {
+.oi-icon {
     display: block;
     overflow: hidden;
     width: 20px;
@@ -476,35 +479,35 @@ a:hover {
     opacity: 0.6;
 }
 
-.wci-icon:hover {
+.oi-icon:hover {
     opacity: 1;
 }
 
-.wci-icon-github {
+.oi-icon-github {
     background-image: url("./images/github.svg");
 }
 
-.wci-icon-finder {
+.oi-icon-finder {
     background-image: url("./images/search.svg");
 }
 
-.wci-icon-my {
+.oi-icon-my {
     background-image: url("./images/star.svg");
 }
 
-.wci-icon-searcher {
+.oi-icon-searcher {
     background-image: url("./images/searcher.svg");
 }
 
 /* app */
 
-.wci-app {
+.oi-app {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-.wci-layout-packages {
+.oi-layout-packages {
     min-width: 200px;
     max-width: 50%;
     color: #eee;
@@ -526,7 +529,7 @@ a:hover {
         font-weight: bold;
     }
 
-    .wci-icon-total {
+    .oi-icon-total {
         width: 100%;
         height: 100%;
 
@@ -547,18 +550,18 @@ a:hover {
     }
 }
 
-.wci-layout-main {
+.oi-layout-main {
     position: relative;
 }
 
-.vui-tab-item .wci-icon {
+.vui-tab-item .oi-icon {
     width: 16px;
     height: 16px;
     background-size: 16px 16px;
     margin-right: 5px;
 }
 
-.wci-packages-header {
+.oi-packages-header {
     font-size: 16px;
     font-weight: bold;
     padding: 0 20px 0 15px;
@@ -569,7 +572,7 @@ a:hover {
     background-color: #000;
 }
 
-.wci-title {
+.oi-title {
     font-weight: bold;
     font-size: 18px;
 
@@ -577,28 +580,32 @@ a:hover {
         font-weight: normal;
         margin-left: 5px;
         font-size: 14px;
-        color: gray;
+
+        a:link,
+        a:visited {
+            color: #999;
+        }
     }
 }
 
-.wci-header-right {
+.oi-header-right {
     margin: 0 10px;
 }
 
-.wci-packages-grid {
+.oi-packages-grid {
     width: 100%;
     height: 100%;
 }
 
-.wci-packages-grid .tg-row .tg-tree-name {
+.oi-packages-grid .tg-row .tg-tree-name {
     cursor: pointer;
 }
 
-.wci-packages-grid .tg-pane .tg-scrollbar-thumb {
+.oi-packages-grid .tg-pane .tg-scrollbar-thumb {
     background-color: #666;
 }
 
-.wci-packages-grid .tg-pane .tg-scrollbar-thumb:hover {
+.oi-packages-grid .tg-pane .tg-scrollbar-thumb:hover {
     background-color: #999;
 }
 

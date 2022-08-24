@@ -88,7 +88,7 @@ const saveSVG = function(content, name) {
 };
 
 const createGrid = () => {
-    const grid = new Grid('.wci-finder-grid');
+    const grid = new Grid('.oi-finder-grid');
     grid.bind('onClick', function(e, d) {
         const rowItem = d.rowItem;
         const $target = d.e.target;
@@ -96,7 +96,7 @@ const createGrid = () => {
             $target.select();
             return;
         }
-        if ($target.classList.contains('wci-icon-download')) {
+        if ($target.classList.contains('oi-icon-download')) {
             const type = $target.getAttribute('name');
             if (type === 'png') {
                 savePNG(rowItem.svg, rowItem.name);
@@ -146,7 +146,7 @@ const renderGrid = () => {
     grid.setOption({
         rowHeight: cellSize,
         frozenColumn: 1,
-        rowNotFound: '<div class="wci-not-found">Not found icon</div>',
+        rowNotFound: '<div class="oi-not-found">Not found icon</div>',
         rowFilter: rowFilter,
         selectVisible: true,
         selectAllVisible: false,
@@ -174,9 +174,9 @@ const renderGrid = () => {
         },
         download: function(v) {
             return `
-                <div class="wci-download-icons vui-flex-row">
-                    <div class="wci-icon-action wci-icon-download" name="svg" title="download svg file">SVG</div>
-                    <div class="wci-icon-action wci-icon-download" name="png" title="download png file">PNG</div>
+                <div class="oi-download-icons vui-flex-row">
+                    <div class="oi-icon-action oi-icon-download" name="svg" title="download svg file">SVG</div>
+                    <div class="oi-icon-action oi-icon-download" name="png" title="download png file">PNG</div>
                 <div>
             `;
         }
@@ -189,7 +189,7 @@ const renderGrid = () => {
             width: cellSize,
             minWidth: cellSize,
             align: 'center',
-            classMap: 'wci-grid-icon',
+            classMap: 'oi-grid-icon',
             formatter: 'icon',
             sortable: false
         }, {
@@ -205,7 +205,7 @@ const renderGrid = () => {
         }, {
             id: 'svg',
             name: 'Pure SVG',
-            classMap: 'wci-textarea',
+            classMap: 'oi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -213,7 +213,7 @@ const renderGrid = () => {
         }, {
             id: 'dataUrl',
             name: 'Data URL',
-            classMap: 'wci-textarea',
+            classMap: 'oi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -221,7 +221,7 @@ const renderGrid = () => {
         }, {
             id: 'wc',
             name: 'Web component',
-            classMap: 'wci-textarea',
+            classMap: 'oi-textarea',
             formatter: 'textarea',
             sortable: false,
             width: 260,
@@ -324,81 +324,81 @@ watch(keywords, () => {
     spacing="10px"
     height="100%"
   >
-    <div class="wci-pkg-title">
+    <div class="oi-pkg-title">
       {{ packageInfo.fullName || packageInfo.name }}
     </div>
-    <div class="wci-pkg-link">
+    <div class="oi-pkg-link">
       <a
         :href="packageInfo.source.url"
         target="_blank"
       >{{ packageInfo.source.name }}@{{ packageInfo.source.version }} - {{ packageInfo.source.license }}</a>
     </div>
-    <div class="wci-pkg-stats">
+    <div class="oi-pkg-stats">
       <b>{{ packageInfo.iconsNum }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
         :href="'/dist/'+packageInfo.namespace+'.js'"
         target="_blank"
       >{{ packageInfo.namespace }}.js</a>
     </div>
 
-    <div class="wci-filter flex-row">
-      <div class="wci-searcher">
+    <div class="oi-filter flex-row">
+      <div class="oi-searcher">
         <input
           v-model="keywords"
           type="text"
-          class="wci-keywords flex-auto"
+          class="oi-keywords flex-auto"
           onfocus="this.select()"
         >
-        <div class="wci-icon wci-icon-searcher" />
+        <div class="oi-icon oi-icon-searcher" />
       </div>
     </div>
-    <div class="wci-tags">
+    <div class="oi-tags">
       <span
         v-for="(tag, i) in tagsList"
         :key="i"
         @click="tagClickHandler(tag)"
       >{{ tag.name }}</span>
     </div>
-    <div class="wci-finder-grid vui-flex-auto" />
+    <div class="oi-finder-grid vui-flex-auto" />
   </VuiFlex>
 </template>
 <style lang="scss">
-.wci-pkg-title {
+.oi-pkg-title {
     text-align: center;
     font-weight: bold;
     font-size: 38px;
     padding: 15px 0 5px;
 }
 
-.wci-pkg-link {
+.oi-pkg-link {
     text-align: center;
     padding-bottom: 5px;
 }
 
-.wci-pkg-link a:link,
-.wci-pkg-link a:visited {
+.oi-pkg-link a:link,
+.oi-pkg-link a:visited {
     font-size: 16px;
     color: #666;
 }
 
-.wci-pkg-link a:hover {
+.oi-pkg-link a:hover {
     color: #0077cf;
 }
 
-.wci-pkg-stats {
+.oi-pkg-stats {
     text-align: center;
     font-size: 18px;
 }
 
-.wci-pkg-stats a:link,
-.wci-pkg-stats a:visited {
+.oi-pkg-stats a:link,
+.oi-pkg-stats a:visited {
     font-size: 16px;
 }
 
-.wci-pkg-stats a:hover {
+.oi-pkg-stats a:hover {
     color: #0077cf;
 }
 
-.wci-filter {
+.oi-filter {
     text-align: center;
     margin: 0 auto;
     width: 60%;
@@ -406,11 +406,11 @@ watch(keywords, () => {
     margin-top: 10px;
 }
 
-.wci-searcher {
+.oi-searcher {
     width: 100%;
     position: relative;
 
-    .wci-icon-searcher {
+    .oi-icon-searcher {
         position: absolute;
         width: 30px;
         height: 30px;
@@ -422,7 +422,7 @@ watch(keywords, () => {
     }
 }
 
-.wci-keywords {
+.oi-keywords {
     border: 3px solid transparent;
     border-radius: 15px;
     padding: 10px 50px 10px 15px;
@@ -436,11 +436,11 @@ watch(keywords, () => {
     width: calc(100% - 70px);
 }
 
-.wci-keywords:focus {
+.oi-keywords:focus {
     border: 3px solid lightblue;
 }
 
-.wci-tags {
+.oi-tags {
     text-align: center;
     font-size: 16px;
     display: flex;
@@ -448,43 +448,43 @@ watch(keywords, () => {
     align-items: center;
 }
 
-.wci-tags span {
+.oi-tags span {
     margin-left: 5px;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.wci-tags span:hover {
+.oi-tags span:hover {
     color: deepskyblue;
 }
 
-.wci-finder-grid {
+.oi-finder-grid {
     border: thin solid #ccc;
     border-radius: 5px;
     margin: 10px;
 }
 
-.wci-finder-grid .wci-not-found {
+.oi-finder-grid .oi-not-found {
     font-size: 20px;
 }
 
-.wci-finder-grid .tg-turbogrid .tg-cell.wci-grid-icon {
+.oi-finder-grid .tg-turbogrid .tg-cell.oi-grid-icon {
     padding: 4px;
     border-left: thin solid #e5e5e5;
     border-right: thin solid #e5e5e5;
 }
 
-.wci-finder-grid .tg-turbogrid .tg-cell.wci-textarea {
+.oi-finder-grid .tg-turbogrid .tg-cell.oi-textarea {
     padding: 3px 5px;
 }
 
-.wci-finder-grid .tg-turbogrid .tg-cell.wci-textarea textarea {
+.oi-finder-grid .tg-turbogrid .tg-cell.oi-textarea textarea {
     width: 100%;
     height: 100%;
     resize: none;
 }
 
-.wci-icon-action {
+.oi-icon-action {
     font-family: Menlo, Consolas, monospace;
     font-weight: bold;
     cursor: pointer;
@@ -495,12 +495,12 @@ watch(keywords, () => {
     }
 }
 
-.wci-icon-action:hover {
+.oi-icon-action:hover {
     opacity: 1;
     text-decoration: underline;
 }
 
-.wci-download-icons {
+.oi-download-icons {
     align-items: center;
     height: 100%;
 }

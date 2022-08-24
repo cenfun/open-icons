@@ -1,7 +1,7 @@
 {
-    "name": "wc-icons",
+    "name": "open-icons",
     "version": "1.0.0",
-    "description": "Web Components Icons",
+    "description": "Open source icons collection",
     "main": "",
     "private": true,
     "scripts": {
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/cenfun/wc-icons.git"
+        "url": "git+https://github.com/cenfun/open-icons.git"
     },
     "workspaces": [
         "packages/*"
@@ -76,6 +76,7 @@
         "eslint-plugin-vue": "^9.3.0",
         "lz-utils": "^1.0.5",
         "markdown-grid": "^1.0.1",
+        "open-store": "^1.0.0",
         "postcss": "^8.4.16",
         "postcss-html": "^1.5.0",
         "postcss-scss": "^4.0.4",

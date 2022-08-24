@@ -1,3 +1,3 @@
-# wc-icons-app
+# open-icons-app
 
 ## Getting Started

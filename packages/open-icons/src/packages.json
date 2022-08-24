@@ -1,0 +1,359 @@
+[
+    {
+        "name": "akar",
+        "namespace": "open-icons-akar",
+        "size": 77540,
+        "sizeGzip": 58647,
+        "sizeJson": 198614
+    },
+    {
+        "name": "ant",
+        "namespace": "open-icons-ant",
+        "size": 200161,
+        "sizeGzip": 151353,
+        "sizeJson": 467697
+    },
+    {
+        "name": "awesome",
+        "namespace": "open-icons-awesome",
+        "size": 477085,
+        "sizeGzip": 360432,
+        "sizeJson": 1087660
+    },
+    {
+        "name": "blueprint",
+        "namespace": "open-icons-blueprint",
+        "size": 129003,
+        "sizeGzip": 97512,
+        "sizeJson": 327593
+    },
+    {
+        "name": "bootstrap",
+        "namespace": "open-icons-bootstrap",
+        "size": 400783,
+        "sizeGzip": 302736,
+        "sizeJson": 1120926
+    },
+    {
+        "name": "box",
+        "namespace": "open-icons-box",
+        "size": 317949,
+        "sizeGzip": 240416,
+        "sizeJson": 820717
+    },
+    {
+        "name": "carbon",
+        "namespace": "open-icons-carbon",
+        "size": 337754,
+        "sizeGzip": 255247,
+        "sizeJson": 963004
+    },
+    {
+        "name": "charm",
+        "namespace": "open-icons-charm",
+        "size": 22167,
+        "sizeGzip": 16765,
+        "sizeJson": 89381
+    },
+    {
+        "name": "coreui",
+        "namespace": "open-icons-coreui",
+        "size": 141166,
+        "sizeGzip": 106723,
+        "sizeJson": 339873
+    },
+    {
+        "name": "crypto",
+        "namespace": "open-icons-crypto",
+        "size": 361214,
+        "sizeGzip": 273204,
+        "sizeJson": 719983
+    },
+    {
+        "name": "cssgg",
+        "namespace": "open-icons-cssgg",
+        "size": 86451,
+        "sizeGzip": 65389,
+        "sizeJson": 298925
+    },
+    {
+        "name": "dev",
+        "namespace": "open-icons-dev",
+        "size": 220853,
+        "sizeGzip": 167015,
+        "sizeJson": 406160
+    },
+    {
+        "name": "element",
+        "namespace": "open-icons-element",
+        "size": 68121,
+        "sizeGzip": 51501,
+        "sizeJson": 166016
+    },
+    {
+        "name": "entypo",
+        "namespace": "open-icons-entypo",
+        "size": 117106,
+        "sizeGzip": 88513,
+        "sizeJson": 256868
+    },
+    {
+        "name": "eva",
+        "namespace": "open-icons-eva",
+        "size": 73073,
+        "sizeGzip": 55254,
+        "sizeJson": 224286
+    },
+    {
+        "name": "feather",
+        "namespace": "open-icons-feather",
+        "size": 25733,
+        "sizeGzip": 19461,
+        "sizeJson": 100182
+    },
+    {
+        "name": "flag",
+        "namespace": "open-icons-flag",
+        "size": 99452,
+        "sizeGzip": 75167,
+        "sizeJson": 235331
+    },
+    {
+        "name": "flat",
+        "namespace": "open-icons-flat",
+        "size": 86712,
+        "sizeGzip": 65588,
+        "sizeJson": 212960
+    },
+    {
+        "name": "fluent",
+        "namespace": "open-icons-fluent",
+        "size": 766022,
+        "sizeGzip": 577630,
+        "sizeJson": 2480510
+    },
+    {
+        "name": "foundation",
+        "namespace": "open-icons-foundation",
+        "size": 147162,
+        "sizeGzip": 111236,
+        "sizeJson": 293820
+    },
+    {
+        "name": "grommet",
+        "namespace": "open-icons-grommet",
+        "size": 115161,
+        "sizeGzip": 87024,
+        "sizeJson": 277023
+    },
+    {
+        "name": "hero",
+        "namespace": "open-icons-hero",
+        "size": 56856,
+        "sizeGzip": 43001,
+        "sizeJson": 191679
+    },
+    {
+        "name": "icomoon",
+        "namespace": "open-icons-icomoon",
+        "size": 113473,
+        "sizeGzip": 85779,
+        "sizeJson": 254751
+    },
+    {
+        "name": "iconoir",
+        "namespace": "open-icons-iconoir",
+        "size": 144645,
+        "sizeGzip": 109265,
+        "sizeJson": 574931
+    },
+    {
+        "name": "ikonate",
+        "namespace": "open-icons-ikonate",
+        "size": 26769,
+        "sizeGzip": 20242,
+        "sizeJson": 97483
+    },
+    {
+        "name": "ionic",
+        "namespace": "open-icons-ionic",
+        "size": 248611,
+        "sizeGzip": 188061,
+        "sizeJson": 635259
+    },
+    {
+        "name": "jam",
+        "namespace": "open-icons-jam",
+        "size": 192037,
+        "sizeGzip": 145174,
+        "sizeJson": 534220
+    },
+    {
+        "name": "line",
+        "namespace": "open-icons-line",
+        "size": 519644,
+        "sizeGzip": 392520,
+        "sizeJson": 1119394
+    },
+    {
+        "name": "lucide",
+        "namespace": "open-icons-lucide",
+        "size": 71782,
+        "sizeGzip": 54227,
+        "sizeJson": 309021
+    },
+    {
+        "name": "majest",
+        "namespace": "open-icons-majest",
+        "size": 110338,
+        "sizeGzip": 83405,
+        "sizeJson": 375516
+    },
+    {
+        "name": "maki",
+        "namespace": "open-icons-maki",
+        "size": 52408,
+        "sizeGzip": 39630,
+        "sizeJson": 112785
+    },
+    {
+        "name": "material",
+        "namespace": "open-icons-material",
+        "size": 525412,
+        "sizeGzip": 396712,
+        "sizeJson": 1616997
+    },
+    {
+        "name": "mdi",
+        "namespace": "open-icons-mdi",
+        "size": 1101653,
+        "sizeGzip": 830138,
+        "sizeJson": 3238477
+    },
+    {
+        "name": "mono",
+        "namespace": "open-icons-mono",
+        "size": 31340,
+        "sizeGzip": 23697,
+        "sizeJson": 83699
+    },
+    {
+        "name": "oct",
+        "namespace": "open-icons-oct",
+        "size": 129349,
+        "sizeGzip": 97816,
+        "sizeJson": 342521
+    },
+    {
+        "name": "park",
+        "namespace": "open-icons-park",
+        "size": 349956,
+        "sizeGzip": 264495,
+        "sizeJson": 1467426
+    },
+    {
+        "name": "phosphor",
+        "namespace": "open-icons-phosphor",
+        "size": 913860,
+        "sizeGzip": 689377,
+        "sizeJson": 2902519
+    },
+    {
+        "name": "pixelart",
+        "namespace": "open-icons-pixelart",
+        "size": 35580,
+        "sizeGzip": 26922,
+        "sizeJson": 140087
+    },
+    {
+        "name": "prime",
+        "namespace": "open-icons-prime",
+        "size": 47231,
+        "sizeGzip": 35705,
+        "sizeJson": 130842
+    },
+    {
+        "name": "radix",
+        "namespace": "open-icons-radix",
+        "size": 77139,
+        "sizeGzip": 58319,
+        "sizeJson": 209472
+    },
+    {
+        "name": "remix",
+        "namespace": "open-icons-remix",
+        "size": 319659,
+        "sizeGzip": 241709,
+        "sizeJson": 1026731
+    },
+    {
+        "name": "simple",
+        "namespace": "open-icons-simple",
+        "size": 1961202,
+        "sizeGzip": 1482611,
+        "sizeJson": 3942309
+    },
+    {
+        "name": "tabler",
+        "namespace": "open-icons-tabler",
+        "size": 205210,
+        "sizeGzip": 155045,
+        "sizeJson": 997071
+    },
+    {
+        "name": "teeny",
+        "namespace": "open-icons-teeny",
+        "size": 196495,
+        "sizeGzip": 148611,
+        "sizeJson": 582085
+    },
+    {
+        "name": "tiny",
+        "namespace": "open-icons-tiny",
+        "size": 79584,
+        "sizeGzip": 60172,
+        "sizeJson": 169076
+    },
+    {
+        "name": "typ",
+        "namespace": "open-icons-typ",
+        "size": 105321,
+        "sizeGzip": 79641,
+        "sizeJson": 226112
+    },
+    {
+        "name": "uiw",
+        "namespace": "open-icons-uiw",
+        "size": 82769,
+        "sizeGzip": 62565,
+        "sizeJson": 166841
+    },
+    {
+        "name": "unicons",
+        "namespace": "open-icons-unicons",
+        "size": 266493,
+        "sizeGzip": 201488,
+        "sizeJson": 804441
+    },
+    {
+        "name": "vscode",
+        "namespace": "open-icons-vscode",
+        "size": 113778,
+        "sizeGzip": 86041,
+        "sizeJson": 252161
+    },
+    {
+        "name": "weather",
+        "namespace": "open-icons-weather",
+        "size": 139817,
+        "sizeGzip": 105724,
+        "sizeJson": 311760
+    },
+    {
+        "name": "zond",
+        "namespace": "open-icons-zond",
+        "size": 28064,
+        "sizeGzip": 21220,
+        "sizeJson": 86120
+    }
+]

@@ -1,0 +1,11 @@
+{
+    "name": "open-icons",
+    "version": "1.0.0",
+    "description": "Open source icons collection",
+    "main": "dist/open-icons.js",
+    "files": [
+        "dist"
+    ],
+    "dependencies": {},
+    "devDependencies": {}
+}

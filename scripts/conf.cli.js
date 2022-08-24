@@ -143,11 +143,11 @@ module.exports = {
 
     build: {
 
-        vendors: ['app', 'wc-icons'],
+        vendors: ['app', 'open-icons'],
 
         define: (env) => {
 
-            let dest = '../../../node_modules/wc-icons/dist/';
+            let dest = '../../../node_modules/open-icons/dist/';
             if (env.production) {
                 dest = 'dist/';
             }
@@ -166,7 +166,7 @@ module.exports = {
 
         before: (item, Util) => {
 
-            if (item.name === 'wc-icons') {
+            if (item.name === 'open-icons') {
                 beforeBuildWebIcons(item, Util);
             }
 
@@ -174,7 +174,7 @@ module.exports = {
         },
 
         afterAll: (o, Util) => {
-            const item = o.jobList.find((it) => it.name === 'wc-icons');
+            const item = o.jobList.find((it) => it.name === 'open-icons');
             if (!item) {
                 return 0;
             }
@@ -264,7 +264,7 @@ module.exports = {
                 });
             }, dest);
 
-            fs.copyFileSync(dest, path.resolve(__dirname, '../packages/wc-icons/README.md'));
+            fs.copyFileSync(dest, path.resolve(__dirname, '../packages/open-icons/README.md'));
 
             return 0;
         }
@@ -276,7 +276,7 @@ module.exports = {
         after: (item, Util) => {
             console.log('copy icons dist ...');
 
-            const from = path.resolve(__dirname, '../packages/wc-icons/dist');
+            const from = path.resolve(__dirname, '../packages/open-icons/dist');
             const list = fs.readdirSync(from);
 
             const dest = path.resolve(item.distPath);
