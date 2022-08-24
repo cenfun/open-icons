@@ -9,16 +9,10 @@ import { BF, throttle } from '../util/util.js';
 
 const { VuiFlex } = VineUI;
 
-const props = defineProps({
-    packageName: {
-        type: String,
-        default: ''
-    }
-});
-
 const state = inject('state');
 const settings = inject('settings');
 const myIcons = inject('myIcons');
+const requestUpdate = ref(false);
 const packageInfo = ref(null);
 const tagsList = ref([]);
 
@@ -131,10 +125,17 @@ const getIcon = function(r) {
 const addIcon = function(icon, $target) {
     myIcons.icons.push(icon.name);
     $target.classList.remove('oi-icon-add');
-    $target.classList.add('oi-icon-ok');
+    $target.classList.add('oi-icon-ok', 'oi-icon-disabled');
+};
+
+const getCurrentGrid = () => {
+    if (state.tabIndex === 0) {
+        return state.finderGrid;
+    }
 };
 
 const createGrid = () => {
+
     const grid = new Grid('.oi-finder-grid');
     grid.bind('onClick', function(e, d) {
         const rowItem = d.rowItem;
@@ -156,13 +157,14 @@ const createGrid = () => {
             saveSVG(rowItem.svg, rowItem.name);
         }
     });
-    state.iconsGrid = grid;
+
+    state.finderGrid = grid;
+
     return grid;
 };
 
 const renderGrid = () => {
-    let grid = state.iconsGrid;
-
+    let grid = getCurrentGrid();
     if (!grid) {
         grid = createGrid();
     }
@@ -190,13 +192,13 @@ const renderGrid = () => {
         },
         my: function(value, rowItem, columnItem, cellNode) {
             const v = rowItem.name;
-            let iconName = 'add';
+            let iconName = 'oi-icon-add';
             let tooltip = `Add '${v}' to my icons`;
             if (myIcons.icons.includes(v)) {
-                iconName = 'ok';
+                iconName = 'oi-icon-ok oi-icon-disabled';
                 tooltip = `'${v}' already in my icons`;
             }
-            const icon = `<div class="oi-action-my oi-icon oi-icon-${iconName}" tooltip="${tooltip}"></div>`;
+            const icon = `<div class="oi-action-my oi-icon ${iconName}" tooltip="${tooltip}"></div>`;
             return icon;
         },
         textarea: function(v, r, c) {
@@ -236,7 +238,7 @@ const renderGrid = () => {
             width: 150
         }, {
             id: 'my',
-            name: '<div class="oi-icon oi-icon-my"></div>',
+            name: '<div class="oi-icon oi-icon-my oi-icon-normal"></div>',
             width: 30,
             resizable: false,
             formatter: 'my'
@@ -283,13 +285,6 @@ const renderGrid = () => {
 
     grid.render();
 
-};
-
-const updateGrid = () => {
-    const grid = state.iconsGrid;
-    if (grid) {
-        grid.update();
-    }
 };
 
 const renderTags = (pkg) => {
@@ -347,19 +342,38 @@ const render = () => {
 
 const renderGridAsync = throttle(renderGrid);
 
-watch(() => props.packageName, (v) => {
+watch(() => state.packageName, (v) => {
     render();
 });
 
 watch(settings, () => {
-    const grid = state.iconsGrid;
+    requestUpdate.value = true;
+    const grid = getCurrentGrid();
     if (grid) {
         renderGridAsync();
     }
 });
 
 watch(keywords, () => {
-    updateGrid();
+    const grid = getCurrentGrid();
+    if (grid) {
+        grid.update();
+    }
+});
+
+watch(myIcons, (v) => {
+    requestUpdate.value = true;
+});
+
+watch(() => state.tabIndex, (v) => {
+    if (v === 1) {
+        requestUpdate.value = false;
+        return;
+    }
+    const grid = getCurrentGrid();
+    if (grid && requestUpdate.value) {
+        renderGrid();
+    }
 });
 
 </script>
@@ -394,7 +408,7 @@ watch(keywords, () => {
           class="oi-keywords flex-auto"
           onfocus="this.select()"
         >
-        <div class="oi-icon oi-icon-searcher" />
+        <div class="oi-icon oi-icon-searcher oi-icon-disabled" />
       </div>
     </div>
     <div class="oi-tags">
@@ -463,8 +477,6 @@ watch(keywords, () => {
         background-size: 30px 30px;
         right: 15px;
         top: 13px;
-        opacity: 0.3;
-        pointer-events: none;
     }
 }
 

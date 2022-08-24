@@ -10,12 +10,13 @@ import {
     loadPackages, getIconElement, version, timestamp
 } from 'open-icons';
 
-import WiLoading from './components/loading.vue';
-import WiFinder from './components/finder.vue';
-import WiSettings from './components/settings.vue';
 import { BF } from './util/util.js';
-
 import { initTooltip } from './util/tooltip.js';
+
+import OiLoading from './components/loading.vue';
+import OiSettings from './components/settings.vue';
+import OiFinder from './components/finder.vue';
+import OiMy from './components/my.vue';
 
 const {
     VuiLayout, VuiFlex, VuiTab
@@ -37,7 +38,8 @@ const state = shallowReactive({
     packages: null,
     packageName: null,
     total: null,
-    icons: null
+    icons: null,
+    tabIndex: 0
 });
 
 provide('state', state);
@@ -60,8 +62,6 @@ const defaultSettings = {
 const settings = shallowReactive(defaultSettings);
 
 provide('settings', settings);
-
-const tabActive = ref(0);
 
 const renderPackages = function(packages) {
 
@@ -424,10 +424,10 @@ onMounted(() => {
       </div>
 
       <div class="oi-layout-main">
-        <VuiTab v-model="tabActive">
+        <VuiTab v-model="state.tabIndex">
           <template #right>
             <div class="vui-flex-auto" />
-            <WiSettings />
+            <OiSettings />
             <div class="oi-header-right">
               <a
                 class="oi-icon oi-icon-github"
@@ -449,19 +449,14 @@ onMounted(() => {
           </template>
 
           <template #panes>
-            <WiFinder :package-name="state.packageName" />
-            <VuiFlex
-              center
-              height="100%"
-            >
-              To do
-            </VuiFlex>
+            <OiFinder />
+            <OiMy />
           </template>
         </VuiTab>
       </div>
     </VuiLayout>
 
-    <WiLoading />
+    <OiLoading />
   </div>
 </template>
 <style lang="scss">
@@ -501,6 +496,16 @@ a:hover {
 }
 
 .oi-icon:hover {
+    opacity: 1;
+}
+
+.oi-icon-disabled,
+.oi-icon-disabled:hover {
+    opacity: 0.3;
+}
+
+.oi-icon-normal,
+.oi-icon-normal:hover {
     opacity: 1;
 }
 
