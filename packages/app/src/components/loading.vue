@@ -1,30 +1,37 @@
 <template>
   <div
-    v-if="props.visible"
+    v-if="loading.visible"
     class="oi-loading"
   >
     <VuiFlex spacing="10px">
-      <VuiLoading fast />
-      <div class="oi-loading-label">
-        {{ props.text }}
+      <VuiLoading
+        fast
+        size="l"
+      />
+      <div>
+        <div class="oi-loading-label">
+          {{ loading.text }}
+        </div>
+        <VuiProgress
+          :percentage="loading.percentage"
+          height="10px"
+          width="200px"
+        />
+        <div class="oi-loading-label">
+          {{ loading.detail }}
+        </div>
       </div>
     </VuiFlex>
   </div>
 </template>
 <script setup>
 import VineUI from 'vine-ui';
-const { VuiLoading, VuiFlex } = VineUI;
+import { inject } from 'vue';
+const {
+    VuiLoading, VuiFlex, VuiProgress
+} = VineUI;
 
-const props = defineProps({
-    visible: {
-        type: Boolean,
-        default: true
-    },
-    text: {
-        type: String,
-        default: ''
-    }
-});
+const loading = inject('loading');
 
 </script>
 <style>
@@ -39,7 +46,8 @@ const props = defineProps({
 
 .oi-loading-label {
     font-size: 14px;
-    width: 100px;
     white-space: nowrap;
+    text-align: center;
+    padding: 3px;
 }
 </style>

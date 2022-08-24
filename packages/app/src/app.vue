@@ -22,6 +22,15 @@ const {
 
 const layout = ref('200px,auto');
 
+const loading = shallowReactive({
+    text: 'Loading Icons ...',
+    detail: '(checking local cache)',
+    percentage: 0,
+    visible: true
+});
+
+provide('loading', loading);
+
 const state = shallowReactive({
     ost: null,
     packages: null,
@@ -42,10 +51,6 @@ const settings = shallowReactive({
 provide('settings', settings);
 
 const tabActive = ref(0);
-
-const loadingText = ref('Loading Icons ...');
-const loadingVisible = ref(true);
-
 
 const renderPackages = function(packages) {
 
@@ -324,16 +329,19 @@ const loadStart = async () => {
     if (cache && cache.version === version) {
 
         console.log('Found cache icons', cache);
-        loadingVisible.value = false;
+        loading.visible = false;
 
         initPackages(cache.packages);
 
         return;
     }
+
     const packages = await loadPackages(path, (item, info) => {
         //console.log(info);
-        const per = Math.round(info.loadedSize / info.totalSize * 100);
-        loadingText.value = `Loading ${per}% (${info.loaded}/${info.total}) - ${item.name}`;
+        const percentage = Math.round(info.loadedSize / info.totalSize * 100);
+        loading.percentage = percentage;
+        loading.text = `Loading ${info.loaded} / ${info.total} - ${item.name}`;
+        loading.detail = `${BF(info.loadedSize)} / ${BF(info.totalSize)} - ${percentage}%`;
     });
 
     const metadata = {
@@ -346,7 +354,7 @@ const loadStart = async () => {
 
     console.log('Loaded icons', metadata);
 
-    loadingVisible.value = false;
+    loading.visible = false;
 
     initPackages(metadata.packages);
 
@@ -437,10 +445,7 @@ onMounted(() => {
       </div>
     </VuiLayout>
 
-    <WiLoading
-      :visible="loadingVisible"
-      :text="loadingText"
-    />
+    <WiLoading />
   </div>
 </template>
 <style lang="scss">
