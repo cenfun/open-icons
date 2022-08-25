@@ -149,9 +149,9 @@
     {
         "name": "hero",
         "namespace": "open-icons-hero",
-        "size": 56848,
-        "sizeGzip": 42982,
-        "sizeJson": 191657
+        "size": 109636,
+        "sizeGzip": 82923,
+        "sizeJson": 315381
     },
     {
         "name": "icomoon",
@@ -296,9 +296,9 @@
     {
         "name": "tabler",
         "namespace": "open-icons-tabler",
-        "size": 205002,
-        "sizeGzip": 154891,
-        "sizeJson": 997049
+        "size": 206538,
+        "sizeGzip": 156082,
+        "sizeJson": 1005206
     },
     {
         "name": "teeny",
@@ -310,9 +310,9 @@
     {
         "name": "tiny",
         "namespace": "open-icons-tiny",
-        "size": 79616,
-        "sizeGzip": 60185,
-        "sizeJson": 169054
+        "size": 79672,
+        "sizeGzip": 60231,
+        "sizeJson": 169284
     },
     {
         "name": "typ",
@@ -338,9 +338,9 @@
     {
         "name": "vscode",
         "namespace": "open-icons-vscode",
-        "size": 113718,
-        "sizeGzip": 85999,
-        "sizeJson": 252145
+        "size": 113730,
+        "sizeGzip": 85969,
+        "sizeJson": 252270
     },
     {
         "name": "weather",

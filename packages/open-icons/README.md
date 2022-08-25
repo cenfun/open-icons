@@ -38,7 +38,7 @@ npm install open-icons
 | 19|fluent|4,075|747.8KB|564.1KB|[@fluentui/svg-icons@1.1.179](https://github.com/microsoft/fluentui-system-icons)|MIT    |
 | 20|foundation|  283|143.8KB|108.7KB|[foundation-icons@1.0.1](https://github.com/zurb/foundation-icon-fonts)|ISC    |
 | 21|grommet|  615|112.5KB|85.0KB|[grommet-icons@4.7.0](https://github.com/FortAwesome/Font-Awesome)|Apache-2.0|
-| 22|hero|  460|55.5KB|42.0KB|[heroicons@1.0.6](https://github.com/tailwindlabs/heroicons)|MIT    |
+| 22|hero|  528|107.1KB|81.0KB|[heroicons@2.0.4](https://github.com/tailwindlabs/heroicons)|MIT    |
 | 23|icomoon|  491|111.1KB|83.9KB|[icomoon-free-npm@0.0.0](https://github.com/Keyamoon/IcoMoon-Free)|CC BY 4.0 or GPL|
 | 24|iconoir|1,151|141.7KB|107.1KB|[iconoir@5.1.4](https://github.com/lucaburgio/iconoir)|MIT    |
 | 25|ikonate|  283|26.3KB|19.9KB|[ikonate@1.1.1](https://github.com/mikolajdobrucki/ikonate)|MIT    |
@@ -59,16 +59,16 @@ npm install open-icons
 | 40|radix|  318|75.3KB|56.9KB|[@radix-ui/react-icons@1.1.1](https://github.com/radix-ui/icons)|MIT    |
 | 41|remix|2,271|312.2KB|236.1KB|[remixicon@2.5.0](https://github.com/Remix-Design/RemixIcon)|Apache 2.0|
 | 42|simple|2,317|1.9MB|1.4MB|[simple-icons@7.8.0](https://github.com/simple-icons/simple-icons)|CC0-1.0|
-| 43|tabler|2,320|200.2KB|151.3KB|[@tabler/icons@1.86.0](https://github.com/tabler/tabler-icons)|MIT    |
+| 43|tabler|2,338|201.7KB|152.4KB|[@tabler/icons@1.87.0](https://github.com/tabler/tabler-icons)|MIT    |
 | 44|teeny|1,200|191.8KB|145.0KB|[teenyicons@0.4.1](https://github.com/teenyicons/teenyicons)|MIT    |
-| 45|tiny|  275|77.8KB|58.8KB|[super-tiny-icons@0.4.0](https://github.com/edent/SuperTinyIcons)|MIT    |
+| 45|tiny|  276|77.8KB|58.8KB|[super-tiny-icons@0.4.0](https://github.com/edent/SuperTinyIcons)|MIT    |
 | 46|typ |  336|102.9KB|77.8KB|[typicons.font@2.1.2](https://github.com/stephenhutchings/typicons.font)|(CC-BY-SA and SIL)|
 | 47|uiw |  214|80.8KB|61.1KB|[@uiw/icons@2.6.7](https://github.com/uiwjs/icons)|MIT    |
 | 48|unicons|1,395|260.2KB|196.7KB|[@iconscout/unicons@4.0.1](https://github.com/Iconscout/unicons)|Apache-2.0|
-| 49|vscode|  420|111.1KB|84.0KB|[@vscode/codicons@0.0.32](https://github.com/microsoft/vscode-codicons)|CC-BY-4.0|
+| 49|vscode|  421|111.1KB|84.0KB|[@vscode/codicons@0.0.32](https://github.com/microsoft/vscode-codicons)|CC-BY-4.0|
 | 50|weather|  219|136.6KB|103.3KB|[weather-icons-npm@10.0.0](https://github.com/erikflowers/weather-icons)|MIT    |
 | 51|zond|  297|27.4KB|20.7KB|[zondicons@1.2.0](https://www.zondicons.com/)|CC-BY-4.0|
-|   |Total|57,581|11.9MB|9.0MB|      |       |
+|   |Total|57,669|12.0MB|9.1MB|      |       |
 
 
 ## Features
