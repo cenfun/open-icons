@@ -13,6 +13,7 @@ import {
 import { BF } from './util/util.js';
 import { initTooltip } from './util/tooltip.js';
 
+import OiIcon from './components/icon.vue';
 import OiLoading from './components/loading.vue';
 import OiSettings from './components/settings.vue';
 import OiFinder from './components/finder.vue';
@@ -45,7 +46,8 @@ const state = shallowReactive({
 provide('state', state);
 
 const myIcons = reactive({
-    icons: []
+    ns: [],
+    icons: {}
 });
 
 provide('myIcons', myIcons);
@@ -430,20 +432,28 @@ onMounted(() => {
             <OiSettings />
             <div class="oi-header-right">
               <a
-                class="oi-icon oi-icon-github"
                 href="https://github.com/cenfun/open-icons"
                 target="_blank"
-              />
+              ><OiIcon
+                name="github"
+                hover
+              /></a>
             </div>
           </template>
 
           <template #tabs>
             <div class="vui-flex-row">
-              <div class="oi-icon oi-icon-finder" />
+              <OiIcon
+                name="finder"
+                size="16px"
+              />
               <b>Icon Finder</b>
             </div>
             <div class="vui-flex-row">
-              <div class="oi-icon oi-icon-my" />
+              <OiIcon
+                name="my"
+                size="16px"
+              />
               <b>My Icons</b>
             </div>
           </template>
@@ -480,57 +490,6 @@ a:visited {
 a:hover {
     color: #3fa8f8;
     text-decoration: underline;
-}
-
-/* icon */
-
-.oi-icon {
-    display: block;
-    overflow: hidden;
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    opacity: 0.6;
-}
-
-.oi-icon:hover {
-    opacity: 1;
-}
-
-.oi-icon-disabled,
-.oi-icon-disabled:hover {
-    opacity: 0.3;
-}
-
-.oi-icon-normal,
-.oi-icon-normal:hover {
-    opacity: 1;
-}
-
-.oi-icon-github {
-    background-image: url("./images/github.svg");
-}
-
-.oi-icon-finder {
-    background-image: url("./images/search.svg");
-}
-
-.oi-icon-my {
-    background-image: url("./images/star.svg");
-}
-
-.oi-icon-searcher {
-    background-image: url("./images/searcher.svg");
-}
-
-.oi-icon-add {
-    background-image: url("./images/plus.svg");
-}
-
-.oi-icon-ok {
-    background-image: url("./images/ok.svg");
 }
 
 /* app */
@@ -589,9 +548,6 @@ a:hover {
 }
 
 .vui-tab-item .oi-icon {
-    width: 16px;
-    height: 16px;
-    background-size: 16px 16px;
     margin-right: 5px;
 }
 
@@ -643,4 +599,51 @@ a:hover {
     background-color: #999;
 }
 
+.oi-grid {
+    border: thin solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+
+    .oi-not-found {
+        font-size: 20px;
+    }
+
+    .oi-action-downloads {
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        .oi-icon-download {
+            font-family: Menlo, Consolas, monospace;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0.6;
+
+            &:first-child {
+                margin-right: 10px;
+            }
+        }
+
+        .oi-icon-download:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    }
+
+    .tg-cell.oi-grid-icon {
+        padding: 4px;
+        border-left: thin solid #e5e5e5;
+        border-right: thin solid #e5e5e5;
+    }
+
+    .tg-cell.oi-textarea {
+        padding: 3px 5px;
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
+    }
+}
 </style>
