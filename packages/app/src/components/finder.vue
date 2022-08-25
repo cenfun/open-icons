@@ -54,8 +54,12 @@ const hasIcon = function(icon) {
     return myIcons.ns.includes(icon.namespace);
 };
 
-const addIcon = function(icon, $target) {
+const addIcon = function(icon) {
+    if (hasIcon(icon)) {
+        return false;
+    }
     myIcons.ns.push(icon.namespace);
+    return true;
 };
 
 const getCurrentGrid = () => {
@@ -78,8 +82,11 @@ const createGrid = () => {
             return;
         }
         if ($target.classList.contains('oi-icon-add')) {
-            addIcon(rowItem, $target);
-            this.updateCell(d.row, d.column);
+            const added = addIcon(rowItem);
+            if (added) {
+                //using item, index is not right, icons list is filtered
+                this.updateCell(d.rowItem, d.columnItem);
+            }
             return;
         }
         if ($target.classList.contains('oi-icon-download')) {
@@ -134,9 +141,6 @@ const renderGrid = () => {
             return getIcon(settings, r);
         },
         my: function(value, rowItem, columnItem, cellNode) {
-
-            console.log(rowItem, columnItem);
-
             const v = rowItem.name;
             let $icon;
             if (hasIcon(rowItem)) {
