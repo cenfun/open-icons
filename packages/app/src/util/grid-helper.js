@@ -43,6 +43,12 @@ export const getIcon = function(settings, r) {
 
 
 export const formatter = {
+    null: function(value) {
+        if (value === null || typeof value === 'undefined') {
+            return '';
+        }
+        return value;
+    },
     download: function(v) {
         return `
             <div class="oi-action-downloads vui-flex-row">

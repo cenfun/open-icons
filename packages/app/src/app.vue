@@ -68,7 +68,7 @@ provide('settings', settings);
 const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
-        pkg.iconsNum = pkg.icons.length.toLocaleString();
+        pkg.iconsNum = pkg.icons.length;
         pkg.sourceFrom = `${pkg.source.name}@${pkg.source.version}`;
         pkg.sourceLicense = pkg.source.license;
         return pkg;
@@ -85,6 +85,9 @@ const renderPackages = function(packages) {
             id: 'iconsNum',
             name: 'Icons',
             type: 'number',
+            formatter: (v) => {
+                return v.toLocaleString();
+            },
             width: 60
         }, {
             id: 'size',
@@ -285,7 +288,7 @@ const initPackages = function(packages) {
         namespace: 'open-icons',
         tags: getTags(allTags),
         icons: allIcons,
-        iconsNum: allIcons.length.toLocaleString(),
+        iconsNum: allIcons.length,
         size: totalSize,
         sizeGzip: totalGzip,
         selectable: true
@@ -636,6 +639,14 @@ a:hover {
         padding: 4px;
         border-left: thin solid #e5e5e5;
         border-right: thin solid #e5e5e5;
+    }
+
+    .tg-cell.oi-grid-view-icon {
+        padding: 4px;
+    }
+
+    .tg-row.oi-grid-view-row {
+        border-bottom: none;
     }
 
     .tg-cell.oi-textarea {

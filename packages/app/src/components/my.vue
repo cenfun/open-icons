@@ -71,6 +71,13 @@ const createGrid = () => {
         }
     });
 
+    grid.setFormatter({
+        ... formatter,
+        icon: function(v, r) {
+            return getIcon(settings, r);
+        }
+    });
+
     state.myGrid = grid;
 
     return grid;
@@ -91,19 +98,13 @@ const renderGrid = () => {
         rowNumberVisible: true,
         selectVisible: true,
         selectAllVisible: false,
+        rowDragVisible: true,
         scrollbarRound: true,
         columnTypes: {
             name: ''
         },
         bindWindowResize: true,
         bindContainerResize: true
-    });
-
-    grid.setFormatter({
-        ... formatter,
-        icon: function(v, r) {
-            return getIcon(settings, r);
-        }
     });
 
     const rows = [];

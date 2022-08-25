@@ -22,6 +22,7 @@ const myIcons = inject('myIcons');
 const requestUpdate = ref(false);
 const packageInfo = ref(null);
 const tagsList = ref([]);
+const gridViewType = ref('list');
 
 const keywords = ref('');
 const rowFilter = function(icon) {
@@ -99,34 +100,6 @@ const createGrid = () => {
         }
     });
 
-    state.finderGrid = grid;
-
-    return grid;
-};
-
-const renderGrid = () => {
-    let grid = getCurrentGrid();
-    if (!grid) {
-        grid = createGrid();
-    }
-
-    const cellSize = parseInt(settings.size) + 10;
-
-    grid.setOption({
-        rowHeight: cellSize,
-        frozenColumn: 1,
-        rowNotFound: '<div class="oi-not-found">Not found icons</div>',
-        rowFilter: rowFilter,
-        rowNumberVisible: true,
-        rowNumberWidth: 52,
-        scrollbarRound: true,
-        columnTypes: {
-            name: ''
-        },
-        bindWindowResize: true,
-        bindContainerResize: true
-    });
-
     grid.setFormatter({
         ... formatter,
         header: function(v, rowItem, columnItem) {
@@ -159,7 +132,117 @@ const renderGrid = () => {
         }
     });
 
+    state.finderGrid = grid;
+
+    return grid;
+};
+
+const getGridViewRows = (icons, columns) => {
+
+    const rows = [];
+
+    const t = columns.length;
+
+    let i = 0;
+    let row = {
+        classMap: 'oi-grid-view-row'
+    };
+
+    icons.forEach((icon, ii) => {
+        icon.tg_index = ii;
+        if (i < t) {
+            const column = columns[i];
+            row[column.id] = getIcon(settings, icon);
+            i++;
+            return;
+        }
+
+        rows.push(row);
+
+        i = 0;
+        row = {
+            classMap: 'oi-grid-view-row'
+        };
+        const column = columns[i];
+        row[column.id] = getIcon(settings, icon);
+
+    });
+
+    if (Object.keys(row).length) {
+        rows.push(row);
+    }
+
+    //console.log(rows);
+
+    return rows;
+};
+
+const renderGridViewGrid = (grid, cellSize) => {
+    grid.setOption({
+        headerVisible: false,
+        rowHeight: cellSize,
+        rowNotFound: '<div class="oi-not-found">Not found icons</div>',
+        scrollbarRound: true,
+        columnTypes: {
+            name: ''
+        },
+        bindWindowResize: true,
+        bindContainerResize: true
+    });
+
+
+    const cw = grid.containerWidth;
+    //const ch = grid.containerHeight;
+    //console.log(cw, ch);
+
+    const numPerRow = Math.floor(cw / cellSize);
+    const columns = [];
+    let i = 0;
+    while (i < numPerRow) {
+        columns.push({
+            id: `c${i}`,
+            width: cellSize,
+            minWidth: cellSize,
+            align: 'center',
+            classMap: 'oi-grid-view-icon'
+        });
+        i++;
+    }
+
+    const icons = state.icons.filter((icon) => {
+        return rowFilter(icon);
+    });
+
+    console.log('icons', icons.length);
+
+    const rows = getGridViewRows(icons, columns);
+
     const gridData = {
+        columns,
+        rows
+    };
+    grid.setData(gridData);
+
+    grid.render();
+};
+
+const renderListVieWGrid = (grid, cellSize) => {
+    grid.setOption({
+        rowHeight: cellSize,
+        frozenColumn: 1,
+        rowNotFound: '<div class="oi-not-found">Not found icons</div>',
+        rowFilter: rowFilter,
+        rowNumberVisible: true,
+        rowNumberWidth: 52,
+        scrollbarRound: true,
+        columnTypes: {
+            name: ''
+        },
+        bindWindowResize: true,
+        bindContainerResize: true
+    });
+
+    grid.setData({
         columns: [{
             id: 'icon',
             name: '',
@@ -220,11 +303,25 @@ const renderGrid = () => {
             align: 'center'
         }],
         rows: state.icons
-    };
-
-    grid.setData(gridData);
+    });
 
     grid.render();
+};
+
+const renderGrid = () => {
+    let grid = getCurrentGrid();
+    if (!grid) {
+        grid = createGrid();
+    }
+
+    const cellSize = parseInt(settings.size) + 10;
+
+    if (gridViewType.value === 'grid') {
+        renderGridViewGrid(grid, cellSize);
+        return;
+    }
+
+    renderListVieWGrid(grid, cellSize);
 
 };
 
@@ -281,6 +378,11 @@ const render = () => {
 
 };
 
+const switchView = (viewType) => {
+    gridViewType.value = viewType;
+    renderGrid();
+};
+
 const renderGridAsync = throttle(renderGrid);
 
 watch(() => state.packageName, (v) => {
@@ -298,6 +400,10 @@ watch(settings, () => {
 watch(keywords, () => {
     const grid = getCurrentGrid();
     if (grid) {
+        if (gridViewType.value === 'grid') {
+            renderGrid();
+            return;
+        }
         grid.update();
     }
 });
@@ -358,6 +464,21 @@ watch(() => state.tabIndex, (v) => {
         :key="i"
         @click="tagClickHandler(tag)"
       >{{ tag.name }}</span>
+    </div>
+    <div :class="'oi-grid-view oi-view-'+gridViewType">
+      <VuiFlex spacing="10px">
+        <div class="vui-flex-empty" />
+        <OiIcon
+          name="list"
+          hover
+          @click="switchView('list')"
+        />
+        <OiIcon
+          name="grid"
+          hover
+          @click="switchView('grid')"
+        />
+      </VuiFlex>
     </div>
     <div class="oi-grid oi-finder-grid vui-flex-auto" />
   </VuiFlex>
@@ -455,7 +576,16 @@ watch(() => state.tabIndex, (v) => {
 }
 
 .oi-tags span:hover {
-    color: deepskyblue;
+    color: #0077cf;
+}
+
+.oi-grid-view {
+    margin: 0 15px;
+}
+
+.oi-view-list .oi-icon-list,
+.oi-view-grid .oi-icon-grid {
+    color: #0077cf;
 }
 
 .oi-finder-grid {
