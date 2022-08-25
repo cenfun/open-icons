@@ -69,10 +69,18 @@ export const copyContent = function(content) {
     navigator.clipboard.writeText(content);
 };
 
-export const savePNG = function(content, name, size) {
+export const savePNG = function(content, name, settings) {
+
+    let color = settings.color;
+    if (color === 'custom') {
+        color = settings.colorCustom;
+    }
+
+    content = content.replace(/currentColor/g, color);
 
     const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
 
+    const size = parseInt(settings.size);
     const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;

@@ -418,6 +418,7 @@ onMounted(() => {
               Open Icons <span><a
                 href="https://github.com/cenfun/open-icons"
                 target="_blank"
+                tooltip="Go to github repository"
               >v{{ version }}</a></span>
             </div>
           </div>
@@ -434,6 +435,7 @@ onMounted(() => {
               <a
                 href="https://github.com/cenfun/open-icons"
                 target="_blank"
+                tooltip="Fork github repository"
               ><OiIcon
                 name="github"
                 hover

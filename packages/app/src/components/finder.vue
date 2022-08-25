@@ -85,7 +85,7 @@ const createGrid = () => {
         if ($target.classList.contains('oi-icon-download')) {
             const type = $target.getAttribute('name');
             if (type === 'png') {
-                savePNG(rowItem.svg, rowItem.name, parseInt(settings.size));
+                savePNG(rowItem.svg, rowItem.name, settings);
                 return;
             }
             saveSVG(rowItem.svg, rowItem.name);
