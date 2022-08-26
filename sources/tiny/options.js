@@ -8,7 +8,18 @@ module.exports = {
         name = name.split('_').join('-');
         return this.onSVGNameDefault(name, item);
     },
-    onSVGDocument: function($svg) {
+    onSVGDocument: function($svg, item, $) {
         //$svg.attr('fill', 'currentColor');
+        if (item.name === 'tiktok') {
+
+            //there is * in style, caused global * style
+            $('style').remove();
+
+            const directive = $.root()[0].children.find((c) => c.type === 'directive');
+            const d = directive.data.split('"')[1];
+            console.log(`tiktok replacement: ${d}`);
+            $.root().find('[d="&z;"]').attr('d', d);
+
+        }
     }
 };
