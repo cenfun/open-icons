@@ -7,7 +7,7 @@ import {
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
 import {
-    loadPackages, getIconElement, version, timestamp
+    loadPackages, getSvg, getSvgSymbol, defineIconElement, version, timestamp
 } from 'open-icons';
 
 import { hasOwn, BF } from './util/util.js';
@@ -237,10 +237,12 @@ const getTags = function(tags) {
     return ls;
 };
 
-const allIconsHandler = (allIcons) => {
-    allIcons.forEach((icon) => {
-
-    });
+const defineSvgSymbol = (allIcons) => {
+    const svgSymbol = getSvgSymbol(allIcons);
+    const div = document.createElement('div');
+    div.style.display = 'none';
+    div.innerHTML = svgSymbol;
+    document.body.appendChild(div);
 };
 
 const initPackages = function(packages) {
@@ -249,6 +251,8 @@ const initPackages = function(packages) {
     let totalGzip = 0;
     const allIcons = [];
     const allTags = {};
+
+    const tagName = 'open-icon';
 
     packages.forEach(function(pkg) {
 
@@ -262,27 +266,15 @@ const initPackages = function(packages) {
             addTag(allTags, iconName);
             addTag(tags, iconName);
             allIcons.push({
-                name: iconName,
-                namespace: icon.namespace,
-                svg: icon.svg,
+                ... icon,
                 packageName: pkg.name,
-                tagName: pkg.tagName
+                tagName: tagName,
+                svg: getSvg(icon),
+                symbol: getSvg(icon, true)
             });
         });
 
         pkg.tags = getTags(tags);
-
-        //init web components
-        const IconElement = getIconElement(pkg.icons);
-        //override tagName
-        IconElement.tagName = pkg.tagName;
-        //define custom element
-        if (customElements.get(pkg.tagName)) {
-            console.error(`${pkg.tagName} already defined`);
-        } else {
-            //console.log(tagName);
-            customElements.define(pkg.tagName, IconElement);
-        }
 
     });
 
@@ -305,7 +297,9 @@ const initPackages = function(packages) {
         selectable: true
     };
 
-    allIconsHandler(allIcons);
+    defineIconElement(tagName, allIcons, 'namespace');
+
+    defineSvgSymbol(allIcons);
 
     loading.visible = false;
 

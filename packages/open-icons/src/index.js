@@ -7,8 +7,7 @@ import loadPackages from './load-packages.js';
 import getSvg from './get-svg.js';
 import getSvgSymbol from './get-svg-symbol.js';
 
-import initIcons from './init-icons.js';
-import getIconElement from './get-icon-element.js';
+import defineIconElement from './define-icon-element.js';
 
 const version = window.VERSION;
 const timestamp = window.TIMESTAMP;
@@ -22,8 +21,7 @@ export {
     getSvg,
     getSvgSymbol,
 
-    initIcons,
-    getIconElement,
+    defineIconElement,
 
     version,
     timestamp

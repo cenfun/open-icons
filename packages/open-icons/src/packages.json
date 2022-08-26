@@ -310,9 +310,9 @@
     {
         "name": "tiny",
         "namespace": "open-icons-tiny",
-        "size": 79672,
-        "sizeGzip": 60231,
-        "sizeJson": 169284
+        "size": 79776,
+        "sizeGzip": 60321,
+        "sizeJson": 169529
     },
     {
         "name": "typ",

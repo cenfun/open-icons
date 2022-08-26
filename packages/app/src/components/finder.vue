@@ -232,26 +232,11 @@ const renderGridView = (cellSize) => {
         align: 'center',
         width: 260,
         maxWidth: 1000
-    }];
-
-    if (settings.type === 'wc') {
-        columns.push({
-            id: 'wc',
-            name: 'Web component',
-            classMap: 'oi-textarea',
-            formatter: 'textarea',
-            sortable: false,
-            align: 'center',
-            width: 260,
-            maxWidth: 500
-        });
-    }
-
-    columns.push({
+    }, {
         id: 'packageName',
         name: 'Package',
         align: 'center'
-    });
+    }];
 
     //console.log(columns);
 
@@ -269,7 +254,7 @@ const renderGrid = () => {
 
     const $thumb = thumb.value;
 
-    console.log('renderGrid', state.viewType);
+    //console.log('renderGrid', state.viewType);
 
     if (state.viewType === 'thumb') {
         $thumb.style.display = 'block';
@@ -435,11 +420,13 @@ watch(() => state.tabIndex, (v) => {
           v-model="state.viewType"
           name="grid"
           hover
+          tooltip="Grid view"
         />
         <OiIcon
           v-model="state.viewType"
           name="thumb"
           hover
+          tooltip="Thumb view"
         />
       </VuiFlex>
     </div>

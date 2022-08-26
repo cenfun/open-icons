@@ -1,7 +1,18 @@
 
 import decompress from 'lz-utils/lib/decompress.js';
 import packages from './packages.json';
-import initIcons from './init-icons.js';
+
+const initIcons = (pkg) => {
+    const contents = pkg.contents;
+    delete pkg.contents;
+
+    pkg.icons.forEach((icon) => {
+        icon.namespace = `oi-${pkg.name}-${icon.name}`;
+        icon.content = contents[icon.content];
+    });
+
+    return pkg;
+};
 
 const loadPackages = (path = './', callback = (item, info) => {}) => {
     return new Promise((resolve) => {

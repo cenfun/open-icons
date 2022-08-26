@@ -12,14 +12,6 @@ const settings = inject('settings');
     spacing="10px"
     class="oi-settings"
   >
-    <VuiSelect v-model="settings.type">
-      <option value="">
-        Type
-      </option>
-      <option>symbol</option>
-      <option>wc</option>
-      <option>svg</option>
-    </VuiSelect>
     <VuiSelect v-model="settings.size">
       <option value="">
         Size
@@ -80,6 +72,14 @@ const settings = inject('settings');
       <option>10px</option>
       <option>20%</option>
       <option>50%</option>
+    </VuiSelect>
+    <VuiSelect v-model="settings.type">
+      <option value="">
+        Type
+      </option>
+      <option>symbol</option>
+      <option>wc</option>
+      <option>svg</option>
     </VuiSelect>
   </VuiFlex>
 </template>
