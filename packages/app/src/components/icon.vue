@@ -34,8 +34,14 @@ const props = defineProps({
     disabled: {
         type: Boolean,
         default: false
+    },
+    modelValue: {
+        type: String,
+        default: null
     }
 });
+
+const emit = defineEmits(['update:modelValue']);
 
 const el = ref(null);
 
@@ -50,6 +56,12 @@ const classList = computed(() => {
     if (props.disabled) {
         ls.push('oi-icon-disabled');
     }
+    if (props.modelValue !== null) {
+        ls.push('oi-icon-selectable');
+    }
+    if (props.modelValue === props.name) {
+        ls.push('oi-icon-selected');
+    }
     return ls;
 });
 
@@ -59,6 +71,9 @@ const styleList = computed(() => {
     };
 });
 
+const clickHandler = (e) => {
+    emit('update:modelValue', props.name);
+};
 
 onMounted(() => {
     const item = svgMap[props.name];
@@ -75,6 +90,7 @@ onMounted(() => {
     ref="el"
     :class="classList"
     :style="styleList"
+    @click="clickHandler"
   />
 </template>
 <style lang="scss">
@@ -103,6 +119,18 @@ onMounted(() => {
 .oi-icon-disabled,
 .oi-icon-disabled:hover {
     opacity: 0.3;
+}
+
+.oi-icon-selectable {
+    border: thin solid transparent;
+    padding: 1px;
+    cursor: pointer;
+}
+
+.oi-icon-selected {
+    color: #006797;
+    border: thin solid #26a0da;
+    background-color: #cbe8f6;
 }
 
 </style>

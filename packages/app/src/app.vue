@@ -10,7 +10,7 @@ import {
     loadPackages, getIconElement, version, timestamp
 } from 'open-icons';
 
-import { BF } from './util/util.js';
+import { hasOwn, BF } from './util/util.js';
 import { initTooltip } from './util/tooltip.js';
 
 import OiIcon from './components/icon.vue';
@@ -40,7 +40,10 @@ const state = shallowReactive({
     packageName: null,
     total: null,
     icons: null,
-    tabIndex: 0
+    tabIndex: 0,
+    results: '',
+    //grid and thumb
+    viewType: 'grid'
 });
 
 provide('state', state);
@@ -53,7 +56,8 @@ const myIcons = reactive({
 provide('myIcons', myIcons);
 
 const defaultSettings = {
-    size: '32px',
+    type: '',
+    size: '',
     color: 'rainbow',
     colorCustom: '',
     bg: '',
@@ -233,6 +237,12 @@ const getTags = function(tags) {
     return ls;
 };
 
+const allIconsHandler = (allIcons) => {
+    allIcons.forEach((icon) => {
+
+    });
+};
+
 const initPackages = function(packages) {
 
     let totalSize = 0;
@@ -273,6 +283,7 @@ const initPackages = function(packages) {
             //console.log(tagName);
             customElements.define(pkg.tagName, IconElement);
         }
+
     });
 
     state.total = {
@@ -293,6 +304,10 @@ const initPackages = function(packages) {
         sizeGzip: totalGzip,
         selectable: true
     };
+
+    allIconsHandler(allIcons);
+
+    loading.visible = false;
 
     state.icons = allIcons;
 
@@ -323,7 +338,6 @@ const loadStart = async () => {
     if (cache && cache.version === version) {
 
         console.log('Found cache icons', cache);
-        loading.visible = false;
 
         initPackages(cache.packages);
 
@@ -348,8 +362,6 @@ const loadStart = async () => {
 
     console.log('Loaded icons', metadata);
 
-    loading.visible = false;
-
     initPackages(metadata.packages);
 
 };
@@ -372,7 +384,9 @@ const read = async (k, target) => {
     }
 
     for (const key in v) {
-        target[key] = v[key];
+        if (hasOwn(target, key)) {
+            target[key] = v[key];
+        }
     }
 
 };
@@ -604,10 +618,17 @@ a:hover {
     background-color: #999;
 }
 
-.oi-grid {
+.oi-view-body {
+    position: relative;
     border: thin solid #ccc;
     border-radius: 5px;
+    overflow: hidden;
     margin: 10px;
+}
+
+.oi-grid {
+    width: 100%;
+    height: 100%;
 
     .oi-not-found {
         font-size: 20px;
@@ -641,14 +662,6 @@ a:hover {
         border-right: thin solid #e5e5e5;
     }
 
-    .tg-cell.oi-grid-view-icon {
-        padding: 4px;
-    }
-
-    .tg-row.oi-grid-view-row {
-        border-bottom: none;
-    }
-
     .tg-cell.oi-textarea {
         padding: 3px 5px;
 
@@ -657,6 +670,25 @@ a:hover {
             height: 100%;
             resize: none;
         }
+    }
+}
+
+.oi-icon-item {
+    --size: 100%;
+    --color: #000;
+    --bg: none;
+    --radius: 0;
+
+    width: var(--size);
+    height: var(--size);
+    color: var(--color);
+    background: var(--bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    svg {
+        display: block;
+        pointer-events: none;
     }
 }
 </style>

@@ -7,7 +7,7 @@ import {
 } from 'vue';
 import { throttle } from '../util/util.js';
 import {
-    formatter, getIcon, saveSVG, savePNG
+    formatter, getCellIcon, saveSVG, savePNG
 } from '../util/grid-helper.js';
 
 import OiIcon from './icon.vue';
@@ -74,7 +74,7 @@ const createGrid = () => {
     grid.setFormatter({
         ... formatter,
         icon: function(v, r) {
-            return getIcon(settings, r);
+            return getCellIcon(settings, r);
         }
     });
 
@@ -89,7 +89,7 @@ const renderGrid = () => {
         return;
     }
 
-    const cellSize = parseInt(settings.size) + 10;
+    const cellSize = (parseInt(settings.size) || 32) + 10;
 
     grid.setOption({
         rowHeight: cellSize,
@@ -156,15 +156,6 @@ const renderGrid = () => {
             align: 'center',
             width: 260,
             maxWidth: 1000
-        }, {
-            id: 'wc',
-            name: 'Web component',
-            classMap: 'oi-textarea',
-            formatter: 'textarea',
-            sortable: false,
-            align: 'center',
-            width: 260,
-            maxWidth: 500
         }, {
             id: 'packageName',
             name: 'Package'
@@ -268,7 +259,9 @@ watch(() => state.tabIndex, (v) => {
         <div>Will be cached in browser</div>
       </VuiFlex>
     </div>
-    <div class="oi-grid oi-my-grid vui-flex-auto" />
+    <div class="oi-view-body vui-flex-auto">
+      <div class="oi-grid oi-my-grid" />
+    </div>
   </VuiFlex>
 </template>
 <style lang="scss">

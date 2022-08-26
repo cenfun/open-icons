@@ -1,17 +1,4 @@
-const getSvg = (item) => {
-    const list = ['<svg'];
-    if (item.viewBox) {
-        list.push(` viewBox="${item.viewBox}"`);
-    }
-    list.push(' width="100%" height="100%"');
-    if (item.preserveAspectRatio) {
-        list.push(` preserveAspectRatio="${item.preserveAspectRatio}"`);
-    }
-    list.push(' pointer-events="none" xmlns="http://www.w3.org/2000/svg">');
-    list.push(item.content);
-    list.push('</svg>');
-    return list.join('');
-};
+import getSvg from './get-svg.js';
 
 const initIcons = (pkg) => {
     const contents = pkg.contents;

@@ -9,7 +9,7 @@
     "dependencies": {
         "open-icons": "~1.0.1",
         "turbogrid": "^3.0.1",
-        "vine-ui": "^3.0.11"
+        "vine-ui": "^3.0.12"
     },
     "devDependencies": {}
 }

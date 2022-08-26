@@ -34,13 +34,44 @@ const getBG = (settings) => {
     return bg;
 };
 
-export const getIcon = function(settings, r) {
-    const color = getColor(settings, r.tg_index);
+const getWCIcon = function(settings, icon) {
+    const size = settings.size || '32px';
+    const color = getColor(settings, icon.tg_index);
     const bg = getBG(settings);
-    const tag = r.tagName;
-    return `<${tag} name="${r.name}" size="${settings.size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
+    const tag = icon.tagName;
+    return `<${tag} name="${icon.name}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
+export const getCellIcon = function(settings, icon) {
+    if (settings.type === 'wc') {
+        return getWCIcon(settings, icon);
+    }
+
+    const svgContent = settings.type === 'svg' ? icon.svg : icon.svg;
+
+    const size = settings.size || '32px';
+
+    const st = [`--size: ${size};`];
+
+    const color = getColor(settings, icon.tg_index);
+    if (color) {
+        st.push(`--color: ${color};`);
+    }
+    const bg = getBG(settings);
+    if (bg) {
+        st.push(`--bg: ${bg};`);
+    }
+    const radius = settings.radius;
+    if (radius) {
+        st.push(`--radius: ${radius};`);
+    }
+
+    return `
+        <div class="oi-icon-item" style="${st.join('')}">
+            ${svgContent}
+        </div>
+    `;
+};
 
 export const formatter = {
     null: function(value) {
@@ -86,7 +117,7 @@ export const savePNG = function(content, name, settings) {
 
     const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
 
-    const size = parseInt(settings.size);
+    const size = parseInt(settings.size) || 32;
     const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;

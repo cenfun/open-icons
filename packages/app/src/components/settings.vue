@@ -12,10 +12,18 @@ const settings = inject('settings');
     spacing="10px"
     class="oi-settings"
   >
-    <VuiSelect
-      v-model="settings.size"
-      label="Size"
-    >
+    <VuiSelect v-model="settings.type">
+      <option value="">
+        Type
+      </option>
+      <option>symbol</option>
+      <option>wc</option>
+      <option>svg</option>
+    </VuiSelect>
+    <VuiSelect v-model="settings.size">
+      <option value="">
+        Size
+      </option>
       <option>16px</option>
       <option>24px</option>
       <option>32px</option>
@@ -25,13 +33,16 @@ const settings = inject('settings');
       <option>128px</option>
       <option>256px</option>
     </VuiSelect>
-    <VuiSelect
-      v-model="settings.color"
-      label="Color"
-    >
-      <option />
-      <option>custom</option>
-      <option>rainbow</option>
+    <VuiSelect v-model="settings.color">
+      <option value="">
+        Color
+      </option>
+      <option value="rainbow">
+        Rainbow
+      </option>
+      <option value="custom">
+        Custom
+      </option>
       <option>orangered</option>
       <option>orange</option>
       <option>green</option>
@@ -44,12 +55,13 @@ const settings = inject('settings');
       v-model="settings.colorCustom"
       type="color"
     >
-    <VuiSelect
-      v-model="settings.bg"
-      label="BG"
-    >
-      <option />
-      <option>custom</option>
+    <VuiSelect v-model="settings.bg">
+      <option value="">
+        BG
+      </option>
+      <option value="custom">
+        Custom
+      </option>
       <option>#eee</option>
       <option>#fff</option>
       <option>#ccc</option>
@@ -60,11 +72,10 @@ const settings = inject('settings');
       v-model="settings.bgCustom"
       type="color"
     >
-    <VuiSelect
-      v-model="settings.radius"
-      label="Radius"
-    >
-      <option />
+    <VuiSelect v-model="settings.radius">
+      <option value="">
+        Radius
+      </option>
       <option>5px</option>
       <option>10px</option>
       <option>20%</option>
@@ -75,6 +86,6 @@ const settings = inject('settings');
 <style lang="scss">
 .oi-settings {
     height: 35px;
-    padding-right: 5px;
+    padding: 0 5px;
 }
 </style>

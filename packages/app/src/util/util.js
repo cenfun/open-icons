@@ -1,3 +1,7 @@
+export const hasOwn = function(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+};
+
 export const BF = function(v, places = 1, base = 1024) {
     if (v === 0) {
         return '0B';
