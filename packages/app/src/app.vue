@@ -7,7 +7,7 @@ import {
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
 import {
-    loadPackages, getSvg, getSvgSymbol, defineIconElement, version, timestamp
+    loadPackages, defineIconElement, version, timestamp
 } from 'open-icons';
 
 import { hasOwn, BF } from './util/util.js';
@@ -237,14 +237,6 @@ const getTags = function(tags) {
     return ls;
 };
 
-const defineSvgSymbol = (allIcons) => {
-    const svgSymbol = getSvgSymbol(allIcons);
-    const div = document.createElement('div');
-    div.style.display = 'none';
-    div.innerHTML = svgSymbol;
-    document.body.appendChild(div);
-};
-
 const initPackages = function(packages) {
 
     let totalSize = 0;
@@ -268,9 +260,7 @@ const initPackages = function(packages) {
             allIcons.push({
                 ... icon,
                 packageName: pkg.name,
-                tagName: tagName,
-                svg: getSvg(icon),
-                symbol: getSvg(icon, true)
+                tagName: tagName
             });
         });
 
@@ -298,8 +288,6 @@ const initPackages = function(packages) {
     };
 
     defineIconElement(tagName, allIcons, 'namespace');
-
-    defineSvgSymbol(allIcons);
 
     loading.visible = false;
 

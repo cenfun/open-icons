@@ -48,11 +48,11 @@
         "flat-color-icons": "^1.1.0",
         "foundation-icons": "^1.0.1",
         "grommet-icons": "^4.7.0",
-        "heroicons": "^2.0.7",
+        "heroicons": "^2.0.8",
         "icomoon-free-npm": "^0.0.0",
         "iconoir": "^5.1.4",
         "ikonate": "^1.1.1",
-        "ionicons": "^6.0.2",
+        "ionicons": "^6.0.3",
         "jam-icons": "^2.0.0",
         "line-awesome": "^1.3.0",
         "lucide": "^0.88.0",
@@ -70,7 +70,7 @@
         "zondicons": "^1.2.0"
     },
     "devDependencies": {
-        "eslint": "^8.22.0",
+        "eslint": "^8.23.0",
         "eslint-config-plus": "^1.0.3",
         "eslint-plugin-html": "^7.1.0",
         "eslint-plugin-vue": "^9.4.0",
@@ -84,7 +84,7 @@
         "stylelint": "^14.11.0",
         "stylelint-config-recommended": "^9.0.0",
         "stylelint-config-standard": "^28.0.0",
-        "svg-minifier": "^1.0.3",
+        "svg-minifier": "^1.0.4",
         "umd-runtime-templates": "^1.0.0",
         "vine-ui": "^3.0.12"
     }

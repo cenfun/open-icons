@@ -77,9 +77,8 @@ const settings = inject('settings');
       <option value="">
         Type
       </option>
-      <option>symbol</option>
-      <option>wc</option>
       <option>svg</option>
+      <option>wc</option>
     </VuiSelect>
   </VuiFlex>
 </template>

@@ -1,8 +1,4 @@
-const getSvg = (icon, useSymbol) => {
-
-    if (useSymbol) {
-        return `<svg pointer-events="none" width="100%" height="100%"><use xlink:href="#${icon.namespace}" /></svg>`;
-    }
+const getSvg = function(icon, size = '100%') {
 
     //round
     // <svg pointer-events="none" width="100%" height="100%">
@@ -19,11 +15,12 @@ const getSvg = (icon, useSymbol) => {
     if (icon.viewBox) {
         list.push(` viewBox="${icon.viewBox}"`);
     }
-    list.push(' width="100%" height="100%"');
+    list.push(` width="${size}" height="${size}"`);
     if (icon.preserveAspectRatio) {
         list.push(` preserveAspectRatio="${icon.preserveAspectRatio}"`);
     }
     list.push(' pointer-events="none" xmlns="http://www.w3.org/2000/svg">');
+
     list.push(icon.content);
 
     list.push('</svg>');

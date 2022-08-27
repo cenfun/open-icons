@@ -1,14 +1,23 @@
 
 import decompress from 'lz-utils/lib/decompress.js';
 import packages from './packages.json';
+import getSvg from './get-svg.js';
 
 const initIcons = (pkg) => {
     const contents = pkg.contents;
     delete pkg.contents;
 
     pkg.icons.forEach((icon) => {
-        icon.namespace = `oi-${pkg.name}-${icon.name}`;
-        icon.content = contents[icon.content];
+        const namespace = `${pkg.namespace}-${icon.name}`;
+        //prefix handler
+        const content = contents[icon.content].split('{prefix}').join(namespace);
+
+        icon.namespace = namespace;
+        icon.content = content;
+
+        icon.svg = getSvg(icon);
+
+        delete icon.content;
     });
 
     return pkg;

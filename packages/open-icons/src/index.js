@@ -5,7 +5,6 @@ import decompress from 'lz-utils/lib/decompress.js';
 import loadPackages from './load-packages.js';
 
 import getSvg from './get-svg.js';
-import getSvgSymbol from './get-svg-symbol.js';
 
 import defineIconElement from './define-icon-element.js';
 
@@ -19,7 +18,6 @@ export {
     loadPackages,
 
     getSvg,
-    getSvgSymbol,
 
     defineIconElement,
 

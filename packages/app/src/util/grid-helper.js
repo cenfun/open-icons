@@ -47,8 +47,6 @@ export const getCellIcon = function(settings, icon) {
         return getWCIcon(settings, icon);
     }
 
-    const svgContent = settings.type === 'svg' ? icon.svg : icon.symbol;
-
     const size = settings.size || '32px';
 
     const st = [`--size: ${size};`];
@@ -68,7 +66,7 @@ export const getCellIcon = function(settings, icon) {
 
     return `
         <div class="oi-icon-item" style="${st.join('')}">
-            ${svgContent}
+            ${icon.svg}
         </div>
     `;
 };
