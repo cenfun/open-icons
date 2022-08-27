@@ -23,6 +23,7 @@ const requestUpdate = ref(false);
 const packageInfo = ref(null);
 const tagsList = ref([]);
 const thumb = ref(null);
+const thumbIcons = ref([]);
 
 const keywords = ref('');
 const rowFilter = function(icon) {
@@ -141,36 +142,68 @@ const createGrid = () => {
     return grid;
 };
 
-const renderThumbView = (cellSize) => {
+const renderThumbIcons = (clean) => {
+    // const ts = Date.now();
 
-    const icons = state.icons.filter((icon) => {
-        return rowFilter(icon);
-    });
+    let icons = thumbIcons.value;
 
-    let total = icons.length;
-    //console.log('icons', icons.length);
-
-    if (total > 1000) {
-        icons.length = 1000;
-        total += ' (render only the first 1,000)';
+    const num = icons.length;
+    if (!num) {
+        return;
     }
 
-    state.results = total;
+    const pageNum = 1000;
+    const showMore = num > pageNum;
+
+    let leftIcons = [];
+
+    if (showMore) {
+        leftIcons = icons.splice(pageNum, num);
+        icons = icons.slice(0, pageNum);
+    }
+
+    //console.log(icons, leftIcons);
 
     const ls = icons.map((ic) => {
         return getCellIcon(settings, ic);
     });
 
-    thumb.value.innerHTML = ls.join('');
+    const str = ls.join('');
+
+    const $thumb = thumb.value;
+
+    if (clean) {
+        $thumb.firstChild.innerHTML = str;
+    } else {
+        $thumb.firstChild.insertAdjacentHTML('beforeend', str);
+    }
+
+    thumbIcons.value = leftIcons;
+
+    // console.log(Date.now() - ts);
+};
+
+const renderThumbView = () => {
+
+    const icons = state.icons.filter((icon) => {
+        return rowFilter(icon);
+    });
+
+    state.results = icons.length;
+    thumbIcons.value = icons;
+
+    renderThumbIcons(true);
 
 };
 
-const renderGridView = (cellSize) => {
+const renderGridView = () => {
 
     let grid = getCurrentGrid();
     if (!grid) {
         grid = createGrid();
     }
+
+    const cellSize = (parseInt(settings.size) || 32) + 10;
 
     grid.setOption({
         rowHeight: cellSize,
@@ -250,20 +283,18 @@ const renderGridView = (cellSize) => {
 
 const renderGrid = () => {
 
-    const cellSize = (parseInt(settings.size) || 32) + 10;
-
     const $thumb = thumb.value;
 
     //console.log('renderGrid', state.viewType);
 
     if (state.viewType === 'thumb') {
         $thumb.style.display = 'block';
-        renderThumbView(cellSize);
+        renderThumbView();
         return;
     }
 
     $thumb.style.display = 'none';
-    renderGridView(cellSize);
+    renderGridView();
 
 };
 
@@ -435,7 +466,16 @@ watch(() => state.tabIndex, (v) => {
       <div
         ref="thumb"
         class="oi-finder-thumb"
-      />
+      >
+        <div class="oi-thumb-icons" />
+        <div
+          v-if="thumbIcons.length"
+          class="oi-thumb-more"
+          @click="renderThumbIcons()"
+        >
+          Show More {{ thumbIcons.length }}
+        </div>
+      </div>
     </div>
   </VuiFlex>
 </template>
@@ -562,10 +602,28 @@ watch(() => state.tabIndex, (v) => {
     padding: 5px;
     overflow-y: auto;
 
-    > * {
+    .oi-thumb-icons > * {
         display: block;
         float: left;
         margin: 5px;
+    }
+
+    .oi-thumb-icons::after {
+        clear: both;
+        display: block;
+        content: "";
+    }
+
+    .oi-thumb-more {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover {
+            background-color: #f5f5f5;
+        }
     }
 }
 
