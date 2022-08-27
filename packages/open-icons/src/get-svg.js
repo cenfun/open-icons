@@ -14,14 +14,17 @@ const getSvg = function(icon, size = '100%') {
     const list = ['<svg'];
     if (icon.viewBox) {
         list.push(` viewBox="${icon.viewBox}"`);
+        delete icon.viewBox;
     }
     list.push(` width="${size}" height="${size}"`);
     if (icon.preserveAspectRatio) {
         list.push(` preserveAspectRatio="${icon.preserveAspectRatio}"`);
+        delete icon.preserveAspectRatio;
     }
     list.push(' pointer-events="none" xmlns="http://www.w3.org/2000/svg">');
 
     list.push(icon.content);
+    delete icon.content;
 
     list.push('</svg>');
     return list.join('');

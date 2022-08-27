@@ -334,6 +334,11 @@ const loadStart = async () => {
         loading.detail = `${BF(info.loadedSize)} / ${BF(info.totalSize)} - ${percentage}%`;
     });
 
+    //sort packages
+    packages.sort(function(a, b) {
+        return a.name > b.name ? 1 : -1;
+    });
+
     const metadata = {
         version,
         timestamp,

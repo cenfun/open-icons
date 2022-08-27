@@ -4,20 +4,24 @@ import packages from './packages.json';
 import getSvg from './get-svg.js';
 
 const initIcons = (pkg) => {
-    const contents = pkg.contents;
-    delete pkg.contents;
 
-    pkg.icons.forEach((icon) => {
+    const icons = pkg.icons;
+
+    //repeated content handler
+    icons.forEach((icon) => {
         const namespace = `${pkg.namespace}-${icon.name}`;
-        //prefix handler
-        const content = contents[icon.content].split('{prefix}').join(namespace);
-
         icon.namespace = namespace;
-        icon.content = content;
+        //content and prefix handler
+        let content = icon.content;
+        if (typeof content === 'number') {
+            content = icons[content].content;
+        }
+        icon.content = content.split('{prefix}').join(namespace);
+    });
 
+    //generating svg
+    icons.forEach((icon) => {
         icon.svg = getSvg(icon);
-
-        delete icon.content;
     });
 
     return pkg;
