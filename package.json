@@ -31,7 +31,7 @@
         "@mdi/svg": "^7.0.96",
         "@primer/octicons": "^17.4.1",
         "@radix-ui/react-icons": "^1.1.1",
-        "@tabler/icons": "^1.88.0",
+        "@tabler/icons": "^1.89.0",
         "@uiw/icons": "^2.6.7",
         "@vscode/codicons": "^0.0.32",
         "akar-icons": "^1.9.20",
@@ -84,7 +84,7 @@
         "stylelint": "^14.11.0",
         "stylelint-config-recommended": "^9.0.0",
         "stylelint-config-standard": "^28.0.0",
-        "svg-minifier": "^1.0.4",
+        "svg-minifier": "^1.0.5",
         "umd-runtime-templates": "^1.0.0",
         "vine-ui": "^3.0.12"
     }

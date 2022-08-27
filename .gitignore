@@ -3,3 +3,5 @@
 /.temp
 /packages/*/output
 /packages/*/dist
+/packages/open-icons/dist1
+/packages/open-icons/output1
