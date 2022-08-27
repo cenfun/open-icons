@@ -17,7 +17,9 @@ const defineIconElement = function(tagName, icons, id = 'name') {
         constructor() {
             super();
             const shadow = this.attachShadow({
-                mode: 'open'
+                //shadowRoot = null, no need shadowRoot
+                mode: 'closed',
+                delegatesFocus: true
             });
             this.$style = document.createElement('style');
             shadow.appendChild(this.$style);

@@ -143,7 +143,6 @@ const createGrid = () => {
 };
 
 const renderThumbIcons = (clean) => {
-    // const ts = Date.now();
 
     let icons = thumbIcons.value;
 
@@ -152,7 +151,7 @@ const renderThumbIcons = (clean) => {
         return;
     }
 
-    const pageNum = 1000;
+    const pageNum = 500;
     const showMore = num > pageNum;
 
     let leftIcons = [];
@@ -162,15 +161,28 @@ const renderThumbIcons = (clean) => {
         icons = icons.slice(0, pageNum);
     }
 
+    thumbIcons.value = leftIcons;
+
     //console.log(icons, leftIcons);
 
-    const ls = icons.map((ic) => {
-        return getCellIcon(settings, ic);
+    const size = parseInt(settings.size) || 32;
+
+    const list = icons.map((icon) => {
+        const children = [`<div class="oi-thumb-item" title="${icon.name}">`];
+        const cellIcon = getCellIcon(settings, icon);
+        children.push(cellIcon);
+        if (size >= 64) {
+            children.push(`<div class="oi-thumb-label" style="width:${size}px;">${icon.name}</div>`);
+        }
+        children.push('</div>');
+        return children.join('');
     });
 
-    const str = ls.join('');
+    const str = list.join('');
 
     const $thumb = thumb.value;
+
+    //const ts = Date.now();
 
     if (clean) {
         $thumb.firstChild.innerHTML = str;
@@ -178,9 +190,7 @@ const renderThumbIcons = (clean) => {
         $thumb.firstChild.insertAdjacentHTML('beforeend', str);
     }
 
-    thumbIcons.value = leftIcons;
-
-    // console.log(Date.now() - ts);
+    //console.log(Date.now() - ts);
 };
 
 const renderThumbView = () => {
@@ -282,19 +292,16 @@ const renderGridView = () => {
 };
 
 const renderGrid = () => {
-
-    const $thumb = thumb.value;
-
     //console.log('renderGrid', state.viewType);
 
+    const $thumb = thumb.value;
     if (state.viewType === 'thumb') {
         $thumb.style.display = 'block';
         renderThumbView();
-        return;
+    } else {
+        $thumb.style.display = 'none';
+        renderGridView();
     }
-
-    $thumb.style.display = 'none';
-    renderGridView();
 
 };
 
@@ -602,10 +609,25 @@ watch(() => state.tabIndex, (v) => {
     padding: 5px;
     overflow-y: auto;
 
-    .oi-thumb-icons > * {
+    .oi-thumb-item {
         display: block;
         float: left;
-        margin: 5px;
+        padding: 4px;
+        border: 1px solid transparent;
+        cursor: pointer;
+    }
+
+    .oi-thumb-item:hover {
+        border: 1px solid #ccc;
+    }
+
+    .oi-thumb-label {
+        margin-top: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 11px;
+        text-overflow: ellipsis;
+        text-align: center;
     }
 
     .oi-thumb-icons::after {
@@ -615,6 +637,7 @@ watch(() => state.tabIndex, (v) => {
     }
 
     .oi-thumb-more {
+        margin-top: 5px;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;

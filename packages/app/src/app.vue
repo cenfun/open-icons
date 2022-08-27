@@ -655,7 +655,7 @@ a:hover {
     }
 }
 
-.oi-icon-item {
+.oi-cell-icon {
     --size: 100%;
     --color: #000;
     --bg: none;
