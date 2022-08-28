@@ -42,7 +42,7 @@ const packageHandler = (item, Util, name, index, total) => {
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
 
-    const outputName = `${item.namespace}-${name}`;
+    const outputName = `${item.id}-${name}`;
     if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
         Util.logYellow(`exists cache and ignore: ${name}`);
         return;
@@ -67,7 +67,7 @@ const packageHandler = (item, Util, name, index, total) => {
     //compress svg
     const svgMinifier = require('svg-minifier');
     const config = {
-        namespace: outputName,
+        id: outputName,
         dirs,
         outputDir: item.outputRoot,
         outputRuntime: false,
@@ -110,8 +110,8 @@ const packageHandler = (item, Util, name, index, total) => {
 
 const beforeBuildWebIcons = (item, Util) => {
 
-    const namespace = require('../package.json').name;
-    item.namespace = namespace;
+    const id = require('../package.json').name;
+    item.id = id;
 
     const sourcesRoot = path.resolve(__dirname, '../sources');
     item.sourcesRoot = sourcesRoot;
@@ -131,7 +131,7 @@ const beforeBuildWebIcons = (item, Util) => {
 
         packageHandler(item, Util, name, i + 1, total);
 
-        const outputName = `${item.namespace}-${name}`;
+        const outputName = `${item.id}-${name}`;
 
         const p = path.resolve(item.buildPath, `${outputName}.js`);
         const size = fs.statSync(p).size;
@@ -146,7 +146,7 @@ const beforeBuildWebIcons = (item, Util) => {
 
         packages.push({
             name,
-            namespace: outputName,
+            id: outputName,
             size,
             sizeGzip,
             sizeJson
@@ -214,7 +214,7 @@ module.exports = {
             let totalSizeGzip = 0;
 
             const list = item.packages.map((pkg, i) => {
-                const outputPath = path.resolve(item.outputRoot, `${pkg.namespace}.json`);
+                const outputPath = path.resolve(item.outputRoot, `${pkg.id}.json`);
                 //console.log(outputPath);
                 const json = require(outputPath);
                 const source = json.source;

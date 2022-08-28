@@ -1,11 +1,8 @@
-const defineIconElement = function(tagName, icons, id = 'name') {
+const defineIconElement = function(tagName, icons) {
 
-    const iconMap = new Map();
+    const idMap = new Map();
     icons.forEach((icon) => {
-        const key = icon[id];
-        if (key) {
-            iconMap.set(key, icon);
-        }
+        idMap.set(icon.id, icon);
     });
 
     class IconElement extends HTMLElement {
@@ -73,7 +70,7 @@ const defineIconElement = function(tagName, icons, id = 'name') {
 
         renderSvg() {
             const name = this.getAttribute('name');
-            const icon = iconMap.get(name);
+            const icon = idMap.get(name);
             const svg = icon ? icon.svg : '';
             this.$container.innerHTML = svg;
         }

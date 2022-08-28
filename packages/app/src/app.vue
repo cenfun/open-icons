@@ -7,7 +7,7 @@ import {
 import openStore from 'open-store';
 import { Grid } from 'turbogrid';
 import {
-    loadPackages, defineIconElement, version, timestamp
+    loadPackages, initSvg, defineIconElement, version, timestamp
 } from 'open-icons';
 
 import { hasOwn, BF } from './util/util.js';
@@ -49,7 +49,7 @@ const state = shallowReactive({
 provide('state', state);
 
 const myIcons = reactive({
-    ns: [],
+    ids: [],
     icons: {}
 });
 
@@ -169,10 +169,10 @@ const renderPackages = function(packages) {
         },
 
         dist: function(value, rowItem, columnItem, cellNode) {
-            if (!rowItem.namespace) {
+            if (!rowItem.id) {
                 return '—';
             }
-            const bundleName = `${rowItem.namespace}.js`;
+            const bundleName = `${rowItem.id}.js`;
             return `<a href="/dist/${bundleName}" target="_blank">${bundleName}</a>`;
         },
 
@@ -257,11 +257,13 @@ const initPackages = function(packages) {
             const iconName = icon.name;
             addTag(allTags, iconName);
             addTag(tags, iconName);
-            allIcons.push({
-                ... icon,
-                packageName: pkg.name,
-                tagName: tagName
-            });
+
+            initSvg(icon);
+
+            icon.packageName = pkg.name;
+            icon.tagName = tagName;
+
+            allIcons.push(icon);
         });
 
         pkg.tags = getTags(tags);
@@ -278,7 +280,7 @@ const initPackages = function(packages) {
             url: 'https://github.com/cenfun/open-icons',
             license: 'MIT'
         },
-        namespace: 'open-icons',
+        id: 'open-icons',
         tags: getTags(allTags),
         icons: allIcons,
         iconsNum: allIcons.length,
@@ -287,7 +289,7 @@ const initPackages = function(packages) {
         selectable: true
     };
 
-    defineIconElement(tagName, allIcons, 'namespace');
+    defineIconElement(tagName, allIcons);
 
     loading.visible = false;
 

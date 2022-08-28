@@ -39,7 +39,7 @@ const getWCIcon = function(settings, icon) {
     const color = getColor(settings, icon.tg_index);
     const bg = getBG(settings);
     const tag = icon.tagName;
-    return `<${tag} name="${icon.namespace}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
+    return `<${tag} name="${icon.id}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
 export const getCellIcon = function(settings, icon) {

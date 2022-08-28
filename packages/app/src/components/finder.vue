@@ -53,14 +53,14 @@ const tagClickHandler = (tag) => {
 };
 
 const hasIcon = function(icon) {
-    return myIcons.ns.includes(icon.namespace);
+    return myIcons.ids.includes(icon.id);
 };
 
 const addIcon = function(icon) {
     if (hasIcon(icon)) {
         return false;
     }
-    myIcons.ns.push(icon.namespace);
+    myIcons.ids.push(icon.id);
     return true;
 };
 
@@ -427,9 +427,9 @@ watch(() => state.tabIndex, (v) => {
     </div>
     <div class="oi-pkg-stats">
       <b>{{ packageInfo.iconsNum }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
-        :href="'/dist/'+packageInfo.namespace+'.js'"
+        :href="'/dist/'+packageInfo.id+'.js'"
         target="_blank"
-      >{{ packageInfo.namespace }}.js</a>
+      >{{ packageInfo.id }}.js</a>
     </div>
 
     <div class="oi-filter flex-row">

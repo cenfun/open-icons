@@ -1,4 +1,4 @@
-const getSvg = function(icon, size = '100%') {
+const initSvg = function(icon, size = '100%') {
 
     //round
     // <svg pointer-events="none" width="100%" height="100%">
@@ -16,6 +16,7 @@ const getSvg = function(icon, size = '100%') {
         list.push(` viewBox="${icon.viewBox}"`);
         delete icon.viewBox;
     }
+
     list.push(` width="${size}" height="${size}"`);
     if (icon.preserveAspectRatio) {
         list.push(` preserveAspectRatio="${icon.preserveAspectRatio}"`);
@@ -27,7 +28,24 @@ const getSvg = function(icon, size = '100%') {
     delete icon.content;
 
     list.push('</svg>');
-    return list.join('');
+
+    const svg = list.join('');
+    const prefixPlaceholder = '{prefix}';
+    const hasPrefix = svg.indexOf(prefixPlaceholder) !== -1;
+    let n = 0;
+    if (hasPrefix) {
+        //dynamic prefix
+        Object.defineProperty(icon, 'svg', {
+            get: function() {
+                n += 1;
+                const uid = `${icon.id}-${n}`;
+                return svg.split(prefixPlaceholder).join(uid);
+            }
+        });
+    } else {
+        icon.svg = svg;
+    }
+
 };
 
-export default getSvg;
+export default initSvg;

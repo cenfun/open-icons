@@ -1,27 +1,20 @@
 
 import decompress from 'lz-utils/lib/decompress.js';
 import packages from './packages.json';
-import getSvg from './get-svg.js';
 
 const initIcons = (pkg) => {
 
     const icons = pkg.icons;
 
-    //repeated content handler
+    //init id and content
     icons.forEach((icon) => {
-        const namespace = `${pkg.namespace}-${icon.name}`;
-        icon.namespace = namespace;
-        //content and prefix handler
-        let content = icon.content;
-        if (typeof content === 'number') {
-            content = icons[content].content;
-        }
-        icon.content = content.split('{prefix}').join(namespace);
-    });
+        icon.id = `${pkg.id}-${icon.name}`;
 
-    //generating svg
-    icons.forEach((icon) => {
-        icon.svg = getSvg(icon);
+        const content = icon.content;
+        if (typeof content === 'number') {
+            //duplicate content
+            icon.content = icons[content].content;
+        }
     });
 
     return pkg;
@@ -41,7 +34,7 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
         const loadHandler = function(it) {
             loaded += 1;
 
-            const str = window[it.namespace].default;
+            const str = window[it.id].default;
 
             const pkg = JSON.parse(decompress(str));
 
@@ -68,7 +61,7 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
         };
 
         packages.forEach((it) => {
-            const url = `${path}${it.namespace}.js`;
+            const url = `${path}${it.id}.js`;
             const $script = document.createElement('script');
             $script.src = url;
             $script.onload = function() {

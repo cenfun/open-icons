@@ -4,7 +4,7 @@ import decompress from 'lz-utils/lib/decompress.js';
 
 import loadPackages from './load-packages.js';
 
-import getSvg from './get-svg.js';
+import initSvg from './init-svg.js';
 
 import defineIconElement from './define-icon-element.js';
 
@@ -17,7 +17,7 @@ export {
 
     loadPackages,
 
-    getSvg,
+    initSvg,
 
     defineIconElement,
 

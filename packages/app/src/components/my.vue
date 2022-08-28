@@ -25,8 +25,8 @@ const getCurrentGrid = () => {
     }
 };
 
-const getIconByNs = (ns) => {
-    const item = state.icons.find((icon) => icon.namespace === ns);
+const getIconById = (id) => {
+    const item = state.icons.find((icon) => icon.id === id);
     if (!item) {
         return;
     }
@@ -40,12 +40,13 @@ const getIconByNs = (ns) => {
         itemNew[k] = item[k];
     });
 
-    const customData = myIcons.icons[ns];
+    //maybe a get function
+    itemNew.svg = item.svg;
+
+    const customData = myIcons.icons[id];
     if (customData) {
         Object.assign(itemNew, customData);
     }
-
-    //console.log(itemNew);
 
     return itemNew;
 };
@@ -109,8 +110,8 @@ const renderGrid = () => {
 
     const rows = [];
 
-    myIcons.ns.forEach((ns) => {
-        const item = getIconByNs(ns);
+    myIcons.ids.forEach((id) => {
+        const item = getIconById(id);
         if (!item) {
             return;
         }
@@ -178,10 +179,10 @@ const removeSelected = () => {
     }
     grid.deleteRow(selectedRows);
 
-    const selectedIcons = selectedRows.map((row) => row.namespace);
+    const selectedIcons = selectedRows.map((row) => row.id);
 
-    myIcons.ns = myIcons.ns.filter((ns) => {
-        if (selectedIcons.includes(ns)) {
+    myIcons.ids = myIcons.ids.filter((id) => {
+        if (selectedIcons.includes(id)) {
             return false;
         }
         return true;
