@@ -105,6 +105,13 @@
         "sizeJson": 219131
     },
     {
+        "name": "evil",
+        "id": "open-icons-evil",
+        "size": 18452,
+        "sizeGzip": 13975,
+        "sizeJson": 37777
+    },
+    {
         "name": "feather",
         "id": "open-icons-feather",
         "size": 24981,
