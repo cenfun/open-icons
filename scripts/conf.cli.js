@@ -226,7 +226,7 @@ module.exports = {
 
                 return {
                     index: i + 1,
-                    name: pkg.name,
+                    name: `[${pkg.name}](/sources/${pkg.name}/options.js)`,
                     icons: icons.toLocaleString(),
                     size: Util.BF(pkg.size),
                     sizeGzip: Util.BF(pkg.sizeGzip),
