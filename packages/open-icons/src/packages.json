@@ -135,9 +135,9 @@
     {
         "name": "flight",
         "id": "open-icons-flight",
-        "size": 194642,
-        "sizeGzip": 147193,
-        "sizeJson": 456354
+        "size": 146026,
+        "sizeGzip": 110415,
+        "sizeJson": 362752
     },
     {
         "name": "fluent",
