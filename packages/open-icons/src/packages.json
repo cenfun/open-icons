@@ -231,6 +231,13 @@
         "sizeJson": 110112
     },
     {
+        "name": "map",
+        "id": "open-icons-map",
+        "size": 85661,
+        "sizeGzip": 64726,
+        "sizeJson": 156040
+    },
+    {
         "name": "material",
         "id": "open-icons-material",
         "size": 514248,
