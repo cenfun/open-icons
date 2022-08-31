@@ -133,6 +133,13 @@
         "sizeJson": 208741
     },
     {
+        "name": "flight",
+        "id": "open-icons-flight",
+        "size": 194642,
+        "sizeGzip": 147193,
+        "sizeJson": 456354
+    },
+    {
         "name": "fluent",
         "id": "open-icons-fluent",
         "size": 750210,
