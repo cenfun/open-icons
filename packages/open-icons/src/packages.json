@@ -196,6 +196,13 @@
         "sizeJson": 1101504
     },
     {
+        "name": "linear",
+        "id": "open-icons-linear",
+        "size": 60846,
+        "sizeGzip": 45995,
+        "sizeJson": 131836
+    },
+    {
         "name": "lucide",
         "id": "open-icons-lucide",
         "size": 69434,
