@@ -203,6 +203,13 @@
         "sizeJson": 93874
     },
     {
+        "name": "instructure",
+        "id": "open-icons-instructure",
+        "size": 234317,
+        "sizeGzip": 177152,
+        "sizeJson": 493312
+    },
+    {
         "name": "ionic",
         "id": "open-icons-ionic",
         "size": 245727,
