@@ -336,6 +336,13 @@
         "sizeJson": 996801
     },
     {
+        "name": "rsuite",
+        "id": "open-icons-rsuite",
+        "size": 54042,
+        "sizeGzip": 40869,
+        "sizeJson": 128533
+    },
+    {
         "name": "sanity",
         "id": "open-icons-sanity",
         "size": 23834,
