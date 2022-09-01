@@ -85,6 +85,6 @@ const settings = inject('settings');
 <style lang="scss">
 .oi-settings {
     height: 35px;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 </style>

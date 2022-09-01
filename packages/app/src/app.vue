@@ -4,7 +4,7 @@ import {
     isRef,
     onMounted, provide, reactive, ref, shallowReactive, toRaw, watch
 } from 'vue';
-import openStore from 'open-store';
+import { deleteDB, openStore } from 'open-store';
 import { Grid } from 'turbogrid';
 import {
     loadPackages, initSvg, defineIconElement, version, timestamp
@@ -18,6 +18,8 @@ import OiLoading from './components/loading.vue';
 import OiSettings from './components/settings.vue';
 import OiFinder from './components/finder.vue';
 import OiMy from './components/my.vue';
+
+const dbName = 'open-icons';
 
 const {
     VuiLayout, VuiFlex, VuiTab
@@ -305,7 +307,7 @@ const initPackages = function(packages) {
 
 const loadStart = async () => {
 
-    const ost = await openStore('open-icons');
+    const ost = await openStore(dbName);
     state.ost = ost;
 
     await read('layout', layout);
@@ -387,6 +389,10 @@ const save = function(k, v) {
     state.ost.set(k, toRaw(v));
 };
 
+const cleanCache = () => {
+    deleteDB(dbName);
+};
+
 watch(layout, (v) => {
     save('layout', v);
 });
@@ -419,16 +425,31 @@ onMounted(() => {
           direction="column"
           height="100%"
         >
-          <div class="oi-packages-header">
-            <div class="oi-title">
-              Open Icons <span><a
-                href="https://github.com/cenfun/open-icons"
-                target="_blank"
-                tooltip="Go to github repository"
-              >v{{ version }}</a></span>
+          <VuiFlex
+            spacing="10px"
+            class="oi-packages-header"
+          >
+            <div class="oi-title vui-flex-auto">
+              Open Icons
             </div>
-          </div>
+            <a
+              href="https://github.com/cenfun/open-icons"
+              target="_blank"
+              tooltip="Fork github repository"
+            ><OiIcon
+              name="github"
+              hover
+            /></a>
+          </VuiFlex>
           <div class="oi-packages-grid vui-flex-auto" />
+          <div class="oi-packages-footer">
+            <a
+              href="https://github.com/cenfun/open-icons"
+              target="_blank"
+            >v{{ version }}</a>
+            cached
+            (<span @click="cleanCache">clean</span>)
+          </div>
         </VuiFlex>
       </div>
 
@@ -437,16 +458,6 @@ onMounted(() => {
           <template #right>
             <div class="vui-flex-auto" />
             <OiSettings />
-            <div class="oi-header-right">
-              <a
-                href="https://github.com/cenfun/open-icons"
-                target="_blank"
-                tooltip="Fork github repository"
-              ><OiIcon
-                name="github"
-                hover
-              /></a>
-            </div>
           </template>
 
           <template #tabs>
@@ -565,29 +576,12 @@ a:hover {
     padding: 0 20px 0 15px;
     height: 41px;
     line-height: 41px;
-    display: flex;
-    flex-direction: row;
     background-color: #000;
 }
 
 .oi-title {
     font-weight: bold;
     font-size: 18px;
-
-    span {
-        font-weight: normal;
-        margin-left: 5px;
-        font-size: 14px;
-
-        a:link,
-        a:visited {
-            color: #999;
-        }
-    }
-}
-
-.oi-header-right {
-    margin: 0 10px;
 }
 
 .oi-packages-grid {
@@ -605,6 +599,25 @@ a:hover {
 
 .oi-packages-grid .tg-pane .tg-scrollbar-thumb:hover {
     background-color: #999;
+}
+
+.oi-packages-footer {
+    background-color: #000;
+    padding: 5px 8px;
+    color: #999;
+
+    span {
+        cursor: pointer;
+    }
+
+    span:hover {
+        text-decoration: underline;
+    }
+
+    a:link,
+    a:visited {
+        color: #999;
+    }
 }
 
 .oi-view-body {
