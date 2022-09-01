@@ -7,9 +7,8 @@ module.exports = {
     dirs: function(item, Util) {
 
         const dir = 'node_modules/phosphor-icons/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const json = Util.readJSONSync('node_modules/phosphor-icons/src/fonts/Phosphor.json');
 

@@ -1,16 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-const Util = require('../../scripts/util.js');
+const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: '@radix-ui/react-icons',
     url: 'https://github.com/radix-ui/icons',
-    dirs: function(item, U) {
+    dirs: function(item, Util) {
 
         const dir = 'node_modules/@radix-ui/react-icons/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const bundle = require('@radix-ui/react-icons');
         const keys = Object.keys(bundle);
@@ -29,10 +28,10 @@ module.exports = {
             });
             //console.log(props);
 
-            const svg = Util.createSvgFromReact(props);
+            const svg = Helper.createSvgFromReact(props);
             //console.log(svg);
 
-            fs.writeFileSync(path.resolve(dir, `${Util.pascalToKebabCase(k)}.svg`), svg);
+            fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
 
         });

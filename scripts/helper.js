@@ -1,4 +1,4 @@
-const Util = {
+const Helper = {
     pascalToKebabCase: (text) => {
         return (`${text}`).trim()
             .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -24,7 +24,7 @@ const Util = {
             }
 
             if (name !== 'viewBox') {
-                name = Util.pascalToKebabCase(name);
+                name = Helper.pascalToKebabCase(name);
             }
 
             return `${name}="${v}"`;
@@ -37,7 +37,7 @@ const Util = {
                 children = [children];
             }
             const cs = children.map((child) => {
-                return Util.createSvgFromReact(child);
+                return Helper.createSvgFromReact(child);
             });
             return `<${ts.join(' ')}>${cs.join('')}</${type}>`;
         }
@@ -48,5 +48,5 @@ const Util = {
 };
 
 
-module.exports = Util;
+module.exports = Helper;
 

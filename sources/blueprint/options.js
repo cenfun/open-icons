@@ -7,9 +7,8 @@ module.exports = {
     dirs: function(item, Util) {
 
         const dir = 'node_modules/@blueprintjs/icons/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const Icons = require('@blueprintjs/icons');
         const keys = Object.keys(Icons.IconSvgPaths20);

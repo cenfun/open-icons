@@ -1,16 +1,15 @@
 const fs = require('fs');
 const path = require('path');
-const Util = require('../../scripts/util.js');
+const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: 'akar-icons',
     url: 'https://github.com/artcoholic/akar-icons',
-    dirs: function(item, U) {
+    dirs: function(item, Util) {
 
         const dir = 'node_modules/akar-icons/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const bundle = require('akar-icons');
         const keys = Object.keys(bundle);
@@ -25,9 +24,9 @@ module.exports = {
 
             const props = v(v.defaultProps);
 
-            const svg = Util.createSvgFromReact(props);
+            const svg = Helper.createSvgFromReact(props);
 
-            fs.writeFileSync(path.resolve(dir, `${Util.pascalToKebabCase(k)}.svg`), svg);
+            fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
 
         });

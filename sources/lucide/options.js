@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const Util = require('../../scripts/util.js');
+const Helper = require('../../scripts/helper.js');
 
 const createSvg = function(tag, attrs, children) {
 
@@ -24,12 +24,11 @@ const createSvg = function(tag, attrs, children) {
 module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
-    dirs: function(item, U) {
+    dirs: function(item, Util) {
 
         const dir = 'node_modules/lucide/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const bundle = require('lucide');
         const keys = Object.keys(bundle);
@@ -44,7 +43,7 @@ module.exports = {
             const svg = createSvg(v[0], v[1], v[2]);
             //console.log(svg);
 
-            fs.writeFileSync(path.resolve(dir, `${Util.pascalToKebabCase(k)}.svg`), svg);
+            fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
         });
 

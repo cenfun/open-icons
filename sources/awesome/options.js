@@ -7,9 +7,8 @@ module.exports = {
     dirs: function(item, Util) {
 
         const dir = 'node_modules/@fortawesome/free-solid-svg-icons/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const Map = require('@fortawesome/free-solid-svg-icons');
         const keys = Object.keys(Map);

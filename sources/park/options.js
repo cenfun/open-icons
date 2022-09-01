@@ -1,22 +1,21 @@
 const fs = require('fs');
 const path = require('path');
-const Util = require('../../scripts/util.js');
+const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
-    dirs: function(item, U) {
+    dirs: function(item, Util) {
 
         const dir = 'node_modules/@icon-park/svg/svg';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        Util.rmSync(dir);
+        fs.mkdirSync(dir);
 
         const bundle = require('@icon-park/svg');
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {
-            const excludes = ['setConfigIcon', 'DEFAULT_ICON_CONFIGS'];
+            const excludes = ['setConfig', 'DEFAULT_ICON_CONFIGS'];
             if (excludes.includes(k)) {
                 return;
             }
@@ -29,7 +28,9 @@ module.exports = {
 
             const svg = v({});
             if (svg) {
-                fs.writeFileSync(path.resolve(dir, `${Util.pascalToKebabCase(k)}.svg`), svg);
+                fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
+            } else {
+                console.log(`Failed to create svg: ${k}`);
             }
 
         });
