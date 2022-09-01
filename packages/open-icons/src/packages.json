@@ -406,6 +406,13 @@
         "sizeJson": 786058
     },
     {
+        "name": "vaadin",
+        "id": "open-icons-vaadin",
+        "size": 97062,
+        "sizeGzip": 73374,
+        "sizeJson": 244385
+    },
+    {
         "name": "vscode",
         "id": "open-icons-vscode",
         "size": 112734,
