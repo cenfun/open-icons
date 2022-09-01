@@ -119,6 +119,13 @@
         "sizeJson": 96508
     },
     {
+        "name": "file",
+        "id": "open-icons-file",
+        "size": 767188,
+        "sizeGzip": 579511,
+        "sizeJson": 1383457
+    },
+    {
         "name": "flag",
         "id": "open-icons-flag",
         "size": 98672,
