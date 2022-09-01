@@ -14,6 +14,13 @@
         "sizeJson": 459818
     },
     {
+        "name": "antdm",
+        "id": "open-icons-antdm",
+        "size": 63239,
+        "sizeGzip": 47798,
+        "sizeJson": 141265
+    },
+    {
         "name": "awesome",
         "id": "open-icons-awesome",
         "size": 472061,

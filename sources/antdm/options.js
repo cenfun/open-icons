@@ -3,38 +3,37 @@ const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    name: '@wordpress/icons',
-    url: 'https://github.com/WordPress/gutenberg',
+    name: 'antd-mobile-icons',
+    url: 'https://github.com/awmleer/antd-mobile-icons',
     dirs: function(item, Util) {
 
-        const dir = 'node_modules/@wordpress/icons/svg';
+        const dir = 'node_modules/antd-mobile-icons/svg';
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('@wordpress/icons');
+        const bundle = require('antd-mobile-icons');
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
 
         keys.forEach((k) => {
-            const excludes = ['Icon'];
+            const excludes = [];
             if (excludes.includes(k)) {
                 return;
             }
 
             const v = bundle[k];
+            //console.log(v);
 
-            const svg = Helper.createSvgFromReact(v);
-            //console.log(k, v, svg);
+            const props = v({});
+            //console.log(props);
+
+            const svg = Helper.createSvgFromReact(props);
+            //console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
         });
 
         return dir;
-    },
-
-    onSVGDocument: function($svg) {
-        $svg.attr('fill', 'currentColor');
     }
-
 };

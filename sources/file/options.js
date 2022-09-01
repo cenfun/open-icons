@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-    debug: true,
     name: 'svg-file-icons',
     url: 'https://github.com/file-icons/icons',
     dirs: function(item, Util) {
