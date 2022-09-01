@@ -315,6 +315,13 @@
         "sizeJson": 996801
     },
     {
+        "name": "sanity",
+        "id": "open-icons-sanity",
+        "size": 23834,
+        "sizeGzip": 18027,
+        "sizeJson": 63951
+    },
+    {
         "name": "simple",
         "id": "open-icons-simple",
         "size": 1951282,

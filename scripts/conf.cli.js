@@ -41,19 +41,24 @@ const packageHandler = (item, Util, name, index, total) => {
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'src'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
+    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
+    const options = require(optionsPath);
 
     const outputName = `${item.id}-${name}`;
     if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
-        Util.logYellow(`exists cache and ignore: ${name}`);
-        return;
+
+        if (!options.debug) {
+            Util.logYellow(`exists cache and ignore: ${name}`);
+            return;
+        }
+
+        Util.logMagenta(`debug mode: exists cache will be overwritten: ${name}`);
+
     }
 
     console.log(`start svg minify: ${name}`);
 
     //Util.format(optionsPath);
-
-    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
-    const options = require(optionsPath);
 
     const source = getSource(options);
 

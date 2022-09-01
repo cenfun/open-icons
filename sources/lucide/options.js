@@ -1,17 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const Util = require('../../scripts/util.js');
 
-
-const pascalToKebabCase = (text) => {
-    return (`${text}`).trim()
-        .replace(/([a-z])([A-Z])/g, '$1-$2')
-        .replace(/\W/g, (m) => ((/[À-ž]/).test(m) ? m : '-'))
-        .replace(/^-+|-+$/g, '')
-        .replace(/-{2,}/g, '-')
-        .toLowerCase();
-};
-
-const createTag = function(tag, attrs, children) {
+const createSvg = function(tag, attrs, children) {
 
     const ts = Object.keys(attrs).map(function(name) {
         return `${name}="${attrs[name]}"`;
@@ -21,7 +12,7 @@ const createTag = function(tag, attrs, children) {
 
     if (children && children.length) {
         const cs = children.map(function(child) {
-            return createTag(child[0], child[1], child[2]);
+            return createSvg(child[0], child[1], child[2]);
         });
         return `<${ts.join(' ')}>${cs.join('')}</${tag}>`;
     }
@@ -33,7 +24,7 @@ const createTag = function(tag, attrs, children) {
 module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
-    dirs: function(item, Util) {
+    dirs: function(item, U) {
 
         const dir = 'node_modules/lucide/svg';
         if (!fs.existsSync(dir)) {
@@ -44,15 +35,16 @@ module.exports = {
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {
-            if (k === 'createElement' || k === 'createIcons' || k === 'icons') {
+            const excludes = ['createElement', 'createIcons', 'icons'];
+            if (excludes.includes(k)) {
                 return;
             }
 
             const v = bundle[k];
-            const svg = createTag(v[0], v[1], v[2]);
+            const svg = createSvg(v[0], v[1], v[2]);
             //console.log(svg);
 
-            fs.writeFileSync(path.resolve(dir, `${pascalToKebabCase(k)}.svg`), svg);
+            fs.writeFileSync(path.resolve(dir, `${Util.pascalToKebabCase(k)}.svg`), svg);
 
         });
 
