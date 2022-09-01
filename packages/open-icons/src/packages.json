@@ -420,6 +420,13 @@
         "sizeJson": 246889
     },
     {
+        "name": "vtmn",
+        "id": "open-icons-vtmn",
+        "size": 74804,
+        "sizeGzip": 56558,
+        "sizeJson": 190685
+    },
+    {
         "name": "weather",
         "id": "open-icons-weather",
         "size": 139225,
