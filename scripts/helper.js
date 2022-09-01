@@ -8,11 +8,25 @@ const Helper = {
             .toLowerCase();
     },
 
-    createSvgFromReact: function(option) {
+    createSvgFromReact: function(parent) {
 
-        //console.log(option);
+        if (!parent) {
+            throw new Error('[createSvgFromReact] invalid option');
+        }
 
-        const { type, props } = option;
+        //console.log(parent);
+
+        const { type, props } = parent;
+
+        if (!type || !props) {
+            console.log(parent);
+            throw new Error('[createSvgFromReact] invalid type or props');
+        }
+
+        let tagName = type;
+        if (typeof tagName === 'function') {
+            tagName = tagName.name.toLowerCase();
+        }
 
         const ts = Object.keys(props).map(function(name) {
             if (name === 'children') {
@@ -30,7 +44,7 @@ const Helper = {
             return `${name}="${v}"`;
         }).filter((it) => it);
 
-        ts.unshift(type);
+        ts.unshift(tagName);
         let children = props.children;
         if (children) {
             if (!Array.isArray(children)) {
@@ -39,10 +53,10 @@ const Helper = {
             const cs = children.map((child) => {
                 return Helper.createSvgFromReact(child);
             });
-            return `<${ts.join(' ')}>${cs.join('')}</${type}>`;
+            return `<${ts.join(' ')}>${cs.join('')}</${tagName}>`;
         }
 
-        return `<${ts.join(' ')}/>`;
+        return `<${ts.join(' ')} />`;
 
     }
 };

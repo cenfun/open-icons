@@ -392,6 +392,13 @@
         "sizeJson": 309001
     },
     {
+        "name": "wordpress",
+        "id": "open-icons-wordpress",
+        "size": 40847,
+        "sizeGzip": 30874,
+        "sizeJson": 96455
+    },
+    {
         "name": "zond",
         "id": "open-icons-zond",
         "size": 27212,
