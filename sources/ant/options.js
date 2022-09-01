@@ -9,6 +9,7 @@ module.exports = {
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     },
+
     onSVGName: function(name, item) {
         name = name.toLowerCase();
         return this.onSVGNameDefault(name, item);

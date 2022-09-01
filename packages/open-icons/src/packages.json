@@ -294,6 +294,13 @@
         "sizeJson": 133930
     },
     {
+        "name": "polaris",
+        "id": "open-icons-polaris",
+        "size": 84245,
+        "sizeGzip": 63689,
+        "sizeJson": 212752
+    },
+    {
         "name": "prime",
         "id": "open-icons-prime",
         "size": 46479,
