@@ -413,6 +413,13 @@
         "sizeJson": 244385
     },
     {
+        "name": "vivid",
+        "id": "open-icons-vivid",
+        "size": 19231,
+        "sizeGzip": 14543,
+        "sizeJson": 43747
+    },
+    {
         "name": "vscode",
         "id": "open-icons-vscode",
         "size": 112734,
