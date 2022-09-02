@@ -426,7 +426,7 @@ watch(() => state.tabIndex, (v) => {
       >{{ packageInfo.source.name }}@{{ packageInfo.source.version }} - {{ packageInfo.source.license }}</a>
     </div>
     <div class="oi-pkg-stats">
-      <b>{{ packageInfo.iconsNum }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
+      <b>{{ packageInfo.iconCount }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
         :href="'/dist/'+packageInfo.id+'.js'"
         target="_blank"
       >{{ packageInfo.id }}.js</a>

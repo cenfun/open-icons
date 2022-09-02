@@ -74,9 +74,10 @@ provide('settings', settings);
 const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
-        pkg.iconsNum = pkg.icons.length;
+        pkg.iconCount = pkg.icons.length;
         pkg.sourceFrom = `${pkg.source.name}@${pkg.source.version}`;
         pkg.sourceLicense = pkg.source.license;
+        pkg.sizeAvg = pkg.size / pkg.iconCount;
         return pkg;
     });
 
@@ -88,7 +89,7 @@ const renderPackages = function(packages) {
             name: 'Name',
             width: 80
         }, {
-            id: 'iconsNum',
+            id: 'iconCount',
             name: 'Icons',
             type: 'number',
             formatter: (v) => {
@@ -103,6 +104,11 @@ const renderPackages = function(packages) {
         }, {
             id: 'sizeGzip',
             name: 'Gzip',
+            formatter: 'BF',
+            align: 'right'
+        }, {
+            id: 'sizeAvg',
+            name: 'Avg',
             formatter: 'BF',
             align: 'right'
         }, {
@@ -285,9 +291,10 @@ const initPackages = function(packages) {
         id: 'open-icons',
         tags: getTags(allTags),
         icons: allIcons,
-        iconsNum: allIcons.length,
+        iconCount: allIcons.length,
         size: totalSize,
         sizeGzip: totalGzip,
+        sizeAvg: totalSize / allIcons.length,
         selectable: true
     };
 
