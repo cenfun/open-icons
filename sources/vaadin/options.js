@@ -6,13 +6,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@vaadin/icons',
     url: 'https://github.com/vaadin/web-components',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@vaadin/icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const jsPath = path.resolve(__dirname, '../../node_modules/@vaadin/icons/vaadin-iconset.js');
+        const jsPath = path.resolve(this.modulePath, 'vaadin-iconset.js');
         let content = Util.readFileContentSync(jsPath);
 
         const tag = 'vaadin-iconset';

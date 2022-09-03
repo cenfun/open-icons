@@ -5,13 +5,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@sanity/icons',
     url: 'https://github.com/sanity-io/design',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@sanity/icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('@sanity/icons');
+        const bundle = require(path.resolve(this.modulePath));
         const keys = Object.keys(bundle);
         //console.log(keys);
 

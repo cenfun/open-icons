@@ -1,7 +1,7 @@
 module.exports = {
     name: 'map-icons',
     url: 'https://github.com/scottdejonge/Map-Icons',
-    dirs: 'node_modules/map-icons/src/icons',
+    dirs: 'src/icons',
 
     onSVGDocument: function($svg) {
         let found = false;

@@ -3,38 +3,39 @@ const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    name: '@rsuite/icons',
+    debug: true,
+    name: '@rsuite/icon-font',
     url: 'https://github.com/rsuite/rsuite-icons',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@rsuite/icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('@rsuite/icons');
-        const keys = Object.keys(bundle);
-        //console.log(keys);
+        const entryPath = path.resolve(this.modulePath, 'components');
 
-        keys.forEach((k) => {
-            const excludes = ['Icon', 'createIconFont', 'createSvgIcon', '__esModule'];
-            if (excludes.includes(k)) {
-                return;
-            }
+        const extname = '.tsx';
 
-            const v = bundle[k];
-            //console.log(k, v);
+        Util.forEachFile(entryPath, [extname], (filename, filePath) => {
+            // const excludes = [];
+            // if (excludes.includes(k)) {
+            //     return;
+            // }
+            const content = fs.readFileSync(path.resolve(filePath, filename), {
+                encoding: 'utf-8'
+            });
 
-            if (typeof v.render !== 'function') {
-                console.log(`Not found render function: ${k}`);
-                return;
-            }
+            const str = Helper.cut(content, [['<svg', '</svg>']]);
+            //console.log(str);
 
-            const root = v.render();
+            const svg = str.split('ref={svgRef} {...props}').join('');
+            // svg = svg.replace(/Path/g, 'path');
+            // if (svg.indexOf('}') !== -1) {
+            //     console.log(svg);
+            // }
 
-            const vn = root.props.as.render();
-
-            const svg = Helper.createSvgFromReact(vn);
-            // console.log(svg);
+            const k = path.basename(filename, extname);
+            //console.log(k);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

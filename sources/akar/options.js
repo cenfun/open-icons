@@ -5,13 +5,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: 'akar-icons',
     url: 'https://github.com/artcoholic/akar-icons',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/akar-icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('akar-icons');
+        const bundle = require(path.resolve(this.modulePath));
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {

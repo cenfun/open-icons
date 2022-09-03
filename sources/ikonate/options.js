@@ -1,7 +1,7 @@
 module.exports = {
     name: 'ikonate',
     url: 'https://github.com/mikolajdobrucki/ikonate',
-    dirs: 'node_modules/ikonate/icons',
+    dirs: 'icons',
 
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'none');

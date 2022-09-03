@@ -5,13 +5,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@icon-park/svg/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('@icon-park/svg');
+        const bundle = require(path.resolve(this.modulePath));
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {

@@ -20,7 +20,7 @@ const getLicense = (json) => {
 
 const getSource = (options) => {
 
-    const jsonPath = path.resolve(__dirname, '../node_modules', options.name, 'package.json');
+    const jsonPath = path.resolve(options.modulePath, 'package.json');
     const json = require(jsonPath);
 
     let license = options.license;
@@ -36,62 +36,226 @@ const getSource = (options) => {
     };
 };
 
-const packageHandler = (item, Util, name, index, total) => {
+const getDirs = (pkg, name, Util) => {
+    let dirs = pkg.dirs;
+    if (typeof dirs === 'function') {
+        dirs = dirs.call(pkg, name, Util);
+    }
+
+    if (!Array.isArray(dirs)) {
+        dirs = [dirs];
+    }
+    //do NOT filter empty, some dir svg are in root ""
+    return dirs.map((item) => {
+        if (typeof item === 'object') {
+            for (const type in item) {
+                const p = item[type];
+                if (!fs.existsSync(p)) {
+                    item[type] = path.resolve(pkg.modulePath, p);
+                }
+            }
+            return item;
+        }
+        if (!fs.existsSync(item)) {
+            item = path.resolve(pkg.modulePath, item);
+        }
+        return item;
+    });
+};
+
+//=============================================================================================
+
+const tarExtract = (stream, folderPath, Util) => {
+    const tar = require('tar');
+    return new Promise((resolve) => {
+        const extractor = tar.x({
+            cwd: folderPath
+        }).on('error', (err) => {
+            Util.logRed(err);
+            resolve(1);
+        }).on('end', () => {
+            Util.log('[extracted]', Util.relativePath(folderPath));
+            resolve(0);
+        });
+        stream.pipe(extractor);
+    });
+};
+
+const downloadDistFile = async (url, times, Util) => {
+
+    const axios = require('axios');
+
+    times -= 1;
+    const res = await axios({
+        method: 'get',
+        url: url,
+        timeout: 10 * 1000,
+        responseType: 'stream'
+    }).catch(function(e) {
+        Util.logRed(e);
+    });
+    if (!res || !res.data) {
+        if (times > 0) {
+            Util.logYellow('Failed to download dist tar file, try again ...');
+            return downloadDistFile(url, times, Util);
+        }
+        return;
+    }
+    return res;
+};
+
+const downloadVersion = async (pkg, info, Util) => {
+    if (!info.dist || !info.dist.tarball) {
+        Util.logRed(`ERROR: Not found ${pkg.name} dist or dist.tarball`);
+        return;
+    }
+    const url = info.dist.tarball;
+    const res = await downloadDistFile(url, 2, Util);
+    if (!res || !res.data) {
+        Util.logRed(`ERROR: Failed to download dist tar file: ${url}`);
+        return;
+    }
+
+    return res.data;
+
+};
+
+const requestRepoInfo = async (job, pkg, Util) => {
+
+    const axios = require('axios');
+
+    const url = job.npmConfig.registry + pkg.name;
+
+    const res = await axios({
+        method: 'get',
+        url: url,
+        timeout: 10 * 1000,
+        responseType: 'json'
+    }).catch(function(e) {
+        Util.logRed(e);
+    });
+
+    if (!res || !res.data) {
+        Util.logRed(`ERROR: Failed to get module info: ${url}`);
+        return;
+    }
+    const info = res.data;
+    if (!info.name || !info.versions) {
+        Util.logRed(`ERROR: Invalid JSON data: ${url}`);
+        return;
+    }
+
+    return info;
+};
+
+const downloadPkgHandler = async (job, name, pkg, Util) => {
+
+    const sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
+    pkg.sourcePath = Util.relativePath(sourcePath);
+    const modulePath = path.resolve(sourcePath, 'package');
+    pkg.modulePath = Util.relativePath(modulePath);
+
+    //check pkg if downloaded
+    const pkgJsonPath = path.resolve(pkg.modulePath, 'package.json');
+    if (fs.existsSync(pkgJsonPath)) {
+        return;
+    }
+
+    //console.log(pkgJsonPath);
+
+    let repoInfo = await requestRepoInfo(job, pkg, Util);
+    if (!repoInfo) {
+        console.log('Try download again ...');
+        repoInfo = await requestRepoInfo(job, pkg, Util);
+    }
+    if (!repoInfo) {
+        throw new Error(`Failed to download repo config: ${pkg.name}`);
+    }
+
+    const repoPath = path.resolve(pkg.sourcePath, 'repository.json');
+    Util.writeJSONSync(repoPath, repoInfo);
+    Util.logGreen(`saved repository json: ${Util.relativePath(repoPath)}`);
+
+    const latestVersion = repoInfo['dist-tags'].latest;
+    const versionInfo = repoInfo.versions[latestVersion];
+
+    const dist = await downloadVersion(pkg, versionInfo, Util);
+    if (!dist) {
+        throw new Error(`Failed to download dist: ${pkg.name}`);
+    }
+
+    const distPath = path.resolve(pkg.sourcePath, 'package.tgz');
+    dist.pipe(fs.createWriteStream(distPath));
+
+    Util.log('[downloaded]', Util.relativePath(distPath));
+
+    const code = await tarExtract(dist, pkg.sourcePath, Util);
+    if (code) {
+        throw new Error(`Failed to extract dist: ${pkg.name}`);
+    }
+
+};
+
+const pkgHandler = async (job, name, index, total, Util) => {
 
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'src'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
     // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
-    const optionsPath = path.resolve(item.sourcesRoot, name, 'options.js');
-    const options = require(optionsPath);
+    const optionsPath = path.resolve(job.sourcesRoot, name, 'options.js');
+    const pkg = require(optionsPath);
 
-    const outputName = `${item.id}-${name}`;
-    if (fs.existsSync(path.resolve(item.buildPath, `${outputName}.js`))) {
+    if (pkg.disabled) {
+        Util.logRed(`disabled: ${name}`);
+        return false;
+    }
 
-        if (!options.debug) {
-            Util.logYellow(`exists cache and ignore: ${name}`);
-            return;
+    const outputName = `${job.id}-${name}`;
+    if (fs.existsSync(path.resolve(job.buildPath, `${outputName}.js`))) {
+
+        if (!pkg.debug) {
+            Util.logYellow(`exists cache and ignored: ${name}`);
+            return true;
         }
 
-        Util.logMagenta(`debug mode: exists cache will be overwritten: ${name}`);
+        Util.logMagenta(`debug mode and cache ignored: ${name}`);
 
     }
+
+    await downloadPkgHandler(job, name, pkg, Util);
 
     console.log(`start svg minify: ${name}`);
 
     //Util.format(optionsPath);
 
-    const source = getSource(options);
-
+    const source = getSource(pkg);
     //console.log(source.name, source.license);
 
-    let dirs = options.dirs;
-    if (typeof dirs === 'function') {
-        dirs = dirs.call(options, name, Util);
-    }
+    const dirs = getDirs(pkg, name, Util);
 
     //compress svg
     const svgMinifier = require('svg-minifier');
     const config = {
         id: outputName,
         dirs,
-        outputDir: item.outputRoot,
+        outputDir: job.outputRoot,
         outputRuntime: false,
         metadata: {
             name,
             source
         }
     };
-    if (options.exclude) {
-        config.exclude = options.exclude;
+    if (pkg.exclude) {
+        config.exclude = pkg.exclude;
     }
-    config.excludeSubDir = options.excludeSubDir;
+    config.excludeSubDir = pkg.excludeSubDir;
 
-    if (options.onSVGDocument) {
-        config.onSVGDocument = options.onSVGDocument;
-    }
-    if (options.onSVGName) {
-        config.onSVGName = options.onSVGName;
-    }
+    //events handler
+    ['onSVGName', 'onSVGContent', 'onSVGDocument', 'onSVGOptimized', 'onSVGError'].forEach((type) => {
+        const handler = pkg[type];
+        if (typeof handler === 'function') {
+            config[type] = handler;
+        }
+    });
 
     const metadata = svgMinifier(config);
 
@@ -99,7 +263,7 @@ const packageHandler = (item, Util, name, index, total) => {
     const compressedStr = compress(JSON.stringify(metadata));
 
     //save lz.js
-    const lzPath = path.resolve(item.buildPath, `${outputName}.js`);
+    const lzPath = path.resolve(job.buildPath, `${outputName}.js`);
 
     const URT = require('umd-runtime-templates');
     URT({
@@ -111,9 +275,10 @@ const packageHandler = (item, Util, name, index, total) => {
 
     Util.logCyan(`minified package: ${name} (${index}/${total})`);
 
+    return true;
 };
 
-const beforeBuildWebIcons = (item, Util) => {
+const beforeBuildHandler = async (item, Util) => {
 
     const id = require('../package.json').name;
     item.id = id;
@@ -129,12 +294,24 @@ const beforeBuildWebIcons = (item, Util) => {
     }
     item.outputRoot = outputRoot;
 
+    const rc = require('rc');
+    const npmConfig = rc('npm', {
+        registry: 'https://registry.npmjs.org/'
+    });
+    // console.log(npmConfig);
+    item.npmConfig = npmConfig;
+
     const packages = [];
 
+    let i = 1;
     const total = list.length;
-    list.forEach((name, i) => {
 
-        packageHandler(item, Util, name, i + 1, total);
+    for (const name of list) {
+
+        const enabled = await pkgHandler(item, name, i++, total, Util);
+        if (!enabled) {
+            continue;
+        }
 
         const outputName = `${item.id}-${name}`;
 
@@ -150,13 +327,13 @@ const beforeBuildWebIcons = (item, Util) => {
         const sizeJson = fs.statSync(path.resolve(item.outputRoot, `${outputName}.json`)).size;
 
         packages.push({
-            name,
             id: outputName,
+            name,
             size,
             sizeGzip,
             sizeJson
         });
-    });
+    }
 
     item.packages = packages;
 
@@ -193,10 +370,10 @@ module.exports = {
             return conf;
         },
 
-        before: (item, Util) => {
+        before: async (item, Util) => {
 
             if (item.name === 'open-icons') {
-                beforeBuildWebIcons(item, Util);
+                await beforeBuildHandler(item, Util);
             }
 
             return 0;
@@ -231,7 +408,7 @@ module.exports = {
 
                 return {
                     index: i + 1,
-                    name: `[${pkg.name}](/sources/${pkg.name}/options.js)`,
+                    name: `[${pkg.name}](https://cenfun.github.io/open-icons/#${pkg.name})`,
                     icons: icons.toLocaleString(),
                     size: Util.BF(pkg.size),
                     sizeGzip: Util.BF(pkg.sizeGzip),

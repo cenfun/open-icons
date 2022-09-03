@@ -1,5 +1,5 @@
 module.exports = {
     name: 'css.gg',
     url: 'https://github.com/astrit/css.gg',
-    dirs: 'node_modules/css.gg/icons/svg'
+    dirs: 'icons/svg'
 };

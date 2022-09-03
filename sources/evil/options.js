@@ -1,7 +1,7 @@
 module.exports = {
     name: 'evil-icons',
     url: 'https://github.com/evil-icons/evil-icons',
-    dirs: 'node_modules/evil-icons/assets/icons',
+    dirs: 'assets/icons',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

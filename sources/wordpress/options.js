@@ -5,27 +5,32 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@wordpress/icons',
     url: 'https://github.com/WordPress/gutenberg',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@wordpress/icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('@wordpress/icons');
-        const keys = Object.keys(bundle);
-        //console.log(keys);
+        const entryPath = path.resolve(this.modulePath, 'src/library');
+        const files = fs.readdirSync(entryPath);
 
-        keys.forEach((k) => {
-            const excludes = ['Icon'];
-            if (excludes.includes(k)) {
-                return;
-            }
+        files.forEach((filename) => {
+            // const excludes = [];
+            // if (excludes.includes(k)) {
+            //     return;
+            // }
+            const content = fs.readFileSync(path.resolve(entryPath, filename), {
+                encoding: 'utf-8'
+            });
 
-            const v = bundle[k];
+            const str = Helper.cut(content, [['<SVG', '</SVG>']]);
+            //console.log(str);
 
-            const svg = Helper.createSvgFromReact(v);
+            let svg = str.replace(/SVG/g, 'svg');
+            svg = svg.replace(/Path/g, 'path');
             //console.log(k, v, svg);
 
+            const k = path.basename(filename, '.js');
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
         });

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'ionicons',
     url: 'https://github.com/ionic-team/ionicons',
-    dirs: 'node_modules/ionicons/dist/svg',
+    dirs: 'dist/svg',
     exclude: ['*-sharp.svg'],
 
     onSVGDocument: function($svg) {

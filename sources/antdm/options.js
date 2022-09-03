@@ -5,13 +5,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: 'antd-mobile-icons',
     url: 'https://github.com/awmleer/antd-mobile-icons',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/antd-mobile-icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require('antd-mobile-icons');
+        const bundle = require(path.resolve(this.modulePath));
         const keys = Object.keys(bundle);
         // console.log(keys);
 

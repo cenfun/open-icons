@@ -1,7 +1,7 @@
 module.exports = {
     name: '@hashicorp/flight-icons',
     url: 'https://github.com/hashicorp/design-system/',
-    dirs: 'node_modules/@hashicorp/flight-icons/svg',
+    dirs: 'svg',
     exclude: ['*-16.svg', '*-color-24.svg'],
 
     onSVGName: function(name, item) {

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'grommet-icons',
     url: 'https://github.com/FortAwesome/Font-Awesome',
-    dirs: 'node_modules/grommet-icons/img',
+    dirs: 'img',
 
     onSVGDocument: function($svg) {
         let found = false;

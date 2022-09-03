@@ -2,7 +2,7 @@
 module.exports = {
     name: '@vtmn/icons',
     url: 'https://github.com/Decathlon/vitamin-web',
-    dirs: 'node_modules/@vtmn/icons/dist/vitamix/svg',
+    dirs: 'dist/vitamix/svg',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

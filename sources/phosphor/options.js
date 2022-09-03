@@ -4,15 +4,15 @@ const path = require('path');
 module.exports = {
     name: 'phosphor-icons',
     url: 'https://github.com/phosphor-icons/phosphor-icons',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/phosphor-icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const json = Util.readJSONSync('node_modules/phosphor-icons/src/fonts/Phosphor.json');
+        const bundle = require(path.resolve(this.modulePath, 'src/fonts/Phosphor.json'));
 
-        json.icons.forEach((ic) => {
+        bundle.icons.forEach((ic) => {
 
             const id = ic.properties.name;
             const paths = ic.icon.paths.map((d) => {

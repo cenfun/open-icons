@@ -1,10 +1,9 @@
 module.exports = {
     name: '@instructure/ui-icons',
     url: 'https://github.com/instructure/instructure-ui',
-    dirs: {
-        line: 'node_modules/@instructure/ui-icons/svg/Line',
-        solid: 'node_modules/@instructure/ui-icons/svg/Solid'
-    },
+    dirs: ['svg/Solid', {
+        line: 'svg/Line'
+    }],
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

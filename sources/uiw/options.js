@@ -1,7 +1,7 @@
 module.exports = {
     name: '@uiw/icons',
     url: 'https://github.com/uiwjs/icons',
-    dirs: 'node_modules/@uiw/icons/icon',
+    dirs: 'icon',
 
     onSVGDocument: function($svg) {
         let found = false;

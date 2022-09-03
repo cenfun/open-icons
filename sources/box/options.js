@@ -1,7 +1,7 @@
 module.exports = {
     name: 'boxicons',
     url: 'https://github.com/atisawd/boxicons',
-    dirs: 'node_modules/boxicons/svg',
+    dirs: 'svg',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

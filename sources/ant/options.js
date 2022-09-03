@@ -1,10 +1,9 @@
 module.exports = {
     name: '@ant-design/icons-svg',
     url: 'https://github.com/ant-design/ant-design-icons',
-    dirs: {
-        filled: 'node_modules/@ant-design/icons-svg/inline-svg/filled',
-        outlined: 'node_modules/@ant-design/icons-svg/inline-svg/outlined'
-    },
+    dirs: ['inline-svg/filled', {
+        outline: 'inline-svg/outlined'
+    }],
 
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');

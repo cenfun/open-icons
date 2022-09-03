@@ -1,9 +1,7 @@
 module.exports = {
     name: 'iconoir',
     url: 'https://github.com/lucaburgio/iconoir',
-    dirs: [
-        'node_modules/iconoir/icons'
-    ],
+    dirs: 'icons',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

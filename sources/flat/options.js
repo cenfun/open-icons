@@ -1,7 +1,7 @@
 module.exports = {
     name: 'flat-color-icons',
     url: 'https://github.com/icons8/flat-color-icons',
-    dirs: 'node_modules/flat-color-icons/svg',
+    dirs: 'svg',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

@@ -4,21 +4,21 @@ const path = require('path');
 module.exports = {
     name: '@blueprintjs/icons',
     url: 'https://github.com/palantir/blueprint',
-    dirs: function(item, Util) {
+    dirs: function(name, Util) {
 
-        const dir = 'node_modules/@blueprintjs/icons/svg';
+        const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const Icons = require('@blueprintjs/icons');
-        const keys = Object.keys(Icons.IconSvgPaths20);
+        const bundle = require(path.resolve(this.modulePath));
+        const keys = Object.keys(bundle.IconSvgPaths20);
 
         //console.log(keys.length);
 
         keys.forEach((k) => {
 
             //console.log(k);
-            const v = Icons.IconSvgPaths20[k];
+            const v = bundle.IconSvgPaths20[k];
 
             let ps = v.map((d) => {
                 return `<path d="${d}" fill-rule="evenodd" fill="currentColor"></path>`;
@@ -31,7 +31,7 @@ module.exports = {
 
             const svg = `<svg viewBox="0 0 20 20">${ps}</svg>`;
 
-            fs.writeFileSync(path.resolve(dir, `${Icons.IconNames[k]}.svg`), svg);
+            fs.writeFileSync(path.resolve(dir, `${bundle.IconNames[k]}.svg`), svg);
 
 
         });

@@ -1,10 +1,8 @@
 module.exports = {
     name: 'eva-icons',
     url: 'https://github.com/akveo/eva-icons',
-    dirs: [
-        'node_modules/eva-icons/fill/svg',
-        'node_modules/eva-icons/outline/svg'
-    ],
+    dirs: ['fill/svg', 'outline/svg'],
+
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
     }

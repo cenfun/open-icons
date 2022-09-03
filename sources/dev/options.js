@@ -1,12 +1,14 @@
 module.exports = {
     name: 'devicons',
     url: 'https://github.com/vorillaz/devicons',
-    dirs: 'node_modules/devicons/!SVG',
+    dirs: '!SVG',
+
     onSVGName: function(name, item) {
         name = name.toLowerCase();
         name = name.split('_').join('-');
         return this.onSVGNameDefault(name, item);
     },
+
     onSVGDocument: function($svg) {
         let found = false;
         ['path'].forEach((k) => {
@@ -23,4 +25,5 @@ module.exports = {
         $svg.attr('fill', 'currentColor');
 
     }
+
 };
