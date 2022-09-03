@@ -13,22 +13,7 @@ module.exports = {
 
         const entryPath = path.resolve(this.modulePath, 'dist/index.js');
 
-        const bundle = Helper.executeCode(entryPath, {
-            'react': {
-                createElement: (tag, props, children) => {
-                    return {
-                        type: tag,
-                        props: {
-                            ... props,
-                            children
-                        }
-                    };
-                }
-            },
-            'prop-types': {
-                oneOfType: () => {}
-            }
-        });
+        const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
         //console.log(keys);

@@ -259,6 +259,10 @@ const pkgHandler = async (job, name, index, total, Util) => {
 
     const metadata = svgMinifier(config);
 
+    if (!metadata.icons.length) {
+        throw new Error(`Failed to generate icons: ${metadata.name}`);
+    }
+
     const compress = require('lz-utils/lib/compress.js');
     const compressedStr = compress(JSON.stringify(metadata));
 

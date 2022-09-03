@@ -11,19 +11,17 @@ module.exports = {
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(this.modulePath, 'index.js');
+        const entryPath = path.resolve(this.modulePath, 'dist/react-icons.cjs.development.js');
 
-        const bundle = Helper.executeCode(entryPath, {
-            'react': {
-                forwardRef: (v) => v
-            }
-        });
+        const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
         //console.log(keys);
+
         keys.forEach((k) => {
 
             const v = bundle[k];
+            //console.log(v);
 
             if (typeof v.render !== 'function') {
                 console.log(`Not found render function: ${k}`);

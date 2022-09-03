@@ -39,11 +39,11 @@ const Helper = {
             tagName = tagName.name.toLowerCase();
         }
 
-        const ts = Object.keys(props).map(function(name) {
+        const attrs = Object.keys(props).map(function(name) {
             if (name === 'children') {
                 return '';
             }
-            const v = props[name];
+            let v = props[name];
             if (!v) {
                 return '';
             }
@@ -52,22 +52,28 @@ const Helper = {
                 name = Helper.pascalToKebabCase(name);
             }
 
-            return `${name}="${v}"`;
-        }).filter((it) => it);
+            if (name === 'style' && v && typeof v === 'object') {
+                v = Object.keys(v).map((k) => {
+                    return `${k}:${v[k]};`;
+                }).join('');
+            }
 
-        ts.unshift(tagName);
+            return `${name}="${v}"`;
+
+        }).filter((it) => it).join(' ');
+
+        let subs = '';
         let children = props.children;
         if (children) {
             if (!Array.isArray(children)) {
                 children = [children];
             }
-            const cs = children.map((child) => {
-                return Helper.createSvgFromReact(child);
-            });
-            return `<${ts.join(' ')}>${cs.join('')}</${tagName}>`;
+            subs = children.map((it) => {
+                return Helper.createSvgFromReact(it);
+            }).join('');
         }
 
-        return `<${ts.join(' ')} />`;
+        return `<${tagName} ${attrs}>${subs}</${tagName}>`;
 
     },
 
@@ -143,6 +149,29 @@ const Helper = {
         vm.runInContext(code, contextObject);
 
         return moduleExports;
+    },
+
+    dependencies: {
+        'react': {
+            createElement: (tag, props, ... children) => {
+                return {
+                    type: tag,
+                    props: {
+                        ... props,
+                        children
+                    }
+                };
+            },
+            forwardRef: (render) => {
+                return {
+                    $$typeof: Symbol.for('react.forward_ref'),
+                    render
+                };
+            }
+        },
+        'prop-types': {
+            oneOfType: () => {}
+        }
     }
 };
 

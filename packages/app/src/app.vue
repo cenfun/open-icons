@@ -229,6 +229,10 @@ const getTags = function(tags) {
         };
     });
 
+    if (!list.length) {
+        return [];
+    }
+
     list.sort((a, b) => {
         return b.num - a.num;
     });
@@ -275,6 +279,10 @@ const initPackages = function(packages) {
         });
 
         pkg.tags = getTags(tags);
+
+        if (!pkg.tags.length) {
+            console.log(`Not found any tags: ${pkg.name}`);
+        }
 
     });
 

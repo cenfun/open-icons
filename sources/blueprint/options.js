@@ -40,7 +40,7 @@ module.exports = {
                 return `<path d="${d}" fill-rule="evenodd" fill="currentColor"></path>`;
             }).join('');
 
-            const svg = `<svg viewBox="0 0 20 20">${ps}</svg>`;
+            const svg = `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">${ps}</svg>`;
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

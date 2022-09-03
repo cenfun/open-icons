@@ -3,6 +3,7 @@ const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
+    debug: true,
     name: '@sanity/icons',
     url: 'https://github.com/sanity-io/design',
     dirs: function(name, Util) {
@@ -13,11 +14,7 @@ module.exports = {
 
         const entryPath = path.resolve(this.modulePath, 'lib/sanity-icons.js');
 
-        const bundle = Helper.executeCode(entryPath, {
-            'react': {
-                forwardRef: (v) => v
-            }
-        });
+        const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
         //console.log(keys);
