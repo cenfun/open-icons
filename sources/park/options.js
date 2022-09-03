@@ -5,7 +5,7 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     name: 'phosphor-icons',
     url: 'https://github.com/phosphor-icons/phosphor-icons',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

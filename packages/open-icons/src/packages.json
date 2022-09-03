@@ -9,16 +9,16 @@
     {
         "id": "open-icons-ant",
         "name": "ant",
-        "size": 198101,
-        "sizeGzip": 149799,
-        "sizeJson": 455926
+        "size": 197393,
+        "sizeGzip": 149283,
+        "sizeJson": 453979
     },
     {
         "id": "open-icons-antdm",
         "name": "antdm",
-        "size": 62035,
-        "sizeGzip": 46905,
-        "sizeJson": 136282
+        "size": 63175,
+        "sizeGzip": 47749,
+        "sizeJson": 141135
     },
     {
         "id": "open-icons-awesome",
@@ -30,9 +30,9 @@
     {
         "id": "open-icons-blueprint",
         "name": "blueprint",
-        "size": 127243,
-        "sizeGzip": 96210,
-        "sizeJson": 320409
+        "size": 127315,
+        "sizeGzip": 96267,
+        "sizeJson": 320230
     },
     {
         "id": "open-icons-bootstrap",
@@ -128,16 +128,16 @@
     {
         "id": "open-icons-file",
         "name": "file",
-        "size": 767188,
-        "sizeGzip": 579511,
-        "sizeJson": 1383457
+        "size": 767576,
+        "sizeGzip": 579792,
+        "sizeJson": 1383849
     },
     {
         "id": "open-icons-flag",
         "name": "flag",
-        "size": 98672,
-        "sizeGzip": 74549,
-        "sizeJson": 231964
+        "size": 98284,
+        "sizeGzip": 74273,
+        "sizeJson": 230940
     },
     {
         "id": "open-icons-flat",
@@ -177,9 +177,9 @@
     {
         "id": "open-icons-hero",
         "name": "hero",
-        "size": 112332,
-        "sizeGzip": 84940,
-        "sizeJson": 319793
+        "size": 111648,
+        "sizeGzip": 84427,
+        "sizeJson": 318113
     },
     {
         "id": "open-icons-icomoon",
@@ -205,9 +205,9 @@
     {
         "id": "open-icons-instructure",
         "name": "instructure",
-        "size": 234221,
-        "sizeGzip": 177055,
-        "sizeJson": 490808
+        "size": 233733,
+        "sizeGzip": 176662,
+        "sizeJson": 488648
     },
     {
         "id": "open-icons-ionic",
@@ -247,9 +247,9 @@
     {
         "id": "open-icons-majest",
         "name": "majest",
-        "size": 107386,
-        "sizeGzip": 81221,
-        "sizeJson": 341319
+        "size": 107274,
+        "sizeGzip": 81129,
+        "sizeJson": 340939
     },
     {
         "id": "open-icons-maki",
@@ -268,9 +268,9 @@
     {
         "id": "open-icons-material",
         "name": "material",
-        "size": 515008,
-        "sizeGzip": 388862,
-        "sizeJson": 1551706
+        "size": 512984,
+        "sizeGzip": 387155,
+        "sizeJson": 1530976
     },
     {
         "id": "open-icons-mdi",

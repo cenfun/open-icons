@@ -5,13 +5,13 @@ module.exports = {
         outline: 'inline-svg/outlined'
     }],
 
-    onSVGDocument: function($svg) {
-        $svg.attr('fill', 'currentColor');
-    },
-
     onSVGName: function(name, item) {
         name = name.toLowerCase();
         return this.onSVGNameDefault(name, item);
+    },
+
+    onSVGDocument: function($svg) {
+        $svg.attr('fill', 'currentColor');
     },
 
     readme: 'Without two-tone icons'

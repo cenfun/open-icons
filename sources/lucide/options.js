@@ -24,7 +24,7 @@ const createSvg = function(tag, attrs, children) {
 module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

@@ -5,7 +5,7 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: 'antd-mobile-icons',
     url: 'https://github.com/awmleer/antd-mobile-icons',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

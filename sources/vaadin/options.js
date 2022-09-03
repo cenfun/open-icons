@@ -6,7 +6,7 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@vaadin/icons',
     url: 'https://github.com/vaadin/web-components',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

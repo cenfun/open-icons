@@ -19,13 +19,14 @@
     "dependencies": {
         "axios": "^0.27.2",
         "console-grid": "^2.0.0",
+        "decompress": "^4.2.1",
         "eight-colors": "^1.0.2",
+        "gauge": "^4.0.4",
         "lz-utils": "^1.0.5",
         "markdown-grid": "^1.0.1",
         "rc": "^1.2.8",
         "svg-minifier": "^1.0.8",
-        "umd-runtime-templates": "^1.0.0",
-        "tar": "^6.1.11"
+        "umd-runtime-templates": "^1.0.0"
     },
     "devDependencies": {
         "eslint": "^8.23.0",

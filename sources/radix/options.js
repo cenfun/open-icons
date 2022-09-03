@@ -5,7 +5,7 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@radix-ui/react-icons',
     url: 'https://github.com/radix-ui/icons',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

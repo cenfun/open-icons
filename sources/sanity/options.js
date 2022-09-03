@@ -3,10 +3,9 @@ const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    debug: true,
     name: '@sanity/icons',
     url: 'https://github.com/sanity-io/design',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);

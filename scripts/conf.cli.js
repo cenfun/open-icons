@@ -4,6 +4,9 @@
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
+const https = require('https');
+
+let gauge;
 
 const getLicense = (json) => {
 
@@ -39,7 +42,7 @@ const getSource = (options) => {
 const getDirs = (pkg, name, Util) => {
     let dirs = pkg.dirs;
     if (typeof dirs === 'function') {
-        dirs = dirs.call(pkg, name, Util);
+        dirs = dirs.call(pkg, Util);
     }
 
     if (!Array.isArray(dirs)) {
@@ -65,58 +68,84 @@ const getDirs = (pkg, name, Util) => {
 
 //=============================================================================================
 
-const tarExtract = (stream, folderPath, Util) => {
-    const tar = require('tar');
+const decompressPackage = (filePath, outputDir, Util) => {
+    const decompress = require('decompress');
+
     return new Promise((resolve) => {
-        const extractor = tar.x({
-            cwd: folderPath
-        }).on('error', (err) => {
-            Util.logRed(err);
-            resolve(1);
-        }).on('end', () => {
-            Util.log('[extracted]', Util.relativePath(folderPath));
-            resolve(0);
+        decompress(filePath, outputDir).then((files) => {
+            Util.log(`decompressed: ${filePath}`);
+            resolve();
         });
-        stream.pipe(extractor);
     });
+
 };
 
-const downloadDistFile = async (url, times, Util) => {
+const downloadFile = async (url, savePath, saveName, Util) => {
 
     const axios = require('axios');
 
-    times -= 1;
-    const res = await axios({
+    Util.log(`start download: ${url}`);
+
+    const { data, headers } = await axios({
         method: 'get',
         url: url,
         timeout: 10 * 1000,
-        responseType: 'stream'
+        responseType: 'stream',
+        httpsAgent: new https.Agent({
+            //keepAlive: true,
+            rejectUnauthorized: false
+        })
     }).catch(function(e) {
         Util.logRed(e);
     });
-    if (!res || !res.data) {
-        if (times > 0) {
-            Util.logYellow('Failed to download dist tar file, try again ...');
-            return downloadDistFile(url, times, Util);
+
+    if (!data) {
+        Util.logRed(`Failed to download: ${url}`);
+        return;
+    }
+
+    let totalLength;
+    let length = 0;
+
+    if (!gauge) {
+        const Gauge = require('gauge');
+        gauge = new Gauge();
+    }
+
+    const filePath = path.resolve(savePath, saveName);
+    const writer = fs.createWriteStream(filePath);
+
+    data.on('data', (chunk) => {
+        length += chunk.length;
+        if (!totalLength) {
+            totalLength = headers['content-length'];
         }
-        return;
-    }
-    return res;
-};
+        if (totalLength) {
+            const per = length / totalLength;
+            const text = `${(per * 100).toFixed(2)}% downloading ...`;
+            // console.log(text);
+            gauge.enable();
+            gauge.show(text, per);
 
-const downloadVersion = async (pkg, info, Util) => {
-    if (!info.dist || !info.dist.tarball) {
-        Util.logRed(`ERROR: Not found ${pkg.name} dist or dist.tarball`);
-        return;
-    }
-    const url = info.dist.tarball;
-    const res = await downloadDistFile(url, 2, Util);
-    if (!res || !res.data) {
-        Util.logRed(`ERROR: Failed to download dist tar file: ${url}`);
-        return;
-    }
+        }
+    });
+    data.pipe(writer);
 
-    return res.data;
+    Util.log('[downloaded]', Util.relativePath(filePath));
+
+    return new Promise((resolve) => {
+        writer.on('finish', async () => {
+            gauge.disable();
+
+            await decompressPackage(filePath, savePath, Util);
+
+            resolve(true);
+        });
+        writer.on('error', (e) => {
+            Util.logRed(e);
+            resolve();
+        });
+    });
 
 };
 
@@ -148,21 +177,7 @@ const requestRepoInfo = async (job, pkg, Util) => {
     return info;
 };
 
-const downloadPkgHandler = async (job, name, pkg, Util) => {
-
-    const sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
-    pkg.sourcePath = Util.relativePath(sourcePath);
-    const modulePath = path.resolve(sourcePath, 'package');
-    pkg.modulePath = Util.relativePath(modulePath);
-
-    //check pkg if downloaded
-    const pkgJsonPath = path.resolve(pkg.modulePath, 'package.json');
-    if (fs.existsSync(pkgJsonPath)) {
-        return;
-    }
-
-    //console.log(pkgJsonPath);
-
+const downloadFromNpm = async (job, name, pkg, Util) => {
     let repoInfo = await requestRepoInfo(job, pkg, Util);
     if (!repoInfo) {
         console.log('Try download again ...');
@@ -178,21 +193,51 @@ const downloadPkgHandler = async (job, name, pkg, Util) => {
 
     const latestVersion = repoInfo['dist-tags'].latest;
     const versionInfo = repoInfo.versions[latestVersion];
+    const url = versionInfo.dist.tarball;
 
-    const dist = await downloadVersion(pkg, versionInfo, Util);
-    if (!dist) {
-        throw new Error(`Failed to download dist: ${pkg.name}`);
+    const done = await downloadFile(url, pkg.sourcePath, 'package.tgz', Util);
+    if (!done) {
+        throw new Error(`Failed to download package: ${pkg.name}`);
     }
 
-    const distPath = path.resolve(pkg.sourcePath, 'package.tgz');
-    dist.pipe(fs.createWriteStream(distPath));
+};
 
-    Util.log('[downloaded]', Util.relativePath(distPath));
+const downloadFromUrl = async (job, name, pkg, Util) => {
+    const url = pkg.download.url;
 
-    const code = await tarExtract(dist, pkg.sourcePath, Util);
-    if (code) {
-        throw new Error(`Failed to extract dist: ${pkg.name}`);
+    const done = await downloadFile(url, pkg.sourcePath, 'package.zip', Util);
+
+    if (!done) {
+        throw new Error(`Failed to download package: ${pkg.name}`);
     }
+
+    const handler = pkg.download.handler;
+    if (typeof handler === 'function') {
+        handler.call(pkg, Util);
+    }
+
+};
+
+const downloadPkgHandler = (job, name, pkg, Util) => {
+
+    const sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
+    pkg.sourcePath = Util.relativePath(sourcePath);
+    const modulePath = path.resolve(sourcePath, 'package');
+    pkg.modulePath = Util.relativePath(modulePath);
+
+    //check pkg if downloaded
+    const pkgJsonPath = path.resolve(pkg.modulePath, 'package.json');
+    if (fs.existsSync(pkgJsonPath)) {
+        return;
+    }
+
+    //console.log(pkgJsonPath);
+
+    if (pkg.download) {
+        return downloadFromUrl(job, name, pkg, Util);
+    }
+
+    return downloadFromNpm(job, name, pkg, Util);
 
 };
 

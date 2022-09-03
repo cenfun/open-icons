@@ -5,7 +5,7 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@blueprintjs/icons',
     url: 'https://github.com/palantir/blueprint',
-    dirs: function(name, Util) {
+    dirs: function(Util) {
 
         const dir = path.resolve(this.modulePath, 'svg');
         Util.rmSync(dir);
@@ -32,7 +32,7 @@ module.exports = {
             //console.log(k);
             const v = bundle.IconSvgPaths20[k];
             if (!v.length) {
-                console.log(name, k, 'Not found path d');
+                console.log(k, 'Not found path d');
                 return;
             }
 

@@ -1,26 +1,53 @@
 const fs = require('fs');
 const path = require('path');
+const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    name: 'svg-file-icons',
+    name: 'file-icons',
     url: 'https://github.com/file-icons/icons',
-    dirs: function(name, Util) {
+    download: {
+        url: 'https://github.com/file-icons/icons/archive/refs/heads/master.zip',
+        handler: function(Util) {
+            const oldPath = path.resolve(this.sourcePath, 'icons-master');
+            const newPath = path.resolve(this.sourcePath, 'package');
+            fs.renameSync(oldPath, newPath);
 
-        const dir = path.resolve(this.modulePath, 'svg');
-        Util.rmSync(dir);
-        fs.mkdirSync(dir);
+            //create package.json
+            const jsonPath = path.resolve(newPath, 'package.json');
+            Util.writeJSONSync(jsonPath, {
+                name: this.name,
+                version: '1.0.0',
+                license: 'ISC'
+            });
+        }
+    },
+    dirs: 'svg',
 
-        const bundle = require(path.resolve(this.modulePath, 'build/svg-file-icons.json'));
+    onSVGName: function(name, item) {
+        name = name.replace('#', '-sharp');
+        name = Helper.pascalToKebabCase(name);
+        return this.onSVGNameDefault(name, item);
+    },
 
-        bundle.icons.forEach((icon) => {
-            const svg = `
-                <svg viewBox="${icon.viewBox}">
-                    ${icon.content}
-                </svg>
-            `;
-            fs.writeFileSync(path.resolve(dir, `${icon.name}.svg`), svg);
+    onSVGDocument: function($svg, item, $) {
+        $svg.attr('fill', 'currentColor');
+        $svg.attr('viewBox', '0 0 512 512');
+    },
+
+    onSVGOptimized: function($svg, item, $) {
+        ['g', 'path'].forEach((tag) => {
+            $svg.find(tag).each((i, it) => {
+                const $elem = $(it);
+                const fill = $elem.attr('fill');
+                if (fill && fill !== 'none') {
+                    $elem.attr('fill', 'currentColor');
+                }
+                const stroke = $elem.attr('stroke');
+                if (stroke && stroke !== 'none') {
+                    $elem.attr('stroke', 'currentColor');
+                }
+            });
         });
-
-        return dir;
     }
+
 };
