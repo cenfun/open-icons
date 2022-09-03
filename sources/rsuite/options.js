@@ -3,7 +3,6 @@ const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    debug: true,
     name: '@rsuite/icon-font',
     url: 'https://github.com/rsuite/rsuite-icons',
     dirs: function(name, Util) {

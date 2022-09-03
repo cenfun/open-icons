@@ -11,7 +11,25 @@ module.exports = {
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require(path.resolve(this.modulePath));
+        const entryPath = path.resolve(this.modulePath, 'dist/index.js');
+
+        const bundle = Helper.executeCode(entryPath, {
+            'react': {
+                createElement: (tag, props, children) => {
+                    return {
+                        type: tag,
+                        props: {
+                            ... props,
+                            children
+                        }
+                    };
+                }
+            },
+            'prop-types': {
+                oneOfType: () => {}
+            }
+        });
+
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {
@@ -23,11 +41,12 @@ module.exports = {
             }
 
             const props = v(v.defaultProps);
+            //console.log(props);
 
             const svg = Helper.createSvgFromReact(props);
+            //console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
-
 
         });
 

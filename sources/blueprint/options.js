@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: '@blueprintjs/icons',
@@ -10,29 +11,38 @@ module.exports = {
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require(path.resolve(this.modulePath));
-        const keys = Object.keys(bundle.IconSvgPaths20);
+        const entryPath = path.resolve(this.modulePath, 'lib/cjs/index.js');
 
+        const bundle = Helper.executeCode(entryPath, {
+            'tslib': {
+                __importStar: (v) => v,
+                __assign: Object.assign
+            },
+            'change-case': {
+                pascalCase: (v) => v,
+                snakeCase: (v) => v
+            }
+        });
+
+        const keys = Object.keys(bundle.IconSvgPaths20);
         //console.log(keys.length);
 
         keys.forEach((k) => {
 
             //console.log(k);
             const v = bundle.IconSvgPaths20[k];
-
-            let ps = v.map((d) => {
-                return `<path d="${d}" fill-rule="evenodd" fill="currentColor"></path>`;
-            }).join('\n');
-
-            if (!ps) {
-                console.log(k);
-                ps = '<path d="M0,0 L1,1z" fill-rule="evenodd" fill="currentColor"></path>';
+            if (!v.length) {
+                console.log(name, k, 'Not found path d');
+                return;
             }
+
+            const ps = v.map((d) => {
+                return `<path d="${d}" fill-rule="evenodd" fill="currentColor"></path>`;
+            }).join('');
 
             const svg = `<svg viewBox="0 0 20 20">${ps}</svg>`;
 
-            fs.writeFileSync(path.resolve(dir, `${bundle.IconNames[k]}.svg`), svg);
-
+            fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 
         });
 

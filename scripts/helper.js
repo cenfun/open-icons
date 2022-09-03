@@ -1,7 +1,15 @@
 
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
 const EC = require('eight-colors');
 
 const Helper = {
+
+    hasOwn: function(obj, key) {
+        return Object.prototype.hasOwnProperty.call(obj, key);
+    },
+
     pascalToKebabCase: (text) => {
         return (`${text}`).trim()
             .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -88,6 +96,53 @@ const Helper = {
         }
 
         return Helper.cut(str, list);
+    },
+
+    executeCode: function(entryPath, dependencies) {
+
+        if (!fs.existsSync(entryPath)) {
+            entryPath = `${entryPath}.js`;
+            if (!fs.existsSync(entryPath)) {
+                throw new Error(`Not found module: ${entryPath}`);
+            }
+        }
+
+        const stat = fs.statSync(entryPath);
+        if (stat.isDirectory()) {
+            entryPath = path.resolve(entryPath, 'index.js');
+        }
+
+        const code = fs.readFileSync(entryPath, {
+            encoding: 'utf-8'
+        });
+
+        const moduleExports = {};
+
+        const contextObject = {
+            require: function(moduleName) {
+
+                if (Helper.hasOwn(dependencies, moduleName)) {
+                    return dependencies[moduleName];
+                }
+
+                const dir = path.dirname(entryPath);
+                const childPath = path.resolve(dir, moduleName);
+                return Helper.executeCode(childPath, dependencies);
+            },
+            module: {
+                exports: moduleExports
+            },
+            exports: moduleExports,
+            process: {
+                env: {
+                    NODE_ENV: ''
+                }
+            }
+        };
+        vm.createContext(contextObject);
+        vm.runInContext(code, contextObject);
+
+        return moduleExports;
     }
 };
 

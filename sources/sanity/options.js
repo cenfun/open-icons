@@ -11,7 +11,14 @@ module.exports = {
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require(path.resolve(this.modulePath));
+        const entryPath = path.resolve(this.modulePath, 'lib/sanity-icons.js');
+
+        const bundle = Helper.executeCode(entryPath, {
+            'react': {
+                forwardRef: (v) => v
+            }
+        });
+
         const keys = Object.keys(bundle);
         //console.log(keys);
 
