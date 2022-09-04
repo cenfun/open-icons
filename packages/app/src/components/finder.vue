@@ -1,3 +1,80 @@
+<template>
+  <VuiFlex
+    v-if="packageInfo"
+    direction="column"
+    spacing="10px"
+    height="100%"
+  >
+    <div class="oi-pkg-title">
+      {{ packageInfo.fullName || packageInfo.name }} <span>{{ packageInfo.iconCount.toLocaleString() }} icons</span>
+    </div>
+    <div class="oi-pkg-stats">
+      <a
+        :href="'/dist/'+packageInfo.id+'.js'"
+        target="_blank"
+      >{{ packageInfo.id }}.js ({{ BF(packageInfo.size) }})</a>
+      /
+      <a
+        :href="packageInfo.source.url"
+        target="_blank"
+      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }}</a>
+    </div>
+
+    <div class="oi-filter flex-row">
+      <div class="oi-searcher">
+        <input
+          v-model="keywords"
+          type="text"
+          class="oi-keywords flex-auto"
+          onfocus="this.select()"
+        >
+        <OiIcon name="searcher" />
+      </div>
+    </div>
+    <div class="oi-tags">
+      <span
+        v-for="(tag, i) in tagsList"
+        :key="i"
+        @click="tagClickHandler(tag)"
+      >{{ tag.name }}</span>
+    </div>
+    <div class="oi-view-header">
+      <VuiFlex spacing="10px">
+        <div>Results: {{ state.results }}</div>
+        <div class="vui-flex-empty" />
+        <OiIcon
+          v-model="state.viewType"
+          name="grid"
+          hover
+          tooltip="Grid view"
+        />
+        <OiIcon
+          v-model="state.viewType"
+          name="thumb"
+          hover
+          tooltip="Thumb view"
+        />
+      </VuiFlex>
+    </div>
+    <div class="oi-view-body vui-flex-auto">
+      <div class="oi-grid oi-finder-grid" />
+      <div
+        ref="thumb"
+        class="oi-finder-thumb"
+      >
+        <div class="oi-thumb-icons" />
+        <div
+          v-if="thumbIcons.length"
+          class="oi-thumb-more"
+          @click="renderThumbIcons()"
+        >
+          Show More {{ thumbIcons.length }}
+        </div>
+      </div>
+    </div>
+  </VuiFlex>
+</template>
+
 <script setup>
 import VineUI from 'vine-ui';
 import { Grid } from 'turbogrid';
@@ -411,82 +488,7 @@ watch(() => state.tabIndex, (v) => {
 });
 
 </script>
-<template>
-  <VuiFlex
-    v-if="packageInfo"
-    direction="column"
-    spacing="10px"
-    height="100%"
-  >
-    <div class="oi-pkg-title">
-      {{ packageInfo.fullName || packageInfo.name }} <span>{{ packageInfo.iconCount.toLocaleString() }} icons</span>
-    </div>
-    <div class="oi-pkg-stats">
-      <a
-        :href="'/dist/'+packageInfo.id+'.js'"
-        target="_blank"
-      >{{ packageInfo.id }}.js ({{ BF(packageInfo.size) }})</a>
-      /
-      <a
-        :href="packageInfo.source.url"
-        target="_blank"
-      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }}</a>
-    </div>
 
-    <div class="oi-filter flex-row">
-      <div class="oi-searcher">
-        <input
-          v-model="keywords"
-          type="text"
-          class="oi-keywords flex-auto"
-          onfocus="this.select()"
-        >
-        <OiIcon name="searcher" />
-      </div>
-    </div>
-    <div class="oi-tags">
-      <span
-        v-for="(tag, i) in tagsList"
-        :key="i"
-        @click="tagClickHandler(tag)"
-      >{{ tag.name }}</span>
-    </div>
-    <div class="oi-view-header">
-      <VuiFlex spacing="10px">
-        <div>Results: {{ state.results }}</div>
-        <div class="vui-flex-empty" />
-        <OiIcon
-          v-model="state.viewType"
-          name="grid"
-          hover
-          tooltip="Grid view"
-        />
-        <OiIcon
-          v-model="state.viewType"
-          name="thumb"
-          hover
-          tooltip="Thumb view"
-        />
-      </VuiFlex>
-    </div>
-    <div class="oi-view-body vui-flex-auto">
-      <div class="oi-grid oi-finder-grid" />
-      <div
-        ref="thumb"
-        class="oi-finder-thumb"
-      >
-        <div class="oi-thumb-icons" />
-        <div
-          v-if="thumbIcons.length"
-          class="oi-thumb-more"
-          @click="renderThumbIcons()"
-        >
-          Show More {{ thumbIcons.length }}
-        </div>
-      </div>
-    </div>
-  </VuiFlex>
-</template>
 <style lang="scss">
 .oi-pkg-title {
     text-transform: capitalize;

@@ -1,12 +1,3 @@
-<script setup>
-import VineUI from 'vine-ui';
-import { inject } from 'vue';
-
-const { VuiFlex, VuiSelect } = VineUI;
-
-const settings = inject('settings');
-
-</script>
 <template>
   <VuiFlex
     spacing="10px"
@@ -82,6 +73,17 @@ const settings = inject('settings');
     </VuiSelect>
   </VuiFlex>
 </template>
+
+<script setup>
+import VineUI from 'vine-ui';
+import { inject } from 'vue';
+
+const { VuiFlex, VuiSelect } = VineUI;
+
+const settings = inject('settings');
+
+</script>
+
 <style lang="scss">
 .oi-settings {
     height: 35px;

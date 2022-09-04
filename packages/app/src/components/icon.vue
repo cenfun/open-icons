@@ -1,3 +1,12 @@
+<template>
+  <div
+    ref="el"
+    :class="classList"
+    :style="styleList"
+    @click="clickHandler"
+  />
+</template>
+
 <script setup>
 import {
     computed, onMounted, ref
@@ -94,14 +103,7 @@ onMounted(() => {
     }
 });
 </script>
-<template>
-  <div
-    ref="el"
-    :class="classList"
-    :style="styleList"
-    @click="clickHandler"
-  />
-</template>
+
 <style lang="scss">
 .oi-icon {
     --oi-icon-size: 20px;

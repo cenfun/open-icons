@@ -1,3 +1,40 @@
+<template>
+  <VuiFlex
+    direction="column"
+    spacing="10px"
+    height="100%"
+  >
+    <div class="oi-toolbar">
+      <VuiFlex spacing="10px">
+        <VuiButton
+          tooltip="Remove selected icons"
+          @click="removeSelected()"
+        >
+          <OiIcon
+            name="remove"
+            size="16px"
+          />
+          Remove
+        </VuiButton>
+        <VuiButton
+          tooltip="Export all my icons"
+          @click="exportIcons()"
+        >
+          <OiIcon
+            name="export"
+            size="16px"
+          />
+          Export
+        </VuiButton>
+        <div class="vui-flex-empty" />
+        <div>Will be cached in browser</div>
+      </VuiFlex>
+    </div>
+    <div class="oi-view-body vui-flex-auto">
+      <div class="oi-grid oi-my-grid" />
+    </div>
+  </VuiFlex>
+</template>
 <script setup>
 import VineUI from 'vine-ui';
 import { Grid } from 'turbogrid';
@@ -228,43 +265,7 @@ watch(() => state.tabIndex, (v) => {
 });
 
 </script>
-<template>
-  <VuiFlex
-    direction="column"
-    spacing="10px"
-    height="100%"
-  >
-    <div class="oi-toolbar">
-      <VuiFlex spacing="10px">
-        <VuiButton
-          tooltip="Remove selected icons"
-          @click="removeSelected()"
-        >
-          <OiIcon
-            name="remove"
-            size="16px"
-          />
-          Remove
-        </VuiButton>
-        <VuiButton
-          tooltip="Export all my icons"
-          @click="exportIcons()"
-        >
-          <OiIcon
-            name="export"
-            size="16px"
-          />
-          Export
-        </VuiButton>
-        <div class="vui-flex-empty" />
-        <div>Will be cached in browser</div>
-      </VuiFlex>
-    </div>
-    <div class="oi-view-body vui-flex-auto">
-      <div class="oi-grid oi-my-grid" />
-    </div>
-  </VuiFlex>
-</template>
+
 <style lang="scss">
 .oi-toolbar {
     padding: 10px 10px 0;

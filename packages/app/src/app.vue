@@ -1,3 +1,92 @@
+<template>
+  <div class="oi-app">
+    <VuiLayout
+      v-model="layout"
+      width="100%"
+      height="100%"
+      gutter-size="0"
+      gutter-hover-size="2px"
+    >
+      <div class="oi-layout-packages">
+        <VuiFlex
+          direction="column"
+          height="100%"
+        >
+          <VuiFlex
+            spacing="10px"
+            class="oi-packages-header"
+          >
+            <div class="oi-title vui-flex-auto">
+              <a href="/">Open Icons</a>
+            </div>
+            <a
+              href="https://github.com/cenfun/open-icons"
+              target="_blank"
+              tooltip="Fork github repository"
+            ><OiIcon
+              name="github"
+              hover
+            /></a>
+          </VuiFlex>
+          <div class="oi-packages-filter">
+            <input
+              v-model="keywords"
+              onfocus="this.select()"
+              placeholder=""
+            >
+            <OiIcon
+              color="#666"
+              name="searcher"
+            />
+          </div>
+          <div class="oi-packages-grid vui-flex-auto" />
+          <div class="oi-packages-footer">
+            <a
+              href="https://github.com/cenfun/open-icons"
+              target="_blank"
+            >v{{ version }}</a>
+            cached
+            (<span @click="cleanCache">clean</span>)
+          </div>
+        </VuiFlex>
+      </div>
+
+      <div class="oi-layout-main">
+        <VuiTab v-model="state.tabIndex">
+          <template #right>
+            <div class="vui-flex-auto" />
+            <OiSettings />
+          </template>
+
+          <template #tabs>
+            <div class="vui-flex-row">
+              <OiIcon
+                name="finder"
+                size="16px"
+              />
+              <b>Icon Finder</b>
+            </div>
+            <div class="vui-flex-row">
+              <OiIcon
+                name="my"
+                size="16px"
+              />
+              <b>My Icons</b>
+            </div>
+          </template>
+
+          <template #panes>
+            <OiFinder />
+            <OiMy />
+          </template>
+        </VuiTab>
+      </div>
+    </VuiLayout>
+
+    <OiLoading />
+  </div>
+</template>
+
 <script setup>
 import VineUI from 'vine-ui';
 import {
@@ -453,94 +542,7 @@ onMounted(() => {
 });
 
 </script>
-<template>
-  <div class="oi-app">
-    <VuiLayout
-      v-model="layout"
-      width="100%"
-      height="100%"
-      gutter-size="0"
-      gutter-hover-size="2px"
-    >
-      <div class="oi-layout-packages">
-        <VuiFlex
-          direction="column"
-          height="100%"
-        >
-          <VuiFlex
-            spacing="10px"
-            class="oi-packages-header"
-          >
-            <div class="oi-title vui-flex-auto">
-              Open Icons
-            </div>
-            <a
-              href="https://github.com/cenfun/open-icons"
-              target="_blank"
-              tooltip="Fork github repository"
-            ><OiIcon
-              name="github"
-              hover
-            /></a>
-          </VuiFlex>
-          <div class="oi-packages-filter">
-            <input
-              v-model="keywords"
-              onfocus="this.select()"
-              placeholder=""
-            >
-            <OiIcon
-              color="#666"
-              name="searcher"
-            />
-          </div>
-          <div class="oi-packages-grid vui-flex-auto" />
-          <div class="oi-packages-footer">
-            <a
-              href="https://github.com/cenfun/open-icons"
-              target="_blank"
-            >v{{ version }}</a>
-            cached
-            (<span @click="cleanCache">clean</span>)
-          </div>
-        </VuiFlex>
-      </div>
 
-      <div class="oi-layout-main">
-        <VuiTab v-model="state.tabIndex">
-          <template #right>
-            <div class="vui-flex-auto" />
-            <OiSettings />
-          </template>
-
-          <template #tabs>
-            <div class="vui-flex-row">
-              <OiIcon
-                name="finder"
-                size="16px"
-              />
-              <b>Icon Finder</b>
-            </div>
-            <div class="vui-flex-row">
-              <OiIcon
-                name="my"
-                size="16px"
-              />
-              <b>My Icons</b>
-            </div>
-          </template>
-
-          <template #panes>
-            <OiFinder />
-            <OiMy />
-          </template>
-        </VuiTab>
-      </div>
-    </VuiLayout>
-
-    <OiLoading />
-  </div>
-</template>
 <style lang="scss">
 html,
 body {
