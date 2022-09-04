@@ -89,7 +89,7 @@ const renderPackages = function(packages) {
         columns: [{
             id: 'name',
             name: 'Name',
-            width: 80
+            width: 85
         }, {
             id: 'iconCount',
             name: 'Icons',
@@ -640,8 +640,7 @@ a:hover {
 .oi-packages-filter {
     position: relative;
     padding: 8px;
-    border-bottom: 1px solid #333;
-    max-width: 200px;
+    max-width: 300px;
 
     input {
         display: block;
@@ -661,6 +660,7 @@ a:hover {
 }
 
 .oi-packages-grid {
+    border-top: 1px solid #333;
     width: 100%;
     height: 100%;
 }
