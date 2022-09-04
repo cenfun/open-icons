@@ -1,6 +1,7 @@
 
 import { saveAs } from 'file-saver';
 import { h, createApp } from 'vue';
+import { getSettingsSize } from './util.js';
 
 const getColor = function(settings, colorIndex) {
 
@@ -35,7 +36,7 @@ const getBG = (settings) => {
 };
 
 const getWCIcon = function(settings, icon) {
-    const size = settings.size || '32px';
+    const size = `${getSettingsSize(settings)}px`;
     const color = getColor(settings, icon.tg_index);
     const bg = getBG(settings);
     const tag = icon.tagName;
@@ -47,7 +48,7 @@ export const getCellIcon = function(settings, icon) {
         return getWCIcon(settings, icon);
     }
 
-    const size = settings.size || '32px';
+    const size = `${getSettingsSize(settings)}px`;
 
     const st = [`--size: ${size};`];
 
@@ -115,7 +116,7 @@ export const savePNG = function(content, name, settings) {
 
     const dataUrl = `data:image/svg+xml;charset=utf8,${encodeURIComponent(content)}`;
 
-    const size = parseInt(settings.size) || 32;
+    const size = getSettingsSize(settings);
     const canvas = document.createElement('canvas');
     canvas.width = size;
     canvas.height = size;

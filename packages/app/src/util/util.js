@@ -24,6 +24,9 @@ export const BF = function(v, places = 1, base = 1024) {
     return v;
 };
 
+export const getSettingsSize = function(settings) {
+    return parseInt(settings.size) || 64;
+};
 
 export const unbindEvents = function(events) {
     if (!events) {

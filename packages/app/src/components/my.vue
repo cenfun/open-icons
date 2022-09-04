@@ -5,7 +5,7 @@ import { Grid } from 'turbogrid';
 import {
     inject, onMounted, ref, watch
 } from 'vue';
-import { throttle } from '../util/util.js';
+import { getSettingsSize, throttle } from '../util/util.js';
 import {
     formatter, getCellIcon, saveSVG, savePNG
 } from '../util/grid-helper.js';
@@ -90,7 +90,7 @@ const renderGrid = () => {
         return;
     }
 
-    const cellSize = (parseInt(settings.size) || 32) + 10;
+    const cellSize = getSettingsSize(settings) + 10;
 
     grid.setOption({
         rowHeight: cellSize,

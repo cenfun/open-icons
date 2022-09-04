@@ -6,7 +6,9 @@ import {
     inject, nextTick, ref, watch
 } from 'vue';
 
-import { BF, throttle } from '../util/util.js';
+import {
+    BF, getSettingsSize, throttle
+} from '../util/util.js';
 
 import {
     formatter, getCellIcon, saveSVG, savePNG, getVueEl
@@ -165,7 +167,7 @@ const renderThumbIcons = (clean) => {
 
     //console.log(icons, leftIcons);
 
-    const size = parseInt(settings.size) || 32;
+    const size = getSettingsSize(settings);
 
     const list = icons.map((icon) => {
         const children = [`<div class="oi-thumb-item" title="${icon.name}">`];
@@ -213,7 +215,7 @@ const renderGridView = () => {
         grid = createGrid();
     }
 
-    const cellSize = (parseInt(settings.size) || 32) + 10;
+    const cellSize = getSettingsSize(settings) + 10;
 
     grid.setOption({
         rowHeight: cellSize,
