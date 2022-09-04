@@ -301,6 +301,13 @@
         "sizeJson": 3090875
     },
     {
+        "id": "open-icons-metrize",
+        "name": "metrize",
+        "size": 143041,
+        "sizeGzip": 108039,
+        "sizeJson": 338230
+    },
+    {
         "id": "open-icons-mono",
         "name": "mono",
         "size": 30128,
