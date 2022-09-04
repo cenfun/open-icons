@@ -149,11 +149,11 @@ const downloadFile = async (url, savePath, saveName, Util) => {
 
 };
 
-const requestRepoInfo = async (job, pkg, Util) => {
+const requestRepoInfo = async (pkg, Util) => {
 
     const axios = require('axios');
 
-    const url = job.npmConfig.registry + pkg.name;
+    const url = pkg.registryUrl;
 
     const res = await axios({
         method: 'get',
@@ -177,19 +177,21 @@ const requestRepoInfo = async (job, pkg, Util) => {
     return info;
 };
 
-const downloadFromNpm = async (job, name, pkg, Util) => {
-    let repoInfo = await requestRepoInfo(job, pkg, Util);
+const downloadFromNpm = async (pkg, Util) => {
+    let repoInfo = await requestRepoInfo(pkg, Util);
     if (!repoInfo) {
         console.log('Try download again ...');
-        repoInfo = await requestRepoInfo(job, pkg, Util);
+        repoInfo = await requestRepoInfo(pkg, Util);
     }
     if (!repoInfo) {
         throw new Error(`Failed to download repo config: ${pkg.name}`);
     }
 
-    const repoPath = path.resolve(pkg.sourcePath, 'repository.json');
-    Util.writeJSONSync(repoPath, repoInfo);
-    Util.logGreen(`saved repository json: ${Util.relativePath(repoPath)}`);
+    if (pkg.debug) {
+        const repoPath = path.resolve(pkg.sourcePath, 'repository.json');
+        Util.writeJSONSync(repoPath, repoInfo);
+        Util.logGreen(`saved repository json: ${Util.relativePath(repoPath)}`);
+    }
 
     const latestVersion = repoInfo['dist-tags'].latest;
     const versionInfo = repoInfo.versions[latestVersion];
@@ -200,20 +202,24 @@ const downloadFromNpm = async (job, name, pkg, Util) => {
         throw new Error(`Failed to download package: ${pkg.name}`);
     }
 
+    const handler = pkg.download && pkg.download.handler;
+    if (typeof handler === 'function') {
+        return handler.call(pkg, Util);
+    }
+
 };
 
-const downloadFromUrl = async (job, name, pkg, Util) => {
+const downloadFromUrl = async (pkg, Util) => {
     const url = pkg.download.url;
 
     const done = await downloadFile(url, pkg.sourcePath, 'package.zip', Util);
-
     if (!done) {
         throw new Error(`Failed to download package: ${pkg.name}`);
     }
 
-    const handler = pkg.download.handler;
+    const handler = pkg.download && pkg.download.handler;
     if (typeof handler === 'function') {
-        handler.call(pkg, Util);
+        return handler.call(pkg, Util);
     }
 
 };
@@ -221,6 +227,12 @@ const downloadFromUrl = async (job, name, pkg, Util) => {
 const downloadPkgHandler = (job, name, pkg, Util) => {
 
     const sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
+    if (!fs.existsSync(sourcePath)) {
+        fs.mkdirSync(sourcePath, {
+            recursive: true
+        });
+    }
+
     pkg.sourcePath = Util.relativePath(sourcePath);
     const modulePath = path.resolve(sourcePath, 'package');
     pkg.modulePath = Util.relativePath(modulePath);
@@ -233,26 +245,20 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
 
     //console.log(pkgJsonPath);
 
-    if (pkg.download) {
-        return downloadFromUrl(job, name, pkg, Util);
+    if (pkg.download && pkg.download.url) {
+        return downloadFromUrl(pkg, Util);
     }
 
-    return downloadFromNpm(job, name, pkg, Util);
+    //from npm
+    pkg.registryUrl = job.npmConfig.registry + pkg.name;
+    return downloadFromNpm(pkg, Util);
 
 };
 
 const pkgHandler = async (job, name, index, total, Util) => {
 
-    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'src'));
-    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'dist'));
-    // Util.rmSync(path.resolve(item.sourcesRoot, dir, 'public'));
     const optionsPath = path.resolve(job.sourcesRoot, name, 'options.js');
     const pkg = require(optionsPath);
-
-    if (pkg.disabled) {
-        Util.logRed(`disabled: ${name}`);
-        return false;
-    }
 
     const outputName = `${job.id}-${name}`;
     if (fs.existsSync(path.resolve(job.buildPath, `${outputName}.js`))) {
@@ -359,10 +365,7 @@ const beforeBuildHandler = async (item, Util) => {
 
     for (const name of list) {
 
-        const enabled = await pkgHandler(item, name, i++, total, Util);
-        if (!enabled) {
-            continue;
-        }
+        await pkgHandler(item, name, i++, total, Util);
 
         const outputName = `${item.id}-${name}`;
 
