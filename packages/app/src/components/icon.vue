@@ -23,9 +23,13 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    color: {
+        type: String,
+        default: ''
+    },
     size: {
         type: String,
-        default: '20px'
+        default: ''
     },
     hover: {
         type: Boolean,
@@ -66,9 +70,14 @@ const classList = computed(() => {
 });
 
 const styleList = computed(() => {
-    return {
-        '--oi-icon-size': props.size
-    };
+    const st = {};
+    if (props.size) {
+        st.size = props.size;
+    }
+    if (props.color) {
+        st.color = props.color;
+    }
+    return st;
 });
 
 const clickHandler = (e) => {

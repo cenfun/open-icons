@@ -71,6 +71,8 @@ const settings = shallowReactive(defaultSettings);
 
 provide('settings', settings);
 
+const keywords = ref('');
+
 const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
@@ -200,11 +202,29 @@ const renderPackages = function(packages) {
         rowNumberWidth: 30,
         scrollbarRound: true,
         bindWindowResize: true,
-        bindContainerResize: true
+        bindContainerResize: true,
+        rowFilter: function(pkg) {
+            const kw = keywords.value.trim();
+            if (!kw) {
+                return true;
+            }
+
+            if (pkg.name.indexOf(kw) !== -1) {
+                return true;
+            }
+
+            if (pkg.source.name.indexOf(kw) !== -1) {
+                return true;
+            }
+
+            return false;
+        }
     });
 
     grid.setData(gridData);
     grid.render();
+
+    state.packagesGrid = grid;
 
 };
 
@@ -420,6 +440,12 @@ watch(settings, (v) => {
     save('settings', v);
 });
 
+watch(keywords, () => {
+    if (state.packagesGrid) {
+        state.packagesGrid.update();
+    }
+});
+
 onMounted(() => {
     loadStart();
     initTooltip();
@@ -456,6 +482,16 @@ onMounted(() => {
               hover
             /></a>
           </VuiFlex>
+          <div class="oi-packages-filter">
+            <input
+              v-model="keywords"
+              placeholder=""
+            >
+            <OiIcon
+              color="#666"
+              name="searcher"
+            />
+          </div>
           <div class="oi-packages-grid vui-flex-auto" />
           <div class="oi-packages-footer">
             <a
@@ -597,6 +633,29 @@ a:hover {
 .oi-title {
     font-weight: bold;
     font-size: 18px;
+}
+
+.oi-packages-filter {
+    position: relative;
+    padding: 8px;
+    border-bottom: 1px solid #333;
+    max-width: 200px;
+
+    input {
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        padding: 5px;
+    }
+
+    .oi-icon {
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translate(-30px, -50%);
+        z-index: 2;
+    }
 }
 
 .oi-packages-grid {
