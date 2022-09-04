@@ -71,7 +71,10 @@
                 name="my"
                 size="16px"
               />
-              <b>My Icons</b>
+              <b>My Icons</b><span
+                v-if="myIcons.ids.length"
+                class="oi-my-icons"
+              >{{ myIcons.ids.length }}</span>
             </div>
           </template>
 
@@ -770,5 +773,18 @@ a:hover {
         display: block;
         pointer-events: none;
     }
+}
+
+.oi-my-icons {
+    font-size: 12px;
+    margin-left: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 0 6px;
+    color: #fff;
 }
 </style>
