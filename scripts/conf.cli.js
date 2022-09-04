@@ -72,8 +72,9 @@ const decompressPackage = (filePath, outputDir, Util) => {
     const decompress = require('decompress');
 
     return new Promise((resolve) => {
+        Util.log(`decompressing: ${Util.relativePath(filePath)} ...`);
         decompress(filePath, outputDir).then((files) => {
-            Util.log(`decompressed: ${filePath}`);
+            Util.log(`decompressed: ${Util.relativePath(filePath)}`);
             resolve();
         });
     });
@@ -122,7 +123,7 @@ const downloadFile = async (url, savePath, saveName, Util) => {
         }
         if (totalLength) {
             const per = length / totalLength;
-            const text = `${(per * 100).toFixed(2)}% downloading ...`;
+            const text = `${(per * 100).toFixed(2)}% downloading ${url} ...`;
             // console.log(text);
             gauge.enable();
             gauge.show(text, per);
@@ -274,7 +275,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
 
     await downloadPkgHandler(job, name, pkg, Util);
 
-    console.log(`start svg minify: ${name}`);
+    Util.log(`start svg minify: ${name}`);
 
     //Util.format(optionsPath);
 
