@@ -291,7 +291,8 @@ const pkgHandler = async (job, name, index, total, Util) => {
         dirs,
         outputDir: job.outputRoot,
         outputRuntime: false,
-        logDuplicates: false,
+
+        logDuplicates: pkg.debug,
 
         metadata: {
             name,

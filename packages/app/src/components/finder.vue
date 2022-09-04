@@ -419,19 +419,18 @@ watch(() => state.tabIndex, (v) => {
     height="100%"
   >
     <div class="oi-pkg-title">
-      {{ packageInfo.fullName || packageInfo.name }}
+      {{ packageInfo.fullName || packageInfo.name }} <span>{{ packageInfo.iconCount.toLocaleString() }} icons</span>
     </div>
-    <div class="oi-pkg-link">
+    <div class="oi-pkg-stats">
+      <a
+        :href="'/dist/'+packageInfo.id+'.js'"
+        target="_blank"
+      >{{ packageInfo.id }}.js ({{ BF(packageInfo.size) }})</a>
+      /
       <a
         :href="packageInfo.source.url"
         target="_blank"
-      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }} - {{ packageInfo.source.license }}</a>
-    </div>
-    <div class="oi-pkg-stats">
-      <b>{{ packageInfo.iconCount }}</b> icons / size: {{ BF(packageInfo.size) }} / gzip: {{ BF(packageInfo.sizeGzip) }} / <a
-        :href="'/dist/'+packageInfo.id+'.js'"
-        target="_blank"
-      >{{ packageInfo.id }}.js</a>
+      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }}</a>
     </div>
 
     <div class="oi-filter flex-row">
@@ -490,25 +489,17 @@ watch(() => state.tabIndex, (v) => {
 </template>
 <style lang="scss">
 .oi-pkg-title {
+    text-transform: capitalize;
     text-align: center;
     font-weight: bold;
     font-size: 38px;
     padding: 15px 0 5px;
-}
 
-.oi-pkg-link {
-    text-align: center;
-    padding-bottom: 5px;
-}
-
-.oi-pkg-link a:link,
-.oi-pkg-link a:visited {
-    font-size: 16px;
-    color: #666;
-}
-
-.oi-pkg-link a:hover {
-    color: #0077cf;
+    span {
+        text-transform: none;
+        margin-left: 10px;
+        font-size: 28px;
+    }
 }
 
 .oi-pkg-stats {
@@ -529,7 +520,7 @@ watch(() => state.tabIndex, (v) => {
     text-align: center;
     margin: 0 auto;
     width: 60%;
-    max-width: 500px;
+    max-width: 600px;
     margin-top: 10px;
 }
 
@@ -553,8 +544,8 @@ watch(() => state.tabIndex, (v) => {
     border-radius: 15px;
     padding: 10px 50px 10px 15px;
     background-color: #eee;
-    height: 32px;
-    line-height: 32px;
+    height: 30px;
+    line-height: 30px;
     outline: none;
     font-size: 18px;
     box-sizing: content-box;
