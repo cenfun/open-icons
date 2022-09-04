@@ -49,6 +49,13 @@
         "sizeJson": 791784
     },
     {
+        "id": "open-icons-bytesize",
+        "name": "bytesize",
+        "size": 9204,
+        "sizeGzip": 6938,
+        "sizeJson": 29355
+    },
+    {
         "id": "open-icons-carbon",
         "name": "carbon",
         "size": 332310,
