@@ -77,31 +77,25 @@ const Helper = {
 
     },
 
-    cut: function(str, list) {
+    cut: function(str, leftMatch, rightMatch) {
 
         if (typeof str !== 'string') {
-            console.log(EC.red(`Invalid string cut: ${str}`));
+            str = String(str);
+        }
+
+        const leftIndex = str.indexOf(leftMatch);
+        if (leftIndex === -1) {
             return '';
         }
+        str = str.slice(leftIndex);
 
-        if (!list.length) {
-            return str;
+        const rightIndex = str.lastIndexOf(rightMatch);
+        if (rightIndex === -1) {
+            return '';
         }
+        str = str.slice(0, rightIndex + rightMatch.length);
 
-        const item = list.shift();
-        const leftMatch = item[0];
-        const leftIndex = str.indexOf(leftMatch);
-        if (leftIndex !== -1) {
-            str = str.substr(leftIndex);
-        }
-
-        const rightMatch = item[1];
-        const rightIndex = str.indexOf(rightMatch);
-        if (rightIndex !== -1) {
-            str = str.substr(0, rightIndex + rightMatch.length);
-        }
-
-        return Helper.cut(str, list);
+        return str;
     },
 
     executeCode: function(entryPath, dependencies) {

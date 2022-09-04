@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const EC = require('eight-colors');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
@@ -24,8 +25,12 @@ module.exports = {
                 encoding: 'utf-8'
             });
 
-            const str = Helper.cut(content, [['<svg', '</svg>']]);
+            const str = Helper.cut(content, '<svg', '</svg>');
             //console.log(str);
+            if (!str) {
+                console.log(`Not found svg: ${EC.red(filename)}`);
+                return;
+            }
 
             const svg = str.split('ref={svgRef} {...props}').join('');
             // svg = svg.replace(/Path/g, 'path');

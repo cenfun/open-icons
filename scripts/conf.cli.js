@@ -284,6 +284,8 @@ const pkgHandler = async (job, name, index, total, Util) => {
         dirs,
         outputDir: job.outputRoot,
         outputRuntime: false,
+        logDuplicates: false,
+
         metadata: {
             name,
             source
@@ -295,7 +297,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     config.excludeSubDir = pkg.excludeSubDir;
 
     //events handler
-    ['onSVGName', 'onSVGContent', 'onSVGDocument', 'onSVGOptimized', 'onSVGError'].forEach((type) => {
+    ['onSVGName', 'onSVGContent', 'onSVGDocument', 'onSVGOptimized', 'onSVGError', 'onFinish'].forEach((type) => {
         const handler = pkg[type];
         if (typeof handler === 'function') {
             config[type] = handler;
@@ -316,8 +318,8 @@ const pkgHandler = async (job, name, index, total, Util) => {
 
     const URT = require('umd-runtime-templates');
     URT({
-        template: 'export-default-string',
         name: outputName,
+        template: 'export-default-string',
         content: compressedStr,
         output: lzPath
     });

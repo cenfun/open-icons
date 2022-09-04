@@ -25,8 +25,8 @@
         "lz-utils": "^1.0.5",
         "markdown-grid": "^1.0.1",
         "rc": "^1.2.8",
-        "svg-minifier": "^1.0.8",
-        "umd-runtime-templates": "^1.0.0"
+        "svg-minifier": "^1.0.9",
+        "umd-runtime-templates": "^1.0.1"
     },
     "devDependencies": {
         "eslint": "^8.23.0",
