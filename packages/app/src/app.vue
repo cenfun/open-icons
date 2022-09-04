@@ -203,6 +203,7 @@ const renderPackages = function(packages) {
         scrollbarRound: true,
         bindWindowResize: true,
         bindContainerResize: true,
+        rowNotFound: '<div class="oi-not-found">Not found packages</div>',
         rowFilter: function(pkg) {
             const kw = keywords.value.trim();
             if (!kw) {
@@ -485,6 +486,7 @@ onMounted(() => {
           <div class="oi-packages-filter">
             <input
               v-model="keywords"
+              onfocus="this.select()"
               placeholder=""
             >
             <OiIcon
