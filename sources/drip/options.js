@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-    name: 'elusive-iconfont',
-    url: 'https://github.com/dovy/elusive-iconfont',
+    name: 'dripicons',
+    url: 'https://github.com/amitjakhu/dripicons',
     download: {
-        url: 'https://github.com/dovy/elusive-iconfont/archive/refs/heads/master.zip',
+        url: 'https://github.com/amitjakhu/dripicons/archive/refs/heads/master.zip',
         handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'elusive-iconfont-master');
+            const oldPath = path.resolve(this.sourcePath, 'dripicons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
 
@@ -16,17 +16,11 @@ module.exports = {
             Util.writeJSONSync(jsonPath, {
                 name: this.name,
                 version: '1.0.0',
-                license: 'SIL'
+                license: 'CC-BY-SA-4.0'
             });
         }
     },
-    dirs: 'dev/icons-svg',
-
-    onSVGContent: function(content, item) {
-        content = content.split('fill:#000000').join('fill:currentColor');
-        content = content.split('fill="#000"').join('fill="currentColor"');
-        return content;
-    },
+    dirs: 'SVG',
 
     onSVGDocument: function($svg, item, $) {
         $svg.attr('fill', 'currentColor');

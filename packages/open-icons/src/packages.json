@@ -98,6 +98,13 @@
         "sizeJson": 403721
     },
     {
+        "id": "open-icons-drip",
+        "name": "drip",
+        "size": 58308,
+        "sizeGzip": 44081,
+        "sizeJson": 128987
+    },
+    {
         "id": "open-icons-element",
         "name": "element",
         "size": 67189,
