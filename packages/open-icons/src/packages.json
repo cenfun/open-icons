@@ -105,6 +105,13 @@
         "sizeJson": 161606
     },
     {
+        "id": "open-icons-elusive",
+        "name": "elusive",
+        "size": 114137,
+        "sizeGzip": 86244,
+        "sizeJson": 211409
+    },
+    {
         "id": "open-icons-entypo",
         "name": "entypo",
         "size": 112662,
