@@ -87,12 +87,14 @@ const Helper = {
 
         const leftIndex = str.indexOf(leftMatch);
         if (leftIndex === -1) {
+            EC.logRed(`Not found left match: ${leftMatch}`);
             return '';
         }
         str = str.slice(leftIndex);
 
         const rightIndex = str.lastIndexOf(rightMatch);
         if (rightIndex === -1) {
+            EC.logRed(`Not found right match: ${rightMatch}`);
             return '';
         }
         str = str.slice(0, rightIndex + rightMatch.length);

@@ -1,7 +1,8 @@
 // const fs = require('fs');
 // const path = require('path');
-// const Helper = require('../../scripts/helper.js');
+// const EC = require('eight-colors');
 // const SFE = require('svg-font-extractor');
+// const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     //debug: true,

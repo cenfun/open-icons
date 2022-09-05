@@ -574,6 +574,13 @@
         "sizeJson": 93243
     },
     {
+        "id": "open-icons-zocial",
+        "name": "zocial",
+        "size": 95358,
+        "sizeGzip": 72065,
+        "sizeJson": 180284
+    },
+    {
         "id": "open-icons-zond",
         "name": "zond",
         "size": 27212,
