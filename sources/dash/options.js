@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const SFE = require('svg-font-extractor');
 
 module.exports = {
-    debug: true,
     name: 'dashicons',
     url: 'https://github.com/WordPress/dashicons',
     download: {

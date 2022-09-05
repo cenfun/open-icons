@@ -210,6 +210,13 @@
         "sizeJson": 277988
     },
     {
+        "id": "open-icons-fxos",
+        "name": "fxos",
+        "size": 66888,
+        "sizeGzip": 50529,
+        "sizeJson": 130045
+    },
+    {
         "id": "open-icons-grommet",
         "name": "grommet",
         "size": 113741,
