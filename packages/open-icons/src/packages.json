@@ -266,6 +266,13 @@
         "sizeJson": 248432
     },
     {
+        "id": "open-icons-iconic",
+        "name": "iconic",
+        "size": 25098,
+        "sizeGzip": 18969,
+        "sizeJson": 66431
+    },
+    {
         "id": "open-icons-iconoir",
         "name": "iconoir",
         "size": 142793,
