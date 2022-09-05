@@ -3,7 +3,6 @@ const path = require('path');
 const SFE = require('svg-font-extractor');
 
 module.exports = {
-    debug: true,
     name: 'paymentfont',
     url: 'https://github.com/AlexanderPoellmann/PaymentFont',
     dirs: function(Util) {

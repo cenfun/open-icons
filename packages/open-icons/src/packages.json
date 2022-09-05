@@ -231,6 +231,13 @@
         "sizeJson": 130045
     },
     {
+        "id": "open-icons-geom",
+        "name": "geom",
+        "size": 4996,
+        "sizeGzip": 3746,
+        "sizeJson": 11828
+    },
+    {
         "id": "open-icons-grommet",
         "name": "grommet",
         "size": 113741,
