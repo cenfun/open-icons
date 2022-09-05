@@ -10,16 +10,16 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'dripicons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
-
-            //create package.json
-            const jsonPath = path.resolve(newPath, 'package.json');
-            Util.writeJSONSync(jsonPath, {
-                name: this.name,
-                version: '1.0.0',
-                license: 'CC-BY-SA-4.0'
-            });
         }
     },
+
+    decompress: {
+        filter: (file) => {
+            return file.path.startsWith('dripicons-master/SVG');
+        }
+    },
+
+    license: 'CC-BY-SA-4.0',
     dirs: 'SVG',
 
     onSVGDocument: function($svg, item, $) {

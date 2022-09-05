@@ -93,9 +93,9 @@
     {
         "id": "open-icons-dash",
         "name": "dash",
-        "size": 64892,
-        "sizeGzip": 49062,
-        "sizeJson": 157956
+        "size": 64904,
+        "sizeGzip": 49054,
+        "sizeJson": 157938
     },
     {
         "id": "open-icons-dev",
@@ -107,9 +107,9 @@
     {
         "id": "open-icons-drip",
         "name": "drip",
-        "size": 58308,
-        "sizeGzip": 44081,
-        "sizeJson": 128987
+        "size": 58404,
+        "sizeGzip": 44157,
+        "sizeJson": 128982
     },
     {
         "id": "open-icons-elegant",
@@ -170,9 +170,9 @@
     {
         "id": "open-icons-file",
         "name": "file",
-        "size": 767576,
-        "sizeGzip": 579792,
-        "sizeJson": 1383849
+        "size": 767416,
+        "sizeGzip": 579654,
+        "sizeJson": 1383844
     },
     {
         "id": "open-icons-flag",
@@ -345,9 +345,9 @@
     {
         "id": "open-icons-metrize",
         "name": "metrize",
-        "size": 143041,
-        "sizeGzip": 108039,
-        "sizeJson": 338230
+        "size": 143193,
+        "sizeGzip": 108167,
+        "sizeJson": 338217
     },
     {
         "id": "open-icons-mono",

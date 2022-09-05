@@ -10,9 +10,12 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'dashicons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
+        }
+    },
 
-            //has package.json, but no svg publish
-
+    decompress: {
+        filter: (file) => {
+            return file.path.startsWith('dashicons-master/svg-min');
         }
     },
 

@@ -10,16 +10,10 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'elusive-iconfont-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
-
-            //create package.json
-            const jsonPath = path.resolve(newPath, 'package.json');
-            Util.writeJSONSync(jsonPath, {
-                name: this.name,
-                version: '1.0.0',
-                license: 'SIL'
-            });
         }
     },
+
+    license: 'SIL',
     dirs: 'dev/icons-svg',
 
     onSVGContent: function(content, item) {

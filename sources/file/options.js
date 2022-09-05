@@ -11,16 +11,16 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'icons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
-
-            //create package.json
-            const jsonPath = path.resolve(newPath, 'package.json');
-            Util.writeJSONSync(jsonPath, {
-                name: this.name,
-                version: '1.0.0',
-                license: 'ISC'
-            });
         }
     },
+
+    decompress: {
+        filter: (file) => {
+            return file.path.startsWith('icons-master/svg');
+        }
+    },
+
+    license: 'ISC',
     dirs: 'svg',
 
     onSVGName: function(name, item) {

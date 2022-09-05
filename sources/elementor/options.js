@@ -11,9 +11,6 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'elementor-icons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
-
-            //has package.json but no npm publish
-
         }
     },
 
