@@ -112,6 +112,13 @@
         "sizeJson": 161606
     },
     {
+        "id": "open-icons-elementor",
+        "name": "elementor",
+        "size": 158603,
+        "sizeGzip": 119916,
+        "sizeJson": 337562
+    },
+    {
         "id": "open-icons-elusive",
         "name": "elusive",
         "size": 114137,
