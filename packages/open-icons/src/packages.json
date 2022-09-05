@@ -189,6 +189,13 @@
         "sizeJson": 2396580
     },
     {
+        "id": "open-icons-fontisto",
+        "name": "fontisto",
+        "size": 753448,
+        "sizeGzip": 568556,
+        "sizeJson": 1338574
+    },
+    {
         "id": "open-icons-foundation",
         "name": "foundation",
         "size": 144274,
