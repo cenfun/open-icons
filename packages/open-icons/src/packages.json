@@ -1,5 +1,12 @@
 [
     {
+        "id": "open-icons-academ",
+        "name": "academ",
+        "size": 166650,
+        "sizeGzip": 125968,
+        "sizeJson": 289906
+    },
+    {
         "id": "open-icons-akar",
         "name": "akar",
         "size": 77324,
