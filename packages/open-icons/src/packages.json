@@ -469,6 +469,13 @@
         "sizeJson": 3904845
     },
     {
+        "id": "open-icons-subway",
+        "name": "subway",
+        "size": 56282,
+        "sizeGzip": 42538,
+        "sizeJson": 135844
+    },
+    {
         "id": "open-icons-tabler",
         "name": "tabler",
         "size": 208362,
