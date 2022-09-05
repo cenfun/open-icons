@@ -507,12 +507,12 @@ watch(() => state.tabIndex, (v) => {
         text-transform: none;
         margin-left: 10px;
         color: #0077cf;
+    }
 
-        span {
-            font-weight: normal;
-            font-size: 30px;
-            color: #111;
-        }
+    span {
+        font-weight: normal;
+        font-size: 30px;
+        color: #111;
     }
 }
 

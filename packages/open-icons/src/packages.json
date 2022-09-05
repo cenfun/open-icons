@@ -364,6 +364,13 @@
         "sizeJson": 338217
     },
     {
+        "id": "open-icons-metro",
+        "name": "metro",
+        "size": 295131,
+        "sizeGzip": 223066,
+        "sizeJson": 614416
+    },
+    {
         "id": "open-icons-mono",
         "name": "mono",
         "size": 30128,
