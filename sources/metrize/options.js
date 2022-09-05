@@ -15,7 +15,7 @@ module.exports = {
 
     decompress: {
         filter: (file) => {
-            return file.path.startsWith('Metrize_Icons/SVG');
+            return file.path === 'Metrize_Icons/package.json' || file.path.startsWith('Metrize_Icons/SVG');
         }
     },
 

@@ -16,7 +16,7 @@ module.exports = {
 
     decompress: {
         filter: (file) => {
-            return file.path.startsWith('icons-master/svg');
+            return file.path === 'icons-master/package.json' || file.path.startsWith('icons-master/svg');
         }
     },
 

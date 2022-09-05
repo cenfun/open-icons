@@ -15,7 +15,7 @@ module.exports = {
 
     decompress: {
         filter: (file) => {
-            return file.path.startsWith('elegant_font/images/SVG');
+            return file.path === 'elegant_font/package.json' || file.path.startsWith('elegant_font/images/SVG');
         }
     },
 

@@ -15,7 +15,7 @@ module.exports = {
 
     decompress: {
         filter: (file) => {
-            return file.path.startsWith('dripicons-master/SVG');
+            return file.path === 'dripicons-master/package.json' || file.path.startsWith('dripicons-master/SVG');
         }
     },
 

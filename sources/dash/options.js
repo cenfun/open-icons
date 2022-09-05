@@ -15,7 +15,7 @@ module.exports = {
 
     decompress: {
         filter: (file) => {
-            return file.path.startsWith('dashicons-master/svg-min');
+            return file.path === 'dashicons-master/package.json' || file.path.startsWith('dashicons-master/svg-min');
         }
     },
 
