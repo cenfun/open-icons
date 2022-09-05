@@ -395,7 +395,7 @@ const initPackages = function(packages) {
     });
 
     state.total = {
-        name: 'Total',
+        name: 'total',
         fullName: 'Open Icons',
         type: 'total',
         source: {
@@ -663,18 +663,22 @@ a:hover {
     border-top: 1px solid #333;
     width: 100%;
     height: 100%;
-}
 
-.oi-packages-grid .tg-row .tg-tree-name {
-    cursor: pointer;
-}
+    .tg-tree-name {
+        text-transform: capitalize;
+    }
 
-.oi-packages-grid .tg-pane .tg-scrollbar-thumb {
-    background-color: #666;
-}
+    .tg-row .tg-tree-name {
+        cursor: pointer;
+    }
 
-.oi-packages-grid .tg-pane .tg-scrollbar-thumb:hover {
-    background-color: #999;
+    .tg-pane .tg-scrollbar-thumb {
+        background-color: #666;
+    }
+
+    .tg-pane .tg-scrollbar-thumb:hover {
+        background-color: #999;
+    }
 }
 
 .oi-packages-footer {
