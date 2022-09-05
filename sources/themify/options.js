@@ -43,8 +43,8 @@ const getNameMap = function(modulePath) {
 module.exports = {
     name: 'themify-icons',
     url: 'https://github.com/aastrong/themify-icons.scss',
-    dirs: function(Util) {
-        const modulePath = this.modulePath;
+    dirs: function(Util, modulePath) {
+
         const nameMap = getNameMap(modulePath);
 
         SFE({

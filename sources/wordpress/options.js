@@ -6,13 +6,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@wordpress/icons',
     url: 'https://github.com/WordPress/gutenberg',
-    dirs: function(Util) {
+    dirs: function(Util, modulePath) {
 
-        const dir = path.resolve(this.modulePath, 'svg');
+        const dir = path.resolve(modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(this.modulePath, 'src/library');
+        const entryPath = path.resolve(modulePath, 'src/library');
         const files = fs.readdirSync(entryPath);
 
         files.forEach((filename) => {

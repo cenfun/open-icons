@@ -24,13 +24,13 @@ const createSvg = function(tag, attrs, children) {
 module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
-    dirs: function(Util) {
+    dirs: function(Util, modulePath) {
 
-        const dir = path.resolve(this.modulePath, 'svg');
+        const dir = path.resolve(modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require(path.resolve(this.modulePath));
+        const bundle = require(path.resolve(modulePath));
         const keys = Object.keys(bundle);
         //console.log(keys);
         keys.forEach((k) => {

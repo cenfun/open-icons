@@ -6,13 +6,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@rsuite/icon-font',
     url: 'https://github.com/rsuite/rsuite-icons',
-    dirs: function(Util) {
+    dirs: function(Util, modulePath) {
 
-        const dir = path.resolve(this.modulePath, 'svg');
+        const dir = path.resolve(modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(this.modulePath, 'components');
+        const entryPath = path.resolve(modulePath, 'components');
 
         const extname = '.tsx';
 

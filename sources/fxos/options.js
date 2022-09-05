@@ -10,9 +10,6 @@ module.exports = {
             const oldPath = path.resolve(this.sourcePath, 'fxos-icons-master');
             const newPath = path.resolve(this.sourcePath, 'package');
             fs.renameSync(oldPath, newPath);
-
-            //has package.json, but no svg publish
-
         }
     },
 

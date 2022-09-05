@@ -4,13 +4,13 @@ const path = require('path');
 module.exports = {
     name: '@fortawesome/free-solid-svg-icons',
     url: 'https://github.com/FortAwesome/Font-Awesome',
-    dirs: function(Util) {
+    dirs: function(Util, modulePath) {
 
-        const dir = path.resolve(this.modulePath, 'svg');
+        const dir = path.resolve(modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const bundle = require(path.resolve(this.modulePath));
+        const bundle = require(path.resolve(modulePath));
         const keys = Object.keys(bundle);
 
         keys.forEach((k) => {

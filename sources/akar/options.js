@@ -5,13 +5,13 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: 'akar-icons',
     url: 'https://github.com/artcoholic/akar-icons',
-    dirs: function(Util) {
+    dirs: function(Util, modulePath) {
 
-        const dir = path.resolve(this.modulePath, 'svg');
+        const dir = path.resolve(modulePath, 'svg');
         Util.rmSync(dir);
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(this.modulePath, 'dist/index.js');
+        const entryPath = path.resolve(modulePath, 'dist/index.js');
 
         const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 

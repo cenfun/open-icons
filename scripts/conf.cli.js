@@ -49,7 +49,7 @@ const getSource = (options) => {
 const getDirs = (pkg, name, Util) => {
     let dirs = pkg.dirs;
     if (typeof dirs === 'function') {
-        dirs = dirs.call(pkg, Util);
+        dirs = dirs.call(pkg, Util, pkg.modulePath);
     }
 
     if (!Array.isArray(dirs)) {
@@ -247,15 +247,12 @@ const downloadFromUrl = async (pkg, Util) => {
 
 const downloadPkgHandler = (job, name, pkg, Util) => {
 
-    pkg.sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
-    pkg.modulePath = path.resolve(pkg.sourcePath, 'package');
-
     //check pkg if downloaded
     if (fs.existsSync(path.resolve(pkg.modulePath))) {
 
         if (!pkg.debug) {
             Util.logYellow(`exists cache module and ignored: ${name}`);
-            return true;
+            return;
         }
 
         Util.logMagenta(`[debug mode] start download: ${name}`);
@@ -297,16 +294,17 @@ const pkgHandler = async (job, name, index, total, Util) => {
 
     }
 
+    pkg.sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
+    pkg.modulePath = path.resolve(pkg.sourcePath, 'package');
+
     await downloadPkgHandler(job, name, pkg, Util);
 
-    Util.log(`start svg minify: ${name}`);
-
-    //Util.format(optionsPath);
+    const dirs = getDirs(pkg, name, Util);
 
     const source = getSource(pkg);
     //console.log(source.name, source.license);
 
-    const dirs = getDirs(pkg, name, Util);
+    Util.log(`start svg minify: ${name}`);
 
     //compress svg
     const svgMinifier = require('svg-minifier');

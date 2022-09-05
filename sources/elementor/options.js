@@ -14,8 +14,7 @@ module.exports = {
         }
     },
 
-    dirs: function(Util) {
-        const modulePath = this.modulePath;
+    dirs: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/eicons.svg'),
