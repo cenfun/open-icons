@@ -203,6 +203,13 @@
         "sizeJson": 318113
     },
     {
+        "id": "open-icons-icofont",
+        "name": "icofont",
+        "size": 1177781,
+        "sizeGzip": 889935,
+        "sizeJson": 2384106
+    },
+    {
         "id": "open-icons-icomoon",
         "name": "icomoon",
         "size": 112225,

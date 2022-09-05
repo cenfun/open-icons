@@ -41,7 +41,6 @@ const getNameMap = function(modulePath) {
 };
 
 module.exports = {
-    debug: true,
     name: 'themify-icons',
     url: 'https://github.com/aastrong/themify-icons.scss',
     dirs: function(Util) {
