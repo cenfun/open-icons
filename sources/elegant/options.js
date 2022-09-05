@@ -4,13 +4,9 @@ module.exports = {
     downloadUrl: 'https://www.elegantthemes.com/icons/elegant_font.zip',
     moduleEntry: 'elegant_font',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'elegant_font/package.json' || file.path.startsWith('elegant_font/images/SVG');
-        }
-    },
-
     license: 'GPL 2.0 and MIT',
+
+    moduleFilters: 'images/SVG',
     dirs: 'images/SVG',
 
     onSVGName: function(name, item) {

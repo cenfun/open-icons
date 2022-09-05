@@ -3,12 +3,7 @@ module.exports = {
     name: 'academicons',
     url: 'https://github.com/jpswalsh/academicons',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'package/package.json' || file.path.startsWith('package/svg');
-        }
-    },
-
+    moduleFilters: 'svg',
     dirs: 'svg',
 
     onSVGDocument: function($svg, item) {

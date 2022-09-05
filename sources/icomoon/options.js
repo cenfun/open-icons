@@ -2,12 +2,7 @@ module.exports = {
     name: 'icomoon-free-npm',
     url: 'https://github.com/Keyamoon/IcoMoon-Free',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'package/package.json' || file.path.startsWith('package/SVG');
-        }
-    },
-
+    moduleFilters: 'SVG',
     dirs: 'SVG',
 
     onSVGName: function(name, item) {

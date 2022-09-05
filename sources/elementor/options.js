@@ -4,8 +4,10 @@ const SFE = require('svg-font-extractor');
 module.exports = {
     name: 'elementor-icons',
     url: 'https://github.com/elementor/elementor-icons',
+
     downloadUrl: 'https://github.com/elementor/elementor-icons/archive/refs/heads/master.zip',
     moduleEntry: 'elementor-icons-master',
+    moduleFilters: 'fonts/eicons.svg',
 
     dirs: function(Util, modulePath) {
 

@@ -6,13 +6,9 @@ module.exports = {
     downloadUrl: 'https://github.com/file-icons/icons/archive/refs/heads/master.zip',
     moduleEntry: 'icons-master',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'icons-master/package.json' || file.path.startsWith('icons-master/svg');
-        }
-    },
-
     license: 'ISC',
+
+    moduleFilters: 'svg',
     dirs: 'svg',
 
     onSVGName: function(name, item) {

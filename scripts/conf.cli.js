@@ -80,8 +80,31 @@ const decompressPackage = async (filePath, pkg, Util) => {
 
     Util.log(`decompressing: ${Util.relativePath(filePath)} ...`);
 
+    const options = {};
+
+    let moduleFilters = pkg.moduleFilters;
+    if (moduleFilters) {
+        if (!Array.isArray(moduleFilters)) {
+            moduleFilters = [moduleFilters];
+        }
+        moduleFilters.push('package.json');
+        moduleFilters = moduleFilters.map((item) => {
+            return `${pkg.moduleEntry}/${item}`;
+        });
+
+        options.filter = (file) => {
+            for (const f of moduleFilters) {
+                if (file.path.startsWith(f)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+
     let hasError;
-    const files = await decompress(filePath, pkg.sourcePath, pkg.decompress).catch(function(err) {
+    const files = await decompress(filePath, pkg.sourcePath, options).catch(function(err) {
         Util.logRed(err);
         hasError = true;
     });
@@ -287,8 +310,8 @@ const pkgHandler = async (job, name, index, total, Util) => {
 
     pkg.sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
 
-    const moduleEntry = pkg.moduleEntry || 'package';
-    pkg.modulePath = path.resolve(pkg.sourcePath, moduleEntry);
+    pkg.moduleEntry = pkg.moduleEntry || 'package';
+    pkg.modulePath = path.resolve(pkg.sourcePath, pkg.moduleEntry);
 
     await downloadPkgHandler(job, name, pkg, Util);
 

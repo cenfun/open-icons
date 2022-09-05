@@ -10,12 +10,7 @@ module.exports = {
 
     // downloadUrl: 'https://github.com/xxx/master.zip',
     // moduleEntry: 'xxx-icons-master',
-
-    // decompress: {
-    //     filter: (file) => {
-    //         return file.path === 'package/package.json' || file.path.startsWith('package/svg');
-    //     }
-    // },
+    // moduleFilters: 'fonts/xxx.svg',
 
     //dirs: 'svg',
 

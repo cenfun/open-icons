@@ -2,12 +2,7 @@ module.exports = {
     name: '@carbon/icons',
     url: 'https://github.com/carbon-design-system/carbon',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'package/package.json' || file.path.startsWith('package/svg/32');
-        }
-    },
-
+    moduleFilters: 'svg/32',
     dirs: 'svg/32',
 
     onSVGDocument: function($svg) {

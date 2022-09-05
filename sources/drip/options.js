@@ -4,13 +4,9 @@ module.exports = {
     downloadUrl: 'https://github.com/amitjakhu/dripicons/archive/refs/heads/master.zip',
     moduleEntry: 'dripicons-master',
 
-    decompress: {
-        filter: (file) => {
-            return file.path === 'dripicons-master/package.json' || file.path.startsWith('dripicons-master/SVG');
-        }
-    },
-
     license: 'CC-BY-SA-4.0',
+
+    moduleFilters: 'SVG',
     dirs: 'SVG',
 
     onSVGDocument: function($svg, item, $) {
