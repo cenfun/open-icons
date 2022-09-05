@@ -378,6 +378,13 @@
         "sizeJson": 1241491
     },
     {
+        "id": "open-icons-payment",
+        "name": "payment",
+        "size": 367201,
+        "sizeGzip": 277599,
+        "sizeJson": 634357
+    },
+    {
         "id": "open-icons-phosphor",
         "name": "phosphor",
         "size": 893784,
