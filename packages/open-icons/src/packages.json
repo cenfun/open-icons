@@ -91,6 +91,13 @@
         "sizeJson": 268604
     },
     {
+        "id": "open-icons-dash",
+        "name": "dash",
+        "size": 64892,
+        "sizeGzip": 49062,
+        "sizeJson": 157956
+    },
+    {
         "id": "open-icons-dev",
         "name": "dev",
         "size": 220553,
@@ -191,9 +198,9 @@
     {
         "id": "open-icons-fontisto",
         "name": "fontisto",
-        "size": 753448,
-        "sizeGzip": 568556,
-        "sizeJson": 1338574
+        "size": 752824,
+        "sizeGzip": 568097,
+        "sizeJson": 1338463
     },
     {
         "id": "open-icons-foundation",
