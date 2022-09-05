@@ -22,7 +22,8 @@ const Helper = {
     createSvgFromReact: function(parent) {
 
         if (!parent) {
-            throw new Error('[createSvgFromReact] invalid option');
+            EC.logRed('[createSvgFromReact] invalid option');
+            return;
         }
 
         //console.log(parent);
@@ -31,7 +32,8 @@ const Helper = {
 
         if (!type || !props) {
             console.log(parent);
-            throw new Error('[createSvgFromReact] invalid type or props');
+            EC.logRed('[createSvgFromReact] invalid type or props');
+            return;
         }
 
         let tagName = type;
@@ -103,7 +105,8 @@ const Helper = {
         if (!fs.existsSync(entryPath)) {
             entryPath = `${entryPath}.js`;
             if (!fs.existsSync(entryPath)) {
-                throw new Error(`Not found module: ${entryPath}`);
+                EC.logRed(`Not found module: ${entryPath}`);
+                return;
             }
         }
 

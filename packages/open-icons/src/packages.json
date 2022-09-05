@@ -112,6 +112,13 @@
         "sizeJson": 128987
     },
     {
+        "id": "open-icons-elegant",
+        "name": "elegant",
+        "size": 87897,
+        "sizeGzip": 66488,
+        "sizeJson": 202141
+    },
+    {
         "id": "open-icons-element",
         "name": "element",
         "size": 67189,

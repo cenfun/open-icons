@@ -82,6 +82,20 @@ export const getCellIcon = function(settings, icon) {
     `;
 };
 
+export const getSourceFrom = function(source, text) {
+
+    let name = source.name;
+    if (source.version) {
+        name += `@${source.version}`;
+    }
+
+    if (text) {
+        return name;
+    }
+
+    return `<a href="${source.url}" target="_blank">${name}</a>`;
+};
+
 export const formatter = {
     null: function(value) {
         if (value === null || typeof value === 'undefined') {

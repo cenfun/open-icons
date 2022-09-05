@@ -23,8 +23,15 @@ const getLicense = (json) => {
 
 const getSource = (options) => {
 
+    let json = {
+        license: '',
+        version: ''
+    };
+
     const jsonPath = path.resolve(options.modulePath, 'package.json');
-    const json = require(jsonPath);
+    if (fs.existsSync(jsonPath)) {
+        json = require(jsonPath);
+    }
 
     let license = options.license;
     if (!license) {
@@ -68,20 +75,26 @@ const getDirs = (pkg, name, Util) => {
 
 //=============================================================================================
 
-const decompressPackage = (filePath, outputDir, Util) => {
+const decompressPackage = async (filePath, pkg, Util) => {
     const decompress = require('decompress');
 
-    return new Promise((resolve) => {
-        Util.log(`decompressing: ${Util.relativePath(filePath)} ...`);
-        decompress(filePath, outputDir).then((files) => {
-            Util.log(`decompressed: ${Util.relativePath(filePath)}`);
-            resolve();
-        });
+    Util.log(`decompressing: ${Util.relativePath(filePath)} ...`);
+
+    let hasError;
+    const files = await decompress(filePath, pkg.sourcePath, pkg.decompress).catch(function(err) {
+        Util.logRed(err);
+        hasError = true;
     });
 
+    if (hasError) {
+        return;
+    }
+
+    Util.log(`decompressed: ${Util.relativePath(filePath)} ${files.length}`);
+    return true;
 };
 
-const downloadFile = async (url, savePath, saveName, Util) => {
+const downloadFile = async (url, pkg, Util) => {
 
     const axios = require('axios');
 
@@ -113,7 +126,8 @@ const downloadFile = async (url, savePath, saveName, Util) => {
         gauge = new Gauge();
     }
 
-    const filePath = path.resolve(savePath, saveName);
+    const filePath = path.resolve(pkg.sourcePath, pkg.saveName);
+
     const writer = fs.createWriteStream(filePath);
 
     data.on('data', (chunk) => {
@@ -135,12 +149,13 @@ const downloadFile = async (url, savePath, saveName, Util) => {
     Util.log('[downloaded]', Util.relativePath(filePath));
 
     return new Promise((resolve) => {
-        writer.on('finish', async () => {
+        writer.on('finish', () => {
             gauge.disable();
 
-            await decompressPackage(filePath, savePath, Util);
+            decompressPackage(filePath, pkg, Util).then(function(done) {
+                resolve(done);
+            });
 
-            resolve(true);
         });
         writer.on('error', (e) => {
             Util.logRed(e);
@@ -185,7 +200,8 @@ const downloadFromNpm = async (pkg, Util) => {
         repoInfo = await requestRepoInfo(pkg, Util);
     }
     if (!repoInfo) {
-        throw new Error(`Failed to download repo config: ${pkg.name}`);
+        Util.logRed(`Failed to download repo config: ${pkg.name}`);
+        return;
     }
 
     if (pkg.debug) {
@@ -198,9 +214,11 @@ const downloadFromNpm = async (pkg, Util) => {
     const versionInfo = repoInfo.versions[latestVersion];
     const url = versionInfo.dist.tarball;
 
-    const done = await downloadFile(url, pkg.sourcePath, 'package.tgz', Util);
+    pkg.saveName = 'package.tgz';
+    const done = await downloadFile(url, pkg, Util);
     if (!done) {
-        throw new Error(`Failed to download package: ${pkg.name}`);
+        Util.logRed(`Failed to download package: ${pkg.name}`);
+        return;
     }
 
     const handler = pkg.download && pkg.download.handler;
@@ -213,9 +231,11 @@ const downloadFromNpm = async (pkg, Util) => {
 const downloadFromUrl = async (pkg, Util) => {
     const url = pkg.download.url;
 
-    const done = await downloadFile(url, pkg.sourcePath, 'package.zip', Util);
+    pkg.saveName = 'package.zip';
+    const done = await downloadFile(url, pkg, Util);
     if (!done) {
-        throw new Error(`Failed to download package: ${pkg.name}`);
+        Util.logRed(`Failed to download package: ${pkg.name}`);
+        return;
     }
 
     const handler = pkg.download && pkg.download.handler;
@@ -227,24 +247,28 @@ const downloadFromUrl = async (pkg, Util) => {
 
 const downloadPkgHandler = (job, name, pkg, Util) => {
 
-    const sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
-    if (!fs.existsSync(sourcePath)) {
-        fs.mkdirSync(sourcePath, {
-            recursive: true
-        });
-    }
-
-    pkg.sourcePath = Util.relativePath(sourcePath);
-    const modulePath = path.resolve(sourcePath, 'package');
-    pkg.modulePath = Util.relativePath(modulePath);
+    pkg.sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
+    pkg.modulePath = path.resolve(pkg.sourcePath, 'package');
 
     //check pkg if downloaded
-    const pkgJsonPath = path.resolve(pkg.modulePath, 'package.json');
-    if (fs.existsSync(pkgJsonPath)) {
-        return;
+    if (fs.existsSync(path.resolve(pkg.modulePath))) {
+
+        if (!pkg.debug) {
+            Util.logYellow(`exists cache module and ignored: ${name}`);
+            return true;
+        }
+
+        Util.logMagenta(`[debug mode] start download: ${name}`);
+
     }
 
     //console.log(pkgJsonPath);
+
+    Util.rmSync(pkg.sourcePath);
+    fs.mkdirSync(pkg.sourcePath, {
+        recursive: true
+    });
+
 
     if (pkg.download && pkg.download.url) {
         return downloadFromUrl(pkg, Util);
@@ -265,11 +289,11 @@ const pkgHandler = async (job, name, index, total, Util) => {
     if (fs.existsSync(path.resolve(job.buildPath, `${outputName}.js`))) {
 
         if (!pkg.debug) {
-            Util.logYellow(`exists cache and ignored: ${name}`);
+            Util.logYellow(`exists cache build and ignored: ${name}`);
             return true;
         }
 
-        Util.logMagenta(`debug mode and cache ignored: ${name}`);
+        Util.logMagenta(`[debug mode] start minify: ${name}`);
 
     }
 
@@ -315,7 +339,8 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const metadata = svgMinifier(config);
 
     if (!metadata.icons.length) {
-        throw new Error(`Failed to generate icons: ${metadata.name}`);
+        Util.logRed(`Failed to generate icons: ${metadata.name}`);
+        return;
     }
 
     const compress = require('lz-utils/lib/compress.js');

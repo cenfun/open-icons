@@ -104,6 +104,7 @@ import {
 
 import { hasOwn, BF } from './util/util.js';
 import { initTooltip } from './util/tooltip.js';
+import { getSourceFrom } from './util/grid-helper.js';
 
 import OiIcon from './components/icon.vue';
 import OiLoading from './components/loading.vue';
@@ -170,7 +171,7 @@ const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
         pkg.iconCount = pkg.icons.length;
-        pkg.sourceFrom = `${pkg.source.name}@${pkg.source.version}`;
+        pkg.sourceFrom = getSourceFrom(pkg.source);
         pkg.sourceLicense = pkg.source.license;
         pkg.sizeAvg = pkg.size / pkg.iconCount;
         return pkg;
@@ -214,7 +215,6 @@ const renderPackages = function(packages) {
         }, {
             id: 'sourceFrom',
             name: 'Source From',
-            formatter: 'sourceFrom',
             width: 200
         }, {
             id: 'sourceLicense',
@@ -263,14 +263,6 @@ const renderPackages = function(packages) {
             return defaultFormatter(value, rowItem, columnItem, cellNode);
         },
 
-        sourceFrom: function(value, rowItem, columnItem, cellNode) {
-            const source = rowItem.source;
-            if (!source) {
-                return '—';
-            }
-            return `<a href="${source.url}" target="_blank">${value}</a>`;
-        },
-
         dist: function(value, rowItem, columnItem, cellNode) {
             if (!rowItem.id) {
                 return '—';
@@ -298,10 +290,12 @@ const renderPackages = function(packages) {
         bindContainerResize: true,
         rowNotFound: '<div class="oi-not-found">Not found packages</div>',
         rowFilter: function(pkg) {
-            const kw = keywords.value.trim();
+            let kw = keywords.value.trim();
             if (!kw) {
                 return true;
             }
+
+            kw = kw.toLowerCase();
 
             if (pkg.name.indexOf(kw) !== -1) {
                 return true;

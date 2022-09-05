@@ -17,7 +17,7 @@
       <a
         :href="packageInfo.source.url"
         target="_blank"
-      >{{ packageInfo.source.name }}@{{ packageInfo.source.version }}</a>
+      >{{ getSourceFrom(packageInfo.source,true) }}</a>
     </div>
 
     <div class="oi-filter flex-row">
@@ -92,7 +92,9 @@ import {
 } from '../util/util.js';
 
 import {
-    formatter, getCellIcon, saveSVG, savePNG, getVueEl
+    formatter,
+    getCellIcon, getVueEl, getSourceFrom,
+    saveSVG, savePNG
 } from '../util/grid-helper.js';
 
 import OiIcon from './icon.vue';
