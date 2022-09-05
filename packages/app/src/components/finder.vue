@@ -42,6 +42,10 @@
       <VuiFlex spacing="10px">
         <div>Results: {{ state.results }}</div>
         <div class="vui-flex-empty" />
+        <VuiSwitch
+          v-model="settings.iconZoomIn"
+          tooltip="Icon zoom in tooltip"
+        />
         <OiIcon
           v-model="state.viewType"
           name="grid"
@@ -93,7 +97,7 @@ import {
 
 import OiIcon from './icon.vue';
 
-const { VuiFlex } = VineUI;
+const { VuiFlex, VuiSwitch } = VineUI;
 
 const state = inject('state');
 const settings = inject('settings');

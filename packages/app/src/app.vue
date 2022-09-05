@@ -156,7 +156,8 @@ const defaultSettings = {
     colorCustom: '',
     bg: '',
     bgCustom: '',
-    radius: ''
+    radius: '',
+    iconZoomIn: true
 };
 
 const settings = shallowReactive(defaultSettings);
