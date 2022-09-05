@@ -93,9 +93,9 @@
     {
         "id": "open-icons-dash",
         "name": "dash",
-        "size": 64904,
-        "sizeGzip": 49054,
-        "sizeJson": 157938
+        "size": 64892,
+        "sizeGzip": 49062,
+        "sizeJson": 157956
     },
     {
         "id": "open-icons-dev",
