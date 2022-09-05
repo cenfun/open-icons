@@ -40,7 +40,7 @@ const getWCIcon = function(settings, icon) {
     const color = getColor(settings, icon.tg_index);
     const bg = getBG(settings);
     const tag = icon.tagName;
-    return `<${tag} name="${icon.id}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
+    return `<${tag} name="${icon.id}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}" tooltip="icon"></${tag}>`;
 };
 
 export const getCellIcon = function(settings, icon) {
@@ -66,7 +66,7 @@ export const getCellIcon = function(settings, icon) {
     }
 
     return `
-        <div class="oi-cell-icon" style="${st.join('')}">
+        <div class="oi-cell-icon" style="${st.join('')}" tooltip="icon">
             ${icon.svg}
         </div>
     `;

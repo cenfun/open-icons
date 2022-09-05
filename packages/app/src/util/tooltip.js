@@ -18,7 +18,25 @@ const showTooltip = function(elem) {
     if (!text) {
         return;
     }
+
     hideTooltip(elem);
+
+    if (text === 'icon') {
+        const $copy = elem.cloneNode(true);
+
+        if ($copy.tagName.toLowerCase() === 'open-icon') {
+            $copy.setAttribute('size', '300px');
+        } else {
+            $copy.style.setProperty('--size', '300px');
+        }
+
+        tooltipInstance = VuiTooltip.createComponent({
+            target: elem,
+            html: $copy.outerHTML
+        });
+        return;
+    }
+
     tooltipInstance = VuiTooltip.createComponent({
         target: elem,
         text: text
