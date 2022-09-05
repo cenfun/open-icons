@@ -6,7 +6,7 @@
     height="100%"
   >
     <div class="oi-pkg-title">
-      {{ packageInfo.fullName || packageInfo.name }} <span>{{ packageInfo.iconCount.toLocaleString() }} icons</span>
+      {{ packageInfo.fullName || packageInfo.name }} <b>{{ packageInfo.iconCount.toLocaleString() }} <span>icons</span></b>
     </div>
     <div class="oi-pkg-stats">
       <a
@@ -503,10 +503,16 @@ watch(() => state.tabIndex, (v) => {
     font-size: 38px;
     padding: 15px 0 5px;
 
-    span {
+    b {
         text-transform: none;
         margin-left: 10px;
-        font-size: 28px;
+        color: #0077cf;
+
+        span {
+            font-weight: normal;
+            font-size: 30px;
+            color: #111;
+        }
     }
 }
 
