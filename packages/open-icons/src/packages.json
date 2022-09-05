@@ -406,6 +406,13 @@
         "sizeJson": 544515
     },
     {
+        "id": "open-icons-themify",
+        "name": "themify",
+        "size": 124613,
+        "sizeGzip": 94222,
+        "sizeJson": 266348
+    },
+    {
         "id": "open-icons-tiny",
         "name": "tiny",
         "size": 78928,

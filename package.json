@@ -25,6 +25,7 @@
         "lz-utils": "^1.0.5",
         "markdown-grid": "^1.0.1",
         "rc": "^1.2.8",
+        "svg-font-extractor": "^1.0.0",
         "svg-minifier": "^1.0.10",
         "umd-runtime-templates": "^1.0.1"
     },
