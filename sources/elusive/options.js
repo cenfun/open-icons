@@ -1,17 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
 module.exports = {
     name: 'elusive-iconfont',
     url: 'https://github.com/dovy/elusive-iconfont',
-    download: {
-        url: 'https://github.com/dovy/elusive-iconfont/archive/refs/heads/master.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'elusive-iconfont-master');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://github.com/dovy/elusive-iconfont/archive/refs/heads/master.zip',
+    moduleEntry: 'elusive-iconfont-master',
 
     license: 'SIL',
     dirs: 'dev/icons-svg',

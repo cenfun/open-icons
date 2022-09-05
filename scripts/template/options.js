@@ -8,14 +8,8 @@ module.exports = {
     name: 'xxx-icons',
     url: 'https://github.com/xxx-icons',
 
-    // download: {
-    //     url: 'https://github.com/xxx/master.zip',
-    //     handler: function(Util) {
-    //         const oldPath = path.resolve(this.sourcePath, 'xxx-icons-master');
-    //         const newPath = path.resolve(this.sourcePath, 'package');
-    //         fs.renameSync(oldPath, newPath);
-    //     }
-    // },
+    // downloadUrl: 'https://github.com/xxx/master.zip',
+    // moduleEntry: 'xxx-icons-master',
 
     // decompress: {
     //     filter: (file) => {

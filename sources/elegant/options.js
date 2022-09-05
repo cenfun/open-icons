@@ -1,17 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
 module.exports = {
     name: 'elegant-icon-font',
     url: 'https://www.elegantthemes.com/blog/resources/elegant-icon-font',
-    download: {
-        url: 'https://www.elegantthemes.com/icons/elegant_font.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'elegant_font');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://www.elegantthemes.com/icons/elegant_font.zip',
+    moduleEntry: 'elegant_font',
 
     decompress: {
         filter: (file) => {

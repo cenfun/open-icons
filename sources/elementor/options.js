@@ -1,18 +1,11 @@
-const fs = require('fs');
 const path = require('path');
 const SFE = require('svg-font-extractor');
 
 module.exports = {
     name: 'elementor-icons',
     url: 'https://github.com/elementor/elementor-icons',
-    download: {
-        url: 'https://github.com/elementor/elementor-icons/archive/refs/heads/master.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'elementor-icons-master');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://github.com/elementor/elementor-icons/archive/refs/heads/master.zip',
+    moduleEntry: 'elementor-icons-master',
 
     dirs: function(Util, modulePath) {
 

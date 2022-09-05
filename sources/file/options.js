@@ -1,18 +1,10 @@
-const fs = require('fs');
-const path = require('path');
 const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: 'file-icons',
     url: 'https://github.com/file-icons/icons',
-    download: {
-        url: 'https://github.com/file-icons/icons/archive/refs/heads/master.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'icons-master');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://github.com/file-icons/icons/archive/refs/heads/master.zip',
+    moduleEntry: 'icons-master',
 
     decompress: {
         filter: (file) => {

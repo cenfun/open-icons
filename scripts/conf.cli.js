@@ -90,6 +90,8 @@ const decompressPackage = async (filePath, pkg, Util) => {
         return;
     }
 
+    //get
+
     Util.log(`decompressed: ${Util.relativePath(filePath)} ${files.length}`);
     return true;
 };
@@ -218,29 +220,18 @@ const downloadFromNpm = async (pkg, Util) => {
     const done = await downloadFile(url, pkg, Util);
     if (!done) {
         Util.logRed(`Failed to download package: ${pkg.name}`);
-        return;
-    }
-
-    const handler = pkg.download && pkg.download.handler;
-    if (typeof handler === 'function') {
-        return handler.call(pkg, Util);
     }
 
 };
 
 const downloadFromUrl = async (pkg, Util) => {
-    const url = pkg.download.url;
+
+    const url = pkg.downloadUrl;
 
     pkg.saveName = 'package.zip';
     const done = await downloadFile(url, pkg, Util);
     if (!done) {
         Util.logRed(`Failed to download package: ${pkg.name}`);
-        return;
-    }
-
-    const handler = pkg.download && pkg.download.handler;
-    if (typeof handler === 'function') {
-        return handler.call(pkg, Util);
     }
 
 };
@@ -251,7 +242,7 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
     if (fs.existsSync(path.resolve(pkg.modulePath))) {
 
         if (!pkg.debug) {
-            Util.logYellow(`exists cache module and ignored: ${name}`);
+            Util.logYellow(`exists module cache: ${name}`);
             return;
         }
 
@@ -267,7 +258,7 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
     });
 
 
-    if (pkg.download && pkg.download.url) {
+    if (pkg.downloadUrl) {
         return downloadFromUrl(pkg, Util);
     }
 
@@ -286,7 +277,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     if (fs.existsSync(path.resolve(job.buildPath, `${outputName}.js`))) {
 
         if (!pkg.debug) {
-            Util.logYellow(`exists cache build and ignored: ${name}`);
+            Util.logYellow(`exists build cache: ${name}`);
             return true;
         }
 
@@ -295,7 +286,9 @@ const pkgHandler = async (job, name, index, total, Util) => {
     }
 
     pkg.sourcePath = path.resolve(Util.getTempRoot(), 'sources', name);
-    pkg.modulePath = path.resolve(pkg.sourcePath, 'package');
+
+    const moduleEntry = pkg.moduleEntry || 'package';
+    pkg.modulePath = path.resolve(pkg.sourcePath, moduleEntry);
 
     await downloadPkgHandler(job, name, pkg, Util);
 

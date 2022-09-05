@@ -1,17 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-
 module.exports = {
+    debug: true,
     name: 'dashicons',
     url: 'https://github.com/WordPress/dashicons',
-    download: {
-        url: 'https://github.com/WordPress/dashicons/archive/refs/heads/master.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'dashicons-master');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://github.com/WordPress/dashicons/archive/refs/heads/master.zip',
+    moduleEntry: 'dashicons-master',
 
     decompress: {
         filter: (file) => {

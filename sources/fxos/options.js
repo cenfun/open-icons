@@ -1,17 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
 module.exports = {
     name: 'fxos-icons',
     url: 'https://github.com/fxos-components/fxos-icons',
-    download: {
-        url: 'https://github.com/fxos-components/fxos-icons/archive/refs/heads/master.zip',
-        handler: function(Util) {
-            const oldPath = path.resolve(this.sourcePath, 'fxos-icons-master');
-            const newPath = path.resolve(this.sourcePath, 'package');
-            fs.renameSync(oldPath, newPath);
-        }
-    },
+    downloadUrl: 'https://github.com/fxos-components/fxos-icons/archive/refs/heads/master.zip',
+    moduleEntry: 'fxos-icons-master',
 
     dirs: 'images',
 
