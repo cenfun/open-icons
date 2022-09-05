@@ -6,6 +6,7 @@ module.exports = {
     moduleEntry: 'subway-master',
     moduleFilters: 'SVG',
 
+    license: 'CC BY 4.0',
     dirs: 'SVG',
 
     onSVGName: function(name, item) {

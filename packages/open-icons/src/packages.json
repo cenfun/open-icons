@@ -560,6 +560,13 @@
         "sizeJson": 298195
     },
     {
+        "id": "open-icons-windows",
+        "name": "windows",
+        "size": 371121,
+        "sizeGzip": 280476,
+        "sizeJson": 810122
+    },
+    {
         "id": "open-icons-wordpress",
         "name": "wordpress",
         "size": 39731,

@@ -12,6 +12,8 @@ module.exports = {
     // moduleEntry: 'xxx-icons-master',
     // moduleFilters: 'fonts/xxx.svg',
 
+    //license: 'CC BY 4.0',
+
     //dirs: 'svg',
 
     // dirs: ['inline-svg/filled', {
