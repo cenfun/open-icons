@@ -420,6 +420,13 @@
         "sizeJson": 634357
     },
     {
+        "id": "open-icons-pep",
+        "name": "pep",
+        "size": 71317,
+        "sizeGzip": 53923,
+        "sizeJson": 167032
+    },
+    {
         "id": "open-icons-phosphor",
         "name": "phosphor",
         "size": 893784,
