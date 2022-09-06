@@ -17,7 +17,7 @@
             class="oi-packages-header"
           >
             <div class="oi-title vui-flex-auto">
-              <a href="/">Open Icons</a>
+              <a href="./">Open Icons</a>
             </div>
             <a
               href="https://github.com/cenfun/open-icons"

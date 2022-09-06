@@ -42,10 +42,16 @@
       <VuiFlex spacing="10px">
         <div>Results: {{ state.results }}</div>
         <div class="vui-flex-empty" />
+
         <VuiSwitch
           v-model="settings.iconZoomIn"
           tooltip="Icon zoom in tooltip"
-        />
+        >
+          <OiIcon
+            name="zoom-in"
+            color="#666"
+          />
+        </VuiSwitch>
         <OiIcon
           v-model="state.viewType"
           name="grid"
