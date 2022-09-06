@@ -35,6 +35,13 @@
         "sizeJson": 994013
     },
     {
+        "id": "open-icons-bitcoin",
+        "name": "bitcoin",
+        "size": 47205,
+        "sizeGzip": 35689,
+        "sizeJson": 101911
+    },
+    {
         "id": "open-icons-blueprint",
         "name": "blueprint",
         "size": 127315,
