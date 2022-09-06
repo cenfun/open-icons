@@ -5,16 +5,21 @@ const { VuiTooltip } = VineUI;
 
 let tooltipInstance;
 
-const showTooltip = function(elem) {
+const getTooltipText = function(elem) {
     if (elem === document) {
         return;
     }
 
     if (!elem.getAttribute) {
-        //console.log(elem);
         return;
     }
-    const text = elem.getAttribute('tooltip');
+
+    return elem.getAttribute('tooltip');
+};
+
+const showTooltip = function(elem) {
+
+    const text = getTooltipText(elem);
     if (!text) {
         return;
     }
