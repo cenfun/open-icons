@@ -171,11 +171,10 @@ const downloadFile = async (url, pkg, Util) => {
     });
     data.pipe(writer);
 
-    Util.log('[downloaded]', Util.relativePath(filePath));
-
     return new Promise((resolve) => {
         writer.on('finish', () => {
             gauge.disable();
+            Util.log(`downloaded: ${Util.relativePath(filePath)}`);
 
             decompressPackage(filePath, pkg, Util).then(function(done) {
                 resolve(done);

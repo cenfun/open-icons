@@ -322,6 +322,13 @@
         "sizeJson": 131836
     },
     {
+        "id": "open-icons-logos",
+        "name": "logos",
+        "size": 1413147,
+        "sizeGzip": 1067731,
+        "sizeJson": 2665925
+    },
+    {
         "id": "open-icons-lucide",
         "name": "lucide",
         "size": 70718,
