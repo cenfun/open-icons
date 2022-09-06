@@ -11,6 +11,18 @@ module.exports = {
 
     onSVGDocument: function($svg) {
         $svg.attr('fill', 'currentColor');
-    }
+    },
+
+    onSVGOptimized: function($svg, item, $) {
+
+        const content = $svg.html();
+        if (content.length > 5000) {
+            //console.log(item.name, content.length);
+            return false;
+        }
+    },
+
+    readme: 'Without size bigger than 5000'
+
 
 };
