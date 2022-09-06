@@ -15,7 +15,7 @@ module.exports = {
 
     //license: 'CC BY 4.0',
 
-    //dirs: 'svg',
+    dirs: 'svg',
 
     // dirs: ['inline-svg/filled', {
     //     outline: 'inline-svg/outlined'

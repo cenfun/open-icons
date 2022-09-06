@@ -238,6 +238,13 @@
         "sizeJson": 11828
     },
     {
+        "id": "open-icons-gov",
+        "name": "gov",
+        "size": 63717,
+        "sizeGzip": 48160,
+        "sizeJson": 124200
+    },
+    {
         "id": "open-icons-grommet",
         "name": "grommet",
         "size": 113741,
