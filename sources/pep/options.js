@@ -28,6 +28,8 @@ module.exports = {
         });
 
         return 'svg';
-    }
+    },
+
+    license: 'CC-BY-4.0'
 
 };

@@ -115,7 +115,7 @@ const decompressPackage = async (filePath, pkg, Util) => {
 
     //get
 
-    Util.log(`decompressed: ${Util.relativePath(filePath)} ${files.length}`);
+    Util.log(`decompressed: ${Util.relativePath(filePath)} (${files.length} files)`);
     return true;
 };
 
@@ -500,13 +500,18 @@ module.exports = {
                 totalSize += pkg.size;
                 totalSizeGzip += pkg.sizeGzip;
 
+                let sourceName = source.name;
+                if (source.version) {
+                    sourceName += `@${source.version}`;
+                }
+
                 return {
                     index: i + 1,
                     name: `[${pkg.name}](https://cenfun.github.io/open-icons/#${pkg.name})`,
                     icons: icons.toLocaleString(),
                     size: Util.BF(pkg.size),
                     sizeGzip: Util.BF(pkg.sizeGzip),
-                    source: `[${source.name}@${source.version}](${source.url})`,
+                    source: `[${sourceName}](${source.url})`,
                     license: source.license
                 };
             });

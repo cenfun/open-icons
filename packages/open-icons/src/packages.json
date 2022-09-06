@@ -149,9 +149,9 @@
     {
         "id": "open-icons-elusive",
         "name": "elusive",
-        "size": 114137,
-        "sizeGzip": 86244,
-        "sizeJson": 211409
+        "size": 114077,
+        "sizeGzip": 86213,
+        "sizeJson": 211404
     },
     {
         "id": "open-icons-entypo",
@@ -338,9 +338,9 @@
     {
         "id": "open-icons-logos",
         "name": "logos",
-        "size": 1413147,
-        "sizeGzip": 1067731,
-        "sizeJson": 2665925
+        "size": 1412675,
+        "sizeGzip": 1067245,
+        "sizeJson": 2665914
     },
     {
         "id": "open-icons-lucide",
@@ -401,9 +401,9 @@
     {
         "id": "open-icons-mono",
         "name": "mono",
-        "size": 30128,
-        "sizeGzip": 22775,
-        "sizeJson": 77301
+        "size": 30104,
+        "sizeGzip": 22764,
+        "sizeJson": 77337
     },
     {
         "id": "open-icons-oct",
@@ -429,9 +429,9 @@
     {
         "id": "open-icons-pep",
         "name": "pep",
-        "size": 71317,
-        "sizeGzip": 53923,
-        "sizeJson": 167032
+        "size": 71245,
+        "sizeGzip": 53883,
+        "sizeJson": 166987
     },
     {
         "id": "open-icons-phosphor",
@@ -478,9 +478,9 @@
     {
         "id": "open-icons-rsuite",
         "name": "rsuite",
-        "size": 315734,
+        "size": 315746,
         "sizeGzip": 238795,
-        "sizeJson": 754087
+        "sizeJson": 754125
     },
     {
         "id": "open-icons-sanity",
@@ -499,9 +499,9 @@
     {
         "id": "open-icons-subway",
         "name": "subway",
-        "size": 56282,
-        "sizeGzip": 42538,
-        "sizeJson": 135844
+        "size": 56462,
+        "sizeGzip": 42698,
+        "sizeJson": 135850
     },
     {
         "id": "open-icons-tabler",
@@ -569,16 +569,16 @@
     {
         "id": "open-icons-vscode",
         "name": "vscode",
-        "size": 112670,
-        "sizeGzip": 85149,
-        "sizeJson": 243853
+        "size": 112630,
+        "sizeGzip": 85108,
+        "sizeJson": 244033
     },
     {
         "id": "open-icons-vtmn",
         "name": "vtmn",
-        "size": 74344,
-        "sizeGzip": 56212,
-        "sizeJson": 188067
+        "size": 74896,
+        "sizeGzip": 56640,
+        "sizeJson": 189370
     },
     {
         "id": "open-icons-weather",

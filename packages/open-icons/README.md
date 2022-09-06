@@ -34,16 +34,16 @@ npm install open-icons
 | 15|[cssgg](https://cenfun.github.io/open-icons/#cssgg)|  704|81.8KB|61.9KB|[css.gg@2.0.0](https://github.com/astrit/css.gg)|MIT    |
 | 16|[dash](https://cenfun.github.io/open-icons/#dash)|  342|63.4KB|47.9KB|[dashicons@0.9.0](https://github.com/WordPress/dashicons)|GPL-2.0-or-later|
 | 17|[dev](https://cenfun.github.io/open-icons/#dev)|  192|215.4KB|162.8KB|[devicons@1.8.0](https://github.com/vorillaz/devicons)|MIT    |
-| 18|[drip](https://cenfun.github.io/open-icons/#drip)|  200|57.0KB|43.1KB|[dripicons@](https://github.com/amitjakhu/dripicons)|CC-BY-SA-4.0|
-| 19|[elegant](https://cenfun.github.io/open-icons/#elegant)|  360|85.8KB|64.9KB|[elegant-icon-font@](https://www.elegantthemes.com/blog/resources/elegant-icon-font)|GPL 2.0 and MIT|
+| 18|[drip](https://cenfun.github.io/open-icons/#drip)|  200|57.0KB|43.1KB|[dripicons](https://github.com/amitjakhu/dripicons)|CC-BY-SA-4.0|
+| 19|[elegant](https://cenfun.github.io/open-icons/#elegant)|  360|85.8KB|64.9KB|[elegant-icon-font](https://www.elegantthemes.com/blog/resources/elegant-icon-font)|GPL 2.0 and MIT|
 | 20|[element](https://cenfun.github.io/open-icons/#element)|  293|65.6KB|49.6KB|[@element-plus/icons-svg@2.0.9](https://github.com/element-plus/element-plus-icons)|MIT    |
 | 21|[elementor](https://cenfun.github.io/open-icons/#elementor)|  443|154.9KB|117.1KB|[elementor-icons@5.16.0](https://github.com/elementor/elementor-icons)|MIT    |
-| 22|[elusive](https://cenfun.github.io/open-icons/#elusive)|  299|111.5KB|84.2KB|[elusive-iconfont@1.0.0](https://github.com/dovy/elusive-iconfont)|SIL    |
+| 22|[elusive](https://cenfun.github.io/open-icons/#elusive)|  299|111.4KB|84.2KB|[elusive-iconfont](https://github.com/dovy/elusive-iconfont)|SIL    |
 | 23|[entypo](https://cenfun.github.io/open-icons/#entypo)|  411|110.0KB|83.1KB|[entypo@2.2.1](https://github.com/hypermodules/entypo)|ISC    |
 | 24|[eva](https://cenfun.github.io/open-icons/#eva)|  490|69.9KB|52.9KB|[eva-icons@1.1.3](https://github.com/akveo/eva-icons)|MIT    |
 | 25|[evil](https://cenfun.github.io/open-icons/#evil)|   70|18.1KB|13.7KB|[evil-icons@1.10.1](https://github.com/evil-icons/evil-icons)|MIT    |
 | 26|[feather](https://cenfun.github.io/open-icons/#feather)|  287|24.9KB|18.8KB|[feather-icons@4.29.0](https://github.com/feathericons/feather)|MIT    |
-| 27|[file](https://cenfun.github.io/open-icons/#file)|  931|749.4KB|566.1KB|[file-icons@](https://github.com/file-icons/icons)|ISC    |
+| 27|[file](https://cenfun.github.io/open-icons/#file)|  931|749.4KB|566.1KB|[file-icons](https://github.com/file-icons/icons)|ISC    |
 | 28|[flag](https://cenfun.github.io/open-icons/#flag)|  512|96.0KB|72.5KB|[country-flag-icons@1.5.5](https://gitlab.com/catamphetamine/country-flag-icons)|MIT    |
 | 29|[flat](https://cenfun.github.io/open-icons/#flat)|  329|81.1KB|61.3KB|[flat-color-icons@1.1.0](https://github.com/icons8/flat-color-icons)|MIT OR Good-Boy|
 | 30|[flight](https://cenfun.github.io/open-icons/#flight)|  468|141.4KB|106.9KB|[@hashicorp/flight-icons@2.10.0](https://github.com/hashicorp/design-system/)|MPL-2.0|
@@ -65,20 +65,20 @@ npm install open-icons
 | 46|[jam](https://cenfun.github.io/open-icons/#jam)|  896|185.0KB|139.9KB|[jam-icons@2.0.0](https://github.com/michaelampr/jam)|MIT    |
 | 47|[line](https://cenfun.github.io/open-icons/#line)|1,544|501.6KB|378.8KB|[line-awesome@1.3.0](https://github.com/icons8/line-awesome)|MIT    |
 | 48|[linear](https://cenfun.github.io/open-icons/#linear)|  170|59.4KB|44.9KB|[linearicons@1.0.2](https://github.com/cjpatoilo/linearicons)|CC BY-SA 4.0|
-| 49|[logos](https://cenfun.github.io/open-icons/#logos)|1,336|1.3MB|1.0MB|[logos-collection@](https://github.com/gilbarbara/logos)|CC0-1.0|
+| 49|[logos](https://cenfun.github.io/open-icons/#logos)|1,336|1.3MB|1.0MB|[logos](https://github.com/gilbarbara/logos)|CC0-1.0|
 | 50|[lucide](https://cenfun.github.io/open-icons/#lucide)|  831|69.1KB|52.3KB|[lucide@0.88.0](https://github.com/lucide-icons/lucide)|ISC    |
 | 51|[majest](https://cenfun.github.io/open-icons/#majest)|  760|104.8KB|79.2KB|[majesticons@2.1.2](https://github.com/halfmage/majesticons)|MIT    |
 | 52|[maki](https://cenfun.github.io/open-icons/#maki)|  211|50.7KB|38.3KB|[@mapbox/maki@8.0.0](https://github.com/mapbox/maki)|CC0-1.0|
 | 53|[map](https://cenfun.github.io/open-icons/#map)|  167|82.3KB|62.2KB|[map-icons@3.0.3](https://github.com/scottdejonge/Map-Icons)|ISC    |
 | 54|[material](https://cenfun.github.io/open-icons/#material)|4,229|501.0KB|378.1KB|[@material-design-icons/svg@0.12.1](https://github.com/marella/material-design-icons)|Apache-2.0|
 | 55|[mdi](https://cenfun.github.io/open-icons/#mdi)|7,096|1.0MB|787.5KB|[@mdi/svg@7.0.96](https://github.com/Templarian/MaterialDesign-SVG)|Apache-2.0|
-| 56|[metrize](https://cenfun.github.io/open-icons/#metrize)|  300|139.8KB|105.6KB|[metrize-icons@](https://www.alessioatzeni.com/metrize-icons/)|Free   |
+| 56|[metrize](https://cenfun.github.io/open-icons/#metrize)|  300|139.8KB|105.6KB|[metrize-icons](https://www.alessioatzeni.com/metrize-icons/)|Free   |
 | 57|[metro](https://cenfun.github.io/open-icons/#metro)|  700|288.2KB|217.8KB|[metro-icons@4.5.1](https://github.com/MfgLabs/mfglabs-iconset)|MIT    |
 | 58|[mono](https://cenfun.github.io/open-icons/#mono)|  180|29.4KB|22.2KB|[mono-icons@1.3.1](https://github.com/mono-company/mono-icons)|MIT    |
 | 59|[oct](https://cenfun.github.io/open-icons/#oct)|  516|125.7KB|95.1KB|[@primer/octicons@17.5.0](https://github.com/primer/octicons)|MIT    |
 | 60|[park](https://cenfun.github.io/open-icons/#park)|2,658|336.0KB|254.2KB|[@icon-park/svg@1.4.2](https://github.com/bytedance/IconPark)|Apache-2.0|
 | 61|[payment](https://cenfun.github.io/open-icons/#payment)|  116|358.6KB|271.1KB|[paymentfont@1.2.5](https://github.com/AlexanderPoellmann/PaymentFont)|(OFL-1.1 AND MIT)|
-| 62|[pep](https://cenfun.github.io/open-icons/#pep)|  218|69.6KB|52.7KB|[pepicons@1.1.2](https://github.com/CyCraft/pepicons)|CREATIVE COMMONS ATTRIBUTION 4.0 INTERNATIONAL LICENSE|
+| 62|[pep](https://cenfun.github.io/open-icons/#pep)|  218|69.6KB|52.6KB|[pepicons@1.1.2](https://github.com/CyCraft/pepicons)|CC-BY-4.0|
 | 63|[phosphor](https://cenfun.github.io/open-icons/#phosphor)|5,235|872.8KB|659.0KB|[phosphor-icons@1.4.2](https://github.com/phosphor-icons/phosphor-icons)|MIT    |
 | 64|[pixelart](https://cenfun.github.io/open-icons/#pixelart)|  480|32.0KB|24.2KB|[pixelarticons@1.7.0](https://github.com/halfmage/pixelarticons)|MIT    |
 | 65|[polaris](https://cenfun.github.io/open-icons/#polaris)|  426|82.0KB|62.0KB|[@shopify/polaris-icons@6.0.0](https://github.com/Shopify/polaris)|SEE LICENSE IN LICENSE.md|
@@ -88,7 +88,7 @@ npm install open-icons
 | 69|[rsuite](https://cenfun.github.io/open-icons/#rsuite)|  921|308.3KB|233.2KB|[@rsuite/icon-font@4.0.0](https://github.com/rsuite/rsuite-icons)|(CC-BY-4.0 AND OFL-1.1 AND MIT)|
 | 70|[sanity](https://cenfun.github.io/open-icons/#sanity)|  171|23.1KB|17.4KB|[@sanity/icons@1.3.4](https://github.com/sanity-io/design)|MIT    |
 | 71|[simple](https://cenfun.github.io/open-icons/#simple)|2,239|1.3MB|975.4KB|[simple-icons@7.10.0](https://github.com/simple-icons/simple-icons)|CC0-1.0|
-| 72|[subway](https://cenfun.github.io/open-icons/#subway)|  306|55.0KB|41.5KB|[subway@](https://github.com/mariuszostrowski/subway)|MIT    |
+| 72|[subway](https://cenfun.github.io/open-icons/#subway)|  306|55.1KB|41.7KB|[subway](https://github.com/mariuszostrowski/subway)|CC BY 4.0|
 | 73|[tabler](https://cenfun.github.io/open-icons/#tabler)|2,428|203.5KB|153.8KB|[@tabler/icons@1.92.0](https://github.com/tabler/tabler-icons)|MIT    |
 | 74|[teeny](https://cenfun.github.io/open-icons/#teeny)|1,200|187.5KB|141.8KB|[teenyicons@0.4.1](https://github.com/teenyicons/teenyicons)|MIT    |
 | 75|[themify](https://cenfun.github.io/open-icons/#themify)|  352|121.7KB|92.0KB|[themify-icons@1.0.0](https://github.com/aastrong/themify-icons.scss)|ISC    |
@@ -98,14 +98,14 @@ npm install open-icons
 | 79|[unicons](https://cenfun.github.io/open-icons/#unicons)|1,395|252.8KB|191.2KB|[@iconscout/unicons@4.0.1](https://github.com/Iconscout/unicons)|Apache-2.0|
 | 80|[vaadin](https://cenfun.github.io/open-icons/#vaadin)|  641|94.7KB|71.6KB|[@vaadin/icons@23.2.0](https://github.com/vaadin/web-components)|Apache-2.0|
 | 81|[vivid](https://cenfun.github.io/open-icons/#vivid)|  104|18.8KB|14.2KB|[vivid-icons@1.0.10](https://github.com/webkul/vivid)|MIT    |
-| 82|[vscode](https://cenfun.github.io/open-icons/#vscode)|  421|110.0KB|83.2KB|[@vscode/codicons@0.0.32](https://github.com/microsoft/vscode-codicons)|CC-BY-4.0|
-| 83|[vtmn](https://cenfun.github.io/open-icons/#vtmn)|  408|72.6KB|54.9KB|[@vtmn/icons@0.14.0](https://github.com/Decathlon/vitamin-web)|Apache-2.0|
+| 82|[vscode](https://cenfun.github.io/open-icons/#vscode)|  421|110.0KB|83.1KB|[@vscode/codicons@0.0.32](https://github.com/microsoft/vscode-codicons)|CC-BY-4.0|
+| 83|[vtmn](https://cenfun.github.io/open-icons/#vtmn)|  410|73.1KB|55.3KB|[@vtmn/icons@0.15.0](https://github.com/Decathlon/vitamin-web)|Apache-2.0|
 | 84|[weather](https://cenfun.github.io/open-icons/#weather)|  219|133.3KB|100.7KB|[weather-icons-npm@10.0.0](https://github.com/erikflowers/weather-icons)|MIT    |
-| 85|[windows](https://cenfun.github.io/open-icons/#windows)|1,260|362.4KB|273.9KB|[windows-icons@](https://github.com/Templarian/WindowsIcons)|CC BY-ND 3.0|
+| 85|[windows](https://cenfun.github.io/open-icons/#windows)|1,260|362.4KB|273.9KB|[windows-icons](https://github.com/Templarian/WindowsIcons)|CC BY-ND 3.0|
 | 86|[wordpress](https://cenfun.github.io/open-icons/#wordpress)|  243|38.8KB|29.3KB|[@wordpress/icons@9.7.0](https://github.com/WordPress/gutenberg)|GPL-2.0-or-later|
 | 87|[zocial](https://cenfun.github.io/open-icons/#zocial)|  100|93.1KB|70.4KB|[css-social-buttons@1.1.1](https://github.com/smcllns/css-social-buttons)|MIT    |
 | 88|[zond](https://cenfun.github.io/open-icons/#zond)|  297|26.6KB|20.1KB|[zondicons@1.2.0](https://www.zondicons.com/)|CC-BY-4.0|
-|   |Total|73,364|18.5MB|14.0MB|      |       |
+|   |Total|73,366|18.5MB|14.0MB|      |       |
 
 
 ## Features
