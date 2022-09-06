@@ -24,6 +24,10 @@ npm install open-icons
 * Customize Size/Color/BG/Radius
 * High Compressed Bundle
 
+## Multiple types naming
+* without type postfix (default name): fill/filled/solid
+* with type postfix: outline/outlined/line
+
 
 ## Minified with [svg-minifier](https://github.com/cenfun/svg-minifier)
 * Optimized with [svgo](https://github.com/svg/svgo)
