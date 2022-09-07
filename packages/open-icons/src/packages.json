@@ -287,6 +287,13 @@
         "sizeJson": 318113
     },
     {
+        "id": "open-icons-humble",
+        "name": "humble",
+        "size": 26906,
+        "sizeGzip": 20340,
+        "sizeJson": 81661
+    },
+    {
         "id": "open-icons-icofont",
         "name": "icofont",
         "size": 1177781,
