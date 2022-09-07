@@ -504,6 +504,13 @@
         "sizeJson": 61630
     },
     {
+        "id": "open-icons-shop",
+        "name": "shop",
+        "size": 162876,
+        "sizeGzip": 123175,
+        "sizeJson": 396241
+    },
+    {
         "id": "open-icons-simple",
         "name": "simple",
         "size": 1322374,
