@@ -434,6 +434,13 @@
         "sizeJson": 77337
     },
     {
+        "id": "open-icons-neu",
+        "name": "neu",
+        "size": 268097,
+        "sizeGzip": 202729,
+        "sizeJson": 760659
+    },
+    {
         "id": "open-icons-oct",
         "name": "oct",
         "size": 128757,
