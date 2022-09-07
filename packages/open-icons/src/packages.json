@@ -84,6 +84,13 @@
         "sizeJson": 84909
     },
     {
+        "id": "open-icons-cool",
+        "name": "cool",
+        "size": 68840,
+        "sizeGzip": 52045,
+        "sizeJson": 166696
+    },
+    {
         "id": "open-icons-coreui",
         "name": "coreui",
         "size": 139550,
