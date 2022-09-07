@@ -539,6 +539,13 @@
         "sizeJson": 2620715
     },
     {
+        "id": "open-icons-sketch",
+        "name": "sketch",
+        "size": 343682,
+        "sizeGzip": 259857,
+        "sizeJson": 728755
+    },
+    {
         "id": "open-icons-subway",
         "name": "subway",
         "size": 56462,
