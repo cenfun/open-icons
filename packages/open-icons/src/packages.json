@@ -434,6 +434,13 @@
         "sizeJson": 333800
     },
     {
+        "id": "open-icons-orchid",
+        "name": "orchid",
+        "size": 175646,
+        "sizeGzip": 132789,
+        "sizeJson": 342720
+    },
+    {
         "id": "open-icons-park",
         "name": "park",
         "size": 344108,
