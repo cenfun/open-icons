@@ -19,7 +19,7 @@ npm install open-icons
 |--:|:---|----:|---:|---:|------|-------|
 |  1|[academ](https://cenfun.github.io/open-icons/#academ)|  149|162.7KB|123.0KB|[academicons@1.9.2](https://github.com/jpswalsh/academicons)|OFL-1.1|
 |  2|[akar](https://cenfun.github.io/open-icons/#akar)|  393|75.5KB|57.1KB|[akar-icons@1.9.20](https://github.com/artcoholic/akar-icons)|MIT    |
-|  3|[ant](https://cenfun.github.io/open-icons/#ant)|  639|192.8KB|145.8KB|[@ant-design/icons-svg@4.2.1](https://github.com/ant-design/ant-design-icons)|MIT    |
+|  3|[antd](https://cenfun.github.io/open-icons/#antd)|  639|192.8KB|145.8KB|[@ant-design/icons-svg@4.2.1](https://github.com/ant-design/ant-design-icons)|MIT    |
 |  4|[antdm](https://cenfun.github.io/open-icons/#antdm)|  151|61.7KB|46.6KB|[antd-mobile-icons@0.3.0](https://github.com/awmleer/antd-mobile-icons)|MIT    |
 |  5|[awesome](https://cenfun.github.io/open-icons/#awesome)|1,388|377.5KB|285.4KB|[@fortawesome/free-solid-svg-icons@6.2.0](https://github.com/FortAwesome/Font-Awesome)|(CC-BY-4.0 AND MIT)|
 |  6|[bitcoin](https://cenfun.github.io/open-icons/#bitcoin)|  158|46.1KB|34.9KB|[@bitcoin-design/bitcoin-icons@0.1.1](https://github.com/BitcoinDesign/Bitcoin-Icons)|MIT    |
