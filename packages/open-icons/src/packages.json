@@ -322,6 +322,13 @@
         "sizeJson": 517260
     },
     {
+        "id": "open-icons-lawn",
+        "name": "lawn",
+        "size": 244728,
+        "sizeGzip": 183962,
+        "sizeJson": 402391
+    },
+    {
         "id": "open-icons-line",
         "name": "line",
         "size": 513612,
