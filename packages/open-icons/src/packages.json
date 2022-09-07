@@ -231,6 +231,13 @@
         "sizeJson": 277988
     },
     {
+        "id": "open-icons-framework7",
+        "name": "framework7",
+        "size": 537882,
+        "sizeGzip": 405761,
+        "sizeJson": 1177459
+    },
+    {
         "id": "open-icons-fxos",
         "name": "fxos",
         "size": 66888,

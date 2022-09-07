@@ -183,7 +183,7 @@ const renderPackages = function(packages) {
         columns: [{
             id: 'name',
             name: 'Name',
-            width: 85
+            width: 90
         }, {
             id: 'iconCount',
             name: 'Icons',
