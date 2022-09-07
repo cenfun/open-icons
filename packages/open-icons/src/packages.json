@@ -532,6 +532,13 @@
         "sizeJson": 544515
     },
     {
+        "id": "open-icons-themeisle",
+        "name": "themeisle",
+        "size": 137387,
+        "sizeGzip": 103783,
+        "sizeJson": 232012
+    },
+    {
         "id": "open-icons-themify",
         "name": "themify",
         "size": 124613,
