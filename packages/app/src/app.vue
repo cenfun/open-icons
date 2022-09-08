@@ -284,7 +284,7 @@ const renderPackages = function(packages) {
         frozenRowHoverable: true,
         selectMultiple: false,
         rowNumberVisible: true,
-        rowNumberWidth: 30,
+        rowNumberWidth: 35,
         scrollbarRound: true,
         bindWindowResize: true,
         bindContainerResize: true,
