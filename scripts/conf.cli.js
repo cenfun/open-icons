@@ -500,18 +500,14 @@ module.exports = {
                 totalSize += pkg.size;
                 totalSizeGzip += pkg.sizeGzip;
 
-                let sourceName = source.name;
-                if (source.version) {
-                    sourceName += `@${source.version}`;
-                }
-
                 return {
                     index: i + 1,
                     name: `[${pkg.name}](https://cenfun.github.io/open-icons/#${pkg.name})`,
                     icons: icons.toLocaleString(),
                     size: Util.BF(pkg.size),
                     sizeGzip: Util.BF(pkg.sizeGzip),
-                    source: `[${sourceName}](${source.url})`,
+                    source: `[${source.name}](${source.url})`,
+                    version: source.version,
                     license: source.license
                 };
             });
@@ -523,6 +519,7 @@ module.exports = {
                 size: Util.BF(totalSize),
                 sizeGzip: Util.BF(totalSizeGzip),
                 source: '',
+                version: '',
                 license: ''
             });
 
@@ -553,6 +550,9 @@ module.exports = {
                 }, {
                     id: 'source',
                     name: 'Source'
+                }, {
+                    id: 'version',
+                    name: 'Version'
                 }, {
                     id: 'license',
                     name: 'License'

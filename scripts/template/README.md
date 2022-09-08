@@ -19,13 +19,13 @@ npm install open-icons
 
 
 ## Features
-* Pure SVG Icons 
+* Pure SVG icons 
 * fill/stroke with currentColor
-* High Compressed Bundle
-* Web Components
-* Customize Size/Color/BG/Radius
-* kebab-case Naming
+* High compressed bundle
 * UMD format bundle
+* Web components
+* Customize size/color/BG/radius
+* kebab-case naming
 
 ## Usage
 ```js
