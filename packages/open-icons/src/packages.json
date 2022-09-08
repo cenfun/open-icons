@@ -623,6 +623,13 @@
         "sizeJson": 781917
     },
     {
+        "id": "open-icons-uxwing",
+        "name": "uxwing",
+        "size": 319490,
+        "sizeGzip": 241559,
+        "sizeJson": 595971
+    },
+    {
         "id": "open-icons-vaadin",
         "name": "vaadin",
         "size": 97018,
