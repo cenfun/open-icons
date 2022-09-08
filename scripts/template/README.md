@@ -9,12 +9,12 @@
 ## Homepage
 [https://cenfun.github.io/open-icons/](https://cenfun.github.io/open-icons/)
 
-# Installation
+## Installation
 ```sh
 npm install open-icons
 ```
 
-## Packages
+# {placeholder_info}
 {placeholder_list}
 
 

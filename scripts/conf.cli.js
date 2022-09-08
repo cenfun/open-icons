@@ -512,6 +512,8 @@ module.exports = {
                 };
             });
 
+            const totalInfo = `${list.length} Packages & ${totalIcons.toLocaleString()} Icons`;
+
             list.push({
                 index: '',
                 name: 'Total',
@@ -568,6 +570,7 @@ module.exports = {
 
             Util.editFile(from, (content) => {
                 return Util.replace(content, {
+                    placeholder_info: totalInfo,
                     placeholder_list: mg
                 });
             }, dest);

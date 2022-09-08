@@ -9,12 +9,12 @@
 ## Homepage
 [https://cenfun.github.io/open-icons/](https://cenfun.github.io/open-icons/)
 
-# Installation
+## Installation
 ```sh
 npm install open-icons
 ```
 
-## Packages
+# 103 Packages & 81,646 Icons
 |   |Name|Icons|Size|Gzip|Source|Version|License|
 |--:|:---|----:|---:|---:|:-----|:------|:------|
 |  1|[academ](https://cenfun.github.io/open-icons/#academ)|  149|162.7KB|123.0KB|[academicons](https://github.com/jpswalsh/academicons)|1.9.2  |OFL-1.1|
