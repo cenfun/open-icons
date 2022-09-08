@@ -84,6 +84,13 @@
         "sizeJson": 84909
     },
     {
+        "id": "open-icons-circum",
+        "name": "circum",
+        "size": 51774,
+        "sizeGzip": 39122,
+        "sizeJson": 106797
+    },
+    {
         "id": "open-icons-cool",
         "name": "cool",
         "size": 68840,
