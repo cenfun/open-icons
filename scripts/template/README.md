@@ -19,15 +19,27 @@ npm install open-icons
 
 
 ## Features
-* Web Components
-* Vector SVG Icons 
-* Customize Size/Color/BG/Radius
+* Pure SVG Icons 
+* fill/stroke with currentColor
 * High Compressed Bundle
+* Web Components
+* Customize Size/Color/BG/Radius
+* kebab-case Naming
+* UMD format bundle
+
+## Usage
+```js
+import { decompress } from 'open-icons';
+import xxxPkg from "open-icons/dist/open-icons-[xxx].js";
+
+const pkg = JSON.parse(decompress(xxxPkg));
+console.log(pkg);
+
+```
 
 ## Multiple types naming
 * without type postfix (default name): fill/filled/solid
 * with type postfix: outline/outlined/line
-
 
 ## Minified with [svg-minifier](https://github.com/cenfun/svg-minifier)
 * Optimized with [svgo](https://github.com/svg/svgo)
