@@ -16,7 +16,7 @@ npm install open-icons
 
 ## Packages
 |   |Name|Icons|Size|Gzip|Source|Version|License|
-|--:|:---|----:|---:|---:|------|-------|-------|
+|--:|:---|----:|---:|---:|:-----|:------|:------|
 |  1|[academ](https://cenfun.github.io/open-icons/#academ)|  149|162.7KB|123.0KB|[academicons](https://github.com/jpswalsh/academicons)|1.9.2  |OFL-1.1|
 |  2|[akar](https://cenfun.github.io/open-icons/#akar)|  393|75.5KB|57.1KB|[akar-icons](https://github.com/artcoholic/akar-icons)|1.9.20 |MIT    |
 |  3|[antd](https://cenfun.github.io/open-icons/#antd)|  639|192.8KB|145.8KB|[@ant-design/icons-svg](https://github.com/ant-design/ant-design-icons)|4.2.1  |MIT    |

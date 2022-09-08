@@ -549,13 +549,16 @@ module.exports = {
                     align: 'right'
                 }, {
                     id: 'source',
-                    name: 'Source'
+                    name: 'Source',
+                    align: 'left'
                 }, {
                     id: 'version',
-                    name: 'Version'
+                    name: 'Version',
+                    align: 'left'
                 }, {
                     id: 'license',
-                    name: 'License'
+                    name: 'License',
+                    align: 'left'
                 }],
                 rows: list
             });
