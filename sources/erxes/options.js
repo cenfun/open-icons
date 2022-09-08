@@ -12,7 +12,7 @@ module.exports = {
 
     license: 'MIT',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'font/erxes.svg'),
@@ -30,7 +30,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {

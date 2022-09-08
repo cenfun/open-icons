@@ -5,10 +5,10 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@sanity/icons',
     url: 'https://github.com/sanity-io/design',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const entryPath = path.resolve(modulePath, 'lib/sanity-icons.js');
@@ -43,7 +43,6 @@ module.exports = {
 
         });
 
-        return dir;
     }
 
 };

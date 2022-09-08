@@ -9,7 +9,7 @@ module.exports = {
 
     license: 'MIT',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/jtbIR.svg'),
@@ -35,7 +35,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {

@@ -52,7 +52,7 @@ module.exports = {
 
     moduleFilters: 'css',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         const nameMap = getNameMap(modulePath);
 
@@ -74,7 +74,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {

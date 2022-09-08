@@ -24,10 +24,10 @@ const createSvg = function(tag, attrs, children) {
 module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const bundle = require(path.resolve(modulePath));
@@ -47,6 +47,5 @@ module.exports = {
 
         });
 
-        return dir;
     }
 };

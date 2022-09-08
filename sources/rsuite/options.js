@@ -6,10 +6,10 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@rsuite/icon-font',
     url: 'https://github.com/rsuite/rsuite-icons',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const entryPath = path.resolve(modulePath, 'components');
@@ -45,7 +45,6 @@ module.exports = {
 
         });
 
-        return dir;
     }
 
 };

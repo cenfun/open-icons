@@ -11,7 +11,7 @@ module.exports = {
 
     license: 'Apache-2.0',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/themeisle-icons.svg'),
@@ -29,7 +29,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {

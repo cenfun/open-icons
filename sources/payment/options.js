@@ -5,7 +5,8 @@ const SFE = require('svg-font-extractor');
 module.exports = {
     name: 'paymentfont',
     url: 'https://github.com/AlexanderPoellmann/PaymentFont',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/paymentfont-webfont.svg'),
@@ -22,7 +23,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg) {

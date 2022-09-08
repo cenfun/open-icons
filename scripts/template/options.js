@@ -5,23 +5,14 @@
 // const Helper = require('../../scripts/helper.js');
 
 module.exports = {
-    //debug: true,
+    debug: true,
     name: 'xxx-icons',
     url: 'https://github.com/xxx-icons',
 
     // downloadUrl: 'https://github.com/xxx/master.zip',
     // moduleEntry: 'xxx-icons-master',
     // moduleFilters: 'fonts/xxx.svg',
-
-    //license: 'CC BY 4.0',
-
-    dirs: 'svg',
-
-    // dirs: ['inline-svg/filled', {
-    //     outline: 'inline-svg/outlined'
-    // }],
-
-    // dirs: function(Util, modulePath) {
+    // moduleInit: function(Util, modulePath) {
 
     //     SFE({
     //         input: path.resolve(modulePath, 'fonts/xxx.svg'),
@@ -40,8 +31,15 @@ module.exports = {
     //         }
     //     });
 
-    //     return 'svg';
     // },
+
+    //license: 'CC BY 4.0',
+
+    // dirs: 'svg',
+
+    // dirs: ['inline-svg/filled', {
+    //     outline: 'inline-svg/outlined'
+    // }],
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

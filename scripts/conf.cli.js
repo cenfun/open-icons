@@ -46,10 +46,11 @@ const getSource = (options) => {
     };
 };
 
-const getDirs = (pkg, name, Util) => {
+const getDirs = (pkg) => {
     let dirs = pkg.dirs;
-    if (typeof dirs === 'function') {
-        dirs = dirs.call(pkg, Util, pkg.modulePath);
+    //maybe empty "" for root path
+    if (typeof dirs === 'undefined') {
+        dirs = ['svg'];
     }
 
     if (!Array.isArray(dirs)) {
@@ -78,7 +79,7 @@ const getDirs = (pkg, name, Util) => {
 const decompressPackage = async (filePath, pkg, Util) => {
     const decompress = require('decompress');
 
-    Util.log(`decompressing: ${Util.relativePath(filePath)} ...`);
+    Util.log(`package decompressing: ${Util.relativePath(filePath)} ...`);
 
     const options = {};
 
@@ -113,9 +114,13 @@ const decompressPackage = async (filePath, pkg, Util) => {
         return;
     }
 
-    //get
+    Util.log(`package decompressed: ${Util.relativePath(filePath)} (${files.length} files)`);
 
-    Util.log(`decompressed: ${Util.relativePath(filePath)} (${files.length} files)`);
+    if (typeof pkg.moduleInit === 'function') {
+        Util.log('module init ...');
+        pkg.moduleInit.call(pkg, Util, pkg.modulePath);
+    }
+
     return true;
 };
 
@@ -239,23 +244,15 @@ const downloadFromNpm = async (pkg, Util) => {
     const url = versionInfo.dist.tarball;
 
     pkg.saveName = 'package.tgz';
-    const done = await downloadFile(url, pkg, Util);
-    if (!done) {
-        Util.logRed(`Failed to download package: ${pkg.name}`);
-    }
-
+    return downloadFile(url, pkg, Util);
 };
 
-const downloadFromUrl = async (pkg, Util) => {
+const downloadFromUrl = (pkg, Util) => {
 
     const url = pkg.downloadUrl;
 
     pkg.saveName = 'package.zip';
-    const done = await downloadFile(url, pkg, Util);
-    if (!done) {
-        Util.logRed(`Failed to download package: ${pkg.name}`);
-    }
-
+    return downloadFile(url, pkg, Util);
 };
 
 const downloadPkgHandler = (job, name, pkg, Util) => {
@@ -265,7 +262,7 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
 
         if (!pkg.debug) {
             Util.logYellow(`exists module cache: ${name}`);
-            return;
+            return true;
         }
 
         Util.logMagenta(`[debug mode] start download: ${name}`);
@@ -312,9 +309,12 @@ const pkgHandler = async (job, name, index, total, Util) => {
     pkg.moduleEntry = pkg.moduleEntry || 'package';
     pkg.modulePath = path.resolve(pkg.sourcePath, pkg.moduleEntry);
 
-    await downloadPkgHandler(job, name, pkg, Util);
+    const done = await downloadPkgHandler(job, name, pkg, Util);
+    if (!done) {
+        Util.logRed(`Failed to download package: ${pkg.name}`);
+    }
 
-    const dirs = getDirs(pkg, name, Util);
+    const dirs = getDirs(pkg);
 
     const source = getSource(pkg);
     //console.log(source.name, source.license);

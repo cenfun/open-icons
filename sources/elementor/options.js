@@ -9,14 +9,13 @@ module.exports = {
     moduleEntry: 'elementor-icons-master',
     moduleFilters: 'fonts/eicons.svg',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/eicons.svg'),
             output: path.resolve(modulePath, 'svg')
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg) {

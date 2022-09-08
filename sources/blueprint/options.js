@@ -5,10 +5,10 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@blueprintjs/icons',
     url: 'https://github.com/palantir/blueprint',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const entryPath = path.resolve(modulePath, 'lib/cjs/index.js');
@@ -46,6 +46,5 @@ module.exports = {
 
         });
 
-        return dir;
     }
 };

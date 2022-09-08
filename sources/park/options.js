@@ -5,10 +5,10 @@ const Helper = require('../../scripts/helper.js');
 module.exports = {
     name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const bundle = require(path.resolve(modulePath));
@@ -35,6 +35,5 @@ module.exports = {
 
         });
 
-        return dir;
     }
 };

@@ -4,9 +4,8 @@ const SFE = require('svg-font-extractor');
 module.exports = {
     name: 'fontisto',
     url: 'https://github.com/kenangundogan/fontisto',
-    dirs: function(Util, modulePath) {
 
-        Util.rmSync(path.resolve(modulePath, 'svg'));
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/fontisto/fontisto.svg'),
@@ -26,7 +25,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item, $) {

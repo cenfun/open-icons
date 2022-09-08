@@ -7,7 +7,7 @@ module.exports = {
 
     moduleFilters: 'dist/fonts/o-icon.svg',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'dist/fonts/o-icon.svg'),
@@ -25,7 +25,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {

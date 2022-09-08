@@ -8,10 +8,9 @@ module.exports = {
 
     moduleFilters: 'src/iconList.js',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const entryPath = path.resolve(modulePath, 'src/iconList.js');
@@ -33,7 +32,6 @@ module.exports = {
 
         });
 
-        return 'svg';
     }
 
 };

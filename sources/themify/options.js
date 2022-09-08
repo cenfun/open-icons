@@ -43,7 +43,8 @@ const getNameMap = function(modulePath) {
 module.exports = {
     name: 'themify-icons',
     url: 'https://github.com/aastrong/themify-icons.scss',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const nameMap = getNameMap(modulePath);
 
@@ -62,7 +63,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg) {

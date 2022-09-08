@@ -8,10 +8,9 @@ module.exports = {
 
     moduleFilters: 'dist/index.cjs.js',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const entryPath = path.resolve(modulePath, 'dist/index.cjs.js');
@@ -27,7 +26,6 @@ module.exports = {
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
         });
 
-        return 'svg';
     },
 
     license: 'CC-BY-4.0'

@@ -4,10 +4,10 @@ const path = require('path');
 module.exports = {
     name: 'phosphor-icons',
     url: 'https://github.com/phosphor-icons/phosphor-icons',
-    dirs: function(Util, modulePath) {
+
+    moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
-        Util.rmSync(dir);
         fs.mkdirSync(dir);
 
         const bundle = require(path.resolve(modulePath, 'src/fonts/Phosphor.json'));
@@ -28,6 +28,5 @@ module.exports = {
 
         });
 
-        return dir;
     }
 };

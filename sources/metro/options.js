@@ -10,7 +10,7 @@ module.exports = {
     moduleEntry: 'Metro-UI-CSS-master',
     moduleFilters: 'icons/metro.svg',
 
-    dirs: function(Util, modulePath) {
+    moduleInit: function(Util, modulePath) {
 
         SFE({
             input: path.resolve(modulePath, 'icons/metro.svg'),
@@ -31,7 +31,6 @@ module.exports = {
             }
         });
 
-        return 'svg';
     },
 
     onSVGDocument: function($svg, item) {
