@@ -609,6 +609,13 @@
         "sizeJson": 167690
     },
     {
+        "id": "open-icons-toe",
+        "name": "toe",
+        "size": 45737,
+        "sizeGzip": 34572,
+        "sizeJson": 88673
+    },
+    {
         "id": "open-icons-typ",
         "name": "typ",
         "size": 104221,
