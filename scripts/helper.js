@@ -26,7 +26,7 @@ const Helper = {
             return;
         }
 
-        //console.log(parent);
+        // console.log(parent);
 
         const { type, props } = parent;
 

@@ -16,7 +16,7 @@
           />
           Remove
         </VuiButton>
-        <VuiButton
+        <!-- <VuiButton
           tooltip="Export all my icons"
           @click="exportIcons()"
         >
@@ -25,7 +25,7 @@
             size="16px"
           />
           Export
-        </VuiButton>
+        </VuiButton> -->
         <div class="vui-flex-empty" />
         <div>Will be cached in browser</div>
       </VuiFlex>
@@ -77,7 +77,7 @@ const getIconById = (id) => {
         itemNew[k] = item[k];
     });
 
-    //maybe a get function
+    // maybe a get function
     itemNew.svg = item.svg;
 
     const customData = myIcons.icons[id];
@@ -227,9 +227,9 @@ const removeSelected = () => {
 
 };
 
-const exportIcons = () => {
-    console.log('exportIcons');
-};
+// const exportIcons = () => {
+//     console.log('exportIcons');
+// };
 
 const renderGridAsync = throttle(renderGrid);
 

@@ -10,12 +10,18 @@
       <option>16px</option>
       <option>24px</option>
       <option>32px</option>
-      <option>48px</option>
       <option>64px</option>
-      <option>96px</option>
       <option>128px</option>
       <option>256px</option>
+      <option value="custom">
+        Custom
+      </option>
     </VuiSelect>
+    <VuiInput
+      v-if="settings.size === 'custom'"
+      v-model="settings.sizeCustom"
+      width="35px"
+    />
     <VuiSelect v-model="settings.color">
       <option value="">
         Color
@@ -23,15 +29,15 @@
       <option value="rainbow">
         Rainbow
       </option>
-      <option value="custom">
-        Custom
-      </option>
       <option>orangered</option>
       <option>orange</option>
       <option>green</option>
       <option>deepskyblue</option>
       <option>royalblue</option>
       <option>darkorchid</option>
+      <option value="custom">
+        Custom
+      </option>
     </VuiSelect>
     <input
       v-if="settings.color === 'custom'"
@@ -42,13 +48,13 @@
       <option value="">
         BG
       </option>
-      <option value="custom">
-        Custom
-      </option>
       <option>#eee</option>
       <option>#fff</option>
       <option>#ccc</option>
       <option>#000</option>
+      <option value="custom">
+        Custom
+      </option>
     </VuiSelect>
     <input
       v-if="settings.bg === 'custom'"
@@ -78,7 +84,9 @@
 import VineUI from 'vine-ui';
 import { inject } from 'vue';
 
-const { VuiFlex, VuiSelect } = VineUI;
+const {
+    VuiFlex, VuiSelect, VuiInput
+} = VineUI;
 
 const settings = inject('settings');
 

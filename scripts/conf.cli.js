@@ -1,5 +1,5 @@
-//starfall-cli config
-//https://github.com/cenfun/starfall-cli
+// starfall-cli config
+// https://github.com/cenfun/starfall-cli
 
 const fs = require('fs');
 const path = require('path');
@@ -48,7 +48,7 @@ const getSource = (options) => {
 
 const getDirs = (pkg) => {
     let dirs = pkg.dirs;
-    //maybe empty "" for root path
+    // maybe empty "" for root path
     if (typeof dirs === 'undefined') {
         dirs = ['svg'];
     }
@@ -56,7 +56,7 @@ const getDirs = (pkg) => {
     if (!Array.isArray(dirs)) {
         dirs = [dirs];
     }
-    //do NOT filter empty, some dir svg are in root ""
+    // do NOT filter empty, some dir svg are in root ""
     return dirs.map((item) => {
         if (typeof item === 'object') {
             for (const type in item) {
@@ -74,7 +74,7 @@ const getDirs = (pkg) => {
     });
 };
 
-//=============================================================================================
+// =============================================================================================
 
 const decompressPackage = async (filePath, pkg, Util) => {
     const decompress = require('decompress');
@@ -136,7 +136,7 @@ const downloadFile = async (url, pkg, Util) => {
         timeout: 10 * 1000,
         responseType: 'stream',
         httpsAgent: new https.Agent({
-            //keepAlive: true,
+            // keepAlive: true,
             rejectUnauthorized: false
         })
     }).catch(function(e) {
@@ -257,7 +257,7 @@ const downloadFromUrl = (pkg, Util) => {
 
 const downloadPkgHandler = (job, name, pkg, Util) => {
 
-    //check pkg if downloaded
+    // check pkg if downloaded
     if (fs.existsSync(path.resolve(pkg.modulePath))) {
 
         if (!pkg.debug) {
@@ -269,7 +269,7 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
 
     }
 
-    //console.log(pkgJsonPath);
+    // console.log(pkgJsonPath);
 
     Util.rmSync(pkg.sourcePath);
     fs.mkdirSync(pkg.sourcePath, {
@@ -281,7 +281,7 @@ const downloadPkgHandler = (job, name, pkg, Util) => {
         return downloadFromUrl(pkg, Util);
     }
 
-    //from npm
+    // from npm
     pkg.registryUrl = job.npmConfig.registry + pkg.name;
     return downloadFromNpm(pkg, Util);
 
@@ -317,11 +317,11 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const dirs = getDirs(pkg);
 
     const source = getSource(pkg);
-    //console.log(source.name, source.license);
+    // console.log(source.name, source.license);
 
     Util.log(`start svg minify: ${name}`);
 
-    //compress svg
+    // compress svg
     const svgMinifier = require('svg-minifier');
     const config = {
         id: outputName,
@@ -341,7 +341,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     }
     config.excludeSubDir = pkg.excludeSubDir;
 
-    //events handler
+    // events handler
     ['onSVGName', 'onSVGContent', 'onSVGDocument', 'onSVGOptimized', 'onSVGError', 'onFinish'].forEach((type) => {
         const handler = pkg[type];
         if (typeof handler === 'function') {
@@ -359,7 +359,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const compress = require('lz-utils/lib/compress.js');
     const compressedStr = compress(JSON.stringify(metadata));
 
-    //save lz.js
+    // save lz.js
     const lzPath = path.resolve(job.buildPath, `${outputName}.js`);
 
     const URT = require('umd-runtime-templates');
@@ -416,7 +416,7 @@ const beforeBuildHandler = async (item, Util) => {
             level: 9
         });
         const sizeGzip = gzip.length;
-        //console.log('sizeGzip', sizeGzip);
+        // console.log('sizeGzip', sizeGzip);
 
         const sizeJson = fs.statSync(path.resolve(item.outputRoot, `${outputName}.json`)).size;
 
@@ -431,9 +431,9 @@ const beforeBuildHandler = async (item, Util) => {
 
     item.packages = packages;
 
-    //console.log(packages);
+    // console.log(packages);
 
-    //generating packages.json
+    // generating packages.json
     const packagesPath = path.resolve(item.componentPath, 'src/packages.json');
     Util.writeJSONSync(packagesPath, packages);
 
@@ -483,7 +483,7 @@ module.exports = {
                 return 0;
             }
 
-            //screenshots handler
+            // screenshots handler
 
             let totalIcons = 0;
             let totalSize = 0;
@@ -491,7 +491,7 @@ module.exports = {
 
             const list = item.packages.map((pkg, i) => {
                 const outputPath = path.resolve(item.outputRoot, `${pkg.id}.json`);
-                //console.log(outputPath);
+                // console.log(outputPath);
                 const json = require(outputPath);
                 const source = json.source;
                 const icons = json.icons.length;
@@ -525,7 +525,7 @@ module.exports = {
                 license: ''
             });
 
-            //console.log(list);
+            // console.log(list);
 
             const MG = require('markdown-grid');
             const mg = MG({

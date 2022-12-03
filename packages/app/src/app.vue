@@ -137,7 +137,7 @@ const state = shallowReactive({
     icons: null,
     tabIndex: 0,
     results: '',
-    //grid and thumb
+    // grid and thumb
     viewType: 'grid'
 });
 
@@ -153,6 +153,7 @@ provide('myIcons', myIcons);
 const defaultSettings = {
     type: '',
     size: '',
+    sizeCustom: '48',
     color: 'rainbow',
     colorCustom: '',
     bg: '',
@@ -227,7 +228,7 @@ const renderPackages = function(packages) {
     const grid = new Grid('.oi-packages-grid');
 
     grid.bind('onFirstUpdated', function(e) {
-        //console.log(e.type);
+        // console.log(e.type);
         if (!state.packageName) {
             return;
         }
@@ -352,7 +353,7 @@ const getTags = function(tags) {
 
     const ls = list.filter((it) => it.prob > 0);
 
-    //console.log(ls.length);
+    // console.log(ls.length);
 
     return ls;
 };
@@ -422,7 +423,7 @@ const initPackages = function(packages) {
 
     state.packages = packages;
     state.packageName = location.hash.substr(1);
-    //console.log(state.packageName);
+    // console.log(state.packageName);
 
     renderPackages(packages);
 
@@ -441,9 +442,9 @@ const loadStart = async () => {
 
     console.log('wc icons path:', path);
 
-    //console.log(db);
+    // console.log(db);
     const cache = await ost.get('metadata');
-    //console.log(cache);
+    // console.log(cache);
     if (cache && cache.version === version) {
 
         console.log('Found cache icons', cache);
@@ -454,14 +455,14 @@ const loadStart = async () => {
     }
 
     const packages = await loadPackages(path, (item, info) => {
-        //console.log(info);
+        // console.log(info);
         const percentage = Math.round(info.loadedSize / info.totalSize * 100);
         loading.percentage = percentage;
         loading.text = `Loading ${info.loaded} / ${info.total} - ${item.name}`;
         loading.detail = `${BF(info.loadedSize)} / ${BF(info.totalSize)} - ${percentage}%`;
     });
 
-    //sort packages
+    // sort packages
     packages.sort(function(a, b) {
         return a.name > b.name ? 1 : -1;
     });
@@ -486,7 +487,7 @@ const read = async (k, target) => {
     }
 
     const v = await state.ost.get(k);
-    //console.log('ost get', k, v);
+    // console.log('ost get', k, v);
 
     if (typeof v === 'undefined') {
         return;

@@ -14,7 +14,7 @@ import {
 
 const context = require.context('../images', true, /\.svg$/);
 const paths = context.keys();
-//console.log(paths);
+// console.log(paths);
 
 const svgMap = {};
 paths.forEach((path) => {
@@ -25,7 +25,7 @@ paths.forEach((path) => {
     };
 });
 
-//console.log(svgMap);
+// console.log(svgMap);
 
 const props = defineProps({
     name: {

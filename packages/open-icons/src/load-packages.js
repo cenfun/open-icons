@@ -6,13 +6,13 @@ const initIcons = (pkg) => {
 
     const icons = pkg.icons;
 
-    //init id and content
+    // init id and content
     icons.forEach((icon) => {
         icon.id = `${pkg.id}-${icon.name}`;
 
         const content = icon.content;
         if (typeof content === 'number') {
-            //duplicate content
+            // duplicate content
             icon.content = icons[content].content;
         }
     });

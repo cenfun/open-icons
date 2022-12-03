@@ -33,7 +33,7 @@ module.exports = {
 
     // },
 
-    //license: 'CC BY 4.0',
+    // license: 'CC BY 4.0',
 
     // dirs: 'svg',
 
@@ -45,7 +45,7 @@ module.exports = {
         name = name.toLowerCase();
 
         name = name.replace(/_/g, '-');
-        //name = Helper.pascalToKebabCase(name);
+        // name = Helper.pascalToKebabCase(name);
 
         return this.onSVGNameDefault(name, item);
     },

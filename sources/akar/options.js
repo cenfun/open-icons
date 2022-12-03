@@ -16,7 +16,7 @@ module.exports = {
         const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
         keys.forEach((k) => {
 
             const v = bundle[k];
@@ -26,10 +26,10 @@ module.exports = {
             }
 
             const props = v(v.defaultProps);
-            //console.log(props);
+            // console.log(props);
 
             const svg = Helper.createSvgFromReact(props);
-            //console.log(svg);
+            // console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

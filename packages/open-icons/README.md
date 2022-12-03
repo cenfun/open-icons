@@ -151,4 +151,4 @@ console.log(pkg);
 * Compressed with [lz-string](https://github.com/pieroxy/lz-string)
 
 ## Statement of use
-All icons are collected from the Internet ([npmjs.com](https://www.npmjs.com/) / [github.com](https://github.com/)), if you have any questions about the license to use the icons, please submit an [issue](https://github.com/cenfun/open-icons/issues), Thanks.
+All icons are collected from the Internet ([npmjs.com](https://www.npmjs.com/) / [github.com](https://github.com/)), if you have any questions about the license to collect the icons, please submit an [issue](https://github.com/cenfun/open-icons/issues), Thanks.

@@ -25,6 +25,10 @@ export const BF = function(v, places = 1, base = 1024) {
 };
 
 export const getSettingsSize = function(settings) {
+    if (settings.size === 'custom') {
+        return parseInt(settings.sizeCustom) || 64;
+    }
+
     return parseInt(settings.size) || 64;
 };
 

@@ -14,7 +14,7 @@ const defineIconElement = function(tagName, icons) {
         constructor() {
             super();
             const shadow = this.attachShadow({
-                //shadowRoot = null, no need shadowRoot
+                // shadowRoot = null, no need shadowRoot
                 mode: 'closed',
                 delegatesFocus: true
             });
@@ -76,13 +76,13 @@ const defineIconElement = function(tagName, icons) {
         }
     }
 
-    //override tagName
+    // override tagName
     IconElement.tagName = tagName;
-    //define custom element
+    // define custom element
     if (customElements.get(tagName)) {
         console.error(`${tagName} already defined`);
     } else {
-        //console.log(tagName);
+        // console.log(tagName);
         customElements.define(tagName, IconElement);
     }
 

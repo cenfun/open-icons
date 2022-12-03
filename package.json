@@ -3,25 +3,24 @@
     "version": "1.0.3",
     "description": "Open source icons collection",
     "main": "",
-    "private": true,
     "scripts": {
         "build": "sf lint && sf b -p",
         "patch": "npm run build && sf publish patch",
         "pack": "sf lint && sf pack -o docs -q v={version}"
     },
+    "workspaces": [
+        "packages/*"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/cenfun/open-icons.git"
     },
-    "workspaces": [
-        "packages/*"
-    ],
     "dependencies": {
         "axios": "^0.27.2",
-        "console-grid": "^2.0.0",
+        "console-grid": "^2.0.1",
         "decompress": "^4.2.1",
         "eight-colors": "^1.0.2",
-        "gauge": "^4.0.4",
+        "gauge": "^5.0.0",
         "lz-utils": "^1.0.5",
         "markdown-grid": "^1.0.1",
         "rc": "^1.2.8",
@@ -30,18 +29,19 @@
         "umd-runtime-templates": "^1.0.1"
     },
     "devDependencies": {
-        "eslint": "^8.23.0",
-        "eslint-config-plus": "^1.0.3",
+        "eslint": "^8.29.0",
+        "eslint-config-plus": "^1.0.5",
         "eslint-plugin-html": "^7.1.0",
-        "eslint-plugin-vue": "^9.4.0",
+        "eslint-plugin-vue": "^9.8.0",
         "file-saver": "^2.0.5",
         "open-store": "^1.0.0",
-        "postcss": "^8.4.16",
+        "postcss": "^8.4.19",
         "postcss-html": "^1.5.0",
-        "postcss-scss": "^4.0.4",
-        "stylelint": "^14.11.0",
+        "postcss-scss": "^4.0.6",
+        "stylelint": "^14.15.0",
         "stylelint-config-recommended": "^9.0.0",
-        "stylelint-config-standard": "^28.0.0",
-        "vine-ui": "^3.0.12"
-    }
+        "stylelint-config-standard": "^29.0.0",
+        "vine-ui": "^3.0.14"
+    },
+    "private": true
 }

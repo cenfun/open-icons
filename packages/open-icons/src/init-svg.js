@@ -1,6 +1,6 @@
 const initSvg = function(icon, size = '100%') {
 
-    //round
+    // round
     // <svg pointer-events="none" width="100%" height="100%">
     //     <mask id="${fullId}-mask">
     //         <rect rx="${radius}" ry="${radius}" fill="#ffffff" x="0" y="0" width="100%" height="100%" />
@@ -34,7 +34,7 @@ const initSvg = function(icon, size = '100%') {
     const hasPrefix = svg.indexOf(prefixPlaceholder) !== -1;
     let n = 0;
     if (hasPrefix) {
-        //dynamic prefix
+        // dynamic prefix
         Object.defineProperty(icon, 'svg', {
             get: function() {
                 n += 1;

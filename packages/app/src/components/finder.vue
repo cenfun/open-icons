@@ -119,7 +119,7 @@ const thumbIcons = ref([]);
 const keywords = ref('');
 const rowFilter = function(icon) {
 
-    //filter package
+    // filter package
     const packageName = state.packageName;
     if (packageName && icon.packageName !== packageName) {
         return false;
@@ -177,7 +177,7 @@ const createGrid = () => {
         if ($target.classList.contains('oi-icon-add')) {
             const added = addIcon(rowItem);
             if (added) {
-                //using item, index is not right, icons list is filtered
+                // using item, index is not right, icons list is filtered
                 this.updateCell(d.rowItem, d.columnItem);
             }
             return;
@@ -254,7 +254,7 @@ const renderThumbIcons = (clean) => {
 
     thumbIcons.value = leftIcons;
 
-    //console.log(icons, leftIcons);
+    // console.log(icons, leftIcons);
 
     const size = getSettingsSize(settings);
 
@@ -273,7 +273,7 @@ const renderThumbIcons = (clean) => {
 
     const $thumb = thumb.value;
 
-    //const ts = Date.now();
+    // const ts = Date.now();
 
     if (clean) {
         $thumb.firstChild.innerHTML = str;
@@ -281,7 +281,7 @@ const renderThumbIcons = (clean) => {
         $thumb.firstChild.insertAdjacentHTML('beforeend', str);
     }
 
-    //console.log(Date.now() - ts);
+    // console.log(Date.now() - ts);
 };
 
 const renderThumbView = () => {
@@ -372,7 +372,7 @@ const renderGridView = () => {
         align: 'center'
     }];
 
-    //console.log(columns);
+    // console.log(columns);
 
     grid.setData({
         columns: columns,
@@ -383,7 +383,7 @@ const renderGridView = () => {
 };
 
 const renderGrid = () => {
-    //console.log('renderGrid', state.viewType);
+    // console.log('renderGrid', state.viewType);
 
     const $thumb = thumb.value;
     if (state.viewType === 'thumb') {
@@ -412,7 +412,7 @@ const renderTags = (pkg) => {
         }
     }
 
-    //console.log(list);
+    // console.log(list);
 
     tagsList.value = list;
 
@@ -452,7 +452,7 @@ const render = () => {
 const renderGridAsync = throttle(renderGrid);
 
 watch(() => state.packageName, (v) => {
-    //change to finder tab
+    // change to finder tab
     state.tabIndex = 0;
     render();
 });
