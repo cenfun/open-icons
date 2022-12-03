@@ -170,6 +170,20 @@ const Helper = {
         },
         'prop-types': {
             oneOfType: () => {}
+        },
+        'react/jsx-runtime': {
+            jsx: (tag, props) => {
+                return {
+                    type: tag,
+                    props: props
+                };
+            },
+            jsxs: (tag, props) => {
+                return {
+                    type: tag,
+                    props: props
+                };
+            }
         }
     }
 };

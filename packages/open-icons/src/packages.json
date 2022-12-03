@@ -9,9 +9,9 @@
     {
         "id": "open-icons-akar",
         "name": "akar",
-        "size": 77324,
-        "sizeGzip": 58480,
-        "sizeJson": 192245
+        "size": 79736,
+        "sizeGzip": 60299,
+        "sizeJson": 199613
     },
     {
         "id": "open-icons-antd",
@@ -30,9 +30,9 @@
     {
         "id": "open-icons-awesome",
         "name": "awesome",
-        "size": 386581,
-        "sizeGzip": 292278,
-        "sizeJson": 994013
+        "size": 385461,
+        "sizeGzip": 291484,
+        "sizeJson": 991853
     },
     {
         "id": "open-icons-bitcoin",
@@ -44,23 +44,23 @@
     {
         "id": "open-icons-blueprint",
         "name": "blueprint",
-        "size": 127315,
-        "sizeGzip": 96267,
-        "sizeJson": 320230
+        "size": 129507,
+        "sizeGzip": 97901,
+        "sizeJson": 325993
     },
     {
         "id": "open-icons-bootstrap",
         "name": "bootstrap",
-        "size": 395847,
-        "sizeGzip": 298846,
-        "sizeJson": 1088145
+        "size": 441571,
+        "sizeGzip": 333256,
+        "sizeJson": 1212106
     },
     {
         "id": "open-icons-box",
         "name": "box",
-        "size": 314549,
-        "sizeGzip": 237824,
-        "sizeJson": 791784
+        "size": 319493,
+        "sizeGzip": 241566,
+        "sizeJson": 806420
     },
     {
         "id": "open-icons-bytesize",
@@ -72,16 +72,16 @@
     {
         "id": "open-icons-carbon",
         "name": "carbon",
-        "size": 332310,
-        "sizeGzip": 251350,
-        "sizeJson": 930075
+        "size": 347082,
+        "sizeGzip": 262523,
+        "sizeJson": 965508
     },
     {
         "id": "open-icons-charm",
         "name": "charm",
-        "size": 21571,
-        "sizeGzip": 16318,
-        "sizeJson": 84909
+        "size": 21747,
+        "sizeGzip": 16451,
+        "sizeJson": 85669
     },
     {
         "id": "open-icons-circum",
@@ -149,16 +149,16 @@
     {
         "id": "open-icons-element",
         "name": "element",
-        "size": 67189,
-        "sizeGzip": 50790,
-        "sizeJson": 161606
+        "size": 67197,
+        "sizeGzip": 50798,
+        "sizeJson": 161607
     },
     {
         "id": "open-icons-elementor",
         "name": "elementor",
-        "size": 158603,
-        "sizeGzip": 119916,
-        "sizeJson": 337562
+        "size": 159051,
+        "sizeGzip": 120254,
+        "sizeJson": 338197
     },
     {
         "id": "open-icons-elusive",
@@ -226,16 +226,16 @@
     {
         "id": "open-icons-flight",
         "name": "flight",
-        "size": 144826,
-        "sizeGzip": 109507,
-        "sizeJson": 352945
+        "size": 149302,
+        "sizeGzip": 112876,
+        "sizeJson": 361165
     },
     {
         "id": "open-icons-fluent",
         "name": "fluent",
-        "size": 747082,
-        "sizeGzip": 562878,
-        "sizeJson": 2396580
+        "size": 779438,
+        "sizeGzip": 587400,
+        "sizeJson": 2495004
     },
     {
         "id": "open-icons-fontisto",
@@ -289,16 +289,16 @@
     {
         "id": "open-icons-hero",
         "name": "hero",
-        "size": 111648,
-        "sizeGzip": 84427,
-        "sizeJson": 318113
+        "size": 116772,
+        "sizeGzip": 88296,
+        "sizeJson": 332914
     },
     {
         "id": "open-icons-humble",
         "name": "humble",
-        "size": 26906,
-        "sizeGzip": 20340,
-        "sizeJson": 81661
+        "size": 27802,
+        "sizeGzip": 21024,
+        "sizeJson": 84625
     },
     {
         "id": "open-icons-icofont",
@@ -324,9 +324,9 @@
     {
         "id": "open-icons-iconoir",
         "name": "iconoir",
-        "size": 142793,
-        "sizeGzip": 107971,
-        "sizeJson": 510185
+        "size": 146233,
+        "sizeGzip": 110538,
+        "sizeJson": 530263
     },
     {
         "id": "open-icons-ikonate",
@@ -338,15 +338,15 @@
     {
         "id": "open-icons-instructure",
         "name": "instructure",
-        "size": 233733,
-        "sizeGzip": 176662,
-        "sizeJson": 488648
+        "size": 236961,
+        "sizeGzip": 179052,
+        "sizeJson": 494917
     },
     {
         "id": "open-icons-ionic",
         "name": "ionic",
-        "size": 243867,
-        "sizeGzip": 184375,
+        "size": 243775,
+        "sizeGzip": 184304,
         "sizeJson": 581693
     },
     {
@@ -366,9 +366,9 @@
     {
         "id": "open-icons-lawn",
         "name": "lawn",
-        "size": 244728,
-        "sizeGzip": 183962,
-        "sizeJson": 402391
+        "size": 406616,
+        "sizeGzip": 306508,
+        "sizeJson": 765305
     },
     {
         "id": "open-icons-line",
@@ -387,16 +387,16 @@
     {
         "id": "open-icons-logos",
         "name": "logos",
-        "size": 1412675,
-        "sizeGzip": 1067245,
-        "sizeJson": 2665914
+        "size": 1449679,
+        "sizeGzip": 1095359,
+        "sizeJson": 2740272
     },
     {
         "id": "open-icons-lucide",
         "name": "lucide",
-        "size": 70718,
-        "sizeGzip": 53516,
-        "sizeJson": 295704
+        "size": 76090,
+        "sizeGzip": 57561,
+        "sizeJson": 312839
     },
     {
         "id": "open-icons-majest",
@@ -408,9 +408,9 @@
     {
         "id": "open-icons-maki",
         "name": "maki",
-        "size": 51948,
-        "sizeGzip": 39268,
-        "sizeJson": 110112
+        "size": 51940,
+        "sizeGzip": 39257,
+        "sizeJson": 110102
     },
     {
         "id": "open-icons-map",
@@ -422,9 +422,9 @@
     {
         "id": "open-icons-material",
         "name": "material",
-        "size": 512984,
-        "sizeGzip": 387155,
-        "sizeJson": 1530976
+        "size": 512472,
+        "sizeGzip": 386925,
+        "sizeJson": 1529836
     },
     {
         "id": "open-icons-mdi",
@@ -464,9 +464,9 @@
     {
         "id": "open-icons-oct",
         "name": "oct",
-        "size": 128757,
-        "sizeGzip": 97365,
-        "sizeJson": 333800
+        "size": 131833,
+        "sizeGzip": 99665,
+        "sizeJson": 343783
     },
     {
         "id": "open-icons-orchid",
@@ -492,9 +492,9 @@
     {
         "id": "open-icons-pep",
         "name": "pep",
-        "size": 71245,
-        "sizeGzip": 53883,
-        "sizeJson": 166987
+        "size": 71833,
+        "sizeGzip": 54317,
+        "sizeJson": 169447
     },
     {
         "id": "open-icons-phosphor",
@@ -513,16 +513,16 @@
     {
         "id": "open-icons-polaris",
         "name": "polaris",
-        "size": 83989,
-        "sizeGzip": 63484,
-        "sizeJson": 210146
+        "size": 88205,
+        "sizeGzip": 66683,
+        "sizeJson": 221657
     },
     {
         "id": "open-icons-prime",
         "name": "prime",
-        "size": 46767,
-        "sizeGzip": 35374,
-        "sizeJson": 126919
+        "size": 57659,
+        "sizeGzip": 43603,
+        "sizeJson": 147005
     },
     {
         "id": "open-icons-radix",
@@ -548,9 +548,9 @@
     {
         "id": "open-icons-sanity",
         "name": "sanity",
-        "size": 23614,
-        "sizeGzip": 17850,
-        "sizeJson": 61630
+        "size": 24802,
+        "sizeGzip": 18746,
+        "sizeJson": 63902
     },
     {
         "id": "open-icons-shop",
@@ -562,9 +562,9 @@
     {
         "id": "open-icons-simple",
         "name": "simple",
-        "size": 1322374,
-        "sizeGzip": 998763,
-        "sizeJson": 2620715
+        "size": 1363126,
+        "sizeGzip": 1029980,
+        "sizeJson": 2705094
     },
     {
         "id": "open-icons-sketch",
@@ -583,9 +583,9 @@
     {
         "id": "open-icons-tabler",
         "name": "tabler",
-        "size": 208362,
-        "sizeGzip": 157527,
-        "sizeJson": 1015360
+        "size": 266894,
+        "sizeGzip": 201826,
+        "sizeJson": 1298363
     },
     {
         "id": "open-icons-teeny",
@@ -653,9 +653,9 @@
     {
         "id": "open-icons-vaadin",
         "name": "vaadin",
-        "size": 97018,
-        "sizeGzip": 73318,
-        "sizeJson": 244385
+        "size": 96858,
+        "sizeGzip": 73216,
+        "sizeJson": 244386
     },
     {
         "id": "open-icons-vivid",
@@ -674,9 +674,9 @@
     {
         "id": "open-icons-vtmn",
         "name": "vtmn",
-        "size": 74896,
-        "sizeGzip": 56640,
-        "sizeJson": 189370
+        "size": 81568,
+        "sizeGzip": 61676,
+        "sizeJson": 204431
     },
     {
         "id": "open-icons-weather",
@@ -702,9 +702,9 @@
     {
         "id": "open-icons-wordpress",
         "name": "wordpress",
-        "size": 39731,
-        "sizeGzip": 30034,
-        "sizeJson": 93243
+        "size": 39895,
+        "sizeGzip": 30171,
+        "sizeJson": 94189
     },
     {
         "id": "open-icons-zocial",

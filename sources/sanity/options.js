@@ -11,12 +11,12 @@ module.exports = {
         const dir = path.resolve(modulePath, 'svg');
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(modulePath, 'lib/sanity-icons.js');
+        const entryPath = path.resolve(modulePath, 'dist/index.js');
 
         const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
 
         keys.forEach((k) => {
             const excludes = ['Icon', 'icons'];
@@ -34,10 +34,10 @@ module.exports = {
             const props = v.render({
                 color: 'currentColor'
             });
-            //console.log(props);
+            // console.log(props);
 
             const svg = Helper.createSvgFromReact(props);
-            //console.log(svg);
+            // console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

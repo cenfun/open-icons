@@ -13,7 +13,7 @@ module.exports = {
 
         const bundle = require(path.resolve(modulePath));
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
         keys.forEach((k) => {
             const excludes = ['setConfig', 'DEFAULT_ICON_CONFIGS'];
             if (excludes.includes(k)) {

@@ -14,7 +14,7 @@ module.exports = {
             onSVGItem: function(item) {
                 const name = item['glyph-name'];
                 if (!name || !item.d) {
-                    //console.log(item);
+                    // console.log(item);
                     return;
                 }
 

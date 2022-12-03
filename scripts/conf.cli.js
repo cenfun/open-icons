@@ -124,27 +124,48 @@ const decompressPackage = async (filePath, pkg, Util) => {
     return true;
 };
 
-const downloadFile = async (url, pkg, Util) => {
-
+const request = async (options) => {
     const axios = require('axios');
+    let err;
+    const res = await axios(options).catch((e) => {
+        err = e;
+    });
+    return [err, res];
+};
+
+const downloadFile = async (url, pkg, Util, retry = 0) => {
 
     Util.log(`start download: ${url}`);
 
-    const { data, headers } = await axios({
+    const [err, res] = await request({
         method: 'get',
         url: url,
-        timeout: 10 * 1000,
+        timeout: 15 * 1000,
         responseType: 'stream',
         httpsAgent: new https.Agent({
             // keepAlive: true,
             rejectUnauthorized: false
         })
-    }).catch(function(e) {
-        Util.logRed(e);
     });
 
+    if (err) {
+        Util.logRed(err);
+
+        if (retry < 3) {
+            Util.logYellow(`retry download: ${url}`);
+            return downloadFile(url, pkg, Util, retry + 1);
+        }
+
+        Util.logRed(`failed to download: ${url}`);
+        Util.logRed('process exit');
+        process.exit(1);
+
+    }
+
+    const { data, headers } = res;
+
     if (!data) {
-        Util.logRed(`Failed to download: ${url}`);
+        Util.logRed(`invalid response data: ${url}`);
         return;
     }
 
