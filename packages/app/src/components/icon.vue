@@ -109,9 +109,9 @@ onMounted(() => {
     --oi-icon-size: 20px;
 
     display: block;
-    overflow: hidden;
     width: var(--oi-icon-size);
     height: var(--oi-icon-size);
+    overflow: hidden;
 
     svg {
         display: block;
@@ -133,8 +133,8 @@ onMounted(() => {
 }
 
 .oi-icon-selectable {
-    border: thin solid transparent;
     padding: 1px;
+    border: thin solid transparent;
     cursor: pointer;
 }
 

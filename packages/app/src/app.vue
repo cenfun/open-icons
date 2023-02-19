@@ -545,12 +545,12 @@ onMounted(() => {
 <style lang="scss">
 html,
 body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     font-size: 14px;
     font-family: arial, sans-serif;
-    width: 100%;
-    height: 100%;
 }
 
 a:link,
@@ -600,18 +600,18 @@ a:hover {
         height: 100%;
 
         &::after {
-            content: "";
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            content: "";
             width: 0;
             height: 0;
-            border: 6px solid transparent;
-            box-sizing: border-box;
-            overflow: hidden;
-            border-left-color: #ddd;
             margin-left: 3px;
+            box-sizing: border-box;
+            border: 6px solid transparent;
+            border-left-color: #ddd;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
         }
     }
 }
@@ -625,10 +625,10 @@ a:hover {
 }
 
 .oi-packages-header {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0 20px 0 15px;
     height: 41px;
+    padding: 0 20px 0 15px;
+    font-weight: bold;
+    font-size: 16px;
     line-height: 41px;
     background-color: #000;
 }
@@ -640,30 +640,30 @@ a:hover {
 
 .oi-packages-filter {
     position: relative;
-    padding: 8px;
     max-width: 300px;
+    padding: 8px;
 
     input {
         display: block;
         width: 100%;
-        border-radius: 5px;
-        border: none;
         padding: 5px;
+        border: none;
+        border-radius: 5px;
     }
 
     .oi-icon {
         position: absolute;
-        left: 100%;
         top: 50%;
-        transform: translate(-30px, -50%);
+        left: 100%;
         z-index: 2;
+        transform: translate(-30px, -50%);
     }
 }
 
 .oi-packages-grid {
-    border-top: 1px solid #333;
     width: 100%;
     height: 100%;
+    border-top: 1px solid #333;
 
     .tg-tree-name {
         text-transform: capitalize;
@@ -683,9 +683,9 @@ a:hover {
 }
 
 .oi-packages-footer {
-    background-color: #000;
     padding: 5px 8px;
     color: #999;
+    background-color: #000;
 
     span {
         cursor: pointer;
@@ -703,10 +703,10 @@ a:hover {
 
 .oi-view-body {
     position: relative;
+    margin: 10px;
     border: thin solid #ccc;
     border-radius: 5px;
     overflow: hidden;
-    margin: 10px;
 }
 
 .oi-grid {
@@ -723,8 +723,8 @@ a:hover {
         height: 100%;
 
         .oi-icon-download {
-            font-family: Menlo, Consolas, monospace;
             font-weight: bold;
+            font-family: Menlo, Consolas, monospace;
             cursor: pointer;
             opacity: 0.6;
 
@@ -734,15 +734,15 @@ a:hover {
         }
 
         .oi-icon-download:hover {
-            opacity: 1;
             text-decoration: underline;
+            opacity: 1;
         }
     }
 
     .tg-cell.oi-grid-icon {
         padding: 4px;
-        border-left: thin solid #e5e5e5;
         border-right: thin solid #e5e5e5;
+        border-left: thin solid #e5e5e5;
     }
 
     .tg-cell.oi-textarea {
@@ -765,8 +765,8 @@ a:hover {
     width: var(--size);
     height: var(--size);
     color: var(--color);
-    background: var(--bg);
     border-radius: var(--radius);
+    background: var(--bg);
     overflow: hidden;
 
     svg {
@@ -776,15 +776,15 @@ a:hover {
 }
 
 .oi-my-icons {
-    font-size: 12px;
-    margin-left: 8px;
-    background-color: #999;
-    border-radius: 50%;
     display: inline-block;
     height: 20px;
-    line-height: 20px;
-    font-weight: bold;
+    margin-left: 8px;
     padding: 0 6px;
     color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 50%;
+    background-color: #999;
 }
 </style>

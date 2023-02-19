@@ -36,18 +36,18 @@ const loading = inject('loading');
 </script>
 <style>
 .oi-loading {
-    pointer-events: none;
     position: absolute;
-    z-index: 100;
-    left: 50%;
     top: 50%;
+    left: 50%;
+    z-index: 100;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .oi-loading-label {
+    padding: 3px;
     font-size: 14px;
     white-space: nowrap;
     text-align: center;
-    padding: 3px;
 }
 </style>

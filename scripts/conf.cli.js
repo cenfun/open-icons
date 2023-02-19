@@ -276,7 +276,7 @@ const downloadFromUrl = (pkg, Util) => {
     return downloadFile(url, pkg, Util);
 };
 
-const downloadPkgHandler = (job, name, pkg, Util) => {
+const downloadHandler = (job, name, pkg, Util) => {
 
     // check pkg if downloaded
     if (fs.existsSync(path.resolve(pkg.modulePath))) {
@@ -314,7 +314,16 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const pkg = require(optionsPath);
 
     const outputName = `${job.id}-${name}`;
-    if (fs.existsSync(path.resolve(job.buildPath, `${outputName}.js`))) {
+
+    // js path
+    const jsPath = path.resolve(job.buildPath, `${outputName}.js`);
+    const relPath = Util.relativePath(jsPath);
+    // add to dependencies then do not be removed after build
+    if (!job.dependencies.files.includes(relPath)) {
+        job.dependencies.files.push(relPath);
+    }
+
+    if (fs.existsSync(jsPath)) {
 
         if (!pkg.debug) {
             Util.logYellow(`exists build cache: ${name}`);
@@ -330,7 +339,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     pkg.moduleEntry = pkg.moduleEntry || 'package';
     pkg.modulePath = path.resolve(pkg.sourcePath, pkg.moduleEntry);
 
-    const done = await downloadPkgHandler(job, name, pkg, Util);
+    const done = await downloadHandler(job, name, pkg, Util);
     if (!done) {
         Util.logRed(`Failed to download package: ${pkg.name}`);
     }
@@ -380,18 +389,15 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const compress = require('lz-utils/lib/compress.js');
     const compressedStr = compress(JSON.stringify(metadata));
 
-    // save lz.js
-    const lzPath = path.resolve(job.buildPath, `${outputName}.js`);
-
     const URT = require('umd-runtime-templates');
     URT({
         name: outputName,
         template: 'export-default-string',
         content: compressedStr,
-        output: lzPath
+        output: jsPath
     });
 
-    Util.logCyan(`minified package: ${name} (${index}/${total})`);
+    Util.logCyan(`minified package: ${name} ${relPath} (${index}/${total})`);
 
     return true;
 };

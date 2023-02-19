@@ -503,28 +503,28 @@ watch(() => state.tabIndex, (v) => {
 
 <style lang="scss">
 .oi-pkg-title {
-    text-transform: capitalize;
-    text-align: center;
+    padding: 15px 0 5px;
     font-weight: bold;
     font-size: 38px;
-    padding: 15px 0 5px;
+    text-align: center;
+    text-transform: capitalize;
 
     b {
-        text-transform: none;
         margin-left: 10px;
         color: #0077cf;
+        text-transform: none;
     }
 
     span {
+        color: #111;
         font-weight: normal;
         font-size: 30px;
-        color: #111;
     }
 }
 
 .oi-pkg-stats {
-    text-align: center;
     font-size: 18px;
+    text-align: center;
 }
 
 .oi-pkg-stats a:link,
@@ -537,40 +537,40 @@ watch(() => state.tabIndex, (v) => {
 }
 
 .oi-filter {
-    text-align: center;
-    margin: 0 auto;
     width: 60%;
     max-width: 600px;
+    margin: 0 auto;
     margin-top: 10px;
+    text-align: center;
 }
 
 .oi-searcher {
-    width: 100%;
     position: relative;
+    width: 100%;
 
     .oi-icon {
         position: absolute;
+        top: 13px;
+        right: 15px;
         width: 30px;
         height: 30px;
         background-size: 30px 30px;
-        right: 15px;
-        top: 13px;
         opacity: 0.3;
     }
 }
 
 .oi-keywords {
-    border: 3px solid transparent;
-    border-radius: 15px;
-    padding: 10px 50px 10px 15px;
-    background-color: #eee;
-    height: 30px;
-    line-height: 30px;
-    outline: none;
-    font-size: 18px;
-    box-sizing: content-box;
     display: block;
     width: calc(100% - 70px);
+    height: 30px;
+    padding: 10px 50px 10px 15px;
+    box-sizing: content-box;
+    font-size: 18px;
+    line-height: 30px;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    background-color: #eee;
+    outline: none;
 }
 
 .oi-keywords:focus {
@@ -578,11 +578,11 @@ watch(() => state.tabIndex, (v) => {
 }
 
 .oi-tags {
-    text-align: center;
-    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
+    text-align: center;
 }
 
 .oi-tags span {
@@ -602,24 +602,24 @@ watch(() => state.tabIndex, (v) => {
 .oi-finder-grid {
     .oi-action-my {
         .oi-icon {
-            cursor: pointer;
             position: absolute;
-            left: 50%;
             top: 50%;
+            left: 50%;
+            cursor: pointer;
             transform: translate(-50%, -50%);
         }
     }
 }
 
 .oi-finder-thumb {
-    display: none;
-    width: 100%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #fff;
+    display: none;
+    width: 100%;
+    height: 100%;
     padding: 5px;
+    background-color: #fff;
     overflow-y: auto;
 
     .oi-thumb-item {
@@ -636,26 +636,26 @@ watch(() => state.tabIndex, (v) => {
 
     .oi-thumb-label {
         margin-top: 3px;
-        white-space: nowrap;
-        overflow: hidden;
         font-size: 11px;
-        text-overflow: ellipsis;
+        white-space: nowrap;
         text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .oi-thumb-icons::after {
-        clear: both;
-        display: block;
         content: "";
+        display: block;
+        clear: both;
     }
 
     .oi-thumb-more {
         margin-top: 5px;
         padding: 10px;
+        text-align: center;
         border: 1px solid #ccc;
         border-radius: 5px;
         cursor: pointer;
-        text-align: center;
 
         &:hover {
             background-color: #f5f5f5;
