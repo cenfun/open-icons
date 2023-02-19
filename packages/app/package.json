@@ -1,12 +1,12 @@
 {
     "name": "open-icons-app",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "main": "dist/open-icons-app.js",
     "files": [
         "dist"
     ],
     "dependencies": {
-        "open-icons": "~1.0.4",
+        "open-icons": "~1.0.5",
         "turbogrid": "^3.0.5",
         "vine-ui": "^3.0.15"
     },
