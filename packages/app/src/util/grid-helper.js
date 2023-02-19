@@ -97,12 +97,23 @@ export const getSourceFrom = function(source, text) {
 };
 
 export const formatter = {
+
     null: function(value) {
         if (value === null || typeof value === 'undefined') {
             return '';
         }
         return value;
     },
+
+    string: function(value, rowItem, columnItem) {
+        const id = columnItem.id;
+        const matched = rowItem[`${id}_matched`];
+        if (matched) {
+            value = matched;
+        }
+        return value;
+    },
+
     download: function(v) {
         return `
             <div class="oi-action-downloads vui-flex-row">
@@ -111,6 +122,7 @@ export const formatter = {
             <div>
         `;
     },
+
     textarea: function(v, r, c) {
         if (c.id === 'svg') {
             return `<textarea spellcheck="false">${v}</textarea>`;

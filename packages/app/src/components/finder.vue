@@ -88,6 +88,7 @@
 <script setup>
 import VineUI from 'vine-ui';
 import { Grid } from 'turbogrid';
+import fuzzy from 'fuzzy';
 
 import {
     inject, nextTick, ref, watch
@@ -119,6 +120,9 @@ const thumbIcons = ref([]);
 const keywords = ref('');
 const rowFilter = function(icon) {
 
+    icon.name_matched = null;
+    icon.name_score = 0;
+
     // filter package
     const packageName = state.packageName;
     if (packageName && icon.packageName !== packageName) {
@@ -130,13 +134,29 @@ const rowFilter = function(icon) {
         return true;
     }
 
-    const iconName = icon.name;
-    const parts = iconName.split('-');
-    if (parts.includes(kw) || iconName.startsWith(kw)) {
+    const res = fuzzy.match(kw, icon.name, {
+        pre: '<b>',
+        post: '</b>'
+    });
+
+    if (res) {
+        icon.name_matched = res.rendered;
+        icon.name_score = res.score;
         return true;
     }
 
     return false;
+};
+
+const rowFilteredSort = function() {
+    const kw = keywords.value.trim();
+    if (!kw) {
+        return;
+    }
+
+    return {
+        id: 'name_score'
+    };
 };
 
 const tagClickHandler = (tag) => {
@@ -310,7 +330,8 @@ const renderGridView = () => {
         rowHeight: cellSize,
         frozenColumn: 1,
         rowNotFound: '<div class="oi-not-found">Not found icons</div>',
-        rowFilter: rowFilter,
+        rowFilter,
+        rowFilteredSort,
         rowNumberVisible: true,
         rowNumberWidth: 52,
         scrollbarRound: true,
@@ -333,6 +354,7 @@ const renderGridView = () => {
     }, {
         id: 'name',
         name: 'Name',
+        classMap: 'oi-grid-name',
         width: 150
     }, {
         id: 'my',
@@ -600,6 +622,10 @@ watch(() => state.tabIndex, (v) => {
 }
 
 .oi-finder-grid {
+    .oi-grid-name {
+        b { color: red; }
+    }
+
     .oi-action-my {
         .oi-icon {
             position: absolute;
