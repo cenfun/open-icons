@@ -4,19 +4,19 @@ const Helper = require('../../scripts/helper.js');
 
 module.exports = {
     name: '@sanity/icons',
-    url: 'https://github.com/sanity-io/design',
+    url: 'https://github.com/sanity-io/icons',
 
     moduleInit: function(Util, modulePath) {
 
         const dir = path.resolve(modulePath, 'svg');
         fs.mkdirSync(dir);
 
-        const entryPath = path.resolve(modulePath, 'dist/index.js');
+        const entryPath = path.resolve(modulePath, 'dist/index.cjs');
 
         const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
-        // console.log(keys);
+        console.log(keys);
 
         keys.forEach((k) => {
             const excludes = ['Icon', 'icons'];

@@ -142,6 +142,16 @@ const downloadFile = async (url, pkg, Util, retry = 0) => {
         url: url,
         timeout: 15 * 1000,
         responseType: 'stream',
+        // onDownloadProgress: (d) => {
+        //     const {
+        //         loaded,
+        //         total,
+        //         // progress, bytes,
+        //         estimated
+        //         // rate, download = true
+        //     } = d;
+        //     console.log(loaded / total, estimated);
+        // },
         httpsAgent: new https.Agent({
             // keepAlive: true,
             rejectUnauthorized: false
@@ -151,7 +161,7 @@ const downloadFile = async (url, pkg, Util, retry = 0) => {
     if (err) {
         Util.logRed(err);
 
-        if (retry < 3) {
+        if (retry < 5) {
             Util.logYellow(`retry download: ${url}`);
             return downloadFile(url, pkg, Util, retry + 1);
         }
@@ -326,7 +336,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     if (fs.existsSync(jsPath)) {
 
         if (!pkg.debug) {
-            Util.logYellow(`exists build cache: ${name}`);
+            Util.logYellow(`${index}, exists build cache: ${name}`);
             return true;
         }
 
@@ -349,7 +359,7 @@ const pkgHandler = async (job, name, index, total, Util) => {
     const source = getSource(pkg);
     // console.log(source.name, source.license);
 
-    Util.log(`start svg minify: ${name}`);
+    Util.log(`${index}, start svg minify: ${name}`);
 
     // compress svg
     const svgMinifier = require('svg-minifier');
@@ -432,7 +442,10 @@ const beforeBuildHandler = async (item, Util) => {
 
     for (const name of list) {
 
-        await pkgHandler(item, name, i++, total, Util);
+        const ok = await pkgHandler(item, name, i++, total, Util);
+        if (!ok) {
+            return 1;
+        }
 
         const outputName = `${item.id}-${name}`;
 
@@ -464,6 +477,7 @@ const beforeBuildHandler = async (item, Util) => {
     const packagesPath = path.resolve(item.componentPath, 'src/packages.json');
     Util.writeJSONSync(packagesPath, packages);
 
+    return 0;
 };
 
 module.exports = {
@@ -491,10 +505,10 @@ module.exports = {
             return conf;
         },
 
-        before: async (item, Util) => {
+        before: (item, Util) => {
 
             if (item.name === 'open-icons') {
-                await beforeBuildHandler(item, Util);
+                return beforeBuildHandler(item, Util);
             }
 
             return 0;
