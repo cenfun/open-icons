@@ -36,15 +36,19 @@ const showTooltip = function(elem) {
         }
 
         tooltipInstance = VuiTooltip.createComponent({
-            target: elem,
-            html: $copy.outerHTML
+            props: {
+                target: elem,
+                html: $copy.outerHTML
+            }
         });
         return;
     }
 
     tooltipInstance = VuiTooltip.createComponent({
-        target: elem,
-        text: text
+        props: {
+            target: elem,
+            text: text
+        }
     });
 };
 
