@@ -495,15 +495,22 @@ watch(() => state.viewType, (v) => {
     }
 });
 
+let timeout_search;
 watch(keywords, () => {
-    const grid = getCurrentGrid();
-    if (grid) {
-        if (state.viewType === 'thumb') {
-            renderGrid();
-            return;
+
+    clearTimeout(timeout_search);
+    timeout_search = setTimeout(() => {
+        const grid = getCurrentGrid();
+        if (grid) {
+            if (state.viewType === 'thumb') {
+                renderGrid();
+                return;
+            }
+            grid.update();
         }
-        grid.update();
-    }
+
+    }, 200);
+
 });
 
 watch(myIcons, (v) => {
