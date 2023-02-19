@@ -7,8 +7,8 @@
     ],
     "dependencies": {
         "open-icons": "~1.0.4",
-        "turbogrid": "^3.0.3",
-        "vine-ui": "^3.0.14"
+        "turbogrid": "^3.0.4",
+        "vine-ui": "^3.0.15"
     },
     "devDependencies": {},
     "private": true
