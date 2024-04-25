@@ -66,7 +66,7 @@ export const getCellIcon = function(settings, icon) {
     }
 
     return `
-        <div class="oi-cell-icon" style="${st.join('')}">
+        <div class="oi-cell-icon" style="${st.join('')}" title="${icon.name}">
             ${icon.svg}
         </div>
     `;

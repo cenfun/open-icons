@@ -71,6 +71,7 @@
       <div
         ref="thumb"
         class="oi-finder-thumb"
+        @click="onThumbClick"
       >
         <div class="oi-thumb-icons" />
         <div
@@ -259,6 +260,17 @@ const createGrid = () => {
     return grid;
 };
 
+const onThumbClick = (e) => {
+
+    const $svg = e.target.querySelector('svg');
+    if (!$svg) {
+        return;
+    }
+
+    const $elem = $svg.parentNode;
+    saveSVG($elem.innerHTML.trim(), $elem.getAttribute('title'));
+};
+
 const renderThumbIcons = (clean) => {
 
     let icons = thumbIcons.value;
@@ -288,7 +300,7 @@ const renderThumbIcons = (clean) => {
         if (!hasOwn(icon, 'tg_index')) {
             icon.tg_index = i;
         }
-        const children = [`<div class="oi-thumb-item" title="${icon.name}">`];
+        const children = ['<div class="oi-thumb-item">'];
         const cellIcon = getCellIcon(settings, icon);
         children.push(cellIcon);
         if (size >= 64) {
