@@ -1,21 +1,10 @@
 # open-icons
-> Open source icons collection
-
 ![](https://img.shields.io/npm/v/open-icons)
 ![](https://img.shields.io/librariesio/github/cenfun/open-icons)
 ![](https://img.shields.io/librariesio/dependents/npm/open-icons)
 [![](https://badgen.net/npm/dw/open-icons)](https://www.npmjs.com/package/open-icons)
 
-## Homepage
 [https://cenfun.github.io/open-icons/](https://cenfun.github.io/open-icons/)
-
-## Installation
-```sh
-npm install open-icons
-```
-
-# {placeholder_info}
-{placeholder_list}
 
 
 ## Features
@@ -27,15 +16,21 @@ npm install open-icons
 * Customize size/color/BG/radius
 * kebab-case naming
 
+## Installation
+```sh
+npm install open-icons
+```
+
 ## Usage
 ```js
 import { decompress } from 'open-icons';
-import xxxPkg from "open-icons/dist/open-icons-[xxx].js";
-
-const pkg = JSON.parse(decompress(xxxPkg));
-console.log(pkg);
-
+import awesome from "open-icons/dist/open-icons-awesome.js";
+const awesomePkg = JSON.parse(decompress(awesome));
+console.log(awesomePkg);
 ```
+
+# {placeholder_info}
+{placeholder_list}
 
 ## Multiple types naming
 * without type postfix (default name): fill/filled/solid

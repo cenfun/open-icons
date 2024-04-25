@@ -1,17 +1,32 @@
 # open-icons
-> Open source icons collection
-
 ![](https://img.shields.io/npm/v/open-icons)
 ![](https://img.shields.io/librariesio/github/cenfun/open-icons)
 ![](https://img.shields.io/librariesio/dependents/npm/open-icons)
 [![](https://badgen.net/npm/dw/open-icons)](https://www.npmjs.com/package/open-icons)
 
-## Homepage
 [https://cenfun.github.io/open-icons/](https://cenfun.github.io/open-icons/)
+
+
+## Features
+* Pure SVG icons 
+* fill/stroke with currentColor
+* High compressed bundle
+* UMD format bundle
+* Web components
+* Customize size/color/BG/radius
+* kebab-case naming
 
 ## Installation
 ```sh
 npm install open-icons
+```
+
+## Usage
+```js
+import { decompress } from 'open-icons';
+import awesome from "open-icons/dist/open-icons-awesome.js";
+const awesomePkg = JSON.parse(decompress(awesome));
+console.log(awesomePkg);
 ```
 
 # 103 Packages & 94,405 Icons
@@ -121,26 +136,6 @@ npm install open-icons
 |102|[zocial](https://cenfun.github.io/open-icons/#zocial)|  100|78.8KB|59.3KB|[css-social-buttons](https://github.com/smcllns/css-social-buttons)|1.1.1  |MIT    |
 |103|[zond](https://cenfun.github.io/open-icons/#zond)|  297|17.7KB|13.4KB|[zondicons](https://www.zondicons.com/)|1.2.0  |CC-BY-4.0|
 |   |Total|94,405|19.7MB|14.8MB|      |       |       |
-
-
-## Features
-* Pure SVG icons 
-* fill/stroke with currentColor
-* High compressed bundle
-* UMD format bundle
-* Web components
-* Customize size/color/BG/radius
-* kebab-case naming
-
-## Usage
-```js
-import { decompress } from 'open-icons';
-import xxxPkg from "open-icons/dist/open-icons-[xxx].js";
-
-const pkg = JSON.parse(decompress(xxxPkg));
-console.log(pkg);
-
-```
 
 ## Multiple types naming
 * without type postfix (default name): fill/filled/solid
