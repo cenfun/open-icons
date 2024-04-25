@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+const SFE = require('svg-font-extractor');
 module.exports = {
     name: 'coolicons',
     url: 'https://github.com/krystonschwarze/coolicons',
@@ -5,11 +8,9 @@ module.exports = {
     downloadUrl: 'https://github.com/krystonschwarze/coolicons/archive/refs/heads/master.zip',
     moduleEntry: 'coolicons-master',
 
-    moduleFilters: 'coolicons SVG',
+    moduleFilters: 'Webfont',
 
     license: 'CC 4.0',
-
-    dirs: 'coolicons SVG',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();
@@ -19,20 +20,18 @@ module.exports = {
         return this.onSVGNameDefault(name, item);
     },
 
-    onSVGDocument: function($svg, item) {
-        let found = false;
-        ['path'].forEach((k) => {
-            const $elem = $svg.find(k);
-            const fill = $elem.attr('fill');
-            if (fill && fill !== 'none') {
-                $elem.attr('fill', 'currentColor');
-                found = true;
-            }
+    moduleInit: function(modulePath, Util) {
+
+        const output = path.resolve(modulePath, 'svg');
+
+        SFE({
+            input: path.resolve(modulePath, 'Webfont/fonts/coolicons.svg'),
+            output
         });
-        if (found) {
-            return;
-        }
-        $svg.attr('fill', 'currentColor');
+
+        // remove 0.svg
+        fs.rmSync(path.resolve(output, '0.svg'));
+
     }
 
 };

@@ -39,14 +39,14 @@ console.log(awesomePkg);
 |  5|[awesome](https://cenfun.github.io/open-icons/#awesome)|1,392|294.3KB|221.6KB|[@fortawesome/free-solid-svg-icons](https://github.com/FortAwesome/Font-Awesome)|6.5.2  |(CC-BY-4.0 AND MIT)|
 |  6|[badgen](https://cenfun.github.io/open-icons/#badgen)|   82|39.4KB|29.7KB|[badgen-icons](https://github.com/badgen/badgen-icons)|0.23.0 |ISC    |
 |  7|[bitcoin](https://cenfun.github.io/open-icons/#bitcoin)|  158|29.9KB|22.5KB|[@bitcoin-design/bitcoin-icons](https://github.com/BitcoinDesign/Bitcoin-Icons)|0.1.1  |MIT    |
-|  8|[blueprint](https://cenfun.github.io/open-icons/#blueprint)|  606|112.7KB|84.9KB|[@blueprintjs/icons](https://github.com/palantir/blueprint)|5.9.0  |Apache-2.0|
+|  8|[blueprint](https://cenfun.github.io/open-icons/#blueprint)|  606|132.9KB|100.1KB|[@blueprintjs/icons](https://github.com/palantir/blueprint)|5.9.0  |Apache-2.0|
 |  9|[bootstrap](https://cenfun.github.io/open-icons/#bootstrap)|2,050|280.0KB|210.8KB|[bootstrap-icons](https://github.com/twbs/icons)|1.11.3 |MIT    |
 | 10|[box](https://cenfun.github.io/open-icons/#box)|1,634|242.0KB|182.3KB|[boxicons](https://github.com/atisawd/boxicons)|2.1.4  |(CC-BY-4.0 OR OFL-1.1 OR MIT)|
 | 11|[bytesize](https://cenfun.github.io/open-icons/#bytesize)|  101|5.1KB|3.8KB|[bytesize-icons](https://github.com/danklammer/bytesize-icons)|1.4.0  |MIT    |
 | 12|[carbon](https://cenfun.github.io/open-icons/#carbon)|2,217|304.3KB|229.2KB|[@carbon/icons](https://github.com/carbon-design-system/carbon)|11.39.0|Apache-2.0|
 | 13|[charm](https://cenfun.github.io/open-icons/#charm)|  261|12.6KB|9.5KB|[charm-icons](https://github.com/jaynewey/charm-icons)|0.18.0 |MIT    |
 | 14|[circum](https://cenfun.github.io/open-icons/#circum)|  139|35.7KB|26.9KB|[@klarr-agency/circum-icons](https://github.com/Klarr-Agency/Circum-Icons)|1.1.39 |MIT    |
-| 15|[cool](https://cenfun.github.io/open-icons/#cool)|  442|37.6KB|28.4KB|[coolicons](https://github.com/krystonschwarze/coolicons)|       |CC 4.0 |
+| 15|[cool](https://cenfun.github.io/open-icons/#cool)|  442|149.5KB|112.6KB|[coolicons](https://github.com/krystonschwarze/coolicons)|       |CC 4.0 |
 | 16|[coreui](https://cenfun.github.io/open-icons/#coreui)|  556|118.1KB|89.0KB|[@coreui/icons](https://github.com/coreui/coreui-icons)|3.0.1  |MIT    |
 | 17|[crypto](https://cenfun.github.io/open-icons/#crypto)|  483|308.7KB|232.5KB|[cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons)|0.18.1 |CC0-1.0|
 | 18|[cssgg](https://cenfun.github.io/open-icons/#cssgg)|  704|57.5KB|43.3KB|[css.gg](https://github.com/astrit/css.gg)|2.1.1  |MIT    |
@@ -85,7 +85,7 @@ console.log(awesomePkg);
 | 51|[ionic](https://cenfun.github.io/open-icons/#ionic)|  934|199.9KB|150.6KB|[ionicons](https://github.com/ionic-team/ionicons)|7.3.1  |MIT    |
 | 52|[jam](https://cenfun.github.io/open-icons/#jam)|  896|119.5KB|90.0KB|[jam-icons](https://github.com/michaelampr/jam)|2.0.0  |MIT    |
 | 53|[jtb](https://cenfun.github.io/open-icons/#jtb)|  912|738.5KB|556.1KB|[jtb-icons](https://github.com/JTBLabs/JTB-Icons)|       |MIT    |
-| 54|[lawn](https://cenfun.github.io/open-icons/#lawn)|5,033|977.7KB|736.3KB|[lawnicons](https://github.com/LawnchairLauncher/lawnicons)|       | Apache 2.0|
+| 54|[lawn](https://cenfun.github.io/open-icons/#lawn)|5,033|977.5KB|736.1KB|[lawnicons](https://github.com/LawnchairLauncher/lawnicons)|       | Apache 2.0|
 | 55|[line](https://cenfun.github.io/open-icons/#line)|1,544|445.0KB|335.1KB|[line-awesome](https://github.com/icons8/line-awesome)|1.3.0  |MIT    |
 | 56|[linear](https://cenfun.github.io/open-icons/#linear)|  170|44.4KB|33.4KB|[linearicons](https://github.com/cjpatoilo/linearicons)|1.0.2  |CC BY-SA 4.0|
 | 57|[logos](https://cenfun.github.io/open-icons/#logos)|1,555|1.5MB|1.1MB|[logos](https://github.com/gilbarbara/logos)|       |CC0-1.0|
@@ -135,7 +135,7 @@ console.log(awesomePkg);
 |101|[wordpress](https://cenfun.github.io/open-icons/#wordpress)|  275|33.0KB|24.9KB|[@wordpress/icons](https://github.com/WordPress/gutenberg)|9.47.0 |GPL-2.0-or-later|
 |102|[zocial](https://cenfun.github.io/open-icons/#zocial)|  100|78.8KB|59.3KB|[css-social-buttons](https://github.com/smcllns/css-social-buttons)|1.1.1  |MIT    |
 |103|[zond](https://cenfun.github.io/open-icons/#zond)|  297|17.7KB|13.4KB|[zondicons](https://www.zondicons.com/)|1.2.0  |CC-BY-4.0|
-|   |Total|94,405|19.7MB|14.8MB|      |       |       |
+|   |Total|94,405|19.8MB|14.9MB|      |       |       |
 
 ## Multiple types naming
 * without type postfix (default name): fill/filled/solid

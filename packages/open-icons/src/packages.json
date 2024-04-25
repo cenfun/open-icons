@@ -115,9 +115,9 @@
         "id": "open-icons-cool",
         "name": "cool",
         "count": 442,
-        "size": 38543,
-        "sizeGzip": 29048,
-        "sizeJson": 213970
+        "size": 153135,
+        "sizeGzip": 115325,
+        "sizeJson": 534587
     },
     {
         "id": "open-icons-coreui",
@@ -427,9 +427,9 @@
         "id": "open-icons-lawn",
         "name": "lawn",
         "count": 5033,
-        "size": 1001164,
-        "sizeGzip": 753925,
-        "sizeJson": 2992341
+        "size": 1000972,
+        "sizeGzip": 753788,
+        "sizeJson": 2992617
     },
     {
         "id": "open-icons-line",

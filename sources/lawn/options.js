@@ -16,8 +16,10 @@ module.exports = {
         return this.onSVGNameDefault(name, item);
     },
 
+
     onSVGContent: function(content, item) {
         content = content.split('#000000').join('currentColor');
+        content = content.split('#000').join('currentColor');
         content = content.split(':#000').join(':currentColor');
 
         content = content.split('#111111').join('currentColor');
@@ -64,7 +66,7 @@ module.exports = {
                 $svg.find('circle').attr('fill', 'currentColor');
                 return;
             }
-            if (item.name === 'microg-settings') {
+            if (['microg-settings', 'androtainer'].includes(item.name)) {
                 $svg.find('path').each(function(i, n) {
                     const $elem = $(n);
                     if (!$elem.attr('fill')) {
