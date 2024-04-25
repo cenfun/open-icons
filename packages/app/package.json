@@ -1,15 +1,16 @@
 {
     "name": "open-icons-app",
     "version": "1.0.5",
+    "private": true,
     "main": "dist/open-icons-app.js",
     "files": [
         "dist"
     ],
+    "license": "MIT",
     "dependencies": {
         "open-icons": "~1.0.5",
-        "turbogrid": "^3.0.5",
-        "vine-ui": "^3.0.15"
+        "turbogrid": "^3.0.13",
+        "vine-ui": "^3.1.13"
     },
-    "devDependencies": {},
-    "private": true
+    "devDependencies": {}
 }
