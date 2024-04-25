@@ -35,20 +35,12 @@ const getBG = (settings) => {
     return bg;
 };
 
-const getIconTooltip = (settings) => {
-    if (settings.iconZoomIn) {
-        return 'tooltip="icon"';
-    }
-    return '';
-};
-
 const getWCIcon = function(settings, icon) {
     const size = `${getSettingsSize(settings)}px`;
     const color = getColor(settings, icon.tg_index);
     const bg = getBG(settings);
     const tag = icon.tagName;
-    const tip = getIconTooltip(settings);
-    return `<${tag} name="${icon.id}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}" ${tip}></${tag}>`;
+    return `<${tag} name="${icon.id}" size="${size}" color="${color}" bg="${bg}" radius="${settings.radius}"></${tag}>`;
 };
 
 export const getCellIcon = function(settings, icon) {
@@ -73,10 +65,8 @@ export const getCellIcon = function(settings, icon) {
         st.push(`--radius: ${radius};`);
     }
 
-    const tip = getIconTooltip(settings);
-
     return `
-        <div class="oi-cell-icon" style="${st.join('')}" ${tip}>
+        <div class="oi-cell-icon" style="${st.join('')}">
             ${icon.svg}
         </div>
     `;

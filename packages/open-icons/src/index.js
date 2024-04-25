@@ -1,6 +1,6 @@
 
 import packages from './packages.json';
-import decompress from 'lz-utils/lib/decompress.js';
+import decompress from 'lz-utils/inflate-sync';
 
 import loadPackages from './load-packages.js';
 

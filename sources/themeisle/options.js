@@ -11,7 +11,7 @@ module.exports = {
 
     license: 'Apache-2.0',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/themeisle-icons.svg'),

@@ -2,7 +2,7 @@
   <VuiFlex
     v-if="packageInfo"
     direction="column"
-    spacing="10px"
+    gap="10px"
     height="100%"
   >
     <div class="oi-pkg-title">
@@ -39,7 +39,7 @@
       >{{ tag.name }}</span>
     </div>
     <div class="oi-view-header">
-      <VuiFlex spacing="10px">
+      <VuiFlex gap="10px">
         <div>Results: {{ state.results }}</div>
         <div class="vui-flex-empty" />
 

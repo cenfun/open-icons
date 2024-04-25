@@ -12,7 +12,7 @@ module.exports = {
     // downloadUrl: 'https://github.com/xxx/master.zip',
     // moduleEntry: 'xxx-icons-master',
     // moduleFilters: 'fonts/xxx.svg',
-    // moduleInit: function(Util, modulePath) {
+    // moduleInit: function(modulePath, Util) {
 
     //     SFE({
     //         input: path.resolve(modulePath, 'fonts/xxx.svg'),

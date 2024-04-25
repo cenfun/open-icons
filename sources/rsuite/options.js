@@ -7,10 +7,9 @@ module.exports = {
     name: '@rsuite/icon-font',
     url: 'https://github.com/rsuite/rsuite-icons',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'components');
 
@@ -26,7 +25,7 @@ module.exports = {
             });
 
             const str = Helper.cut(content, '<svg', '</svg>');
-            //console.log(str);
+            // console.log(str);
             if (!str) {
                 console.log(`Not found svg: ${EC.red(filename)}`);
                 return;
@@ -39,7 +38,7 @@ module.exports = {
             // }
 
             const k = path.basename(filename, extname);
-            //console.log(k);
+            // console.log(k);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

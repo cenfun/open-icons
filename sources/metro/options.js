@@ -10,7 +10,7 @@ module.exports = {
     moduleEntry: 'Metro-UI-CSS-master',
     moduleFilters: 'icons/metro.svg',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'icons/metro.svg'),
@@ -19,7 +19,7 @@ module.exports = {
 
                 let name = item['glyph-name'];
                 if (!name || !item.d) {
-                    //console.log(item);
+                    // console.log(item);
                     return;
                 }
                 name = name.replace(/_/g, '-');

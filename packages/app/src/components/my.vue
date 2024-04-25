@@ -1,11 +1,11 @@
 <template>
   <VuiFlex
     direction="column"
-    spacing="10px"
+    gap="10px"
     height="100%"
   >
     <div class="oi-toolbar">
-      <VuiFlex spacing="10px">
+      <VuiFlex gap="10px">
         <VuiButton
           tooltip="Remove selected icons"
           @click="removeSelected()"

@@ -12,12 +12,12 @@ const getNameMap = function(modulePath) {
     const nameMap = {};
     content.split(/\r|\n/g).forEach((line) => {
         const str = line.trim();
-        //console.log(str);
+        // console.log(str);
         if (!str) {
             return;
         }
         const name = str.split(':')[0].replace(/\.icon-/g, '');
-        //console.log(name);
+        // console.log(name);
         const v = str.split('"')[1].split('"')[0];
 
         const code = v.replace('\\', '');
@@ -26,12 +26,12 @@ const getNameMap = function(modulePath) {
 
         const x = String.fromCharCode(u);
 
-        //console.log(u);
+        // console.log(u);
 
         nameMap[x] = name.toLowerCase();
     });
 
-    //console.log(nameMap);
+    // console.log(nameMap);
 
     const total = EC.yellow(Object.keys(nameMap).length);
 
@@ -44,7 +44,7 @@ module.exports = {
     name: 'themify-icons',
     url: 'https://github.com/aastrong/themify-icons.scss',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         const nameMap = getNameMap(modulePath);
 
@@ -52,7 +52,7 @@ module.exports = {
             input: path.resolve(modulePath, 'themify-icons/fonts/themify.svg'),
             output: path.resolve(modulePath, 'svg'),
             onSVGItem: function(item) {
-                //filter no d item
+                // filter no d item
                 if (!item.d) {
                     return;
                 }

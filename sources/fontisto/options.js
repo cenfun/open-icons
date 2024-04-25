@@ -5,7 +5,7 @@ module.exports = {
     name: 'fontisto',
     url: 'https://github.com/kenangundogan/fontisto',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/fontisto/fontisto.svg'),
@@ -15,7 +15,7 @@ module.exports = {
 
                 const name = item['glyph-name'];
                 if (!name || !item.d) {
-                    //console.log(item);
+                    // console.log(item);
                     return;
                 }
 

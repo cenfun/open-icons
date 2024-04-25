@@ -6,22 +6,21 @@ module.exports = {
     name: '@radix-ui/react-icons',
     url: 'https://github.com/radix-ui/icons',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'dist/react-icons.cjs.development.js');
 
         const bundle = Helper.executeCode(entryPath, Helper.dependencies);
 
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
 
         keys.forEach((k) => {
 
             const v = bundle[k];
-            //console.log(v);
+            // console.log(v);
 
             if (typeof v.render !== 'function') {
                 console.log(`Not found render function: ${k}`);
@@ -31,10 +30,10 @@ module.exports = {
             const props = v.render({
                 color: 'currentColor'
             });
-            //console.log(props);
+            // console.log(props);
 
             const svg = Helper.createSvgFromReact(props);
-            //console.log(svg);
+            // console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

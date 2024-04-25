@@ -25,14 +25,13 @@ module.exports = {
     name: 'lucide',
     url: 'https://github.com/lucide-icons/lucide',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const bundle = require(path.resolve(modulePath));
         const keys = Object.keys(bundle);
-        //console.log(keys);
+        // console.log(keys);
         keys.forEach((k) => {
             const excludes = ['createElement', 'createIcons', 'icons'];
             if (excludes.includes(k)) {
@@ -41,7 +40,7 @@ module.exports = {
 
             const v = bundle[k];
             const svg = createSvg(v[0], v[1], v[2]);
-            //console.log(svg);
+            // console.log(svg);
 
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);
 

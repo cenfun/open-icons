@@ -13,7 +13,7 @@
           height="100%"
         >
           <VuiFlex
-            spacing="10px"
+            gap="10px"
             class="oi-packages-header"
           >
             <div class="oi-title vui-flex-auto">
@@ -79,13 +79,17 @@
           </template>
 
           <template #panes>
-            <OiFinder />
-            <OiMy />
+            <div><OiFinder /></div>
+            <div><OiMy /></div>
           </template>
         </VuiTab>
       </div>
     </VuiLayout>
-
+    <VuiTooltip
+      :visible="state.tooltipVisible"
+      :target="state.tooltipTarget"
+      :text="state.tooltipText"
+    />
     <OiLoading />
   </div>
 </template>
@@ -115,7 +119,7 @@ import OiMy from './components/my.vue';
 const dbName = 'open-icons';
 
 const {
-    VuiLayout, VuiFlex, VuiTab
+    VuiLayout, VuiFlex, VuiTab, VuiTooltip
 } = VineUI;
 
 const layout = ref('200px,auto');
@@ -138,7 +142,10 @@ const state = shallowReactive({
     tabIndex: 0,
     results: '',
     // grid and thumb
-    viewType: 'grid'
+    viewType: 'grid',
+    tooltipVisible: false,
+    tooltipTarget: null,
+    tooltipText: ''
 });
 
 provide('state', state);
@@ -537,7 +544,7 @@ watch(keywords, () => {
 
 onMounted(() => {
     loadStart();
-    initTooltip();
+    initTooltip(state);
 });
 
 </script>

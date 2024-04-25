@@ -6,10 +6,9 @@ module.exports = {
     name: '@icon-park/svg',
     url: 'https://github.com/bytedance/IconPark',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const bundle = require(path.resolve(modulePath));
         const keys = Object.keys(bundle);

@@ -1,5 +1,5 @@
 
-import decompress from 'lz-utils/lib/decompress.js';
+import decompress from 'lz-utils/inflate-sync';
 import packages from './packages.json';
 
 const initIcons = (pkg) => {
@@ -36,7 +36,14 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
 
             const str = window[it.id].default;
 
-            const pkg = JSON.parse(decompress(str));
+            // console.log(window[it.id]);
+
+            const text = decompress(str);
+
+            // console.log(text);
+
+            const pkg = JSON.parse(text);
+            // console.log(it);
 
             loadedSize += it.size;
 
@@ -60,9 +67,12 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
             }
         };
 
+        // packages.length = 1;
+
         packages.forEach((it) => {
             const url = `${path}${it.id}.js`;
             const $script = document.createElement('script');
+            console.log('url', url);
             $script.src = url;
             $script.onload = function() {
                 loadHandler(it);

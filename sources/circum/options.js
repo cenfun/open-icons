@@ -8,10 +8,9 @@ module.exports = {
 
     moduleFilters: 'src/iconList.js',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'src/iconList.js');
         const content = fs.readFileSync(entryPath, {
@@ -21,7 +20,7 @@ module.exports = {
         const jsonStr = Helper.cut(content, '[', ';');
 
         const icons = new Function(`return ${jsonStr}`)();
-        //console.log(icons);
+        // console.log(icons);
         icons.forEach((item) => {
 
             const svg = `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">${item.svg}</svg>`;

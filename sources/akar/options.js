@@ -6,10 +6,9 @@ module.exports = {
     name: 'akar-icons',
     url: 'https://github.com/artcoholic/akar-icons',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'dist/index.js');
 
@@ -25,7 +24,7 @@ module.exports = {
                 return;
             }
 
-            const props = v(v.defaultProps);
+            const props = v({});
             // console.log(props);
 
             const svg = Helper.createSvgFromReact(props);

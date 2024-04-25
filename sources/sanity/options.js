@@ -6,10 +6,9 @@ module.exports = {
     name: '@sanity/icons',
     url: 'https://github.com/sanity-io/icons',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'dist/index.cjs');
 

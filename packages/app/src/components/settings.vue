@@ -1,6 +1,6 @@
 <template>
   <VuiFlex
-    spacing="10px"
+    gap="10px"
     class="oi-settings"
   >
     <VuiSelect v-model="settings.size">

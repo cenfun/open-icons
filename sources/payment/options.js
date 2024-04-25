@@ -6,7 +6,7 @@ module.exports = {
     name: 'paymentfont',
     url: 'https://github.com/AlexanderPoellmann/PaymentFont',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/paymentfont-webfont.svg'),

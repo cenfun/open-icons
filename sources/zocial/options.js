@@ -13,17 +13,17 @@ const getNameMap = function(modulePath) {
 
     content = Helper.cut(content, '.zocial.acrobat:before { content', '{ content: "\\f163"; }');
 
-    //console.log(content);
+    // console.log(content);
 
     const nameMap = {};
     content.split(/\r|\n/g).forEach((line) => {
         const str = line.trim();
-        //console.log(str);
+        // console.log(str);
         if (!str) {
             return;
         }
         const name = str.split(':')[0].replace(/\.zocial\./g, '');
-        //console.log(name);
+        // console.log(name);
         const v = str.split('"')[1].split('"')[0];
 
         const code = v.replace('\\', '');
@@ -32,12 +32,12 @@ const getNameMap = function(modulePath) {
 
         const x = String.fromCharCode(u);
 
-        //console.log(u);
+        // console.log(u);
 
         nameMap[x] = name.toLowerCase();
     });
 
-    //console.log(nameMap);
+    // console.log(nameMap);
 
     const total = EC.yellow(Object.keys(nameMap).length);
 
@@ -52,7 +52,7 @@ module.exports = {
 
     moduleFilters: 'css',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         const nameMap = getNameMap(modulePath);
 

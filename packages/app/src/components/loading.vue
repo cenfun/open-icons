@@ -3,7 +3,7 @@
     v-if="loading.visible"
     class="oi-loading"
   >
-    <VuiFlex spacing="10px">
+    <VuiFlex gap="10px">
       <VuiLoading
         fast
         size="l"

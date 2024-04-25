@@ -7,10 +7,9 @@ module.exports = {
     name: '@wordpress/icons',
     url: 'https://github.com/WordPress/gutenberg',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
-        const dir = path.resolve(modulePath, 'svg');
-        fs.mkdirSync(dir);
+        const dir = Util.createSvgDir();
 
         const entryPath = path.resolve(modulePath, 'src/library');
         const files = fs.readdirSync(entryPath);
@@ -25,7 +24,7 @@ module.exports = {
             });
 
             const str = Helper.cut(content, '<SVG', '</SVG>');
-            //console.log(str);
+            // console.log(str);
             if (!str) {
                 console.log(`Not found svg: ${EC.red(filename)}`);
                 return;
@@ -33,7 +32,7 @@ module.exports = {
 
             let svg = str.replace(/SVG/g, 'svg');
             svg = svg.replace(/Path/g, 'path');
-            //console.log(k, v, svg);
+            // console.log(k, v, svg);
 
             const k = path.basename(filename, '.js');
             fs.writeFileSync(path.resolve(dir, `${Helper.pascalToKebabCase(k)}.svg`), svg);

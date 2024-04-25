@@ -5,7 +5,7 @@ module.exports = {
     name: 'icofont',
     url: 'https://github.com/LuanHimmlisch/icofont',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'dist/fonts/icofont.svg'),

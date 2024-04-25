@@ -9,7 +9,7 @@ module.exports = {
 
     license: 'MIT',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/jtbIR.svg'),

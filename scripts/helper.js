@@ -4,6 +4,10 @@ const path = require('path');
 const vm = require('vm');
 const EC = require('eight-colors');
 
+const cheerio = require('cheerio');
+const { renderToString } = require('react-dom/server');
+
+
 const Helper = {
 
     hasOwn: function(obj, key) {
@@ -17,6 +21,19 @@ const Helper = {
             .replace(/^-+|-+$/g, '')
             .replace(/-{2,}/g, '-')
             .toLowerCase();
+    },
+
+    renderReactIcon: (Icon, props = {}) => {
+        const content = renderToString(Icon.render(props));
+        const $ = cheerio.load(content, {
+            xmlMode: true
+        });
+        const $svg = $('svg');
+        const $parent = $svg.parent();
+        if ($parent) {
+            return $parent.html();
+        }
+        return content;
     },
 
     createSvgFromReact: function(parent) {

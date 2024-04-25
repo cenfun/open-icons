@@ -5,11 +5,11 @@ module.exports = {
     downloadUrl: 'https://github.com/krystonschwarze/coolicons/archive/refs/heads/master.zip',
     moduleEntry: 'coolicons-master',
 
-    moduleFilters: 'coolicons v2.5 SVG',
+    moduleFilters: 'coolicons SVG',
 
     license: 'CC 4.0',
 
-    dirs: 'coolicons v2.5 SVG',
+    dirs: 'coolicons SVG',
 
     onSVGName: function(name, item) {
         name = name.toLowerCase();

@@ -9,7 +9,7 @@ module.exports = {
     moduleEntry: 'elementor-icons-master',
     moduleFilters: 'fonts/eicons.svg',
 
-    moduleInit: function(Util, modulePath) {
+    moduleInit: function(modulePath, Util) {
 
         SFE({
             input: path.resolve(modulePath, 'fonts/eicons.svg'),

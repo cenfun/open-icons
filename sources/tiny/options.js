@@ -10,13 +10,13 @@ module.exports = {
     },
 
     onSVGDocument: function($svg, item, $) {
-        //$svg.attr('fill', 'currentColor');
+        // $svg.attr('fill', 'currentColor');
         if (item.name === 'tiktok') {
 
-            const directive = $.root()[0].children.find((c) => c.type === 'directive');
-            const d = directive.data.split('"')[1];
-            console.log(`tiktok replacement: ${d}`);
-            $.root().find('[d="&z;"]').attr('d', d);
+            // const directive = $.root()[0].children.find((c) => c.type === 'directive');
+            // const d = directive.data.split('"')[1];
+            // console.log(`tiktok replacement: ${d}`);
+            // $.root().find('[d="&z;"]').attr('d', d);
 
         }
     }
