@@ -37,7 +37,7 @@ console.log(awesomePkg);
 |  3|[antd](https://cenfun.github.io/open-icons/#antd)|  681|165.1KB|124.3KB|[@ant-design/icons-svg](https://github.com/ant-design/ant-design-icons)|4.4.2  |MIT    |
 |  4|[antdm](https://cenfun.github.io/open-icons/#antdm)|  151|42.1KB|31.7KB|[antd-mobile-icons](https://github.com/awmleer/antd-mobile-icons)|0.3.0  |MIT    |
 |  5|[awesome](https://cenfun.github.io/open-icons/#awesome)|1,392|294.3KB|221.6KB|[@fortawesome/free-solid-svg-icons](https://github.com/FortAwesome/Font-Awesome)|6.5.2  |(CC-BY-4.0 AND MIT)|
-|  6|[badgen](https://cenfun.github.io/open-icons/#badgen)|   82|39.5KB|29.7KB|[badgen-icons](https://github.com/badgen/badgen-icons)|0.23.0 |ISC    |
+|  6|[badgen](https://cenfun.github.io/open-icons/#badgen)|   82|39.4KB|29.7KB|[badgen-icons](https://github.com/badgen/badgen-icons)|0.23.0 |ISC    |
 |  7|[bitcoin](https://cenfun.github.io/open-icons/#bitcoin)|  158|29.9KB|22.5KB|[@bitcoin-design/bitcoin-icons](https://github.com/BitcoinDesign/Bitcoin-Icons)|0.1.1  |MIT    |
 |  8|[blueprint](https://cenfun.github.io/open-icons/#blueprint)|  606|112.7KB|84.9KB|[@blueprintjs/icons](https://github.com/palantir/blueprint)|5.9.0  |Apache-2.0|
 |  9|[bootstrap](https://cenfun.github.io/open-icons/#bootstrap)|2,050|280.0KB|210.8KB|[bootstrap-icons](https://github.com/twbs/icons)|1.11.3 |MIT    |

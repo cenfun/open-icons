@@ -6,7 +6,7 @@
     height="100%"
   >
     <div class="oi-pkg-title">
-      {{ packageInfo.fullName || packageInfo.name }} <b>{{ packageInfo.iconCount.toLocaleString() }} <span>icons</span></b>
+      {{ packageInfo.fullName || packageInfo.name }} <b>{{ packageInfo.count.toLocaleString() }} <span>icons</span></b>
     </div>
     <div class="oi-pkg-stats">
       <a
@@ -95,7 +95,7 @@ import {
 } from 'vue';
 
 import {
-    BF, getSettingsSize, throttle
+    BF, getSettingsSize, hasOwn, throttle
 } from '../util/util.js';
 
 import {
@@ -103,6 +103,8 @@ import {
     getCellIcon, getVueEl, getSourceFrom,
     saveSVG, savePNG
 } from '../util/grid-helper.js';
+
+import store from '../util/store.js';
 
 import OiIcon from './icon.vue';
 
@@ -176,9 +178,13 @@ const addIcon = function(icon) {
 };
 
 const getCurrentGrid = () => {
-    if (state.tabIndex === 0) {
-        return state.finderGrid;
+    let grid = state.finderGrid;
+    if (!grid) {
+        grid = createGrid();
+        state.finderGrid = grid;
     }
+
+    return grid;
 };
 
 const createGrid = () => {
@@ -278,7 +284,10 @@ const renderThumbIcons = (clean) => {
 
     const size = getSettingsSize(settings);
 
-    const list = icons.map((icon) => {
+    const list = icons.map((icon, i) => {
+        if (!hasOwn(icon, 'tg_index')) {
+            icon.tg_index = i;
+        }
         const children = [`<div class="oi-thumb-item" title="${icon.name}">`];
         const cellIcon = getCellIcon(settings, icon);
         children.push(cellIcon);
@@ -319,10 +328,7 @@ const renderThumbView = () => {
 
 const renderGridView = () => {
 
-    let grid = getCurrentGrid();
-    if (!grid) {
-        grid = createGrid();
-    }
+    const grid = getCurrentGrid();
 
     const cellSize = getSettingsSize(settings) + 10;
 
@@ -408,6 +414,11 @@ const renderGrid = () => {
     // console.log('renderGrid', state.viewType);
 
     const $thumb = thumb.value;
+    if (!$thumb) {
+        return;
+    }
+
+
     if (state.viewType === 'thumb') {
         $thumb.style.display = 'block';
         renderThumbView();
@@ -481,18 +492,13 @@ watch(() => state.packageName, (v) => {
 
 watch(settings, () => {
     requestUpdate.value = true;
-    const grid = getCurrentGrid();
-    if (grid) {
-        renderGridAsync();
-    }
+    renderGridAsync();
 });
 
 watch(() => state.viewType, (v) => {
+    store.set('viewType', v);
     requestUpdate.value = true;
-    const grid = getCurrentGrid();
-    if (grid) {
-        renderGrid();
-    }
+    renderGrid();
 });
 
 let timeout_search;
@@ -500,14 +506,12 @@ watch(keywords, () => {
 
     clearTimeout(timeout_search);
     timeout_search = setTimeout(() => {
-        const grid = getCurrentGrid();
-        if (grid) {
-            if (state.viewType === 'thumb') {
-                renderGrid();
-                return;
-            }
-            grid.update();
+        if (state.viewType === 'thumb') {
+            renderGrid();
+            return;
         }
+        const grid = getCurrentGrid();
+        grid.update();
 
     }, 200);
 

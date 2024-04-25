@@ -109,6 +109,7 @@ import {
 import { hasOwn, BF } from './util/util.js';
 import { initTooltip } from './util/tooltip.js';
 import { getSourceFrom } from './util/grid-helper.js';
+import store from './util/store.js';
 
 import OiIcon from './components/icon.vue';
 import OiLoading from './components/loading.vue';
@@ -178,10 +179,9 @@ const keywords = ref('');
 const renderPackages = function(packages) {
 
     const rows = packages.map((pkg) => {
-        pkg.iconCount = pkg.icons.length;
         pkg.sourceFrom = getSourceFrom(pkg.source);
         pkg.sourceLicense = pkg.source.license;
-        pkg.sizeAvg = pkg.size / pkg.iconCount;
+        pkg.sizeAvg = pkg.size / pkg.count;
         return pkg;
     });
 
@@ -193,7 +193,7 @@ const renderPackages = function(packages) {
             name: 'Name',
             width: 90
         }, {
-            id: 'iconCount',
+            id: 'count',
             name: 'Icons',
             type: 'number',
             formatter: (v) => {
@@ -415,7 +415,7 @@ const initPackages = function(packages) {
         id: 'open-icons',
         tags: getTags(allTags),
         icons: allIcons,
-        iconCount: allIcons.length,
+        count: allIcons.length,
         size: totalSize,
         sizeGzip: totalGzip,
         sizeAvg: totalSize / allIcons.length,
@@ -447,12 +447,14 @@ const loadStart = async () => {
 
     const path = window.WC_ICONS_PATH;
 
-    console.log('wc icons path:', path);
+    // console.log('wc icons path:', path);
+
+    const isDev = path.includes('node_modules');
 
     // console.log(db);
     const cache = await ost.get('metadata');
     // console.log(cache);
-    if (cache && cache.version === version) {
+    if (!isDev && cache && cache.version === version) {
 
         console.log('Found cache icons', cache);
 
@@ -524,6 +526,28 @@ const cleanCache = () => {
     deleteDB(dbName);
 };
 
+const initStore = () => {
+    const mapping = {
+        'true': true,
+        'false': false
+    };
+    ['viewType'].forEach((item) => {
+        // default empty string
+        const v = store.get(item);
+        // console.log(item, v);
+        if (!v) {
+            return;
+        }
+        if (hasOwn(mapping, v)) {
+            state[item] = mapping[v];
+            return;
+        }
+        // console.log(item, v);
+        state[item] = v;
+    });
+
+};
+
 watch(layout, (v) => {
     save('layout', v);
 });
@@ -543,6 +567,7 @@ watch(keywords, () => {
 });
 
 onMounted(() => {
+    initStore();
     loadStart();
     initTooltip(state);
 });

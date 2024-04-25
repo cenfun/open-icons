@@ -152,7 +152,7 @@ const pkgInit = (options, Util) => {
 
     if (!metadata.icons.length) {
         Util.logRed(`Failed to generate icons: ${metadata.name}`);
-        return;
+        return false;
     }
 
     const compress = require('lz-utils/deflate-sync');

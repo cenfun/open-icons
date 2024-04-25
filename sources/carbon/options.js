@@ -10,7 +10,7 @@ module.exports = {
     },
 
     onSVGName: function(name, item) {
-        //replace -- to -
+        // replace -- to -
         name = name.split(/-+/).join('-');
         name = name.toLowerCase();
         return this.onSVGNameDefault(name, item);

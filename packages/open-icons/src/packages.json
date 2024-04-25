@@ -43,9 +43,9 @@
         "id": "open-icons-badgen",
         "name": "badgen",
         "count": 82,
-        "size": 40416,
-        "sizeGzip": 30457,
-        "sizeJson": 76576
+        "size": 40360,
+        "sizeGzip": 30410,
+        "sizeJson": 77292
     },
     {
         "id": "open-icons-bitcoin",

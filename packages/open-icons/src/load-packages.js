@@ -17,6 +17,8 @@ const initIcons = (pkg) => {
         }
     });
 
+    // console.log(pkg);
+
     return pkg;
 };
 
@@ -43,7 +45,6 @@ const loadPackages = (path = './', callback = (item, info) => {}) => {
             // console.log(text);
 
             const pkg = JSON.parse(text);
-            // console.log(it);
 
             loadedSize += it.size;
 
