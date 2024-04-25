@@ -125,7 +125,7 @@ console.log(awesomePkg);
 | 91|[typ](https://cenfun.github.io/open-icons/#typ)|  336|76.5KB|57.6KB|[typicons.font](https://github.com/stephenhutchings/typicons.font)|2.1.2  |(CC-BY-SA and SIL)|
 | 92|[uiw](https://cenfun.github.io/open-icons/#uiw)|  214|60.5KB|45.6KB|[@uiw/icons](https://github.com/uiwjs/icons)|2.6.10 |MIT    |
 | 93|[unicons](https://cenfun.github.io/open-icons/#unicons)|1,395|199.1KB|150.0KB|[@iconscout/unicons](https://github.com/Iconscout/unicons)|4.0.8  |IconScout Simple License|
-| 94|[vaadin](https://cenfun.github.io/open-icons/#vaadin)|  636|72.4KB|54.5KB|[@vaadin/icons](https://github.com/vaadin/web-components)|24.3.11|Apache-2.0|
+| 94|[vaadin](https://cenfun.github.io/open-icons/#vaadin)|  636|72.7KB|54.8KB|[@vaadin/icons](https://github.com/vaadin/web-components)|24.3.11|Apache-2.0|
 | 95|[vivid](https://cenfun.github.io/open-icons/#vivid)|  104|13.0KB|9.8KB|[vivid-icons](https://github.com/webkul/vivid)|1.0.10 |MIT    |
 | 96|[vscode](https://cenfun.github.io/open-icons/#vscode)|  439|83.5KB|62.9KB|[@vscode/codicons](https://github.com/microsoft/vscode-codicons)|0.0.35 |CC-BY-4.0|
 | 97|[vtmn](https://cenfun.github.io/open-icons/#vtmn)|  492|58.1KB|43.7KB|[@vtmn/icons](https://github.com/Decathlon/vitamin-web)|1.3.0  |Apache-2.0|
